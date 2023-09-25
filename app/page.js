@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/firebase';
+import { auth } from '@/firebase-config';
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('submitting');
     console.log(email, password);
@@ -17,13 +17,14 @@ export default function Home() {
         // Signed in
         const user = userCredential.user;
         console.log('user', user);
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log('error', errorCode, errorMessage);
       });
+    const jwt = await auth.currentUser.getIdToken();
+    console.log('jwt', jwt);
   };
 
   return (
