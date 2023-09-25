@@ -15,8 +15,8 @@ const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
   prepareHeaders: async (headers) => {
     const token = await getFirebaseIdToken();
-    if (token) {
-      headers.set('Authorization', token);
+    if (token && !headers.has('Authorization')) {
+      headers.set('Authorization', `Bearer ${token}`);
     }
     return headers;
   },
