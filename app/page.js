@@ -26,6 +26,7 @@ export default function Home() {
       password: '',
     };
   }, []);
+
   const {
     control,
     formState: { errors },
@@ -55,11 +56,11 @@ export default function Home() {
     [dispatch, login, reset, defaultValues]
   );
 
-  // useEffect(() => {
-  //   if (authState.isAuthenticated && authState.user) {
-  //     router.push(`/user/${authState.user.handle}`);
-  //   }
-  // }, [authState.isAuthenticated, authState.user, router]);
+  useEffect(() => {
+    if (authState.isAuthenticated && authState.user) {
+      router.push(`/user/${authState.user.handle}`);
+    }
+  }, [authState.isAuthenticated, authState.user, router]);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>

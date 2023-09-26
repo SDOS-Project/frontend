@@ -1,5 +1,6 @@
 'use client';
 import { useGetUserQuery } from '@/features/user/apiSlice';
+
 import React from 'react';
 
 function User({ params }) {
