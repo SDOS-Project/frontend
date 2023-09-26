@@ -1,36 +1,49 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { setUser } from '@/features/auth/authSlice';
+import { Controller, useForm } from 'react-hook-form';
+import { TextField } from '@mui/material';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginValidationSchema } from '@/schemas/login/schema';
 
 export default function Home() {
   const router = useRouter();
+
+  const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
 
   const [login] = useLoginMutation();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm({
+    resolver: yupResolver(loginValidationSchema),
+  });
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(async (_) => {
-        const { data } = await login({ email, password });
-        dispatch(setUser(data));
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log('error', errorCode, errorMessage);
-      });
-  };
+  const onSubmit = useCallback(
+    async (data) => {
+      const { email, password } = data;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(async (_) => {
+          const { data } = await login({ email, password });
+          dispatch(setUser(data));
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log('error', errorCode, errorMessage);
+        });
+    },
+    [dispatch, login]
+  );
 
   useEffect(() => {
     if (authState.isAuthenticated && authState.user) {
@@ -40,20 +53,41 @@ export default function Home() {
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <form className='flex flex-col items-center justify-between'>
-        <input
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='flex flex-col items-center justify-between'
+      >
+        <Controller
+          name='email'
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              size='small'
+              label='Email'
+              variant='outlined'
+              className='mb-4'
+              error={!!errors.email}
+              helperText={errors.email ? errors.email?.message : ''}
+            />
+          )}
         />
-        <input
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+        <Controller
+          name='password'
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              size='small'
+              label='Password'
+              variant='outlined'
+              className='mb-4'
+              error={!!errors.password}
+              helperText={errors.password ? errors.password?.message : ''}
+            />
+          )}
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <button>Submit</button>
       </form>
     </main>
   );
