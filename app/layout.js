@@ -1,5 +1,6 @@
 import { Providers } from '@/features/redux/provider';
 import './globals.css';
+import ToastProvider from './toast.provider';
 
 export const metadata = {
   title: 'SDOS',
@@ -10,7 +11,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ToastProvider>{children}</ToastProvider>
+        </Providers>
       </body>
     </html>
   );
