@@ -37,12 +37,13 @@ export default function Home() {
           dispatch(setUser(data));
         })
         .catch((error) => {
+          reset();
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log('error', errorCode, errorMessage);
         });
     },
-    [dispatch, login]
+    [dispatch, login, reset]
   );
 
   useEffect(() => {
