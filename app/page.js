@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { signInWithEmailAndPassword, updateCurrentUser } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '@/features/auth/apiSlice';
@@ -20,15 +20,10 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('submitting');
-    console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        // Signed in
-        const user = userCredential.user;
+      .then(async (_) => {
         const { data } = await login({ email, password });
         dispatch(setUser(data));
-        console.log('user', user);
       })
       .catch((error) => {
         const errorCode = error.code;
