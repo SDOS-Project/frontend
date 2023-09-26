@@ -7,7 +7,7 @@ import { useLoginMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { setUser } from '@/features/auth/authSlice';
 import { Controller, useForm } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidationSchema } from '@/schemas/login/schema';
 
@@ -46,17 +46,17 @@ export default function Home() {
     [dispatch, login, reset]
   );
 
-  useEffect(() => {
-    if (authState.isAuthenticated && authState.user) {
-      router.push(`/user/${authState.user.handle}`);
-    }
-  }, [authState.isAuthenticated, authState.user, router]);
+  // useEffect(() => {
+  //   if (authState.isAuthenticated && authState.user) {
+  //     router.push(`/user/${authState.user.handle}`);
+  //   }
+  // }, [authState.isAuthenticated, authState.user, router]);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-between'
+        className='flex flex-col items-center justify-between gap-10'
       >
         <Controller
           name='email'
@@ -88,7 +88,7 @@ export default function Home() {
             />
           )}
         />
-        <button>Submit</button>
+        <Button variant='contained'>Login</Button>
       </form>
     </main>
   );
