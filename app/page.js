@@ -1,21 +1,33 @@
 'use client';
-
-import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { signInWithEmailAndPassword, updateCurrentUser } from 'firebase/auth';
 import { auth } from '@/firebase-config';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '@/features/auth/apiSlice';
+import { useRouter } from 'next/navigation';
+import { setUser } from '@/features/auth/authSlice';
 
 export default function Home() {
+  const router = useRouter();
+  const authState = useSelector((state) => state.auth);
+
+  const [login] = useLoginMutation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('submitting');
     console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
+        const { data } = await login({ email, password });
+        dispatch(setUser(data));
         console.log('user', user);
       })
       .catch((error) => {
@@ -23,9 +35,13 @@ export default function Home() {
         const errorMessage = error.message;
         console.log('error', errorCode, errorMessage);
       });
-    const jwt = await auth.currentUser.getIdToken();
-    console.log('jwt', jwt);
   };
+
+  useEffect(() => {
+    if (authState.isAuthenticated && authState.user) {
+      router.push(`/user/${authState.user.handle}`);
+    }
+  }, [authState.isAuthenticated, authState.user, router]);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>

@@ -5,10 +5,11 @@ import React from 'react';
 function User({ params }) {
   const { slug } = params;
 
-  const { data: user, isLoading, error } = useGetUserQuery(slug);
+  const { data: user, isLoading } = useGetUserQuery(slug);
 
-  console.log(user, isLoading, error);
-  return <div>User {slug}</div>;
+  console.log('user', user);
+  if (isLoading) return <div>Loading...</div>;
+  return <div>Hi {user?.firstName + ' ' + user?.lastName}</div>;
 }
 
 export default User;

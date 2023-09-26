@@ -13,15 +13,14 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: credentials,
       }),
     }),
-    async onQueryStarted(_, { dispatch, queryFulfilled }) {
-      try {
-        const { user } = await queryFulfilled;
-        dispatch(updateUser(user));
-        dispatch(apiSlice.util.resetApiState());
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    // async onQueryStarted(_, { dispatch, queryFulfilled }) {
+    //   try {
+    //     const { user } = await queryFulfilled;
+    //     dispatch(updateUser(user));
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
     signup: builder.mutation({
       query: (credentials) => ({
         url: `${AUTH_BASE_URL}/signup`,
