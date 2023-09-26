@@ -14,6 +14,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { rtkQueryErrorLogger } from '@/features/middleware/error';
 
 const store = configureStore({
   reducer: {
@@ -39,7 +40,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(apiSlice.middleware),
+    }).concat(apiSlice.middleware, rtkQueryErrorLogger),
   devTools: process.env.NODE_ENV !== 'production',
 });
 
