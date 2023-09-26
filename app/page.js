@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidationSchema } from '@/schemas/login/schema';
+import { toast } from 'react-toastify';
 
 export default function Home() {
   const router = useRouter();
@@ -19,6 +20,12 @@ export default function Home() {
 
   const [login] = useLoginMutation();
 
+  const defaultValues = useMemo(() => {
+    return {
+      email: '',
+      password: '',
+    };
+  }, []);
   const {
     control,
     formState: { errors },
@@ -26,6 +33,7 @@ export default function Home() {
     reset,
   } = useForm({
     resolver: yupResolver(loginValidationSchema),
+    defaultValues,
   });
 
   const onSubmit = useCallback(
@@ -37,13 +45,14 @@ export default function Home() {
           dispatch(setUser(data));
         })
         .catch((error) => {
-          reset();
+          reset(defaultValues);
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log('error', errorCode, errorMessage);
+          toast.error(errorMessage);
         });
     },
-    [dispatch, login, reset]
+    [dispatch, login, reset, defaultValues]
   );
 
   // useEffect(() => {
@@ -80,6 +89,7 @@ export default function Home() {
             <TextField
               {...field}
               size='small'
+              type='password'
               label='Password'
               variant='outlined'
               className='mb-4'
@@ -88,7 +98,9 @@ export default function Home() {
             />
           )}
         />
-        <Button variant='contained'>Login</Button>
+        <Button type='submit' variant='contained'>
+          Login
+        </Button>
       </form>
     </main>
   );
