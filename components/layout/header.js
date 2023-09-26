@@ -13,11 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
+import { selectUser } from '@/features/auth/authSlice';
+import { useSelector } from 'react-redux';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Projects', 'Institutes', 'Corporates'];
+const settings = ['Profile', 'Logout'];
 
 function Header() {
+  const user = useSelector(selectUser);
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -56,9 +60,8 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            SDOS
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size='large'
@@ -112,7 +115,7 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            SDOS
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -125,11 +128,13 @@ function Header() {
               </Button>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+                <Avatar>
+                  {user.firstName[0]}
+                  {user.lastName[0]}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
