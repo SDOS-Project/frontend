@@ -12,18 +12,25 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { useState } from 'react';
-import { selectUser } from '@/features/auth/authSlice';
-import { useSelector } from 'react-redux';
-
-const pages = ['Projects', 'Institutes', 'Corporates'];
-const settings = ['Profile', 'Logout'];
+import { useCallback, useMemo, useState } from 'react';
+import { clearUser, selectUser } from '@/features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { ListItemText } from '@mui/material';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { auth } from '@/firebase-config';
+import { toast } from 'react-toastify';
 
 function Header() {
+  const router = useRouter();
+
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const pages = useMemo(() => ['Projects', 'Institutes', 'Corporates'], []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,6 +46,16 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = useCallback(async () => {
+    try {
+      await auth.signOut();
+      dispatch(clearUser());
+      router.push('/');
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }, [dispatch, router]);
 
   return (
     <AppBar position='static'>
@@ -132,8 +149,8 @@ function Header() {
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar>
-                  {user.firstName[0]}
-                  {user.lastName[0]}
+                  {user?.firstName[0]}
+                  {user?.lastName[0]}
                 </Avatar>
               </IconButton>
             </Tooltip>
@@ -153,11 +170,14 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+              <Link href={`/user/${user?.handle}`} legacyBehavior>
+                <MenuItem>
+                  <Typography textAlign='center'>Profile</Typography>
                 </MenuItem>
-              ))}
+              </Link>
+              <MenuItem onClick={handleLogout}>
+                <ListItemText textAlign='center'>Logout</ListItemText>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
