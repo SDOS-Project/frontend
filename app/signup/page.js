@@ -7,7 +7,14 @@ import { useLoginMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { setUser } from '@/features/auth/authSlice';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, TextField } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { signupValidationSchema } from '@/schemas/signup/schema';
@@ -128,6 +135,27 @@ function Signup() {
                 errors.confirmPassword ? errors.confirmPassword?.message : ''
               }
             />
+          )}
+        />
+        <Controller
+          name='platform'
+          control={control}
+          render={({ field }) => (
+            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
+              <InputLabel>Platform</InputLabel>
+              <Select {...field} label='Platform'>
+                {organisations?.map((organisation) => {
+                  return (
+                    <MenuItem
+                      key={organisation.handle}
+                      value={organisation.handle}
+                    >
+                      {organisation.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
           )}
         />
         <Button type='submit' variant='contained'>
