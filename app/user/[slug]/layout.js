@@ -1,6 +1,6 @@
 import Header from '@/components/layout/header';
 
-export default function UserLayout({ children }) {
+export default function Layout({ children }) {
   return (
     <>
       <Header />
