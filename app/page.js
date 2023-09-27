@@ -77,7 +77,6 @@ export default function Home() {
               size='small'
               label='Email'
               variant='outlined'
-              className='mb-4'
               error={!!errors.email}
               helperText={errors.email ? errors.email?.message : ''}
             />
@@ -93,7 +92,6 @@ export default function Home() {
               type='password'
               label='Password'
               variant='outlined'
-              className='mb-4'
               error={!!errors.password}
               helperText={errors.password ? errors.password?.message : ''}
             />

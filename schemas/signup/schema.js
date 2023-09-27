@@ -20,9 +20,10 @@ export const signupValidationSchema = yup.object().shape({
     .string()
     .oneOf([UserRole.EMPLOYEE, UserRole.FACULTY])
     .required('Role is required'),
-  organisation: yup.string().required('Organisation is required'),
+  organisationId: yup.string().required('Organisation is required'),
   areasOfInterest: yup
     .array()
     .of(yup.string())
+    .min(1)
     .required('Areas of Interest is required'),
 });

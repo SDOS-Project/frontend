@@ -18,3 +18,6 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 });
+
+export const { useGetOrganisationsQuery, useGetOrganisationQuery } =
+  organisationApiSlice;

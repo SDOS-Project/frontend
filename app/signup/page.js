@@ -1,9 +1,9 @@
 'use client';
 import { useCallback, useEffect, useMemo } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoginMutation } from '@/features/auth/apiSlice';
+import { useSignupMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { setUser } from '@/features/auth/authSlice';
 import { Controller, useForm } from 'react-hook-form';
@@ -18,6 +18,10 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { signupValidationSchema } from '@/schemas/signup/schema';
+import { useGetOrganisationsQuery } from '@/features/organisation/apiSlice';
+import { UserRole } from '@/types/UserRole';
+import MultipleChipSelect from '@/components/common/MultipleChipSelect';
+import CustomAutocomplete from '@/components/common/CustomAutocomplete';
 
 function Signup() {
   const router = useRouter();
@@ -25,10 +29,20 @@ function Signup() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
 
+  const { data: organisations, isLoading } = useGetOrganisationsQuery();
+
+  const [signup] = useSignupMutation();
+
   const defaultValues = useMemo(() => {
     return {
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
+      confirmPassword: '',
+      role: '',
+      organisationId: '',
+      areasOfInterest: [],
     };
   }, []);
 
@@ -36,21 +50,49 @@ function Signup() {
     control,
     formState: { errors },
     handleSubmit,
+    setValue,
     reset,
   } = useForm({
     resolver: yupResolver(signupValidationSchema),
     defaultValues,
   });
 
-  const onSubmit = useCallback((data) => {
-    console.logq('data', data);
-  }, []);
+  const onSubmit = useCallback(
+    async (data) => {
+      const { email, password } = data;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async (userCredential) => {
+          const firebaseUser = userCredential.user;
+          try {
+            const { data: user } = await signup({
+              ...data,
+              firebaseId: firebaseUser.uid,
+            }).unwrap();
+            dispatch(setUser(user));
+          } catch (error) {
+            deleteUser(firebaseUser)
+              .then(() => {
+                console.log('User deleted');
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((error) => {
+          reset(defaultValues);
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log('error', errorCode, errorMessage);
+          toast.error(errorMessage);
+        });
+    },
+    [dispatch, signup, reset, defaultValues]
+  );
 
-  //   useEffect(() => {
-  //     if (authState.isAuthenticated && authState.user) {
-  //       router.push(`/user/${authState.user.handle}`);
-  //     }
-  //   }, [authState.isAuthenticated, authState.user, router]);
+  useEffect(() => {
+    if (authState.isAuthenticated && authState.user) {
+      router.push(`/user/${authState.user.handle}`);
+    }
+  }, [authState.isAuthenticated, authState.user, router]);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
@@ -67,7 +109,6 @@ function Signup() {
               size='small'
               label='First Name'
               variant='outlined'
-              className='mb-4'
               error={!!errors.firstName}
               helperText={errors.firstName ? errors.firstName?.message : ''}
             />
@@ -82,7 +123,6 @@ function Signup() {
               size='small'
               label='Last Name'
               variant='outlined'
-              className='mb-4'
               error={!!errors.lastName}
               helperText={errors.lastName ? errors.lastName?.message : ''}
             />
@@ -97,7 +137,6 @@ function Signup() {
               size='small'
               label='Email'
               variant='outlined'
-              className='mb-4'
               error={!!errors.email}
               helperText={errors.email ? errors.email?.message : ''}
             />
@@ -113,7 +152,6 @@ function Signup() {
               type='password'
               label='Password'
               variant='outlined'
-              className='mb-4'
               error={!!errors.password}
               helperText={errors.password ? errors.password?.message : ''}
             />
@@ -129,7 +167,6 @@ function Signup() {
               type='password'
               label='Confirm Password'
               variant='outlined'
-              className='mb-4'
               error={!!errors.confirmPassword}
               helperText={
                 errors.confirmPassword ? errors.confirmPassword?.message : ''
@@ -138,18 +175,39 @@ function Signup() {
           )}
         />
         <Controller
-          name='platform'
+          name='role'
           control={control}
           render={({ field }) => (
             <FormControl className='w-full mb-2 lg:mb-0' size='small'>
-              <InputLabel>Platform</InputLabel>
-              <Select {...field} label='Platform'>
+              <InputLabel>Role</InputLabel>
+              <Select {...field} label='role'>
+                {Object.keys(UserRole)?.map((role) => {
+                  return (
+                    <MenuItem key={role} value={role}>
+                      {UserRole[role]}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          )}
+        />
+        <CustomAutocomplete
+          control={control}
+          fieldName='organisationId'
+          options={organisations ?? []}
+          errors={errors}
+        />
+        <Controller
+          name='organisationId'
+          control={control}
+          render={({ field }) => (
+            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
+              <InputLabel>Organisation</InputLabel>
+              <Select {...field} label='organisation'>
                 {organisations?.map((organisation) => {
                   return (
-                    <MenuItem
-                      key={organisation.handle}
-                      value={organisation.handle}
-                    >
+                    <MenuItem key={organisation.id} value={organisation.id}>
                       {organisation.name}
                     </MenuItem>
                   );
@@ -157,6 +215,13 @@ function Signup() {
               </Select>
             </FormControl>
           )}
+        />
+        <MultipleChipSelect
+          control={control}
+          fieldName='areasOfInterest'
+          options={['AI', 'ML', 'DL', 'CV']}
+          errors={errors}
+          setValue={setValue}
         />
         <Button type='submit' variant='contained'>
           Login

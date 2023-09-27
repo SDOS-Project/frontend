@@ -2,7 +2,7 @@ const { apiSlice } = require('../api/apiSlice');
 
 const AUTH_BASE_URL = '/auth';
 
-const authApiSlice = apiSlice.injectEndpoints({
+export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
