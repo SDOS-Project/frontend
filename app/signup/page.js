@@ -197,6 +197,7 @@ function Signup() {
           fieldName='organisationId'
           options={organisations}
           errors={errors}
+          loading={isLoading}
         />
         <MultipleChipSelect
           control={control}

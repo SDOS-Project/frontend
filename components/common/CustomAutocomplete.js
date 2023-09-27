@@ -1,13 +1,14 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
-function CustomAutocomplete({ control, fieldName, options, errors }) {
+function CustomAutocomplete({ control, fieldName, options, errors, loading }) {
   return (
     <Controller
       name={fieldName}
       control={control}
       render={({ field: { onChange, value } }) => (
         <Autocomplete
+          loading={loading}
           value={options?.find((option) => option.id === value) || null}
           className='w-full'
           onChange={(_, newValue) => {
