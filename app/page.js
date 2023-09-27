@@ -42,8 +42,12 @@ export default function Home() {
       const { email, password } = data;
       signInWithEmailAndPassword(auth, email, password)
         .then(async (_) => {
-          const { data } = await login({ email, password });
-          dispatch(setUser(data));
+          try {
+            const user = await login({ email, password }).unwrap();
+            dispatch(setUser(user));
+          } catch (error) {
+            auth.signOut();
+          }
         })
         .catch((error) => {
           reset(defaultValues);
