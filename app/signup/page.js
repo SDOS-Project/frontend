@@ -195,26 +195,8 @@ function Signup() {
         <CustomAutocomplete
           control={control}
           fieldName='organisationId'
-          options={organisations ?? []}
+          options={organisations}
           errors={errors}
-        />
-        <Controller
-          name='organisationId'
-          control={control}
-          render={({ field }) => (
-            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
-              <InputLabel>Organisation</InputLabel>
-              <Select {...field} label='organisation'>
-                {organisations?.map((organisation) => {
-                  return (
-                    <MenuItem key={organisation.id} value={organisation.id}>
-                      {organisation.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-          )}
         />
         <MultipleChipSelect
           control={control}
@@ -224,7 +206,7 @@ function Signup() {
           setValue={setValue}
         />
         <Button type='submit' variant='contained'>
-          Login
+          Sign up
         </Button>
       </form>
     </main>

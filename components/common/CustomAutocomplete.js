@@ -8,7 +8,7 @@ function CustomAutocomplete({ control, fieldName, options, errors }) {
       control={control}
       render={({ field: { onChange, value } }) => (
         <Autocomplete
-          value={options.find((option) => option.id === value) || null}
+          value={options?.find((option) => option.id === value) || null}
           className='w-full'
           onChange={(_, newValue) => {
             onChange(newValue?.id);
@@ -19,9 +19,11 @@ function CustomAutocomplete({ control, fieldName, options, errors }) {
           renderInput={(params) => (
             <TextField
               {...params}
+              name='organisationId'
               label='Organisation'
               size='small'
               variant='outlined'
+              autoComplete='given-name'
               error={!!errors[fieldName]}
               helperText={errors[fieldName] ? errors[fieldName]?.message : ''}
             />
