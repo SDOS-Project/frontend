@@ -65,7 +65,7 @@ function Signup() {
         .then(async (userCredential) => {
           const firebaseUser = userCredential.user;
           try {
-            const { data: user } = await signup({
+            const user = await signup({
               ...data,
               firebaseId: firebaseUser.uid,
             }).unwrap();
