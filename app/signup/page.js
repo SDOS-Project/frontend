@@ -5,11 +5,11 @@ import { auth } from '@/firebase-config';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSignupMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
-import { setUser } from '@/features/auth/authSlice';
 import { Controller, useForm } from 'react-hook-form';
 import {
   Button,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -22,6 +22,7 @@ import { useGetOrganisationsQuery } from '@/features/organisation/apiSlice';
 import { UserRole } from '@/types/UserRole';
 import MultipleChipSelect from '@/components/common/MultipleChipSelect';
 import CustomAutocomplete from '@/components/common/CustomAutocomplete';
+import { setUser } from '@/features/auth/authSlice';
 
 function Signup() {
   const router = useRouter();
@@ -180,7 +181,7 @@ function Signup() {
           render={({ field }) => (
             <FormControl className='w-full mb-2 lg:mb-0' size='small'>
               <InputLabel>Role</InputLabel>
-              <Select {...field} label='role'>
+              <Select {...field} label='role' error={!!errors.role}>
                 {Object.keys(UserRole)?.map((role) => {
                   return (
                     <MenuItem key={role} value={role}>
@@ -189,6 +190,9 @@ function Signup() {
                   );
                 })}
               </Select>
+              <FormHelperText className='text-red ml-4'>
+                {errors?.role && errors?.role?.message}
+              </FormHelperText>
             </FormControl>
           )}
         />
