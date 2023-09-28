@@ -17,7 +17,6 @@ import {
 } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import { useGetOrganisationsQuery } from '@/features/organisation/apiSlice';
 import { setUser } from '@/features/auth/authSlice';
 import { organisationSignupValidationSchema } from '@/schemas/organisation-signup/schema';
 import { OrganisationType } from '@/types/OrganisationType';
@@ -27,8 +26,6 @@ function Signup() {
 
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
-
-  const { data: organisations, isLoading } = useGetOrganisationsQuery();
 
   const [signup] = useSignupMutation();
 
@@ -49,7 +46,6 @@ function Signup() {
     control,
     formState: { errors },
     handleSubmit,
-    setValue,
     reset,
   } = useForm({
     resolver: yupResolver(organisationSignupValidationSchema),
