@@ -4,7 +4,6 @@ import themeConstants from './themeConstants';
 const theme = createTheme({
   palette: {
     primary: themeConstants.primary,
-    secondary: themeConstants.secondary,
     background: themeConstants.background,
     text: {
       primary: themeConstants.fg.main,
