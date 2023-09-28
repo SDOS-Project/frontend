@@ -71,7 +71,7 @@ function Header() {
       {user && (
         <>
           <Box className='mt-4 flex flex-col gap-5 justify-center items-center'>
-            <Avatar className='w-20'>
+            <Avatar className='w-20 h-20'>
               {user?.firstName && user?.lastName ? (
                 <>
                   {user?.firstName[0]}
@@ -84,7 +84,7 @@ function Header() {
             <Link href={`/user/${user?.handle}`} legacyBehavior>
               <Typography
                 variant='h6'
-                className='text-primary-main cursor-pointer pb-2'
+                className='text-primary-main cursor-pointer'
               >
                 {user?.firstName} {user?.lastName}
               </Typography>
