@@ -72,8 +72,14 @@ function Header() {
         <>
           <Box className='mt-4 flex flex-col gap-5 justify-center items-center'>
             <Avatar className='w-20'>
-              {user?.firstName[0]}
-              {user?.lastName[0]}
+              {user?.firstName && user?.lastName ? (
+                <>
+                  {user?.firstName[0]}
+                  {user?.lastName[0]}
+                </>
+              ) : (
+                user?.name[0]
+              )}
             </Avatar>
             <Link href={`/user/${user?.handle}`} legacyBehavior>
               <Typography
@@ -131,8 +137,14 @@ function Header() {
           <Box className='hidden md:flex items-center gap-4'>
             <IconButton className='p-0' onClick={handleOpenUserMenu}>
               <Avatar>
-                {user?.firstName[0]}
-                {user?.lastName[0]}
+                {user?.firstName && user?.lastName ? (
+                  <>
+                    {user?.firstName[0]}
+                    {user?.lastName[0]}
+                  </>
+                ) : (
+                  user?.name[0]
+                )}
               </Avatar>
             </IconButton>
             <Menu
