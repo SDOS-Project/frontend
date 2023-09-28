@@ -18,7 +18,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: credentials,
       }),
     }),
+    organisationSignup: builder.mutation({
+      query: (credentials) => ({
+        url: `${AUTH_BASE_URL}/signup/organisation`,
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useSignupMutation } = authApiSlice;
+export const {
+  useLoginMutation,
+  useSignupMutation,
+  useOrganisationSignupMutation,
+} = authApiSlice;
