@@ -3,8 +3,7 @@ import * as yup from 'yup';
 import { urlValidationSchema } from '../url/schema';
 
 export const organisationSignupValidationSchema = yup.object().shape({
-  firstName: yup.string().required('First Name is required'),
-  lastName: yup.string().required('Last Name is required'),
+  name: yup.string().required('Organisation Name is required'),
   email: yup
     .string()
     .email('Please enter a valid email')
