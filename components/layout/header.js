@@ -4,23 +4,26 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import { useCallback, useMemo, useState } from 'react';
 import { clearUser, selectUser } from '@/features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { ListItemText } from '@mui/material';
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase-config';
 import { toast } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '@/store/store';
+import LoggedInRightCol from './LoggedInRightCol';
 
 function Header() {
   const router = useRouter();
@@ -28,25 +31,20 @@ function Header() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const drawerWidth = 240;
 
-  const pages = useMemo(() => ['Projects', 'Institutes', 'Corporates'], []);
+  const navItems = useMemo(
+    () => [
+      { page: 'Recommended', href: '/recommended' },
+      { page: 'Projects', href: '/projects' },
+      { page: 'Organisations', href: '/organisation' },
+    ],
+    []
+  );
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
   const handleLogout = useCallback(async () => {
@@ -59,131 +57,102 @@ function Header() {
     }
   }, [dispatch, router]);
 
+  const drawer = (
+    <Box onClick={handleDrawerToggle} className='h-full bg-white flex flex-col'>
+      {user && (
+        <>
+          <Box className='mt-5 flex flex-col gap-5 justify-center items-center'>
+            <Avatar className='w-20 h-20'>
+              {user?.firstName[0]}
+              {user?.lastName[0]}
+            </Avatar>
+            <Link href={`/${user?.base}/${user?.handle}`} legacyBehavior>
+              <Typography className='text-primary-main text-md cursor-pointer text-center'>
+                {user?.name}
+              </Typography>
+            </Link>
+          </Box>
+          <Divider className='m-0 p-0 mt-4' />
+        </>
+      )}
+      <List>
+        {navItems.map((item) => {
+          return (
+            <ListItem key={item.href} disablePadding>
+              <ListItemButton className='text-center'>
+                <Link href={item.href} legacyBehavior>
+                  <ListItemText primary={item.page} />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+        <ListItem disablePadding>
+          <ListItemButton className='text-center'>
+            <ListItemText onClick={handleLogout}>Logout</ListItemText>
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
+
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar position='static'>
-        <Container maxWidth='xl'>
-          <Toolbar disableGutters>
-            <Typography
-              variant='h6'
-              noWrap
-              component='a'
-              href='#app-bar-with-responsive-menu'
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
+      <AppBar
+        component='nav'
+        color='transparent'
+        className='bg-gg shadow-md sticky'
+      >
+        <Toolbar className='flex items-center justify-between'>
+          <Box className='flex'>
+            <Link href={'/'} passHref={true} legacyBehavior>
               SDOS
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size='large'
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleOpenNavMenu}
-                color='inherit'
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography>{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+            </Link>
+            <Box className='ml-4 hidden md:flex items-center gap-4'>
+              {navItems.map((item) => {
+                return (
+                  <Link href={item.href} key={item.href} legacyBehavior>
+                    <Typography className='body-normal  cursor-pointer transition all delay-30 hover:text-primary-main'>
+                      {item.page}
+                    </Typography>
+                  </Link>
+                );
+              })}
             </Box>
-
-            <Typography
-              variant='h5'
-              noWrap
-              component='a'
-              href='#app-bar-with-responsive-menu'
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
+          </Box>
+          <Box className='hidden md:flex items-center gap-4'>
+            <LoggedInRightCol handleLogout={handleLogout} user={user} />
+          </Box>
+          <Box className='md:hidden'>
+            <IconButton
+              className='md:hidden'
+              color='inherit'
+              aria-label='open drawer'
+              edge='start'
+              onClick={handleDrawerToggle}
             >
-              SDOS
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
-              ))}
-            </Box>
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar>
-                    {user?.firstName[0]}
-                    {user?.lastName[0]}
-                  </Avatar>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id='menu-appbar'
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <Link href={`/user/${user?.handle}`} legacyBehavior>
-                  <MenuItem>
-                    <Typography>Profile</Typography>
-                  </MenuItem>
-                </Link>
-                <MenuItem onClick={handleLogout}>
-                  <ListItemText>Logout</ListItemText>
-                </MenuItem>
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
+              <MenuIcon className='text-black' />
+            </IconButton>
+          </Box>
+        </Toolbar>
+        <Drawer
+          anchor='right'
+          variant='temporary'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
       </AppBar>
     </PersistGate>
   );

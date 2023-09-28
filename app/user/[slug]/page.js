@@ -13,9 +13,8 @@ function User({ params }) {
   console.log('user', user);
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className='body-large text-center'>
+    <div className='body-large text-center mt-20'>
       Hi {user?.firstName + ' ' + user?.lastName} Role: {UserRole[user?.role]}
-      <Button variant='contained' />
     </div>
   );
 }
