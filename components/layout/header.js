@@ -110,7 +110,7 @@ function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar color='transparent' className='bg-gg'>
+      <AppBar color='transparent' className='bg-gg mb-12'>
         <Toolbar className='flex items-center justify-between'>
           <Box className='flex'>
             <Link href={'/'} passHref={true} legacyBehavior>
