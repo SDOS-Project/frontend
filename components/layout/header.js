@@ -16,6 +16,8 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -23,7 +25,6 @@ import { auth } from '@/firebase-config';
 import { toast } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '@/store/store';
-import LoggedInRightCol from './LoggedInRightCol';
 
 function Header() {
   const router = useRouter();
@@ -32,7 +33,15 @@ function Header() {
   const user = useSelector(selectUser);
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const drawerWidth = 240;
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenUserMenu = useCallback((event) => {
+    setAnchorElUser(event.currentTarget);
+  }, []);
+
+  const handleCloseUserMenu = useCallback(() => {
+    setAnchorElUser(null);
+  }, []);
 
   const navItems = useMemo(
     () => [
@@ -43,9 +52,9 @@ function Header() {
     []
   );
 
-  const handleDrawerToggle = () => {
+  const handleDrawerToggle = useCallback(() => {
     setMobileOpen(!mobileOpen);
-  };
+  }, [mobileOpen]);
 
   const handleLogout = useCallback(async () => {
     try {
@@ -61,14 +70,17 @@ function Header() {
     <Box onClick={handleDrawerToggle} className='h-full bg-white flex flex-col'>
       {user && (
         <>
-          <Box className='mt-5 flex flex-col gap-5 justify-center items-center'>
-            <Avatar className='w-20 h-20'>
+          <Box className='mt-4 flex flex-col gap-5 justify-center items-center'>
+            <Avatar className='w-20'>
               {user?.firstName[0]}
               {user?.lastName[0]}
             </Avatar>
-            <Link href={`/${user?.base}/${user?.handle}`} legacyBehavior>
-              <Typography className='text-primary-main text-md cursor-pointer text-center'>
-                {user?.name}
+            <Link href={`/user/${user?.handle}`} legacyBehavior>
+              <Typography
+                variant='h6'
+                className='text-primary-main cursor-pointer pb-2'
+              >
+                {user?.firstName} {user?.lastName}
               </Typography>
             </Link>
           </Box>
@@ -98,11 +110,7 @@ function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar
-        component='nav'
-        color='transparent'
-        className='bg-gg shadow-md sticky'
-      >
+      <AppBar color='transparent' className='bg-gg'>
         <Toolbar className='flex items-center justify-between'>
           <Box className='flex'>
             <Link href={'/'} passHref={true} legacyBehavior>
@@ -112,7 +120,7 @@ function Header() {
               {navItems.map((item) => {
                 return (
                   <Link href={item.href} key={item.href} legacyBehavior>
-                    <Typography className='body-normal  cursor-pointer transition all delay-30 hover:text-primary-main'>
+                    <Typography className='body-normal cursor-pointer transition all delay-30 hover:text-primary-main'>
                       {item.page}
                     </Typography>
                   </Link>
@@ -121,7 +129,37 @@ function Header() {
             </Box>
           </Box>
           <Box className='hidden md:flex items-center gap-4'>
-            <LoggedInRightCol handleLogout={handleLogout} user={user} />
+            <IconButton className='p-0' onClick={handleOpenUserMenu}>
+              <Avatar>
+                {user?.firstName[0]}
+                {user?.lastName[0]}
+              </Avatar>
+            </IconButton>
+            <Menu
+              className='mt-10'
+              id='menu-appbar'
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <Link href={`/user/${user?.handle}`} legacyBehavior>
+                <MenuItem>
+                  <ListItemText textAlign='center'>Profile</ListItemText>
+                </MenuItem>
+              </Link>
+              <MenuItem onClick={handleLogout}>
+                <ListItemText textAlign='center'>Logout</ListItemText>
+              </MenuItem>
+            </Menu>
           </Box>
           <Box className='md:hidden'>
             <IconButton
@@ -147,7 +185,7 @@ function Header() {
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
-              width: drawerWidth,
+              width: 240,
             },
           }}
         >
