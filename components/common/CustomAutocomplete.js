@@ -1,7 +1,15 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
-function CustomAutocomplete({ control, fieldName, options, errors, loading }) {
+function CustomAutocomplete({
+  control,
+  fieldName,
+  options,
+  errors,
+  loading,
+  label,
+  optionLabelCallback,
+}) {
   return (
     <Controller
       name={fieldName}
@@ -16,12 +24,12 @@ function CustomAutocomplete({ control, fieldName, options, errors, loading }) {
           }}
           defaultValue={''}
           options={options ?? []}
-          getOptionLabel={(option) => option.name}
+          getOptionLabel={(option) => optionLabelCallback(option)}
           renderInput={(params) => (
             <TextField
               {...params}
-              name='organisationId'
-              label='Organisation'
+              name={fieldName}
+              label={label}
               size='small'
               variant='outlined'
               autoComplete='given-name'

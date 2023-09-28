@@ -7,7 +7,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
     getUser: builder.query({
       query: (handle) => `${USER_BASE_URL}/${handle}`,
     }),
+    getFaculty: builder.query({
+      query: () => `${USER_BASE_URL}/faculty`,
+    }),
+    getEmployees: builder.query({
+      query: () => `${USER_BASE_URL}/employees`,
+    }),
   }),
 });
 
-export const { useGetUserQuery } = userApiSlice;
+export const { useGetUserQuery, useGetFacultyQuery, useGetEmployeesQuery } =
+  userApiSlice;

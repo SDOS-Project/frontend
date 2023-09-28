@@ -202,7 +202,8 @@ function Signup() {
           options={organisations}
           errors={errors}
           loading={isLoading}
-          key={'handle'}
+          label={'Organisation'}
+          optionLabelCallback={(option) => option?.name}
         />
         <MultipleChipSelect
           control={control}

@@ -165,11 +165,11 @@ function Header() {
             >
               <Link href={`/user/${user?.handle}`} legacyBehavior>
                 <MenuItem>
-                  <ListItemText textAlign='center'>Profile</ListItemText>
+                  <ListItemText>Profile</ListItemText>
                 </MenuItem>
               </Link>
               <MenuItem onClick={handleLogout}>
-                <ListItemText textAlign='center'>Logout</ListItemText>
+                <ListItemText>Logout</ListItemText>
               </MenuItem>
             </Menu>
           </Box>

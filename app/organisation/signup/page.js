@@ -85,7 +85,11 @@ function Signup() {
 
   useEffect(() => {
     if (authState.isAuthenticated && authState.user) {
-      router.push(`/organisation/${authState.user.handle}`);
+      if (authState.user.name) {
+        router.push(`/organisation/${authState.user.handle}`);
+      } else {
+        router.push(`/user/${authState.user.handle}`);
+      }
     }
   }, [authState.isAuthenticated, authState.user, router]);
 
