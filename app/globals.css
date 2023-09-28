@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-}
-
-body {
-}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
 
 input::placeholder {
   @apply whitespace-pre-wrap;

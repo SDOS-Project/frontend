@@ -28,8 +28,8 @@ const themeConstants = {
     '2xl': '1536px',
   },
   font: {
-    heading: "'Fira Sans', 'sans-serif'",
-    body: "'Assistant', 'sans-serif'",
+    heading: "'Outfit', 'sans-serif'",
+    body: "'Outfit', 'sans-serif'",
   },
 };
 
