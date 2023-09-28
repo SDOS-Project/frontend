@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSignupMutation } from '@/features/auth/apiSlice';
+import { useOrganisationSignupMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import {
@@ -27,7 +27,7 @@ function Signup() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
 
-  const [signup] = useSignupMutation();
+  const [signup] = useOrganisationSignupMutation();
 
   const defaultValues = useMemo(() => {
     return {
@@ -59,11 +59,11 @@ function Signup() {
         .then(async (userCredential) => {
           const firebaseUser = userCredential.user;
           try {
-            const user = await signup({
+            const organisation = await signup({
               ...data,
               firebaseId: firebaseUser.uid,
             }).unwrap();
-            dispatch(setUser(user));
+            dispatch(setUser(organisation));
           } catch (error) {
             deleteUser(firebaseUser)
               .then(() => {
