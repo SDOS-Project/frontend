@@ -42,7 +42,7 @@ function Signup() {
       password: '',
       confirmPassword: '',
       role: '',
-      organisationId: '',
+      organisationHandle: '',
       areasOfInterest: [],
     };
   }, []);
@@ -198,10 +198,11 @@ function Signup() {
         />
         <CustomAutocomplete
           control={control}
-          fieldName='organisationId'
+          fieldName='organisationHandle'
           options={organisations}
           errors={errors}
           loading={isLoading}
+          key={'handle'}
         />
         <MultipleChipSelect
           control={control}

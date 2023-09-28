@@ -9,10 +9,10 @@ function CustomAutocomplete({ control, fieldName, options, errors, loading }) {
       render={({ field: { onChange, value } }) => (
         <Autocomplete
           loading={loading}
-          value={options?.find((option) => option.id === value) || null}
+          value={options?.find((option) => option.handle === value) || null}
           className='w-full'
           onChange={(_, newValue) => {
-            onChange(newValue?.id);
+            onChange(newValue?.handle);
           }}
           defaultValue={''}
           options={options ?? []}
