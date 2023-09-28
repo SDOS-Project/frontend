@@ -1,6 +1,7 @@
 'use client';
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { UserRole } from '@/types/UserRole';
+import { Button } from '@mui/material';
 
 import React from 'react';
 
@@ -14,6 +15,7 @@ function User({ params }) {
   return (
     <div className='body-large text-center'>
       Hi {user?.firstName + ' ' + user?.lastName} Role: {UserRole[user?.role]}
+      <Button variant='contained' />
     </div>
   );
 }
