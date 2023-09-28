@@ -12,7 +12,7 @@ function User({ params }) {
   console.log('user', user);
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div>
+    <div className='body-large text-center'>
       Hi {user?.firstName + ' ' + user?.lastName} Role: {UserRole[user?.role]}
     </div>
   );

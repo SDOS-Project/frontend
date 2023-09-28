@@ -7,3 +7,96 @@
 
 body {
 }
+
+input::placeholder {
+  @apply whitespace-pre-wrap;
+}
+
+@layer components {
+  .dialog-layout-md {
+    @apply mx-auto mr-auto w-full max-w-screen-md;
+  }
+
+  .dialog-layout-lg {
+    @apply mx-auto mr-auto w-full max-w-screen-lg;
+  }
+
+  .dialog-title {
+    @apply font-heading text-primary-main text-lg md:text-2xl;
+  }
+
+  .dialog-subtitle {
+    @apply text-primary-main text-md md:text-lg;
+  }
+
+  .width-layout-1 {
+    @apply w-full md:w-11/12 lg:w-5/6 xl:w-3/4 mx-auto !max-w-screen-xl;
+  }
+
+  .width-layout-page-form {
+    @apply w-5/6 sm:w-2/3 md:w-1/2 mx-auto !max-w-screen-sm;
+  }
+
+  .padding-layout-1 {
+    @apply px-4 sm:px-8 md:px-0 py-8 md:py-12 lg:py-16 xl:py-20;
+  }
+
+  .padding-layout-2 {
+    @apply px-2 sm:px-4 md:px-0 py-4 md:py-6 lg:py-8 xl:py-10;
+  }
+
+  .banner-layout {
+    @apply px-4 md:px-0 py-4 md:py-8 lg:py-12 w-full md:w-11/12 xl:w-5/6 mx-auto !max-w-screen-xl;
+  }
+
+  .page-layout-1 {
+    @apply padding-layout-1 width-layout-1;
+  }
+
+  .title {
+    @apply text-3xl sm:text-4xl xl:text-5xl font-heading mb-2 md:mb-3 lg:mb-4 xl:mb-5 font-semibold;
+    line-height: 1.2;
+  }
+
+  .heading-1 {
+    @apply text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-heading text-center mb-6 md:mb-8 lg:mb-10 xl:mb-12 font-medium;
+    line-height: 1.2;
+  }
+
+  .heading-2 {
+    @apply text-xl md:text-2xl lg:text-3xl xl:text-4xl font-heading font-medium mb-2;
+    line-height: 1.2;
+  }
+
+  .body-3xlarge {
+    @apply text-3xl md:text-4xl 2xl:text-5xl;
+  }
+
+  .body-2xlarge {
+    @apply text-2xl md:text-3xl 2xl:text-4xl;
+  }
+
+  .body-xlarge {
+    @apply text-xl md:text-2xl 2xl:text-3xl;
+  }
+
+  .body-large {
+    @apply text-lg lg:text-xl 2xl:text-2xl;
+  }
+
+  .body-normal {
+    @apply text-base lg:text-lg 2xl:text-xl;
+  }
+
+  .body-small {
+    @apply text-sm lg:text-base 2xl:text-lg;
+  }
+
+  .body-xsmall {
+    @apply text-xs lg:text-sm 2xl:text-base;
+  }
+
+  .link {
+    @apply text-primary-light hover:text-primary-main hover:underline hover:cursor-pointer;
+  }
+}
