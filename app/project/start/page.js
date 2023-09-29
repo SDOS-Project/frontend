@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,13 +12,19 @@ import CustomAutocomplete from '@/components/common/CustomAutocomplete';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@/features/auth/authSlice';
 import { UserRole } from '@/types/UserRole';
+import { useCreateProjectMutation } from '@/features/project/apiSice';
+import { useRouter } from 'next/navigation';
 
 function StartProject() {
+  const router = useRouter();
+
   const user = useSelector(selectUser);
 
   const { data: faculty, isLoading: isFacultyLoading } = useGetFacultyQuery();
   const { data: employees, isLoading: isEmployeesLoading } =
     useGetEmployeesQuery();
+
+  const [createProject] = useCreateProjectMutation();
 
   const defaultValues = useMemo(() => {
     return {
@@ -33,14 +39,23 @@ function StartProject() {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     resolver: yupResolver(startProjectValidationSchema),
     defaultValues,
   });
 
-  const onSubmit = useCallback(async (data) => {
-    console.log(data);
-  }, []);
+  const onSubmit = useCallback(
+    async (data) => {
+      try {
+        const project = await createProject(data).unwrap();
+        router.push(`/project/${project.handle}`);
+      } catch (error) {
+        reset(defaultValues);
+      }
+    },
+    [createProject, defaultValues, reset, router]
+  );
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
@@ -80,7 +95,7 @@ function StartProject() {
         {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
           <CustomAutocomplete
             control={control}
-            fieldName='partner'
+            fieldName='partnerHandle'
             options={employees}
             errors={errors}
             loading={isEmployeesLoading}
@@ -92,7 +107,7 @@ function StartProject() {
         ) : (
           <CustomAutocomplete
             control={control}
-            fieldName='partner'
+            fieldName='partnerHandle'
             options={faculty}
             errors={errors}
             loading={isFacultyLoading}

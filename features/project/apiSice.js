@@ -25,3 +25,9 @@ export const projectApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 });
+
+export const {
+  useGetProjectsQuery,
+  useGetProjectQuery,
+  useCreateProjectMutation,
+} = projectApiSlice;
