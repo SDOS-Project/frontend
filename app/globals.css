@@ -1,12 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap');
-
-input::placeholder {
-  @apply whitespace-pre-wrap;
-}
 
 @layer components {
   .dialog-layout-md {
@@ -95,4 +91,8 @@ input::placeholder {
   .link {
     @apply text-primary-light hover:text-primary-main hover:underline hover:cursor-pointer;
   }
+}
+
+input::placeholder {
+  @apply whitespace-pre-wrap;
 }
