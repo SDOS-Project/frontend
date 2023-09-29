@@ -1,3 +1,4 @@
+'use client';
 import { useGetOrganisationsQuery } from '@/features/organisation/apiSlice';
 
 function Organisations() {
