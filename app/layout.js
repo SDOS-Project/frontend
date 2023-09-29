@@ -1,9 +1,8 @@
 import { Providers } from '@/features/redux/provider';
 import './globals.css';
 import ToastProvider from './toast.provider';
-
 import CustomThemeProvider from '@/theme/provider';
-import AppWrapper from '@/components/common/AppWrapper';
+import Layout from '@/components/common/Layout';
 
 export const metadata = {
   title: 'SDOS',
@@ -17,7 +16,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <CustomThemeProvider>
             <ToastProvider>
-              <AppWrapper>{children}</AppWrapper>
+              <Layout>{children}</Layout>
             </ToastProvider>
           </CustomThemeProvider>
         </Providers>

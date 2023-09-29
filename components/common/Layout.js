@@ -3,7 +3,7 @@ import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import Header from '../layout/header';
 
-export default function AppWrapper({ children }) {
+export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
 
   //   if (!auth) return <>Unauthorised</>;
