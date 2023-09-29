@@ -47,7 +47,7 @@ function Header() {
   const navItems = useMemo(
     () => [
       { page: 'Recommended', href: '/recommended' },
-      { page: 'Projects', href: '/projects' },
+      { page: 'Projects', href: '/project' },
       { page: 'Organisations', href: '/organisation' },
     ],
     []
