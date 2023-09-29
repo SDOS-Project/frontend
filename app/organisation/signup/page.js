@@ -7,7 +7,6 @@ import { useOrganisationSignupMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import {
-  Button,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -20,6 +19,7 @@ import { toast } from 'react-toastify';
 import { setUser } from '@/features/auth/authSlice';
 import { organisationSignupValidationSchema } from '@/schemas/organisation-signup/schema';
 import { OrganisationType } from '@/types/OrganisationType';
+import { LoadingButton } from '@mui/lab';
 
 function Signup() {
   const router = useRouter();
@@ -27,7 +27,8 @@ function Signup() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
 
-  const [signup] = useOrganisationSignupMutation();
+  const [signup, { isLoading: isOrganisationSignupLoading }] =
+    useOrganisationSignupMutation();
 
   const defaultValues = useMemo(() => {
     return {
@@ -209,9 +210,13 @@ function Signup() {
             />
           )}
         />
-        <Button type='submit' variant='contained'>
-          Sign up
-        </Button>
+        <LoadingButton
+          type='submit'
+          variant='contained'
+          loading={isOrganisationSignupLoading}
+        >
+          Sign Up
+        </LoadingButton>
       </form>
     </main>
   );
