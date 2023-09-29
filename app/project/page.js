@@ -1,5 +1,4 @@
 'use client';
-
 import { useGetProjectsQuery } from '@/features/project/apiSice';
 
 function Projects() {
@@ -9,7 +8,7 @@ function Projects() {
   console.log('projects', projects);
 
   if (isProjectsLoading) return <div>Loading...</div>;
-  return <div>Projects</div>;
+  return <div className='mt-20'>Projects</div>;
 }
 
 export default Projects;
