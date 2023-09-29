@@ -25,6 +25,13 @@ function CustomAutocomplete({
           defaultValue={''}
           options={options ?? []}
           getOptionLabel={(option) => optionLabelCallback(option)}
+          renderOption={(props, option) => {
+            return (
+              <li {...props} key={option}>
+                {optionLabelCallback(option)}
+              </li>
+            );
+          }}
           renderInput={(params) => (
             <TextField
               {...params}
