@@ -7,7 +7,6 @@ import { useSignupMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import {
-  Button,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -23,6 +22,7 @@ import { UserRole } from '@/types/UserRole';
 import MultipleChipSelect from '@/components/common/MultipleChipSelect';
 import CustomAutocomplete from '@/components/common/CustomAutocomplete';
 import { setUser } from '@/features/auth/authSlice';
+import { LoadingButton } from '@mui/lab';
 
 function Signup() {
   const router = useRouter();
@@ -30,9 +30,10 @@ function Signup() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
 
-  const { data: organisations, isLoading } = useGetOrganisationsQuery();
+  const { data: organisations, isLoading: isOrganisationsLoading } =
+    useGetOrganisationsQuery();
 
-  const [signup] = useSignupMutation();
+  const [signup, { isLoading: isUserSignupLoading }] = useSignupMutation();
 
   const defaultValues = useMemo(() => {
     return {
@@ -190,7 +191,7 @@ function Signup() {
                   );
                 })}
               </Select>
-              <FormHelperText className='text-red ml-4'>
+              <FormHelperText className='text-error-main'>
                 {errors?.role && errors?.role?.message}
               </FormHelperText>
             </FormControl>
@@ -201,7 +202,7 @@ function Signup() {
           fieldName='organisationHandle'
           options={organisations}
           errors={errors}
-          loading={isLoading}
+          loading={isOrganisationsLoading}
           label={'Organisation'}
           optionLabelCallback={(option) => option?.name}
         />
@@ -212,9 +213,13 @@ function Signup() {
           errors={errors}
           setValue={setValue}
         />
-        <Button type='submit' variant='contained'>
+        <LoadingButton
+          type='submit'
+          variant='contained'
+          loading={isUserSignupLoading}
+        >
           Sign up
-        </Button>
+        </LoadingButton>
       </form>
     </main>
   );
