@@ -10,6 +10,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { clearUser, selectUser } from '@/features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  Button,
   Divider,
   Drawer,
   List,
@@ -71,7 +72,7 @@ function Header() {
       {user && (
         <>
           <Box className='mt-4 flex flex-col gap-5 justify-center items-center'>
-            <Avatar className='w-20 h-20'>
+            <Avatar className='w-16 h-16'>
               {user?.name ? (
                 <>{user?.name[0]}</>
               ) : (
@@ -82,10 +83,7 @@ function Header() {
               )}
             </Avatar>
             <Link href={`/user/${user?.handle}`} legacyBehavior>
-              <Typography
-                variant='h6'
-                className='text-primary-main cursor-pointer'
-              >
+              <Typography className='text-primary-main cursor-pointer body-large'>
                 {user?.name ? (
                   <>{user?.name}</>
                 ) : (
@@ -141,6 +139,11 @@ function Header() {
             </Box>
           </Box>
           <Box className='hidden md:flex items-center gap-4'>
+            <Link href={'/project/start'} legacyBehavior>
+              <Button variant='contained' className='bg-primary-main py-1 px-6'>
+                Start a Project
+              </Button>
+            </Link>
             <IconButton className='p-0' onClick={handleOpenUserMenu}>
               <Avatar>
                 {user?.firstName && user?.lastName ? (
