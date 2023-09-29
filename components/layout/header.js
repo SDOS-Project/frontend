@@ -72,13 +72,13 @@ function Header() {
         <>
           <Box className='mt-4 flex flex-col gap-5 justify-center items-center'>
             <Avatar className='w-20 h-20'>
-              {user?.firstName && user?.lastName ? (
+              {user?.name ? (
+                <>{user?.name[0]}</>
+              ) : (
                 <>
                   {user?.firstName[0]}
                   {user?.lastName[0]}
                 </>
-              ) : (
-                user?.name[0]
               )}
             </Avatar>
             <Link href={`/user/${user?.handle}`} legacyBehavior>
@@ -86,7 +86,13 @@ function Header() {
                 variant='h6'
                 className='text-primary-main cursor-pointer'
               >
-                {user?.firstName} {user?.lastName}
+                {user?.name ? (
+                  <>{user?.name}</>
+                ) : (
+                  <>
+                    {user?.firstName} {user?.lastName}
+                  </>
+                )}
               </Typography>
             </Link>
           </Box>
