@@ -24,9 +24,10 @@ function StartProject() {
     return {
       name: '',
       description: '',
-      partner: '',
+      creatorHandle: user?.handle,
+      partnerHandle: '',
     };
-  }, []);
+  }, [user?.handle]);
 
   const {
     control,
