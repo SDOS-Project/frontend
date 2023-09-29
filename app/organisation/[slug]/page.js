@@ -2,7 +2,7 @@
 import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
 import { OrganisationType } from '@/types/OrganisationType';
 
-function Organisation({ params }) {
+export default function Organisation({ params }) {
   const { slug } = params;
 
   const { data: organisation, isLoading } = useGetOrganisationQuery(slug);
@@ -15,5 +15,3 @@ function Organisation({ params }) {
     </div>
   );
 }
-
-export default Organisation;

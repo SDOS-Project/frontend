@@ -16,7 +16,7 @@ import { UserRole } from '@/types/UserRole';
 import { useCreateProjectMutation } from '@/features/project/apiSice';
 import { useRouter } from 'next/navigation';
 
-function StartProject() {
+export default function StartProject() {
   const router = useRouter();
 
   const user = useSelector(selectUser);
@@ -130,5 +130,3 @@ function StartProject() {
     </main>
   );
 }
-
-export default StartProject;

@@ -21,7 +21,7 @@ import { organisationSignupValidationSchema } from '@/schemas/organisation-signu
 import { OrganisationType } from '@/types/OrganisationType';
 import { LoadingButton } from '@mui/lab';
 
-function Signup() {
+export default function Signup() {
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -221,5 +221,3 @@ function Signup() {
     </main>
   );
 }
-
-export default Signup;

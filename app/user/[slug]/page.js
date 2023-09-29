@@ -2,7 +2,7 @@
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { UserRole } from '@/types/UserRole';
 
-function User({ params }) {
+export default function User({ params }) {
   const { slug } = params;
 
   const { data: user, isLoading } = useGetUserQuery(slug);
@@ -15,5 +15,3 @@ function User({ params }) {
     </div>
   );
 }
-
-export default User;

@@ -1,7 +1,7 @@
 'use client';
 import { useGetProjectsQuery } from '@/features/project/apiSice';
 
-function Projects() {
+export default function Projects() {
   const { data: projects, isLoading: isProjectsLoading } =
     useGetProjectsQuery();
 
@@ -10,5 +10,3 @@ function Projects() {
   if (isProjectsLoading) return <div>Loading...</div>;
   return <div className='mt-20'>Projects</div>;
 }
-
-export default Projects;

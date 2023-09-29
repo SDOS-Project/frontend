@@ -1,7 +1,7 @@
 'use client';
 import { useGetOrganisationsQuery } from '@/features/organisation/apiSlice';
 
-function Organisations() {
+export default function Organisations() {
   const { data: organisations, isLoading: isOrganisationsLoading } =
     useGetOrganisationsQuery();
 
@@ -9,5 +9,3 @@ function Organisations() {
 
   return <div>Organisations</div>;
 }
-
-export default Organisations;
