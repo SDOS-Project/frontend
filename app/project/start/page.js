@@ -1,7 +1,8 @@
 'use client';
 import { useCallback, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { startProjectValidationSchema } from '@/schemas/project/start/schema';
 import {
@@ -24,7 +25,8 @@ function StartProject() {
   const { data: employees, isLoading: isEmployeesLoading } =
     useGetEmployeesQuery();
 
-  const [createProject] = useCreateProjectMutation();
+  const [createProject, { isLoading: isCreateProjectLoading }] =
+    useCreateProjectMutation();
 
   const defaultValues = useMemo(() => {
     return {
@@ -117,9 +119,13 @@ function StartProject() {
             }
           />
         )}
-        <Button type='submit' variant='contained'>
+        <LoadingButton
+          type='submit'
+          variant='contained'
+          loading={isCreateProjectLoading}
+        >
           Start Project
-        </Button>
+        </LoadingButton>
       </form>
     </main>
   );
