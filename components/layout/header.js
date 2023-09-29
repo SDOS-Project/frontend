@@ -27,7 +27,7 @@ import { toast } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '@/store/store';
 
-function Header() {
+export default function Header() {
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -214,4 +214,3 @@ function Header() {
     </PersistGate>
   );
 }
-export default Header;

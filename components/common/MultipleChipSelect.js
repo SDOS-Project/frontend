@@ -9,7 +9,13 @@ import {
 import React, { useCallback } from 'react';
 import { Controller } from 'react-hook-form';
 
-function MultipleChipSelect({ control, fieldName, options, setValue, errors }) {
+export default function MultipleChipSelect({
+  control,
+  fieldName,
+  options,
+  setValue,
+  errors,
+}) {
   const handleChange = useCallback(
     (event) => {
       const {
@@ -60,4 +66,3 @@ function MultipleChipSelect({ control, fieldName, options, setValue, errors }) {
     />
   );
 }
-export default MultipleChipSelect;

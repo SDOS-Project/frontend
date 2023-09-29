@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
-function CustomAutocomplete({
+export default function CustomAutocomplete({
   control,
   fieldName,
   options,
@@ -49,4 +49,3 @@ function CustomAutocomplete({
     />
   );
 }
-export default CustomAutocomplete;

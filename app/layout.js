@@ -3,6 +3,7 @@ import './globals.css';
 import ToastProvider from './toast.provider';
 
 import CustomThemeProvider from '@/theme/provider';
+import AppWrapper from '@/components/common/AppWrapper';
 
 export const metadata = {
   title: 'SDOS',
@@ -15,7 +16,9 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning={true}>
         <Providers>
           <CustomThemeProvider>
-            <ToastProvider>{children}</ToastProvider>
+            <ToastProvider>
+              <AppWrapper>{children}</AppWrapper>
+            </ToastProvider>
           </CustomThemeProvider>
         </Providers>
       </body>
