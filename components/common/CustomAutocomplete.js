@@ -27,7 +27,7 @@ function CustomAutocomplete({
           getOptionLabel={(option) => optionLabelCallback(option)}
           renderOption={(props, option) => {
             return (
-              <li {...props} key={option}>
+              <li {...props} key={option.handle}>
                 {optionLabelCallback(option)}
               </li>
             );
