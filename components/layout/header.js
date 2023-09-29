@@ -123,9 +123,7 @@ function Header() {
       <AppBar color='transparent' className='bg-gg mb-12'>
         <Toolbar className='flex items-center justify-between'>
           <Box className='flex'>
-            <Link href={'/'} passHref={true} legacyBehavior>
-              SDOS
-            </Link>
+            SDOS
             <Box className='ml-4 hidden md:flex items-center gap-4'>
               {navItems.map((item) => {
                 return (

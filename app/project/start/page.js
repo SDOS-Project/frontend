@@ -77,7 +77,7 @@ function StartProject() {
             />
           )}
         />
-        {user?.role.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
+        {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
           <CustomAutocomplete
             control={control}
             fieldName='partner'
