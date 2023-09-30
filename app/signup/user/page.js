@@ -35,6 +35,37 @@ export default function Signup() {
 
   const [signup, { isLoading: isUserSignupLoading }] = useSignupMutation();
 
+  const textFields = useMemo(
+    () => [
+      {
+        name: 'firstName',
+        label: 'First Name',
+        type: 'text',
+      },
+      {
+        name: 'lastName',
+        label: 'Last Name',
+        type: 'text',
+      },
+      {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+      },
+      {
+        name: 'password',
+        label: 'Password',
+        type: 'password',
+      },
+      {
+        name: 'confirmPassword',
+        label: 'Confirm Password',
+        type: 'password',
+      },
+    ],
+    []
+  );
+
   const defaultValues = useMemo(() => {
     return {
       firstName: '',
@@ -102,80 +133,26 @@ export default function Signup() {
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-between gap-10'
       >
-        <Controller
-          name='firstName'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='First Name'
-              variant='outlined'
-              error={!!errors.firstName}
-              helperText={errors.firstName ? errors.firstName?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='lastName'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='Last Name'
-              variant='outlined'
-              error={!!errors.lastName}
-              helperText={errors.lastName ? errors.lastName?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='email'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='Email'
-              variant='outlined'
-              error={!!errors.email}
-              helperText={errors.email ? errors.email?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='password'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              type='password'
-              label='Password'
-              variant='outlined'
-              error={!!errors.password}
-              helperText={errors.password ? errors.password?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='confirmPassword'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              type='password'
-              label='Confirm Password'
-              variant='outlined'
-              error={!!errors.confirmPassword}
-              helperText={
-                errors.confirmPassword ? errors.confirmPassword?.message : ''
-              }
-            />
-          )}
-        />
+        {textFields.map((textField) => (
+          <Controller
+            key={textField.name}
+            name={textField.name}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                size='small'
+                label={textField.label}
+                type={textField.type}
+                variant='outlined'
+                error={!!errors[textField.name]}
+                helperText={
+                  errors[textField.name] ? errors[textField.name]?.message : ''
+                }
+              />
+            )}
+          />
+        ))}
         <Controller
           name='role'
           control={control}
