@@ -62,7 +62,8 @@ export default function Home() {
 
   useEffect(() => {
     if (authState.isAuthenticated && authState.user) {
-      router.push(`/user/${authState.user.handle}`);
+      const href = authState.user?.role ? `/user` : '/organisation';
+      router.push(`${href}/${authState.user.handle}`);
     }
   }, [authState.isAuthenticated, authState.user, router]);
 
