@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Header from "../layout/header";
 import { useEffect, useState } from "react";
 import { Router } from "next/router";
+import { LandingHeader } from "./LandingHeader";
 
 export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
@@ -32,7 +33,7 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {auth && <Header />}
+      {auth ? <Header /> : <LandingHeader />}
       {children}
     </>
   );
