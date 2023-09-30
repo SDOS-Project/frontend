@@ -117,6 +117,13 @@ export default function Header() {
         })}
         <ListItem disablePadding>
           <ListItemButton className='text-center'>
+            <Link href={'/project/start'} legacyBehavior>
+              <ListItemText primary={'Start a Project'} />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton className='text-center'>
             <ListItemText onClick={handleLogout}>Logout</ListItemText>
           </ListItemButton>
         </ListItem>
