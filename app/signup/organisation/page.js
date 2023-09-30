@@ -123,11 +123,8 @@ export default function Signup() {
 
   useEffect(() => {
     if (authState.isAuthenticated && authState.user) {
-      if (authState.user.name) {
-        router.push(`/organisation/${authState.user.handle}`);
-      } else {
-        router.push(`/user/${authState.user.handle}`);
-      }
+      const href = authState.user?.role ? `/user` : '/organisation';
+      router.push(`${href}/${authState.user.handle}`);
     }
   }, [authState.isAuthenticated, authState.user, router]);
 
