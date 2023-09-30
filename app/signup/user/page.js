@@ -1,10 +1,10 @@
-'use client';
-import { useCallback, useMemo } from 'react';
-import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
-import { auth } from '@/firebase-config';
-import { useDispatch } from 'react-redux';
-import { useSignupMutation } from '@/features/auth/apiSlice';
-import { Controller, useForm } from 'react-hook-form';
+"use client";
+import { useCallback, useMemo } from "react";
+import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import { auth } from "@/firebase-config";
+import { useDispatch } from "react-redux";
+import { useSignupMutation } from "@/features/auth/apiSlice";
+import { Controller, useForm } from "react-hook-form";
 import {
   FormControl,
   FormHelperText,
@@ -12,20 +12,22 @@ import {
   MenuItem,
   Select,
   TextField,
-} from '@mui/material';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
-import { signupValidationSchema } from '@/schemas/signup/schema';
-import { useGetOrganisationsQuery } from '@/features/organisation/apiSlice';
-import { UserRole } from '@/types/UserRole';
-import MultipleChipSelect from '@/components/common/MultipleChipSelect';
-import CustomAutocomplete from '@/components/common/CustomAutocomplete';
-import { setUser } from '@/features/auth/authSlice';
-import { LoadingButton } from '@mui/lab';
-import { FirebaseErrors } from '@/types/FirebaseErrors';
+} from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import { signupValidationSchema } from "@/schemas/signup/schema";
+import { useGetOrganisationsQuery } from "@/features/organisation/apiSlice";
+import { UserRole } from "@/types/UserRole";
+import MultipleChipSelect from "@/components/common/MultipleChipSelect";
+import CustomAutocomplete from "@/components/common/CustomAutocomplete";
+import { setUser } from "@/features/auth/authSlice";
+import { LoadingButton } from "@mui/lab";
+import { FirebaseErrors } from "@/types/FirebaseErrors";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { data: organisations, isLoading: isOrganisationsLoading } =
     useGetOrganisationsQuery();
@@ -35,29 +37,29 @@ export default function Signup() {
   const textFields = useMemo(
     () => [
       {
-        name: 'firstName',
-        label: 'First Name',
-        type: 'text',
+        name: "firstName",
+        label: "First Name",
+        type: "text",
       },
       {
-        name: 'lastName',
-        label: 'Last Name',
-        type: 'text',
+        name: "lastName",
+        label: "Last Name",
+        type: "text",
       },
       {
-        name: 'email',
-        label: 'Email',
-        type: 'email',
+        name: "email",
+        label: "Email",
+        type: "email",
       },
       {
-        name: 'password',
-        label: 'Password',
-        type: 'password',
+        name: "password",
+        label: "Password",
+        type: "password",
       },
       {
-        name: 'confirmPassword',
-        label: 'Confirm Password',
-        type: 'password',
+        name: "confirmPassword",
+        label: "Confirm Password",
+        type: "password",
       },
     ],
     []
@@ -65,13 +67,13 @@ export default function Signup() {
 
   const defaultValues = useMemo(() => {
     return {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      role: '',
-      organisationHandle: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      role: "",
+      organisationHandle: "",
       areasOfInterest: [],
     };
   }, []);
@@ -102,7 +104,7 @@ export default function Signup() {
           } catch (error) {
             deleteUser(firebaseUser)
               .then(() => {
-                console.log('User deleted');
+                console.log("User deleted");
               })
               .catch((err) => console.log(err));
           }
@@ -111,7 +113,7 @@ export default function Signup() {
           reset(defaultValues);
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log('error', errorCode, errorMessage);
+          console.log("error", errorCode, errorMessage);
           toast.error(FirebaseErrors[errorCode] || errorMessage);
         });
     },
@@ -119,11 +121,19 @@ export default function Signup() {
   );
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+    <main className="flex min-h-screen items-center justify-center bg-grey">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-between gap-10'
+        className="flex flex-col items-center justify-center gap-6 bg-paper py-8 px-20 w-1/2 rounded-md"
       >
+        <div className="flex flex-col items-center justify-center gap-2">
+          <h1 className="text-3xl font-semibold">
+            Signup On Edu<span className="text-primary-main">Corp.</span>
+          </h1>
+          <p className="text-primary-grey font-light">
+            Bridging Academia and Industry
+          </p>
+        </div>
         {textFields.map((textField) => (
           <Controller
             key={textField.name}
@@ -132,25 +142,31 @@ export default function Signup() {
             render={({ field }) => (
               <TextField
                 {...field}
-                size='small'
+                size="small"
                 label={textField.label}
                 type={textField.type}
-                variant='outlined'
+                variant="outlined"
                 error={!!errors[textField.name]}
                 helperText={
-                  errors[textField.name] ? errors[textField.name]?.message : ''
+                  errors[textField.name] ? errors[textField.name]?.message : ""
                 }
+                className="w-full"
               />
             )}
           />
         ))}
         <Controller
-          name='role'
+          name="role"
           control={control}
           render={({ field }) => (
-            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
+            <FormControl className="w-full mb-2 lg:mb-0" size="small">
               <InputLabel>Role</InputLabel>
-              <Select {...field} label='role' error={!!errors.role}>
+              <Select
+                {...field}
+                label="role"
+                error={!!errors.role}
+                className="w-full"
+              >
                 {Object.keys(UserRole)?.map((role) => {
                   return (
                     <MenuItem key={role} value={role}>
@@ -159,7 +175,7 @@ export default function Signup() {
                   );
                 })}
               </Select>
-              <FormHelperText className='text-error-main'>
+              <FormHelperText className="text-error-main">
                 {errors?.role && errors?.role?.message}
               </FormHelperText>
             </FormControl>
@@ -167,27 +183,35 @@ export default function Signup() {
         />
         <CustomAutocomplete
           control={control}
-          fieldName='organisationHandle'
+          fieldName="organisationHandle"
           options={organisations}
           errors={errors}
           loading={isOrganisationsLoading}
-          label={'Organisation'}
+          label={"Organisation"}
           optionLabelCallback={(option) => option?.name}
         />
         <MultipleChipSelect
+          label="Select Areas Of Interest"
           control={control}
-          fieldName='areasOfInterest'
-          options={['AI', 'ML', 'DL', 'CV']}
+          fieldName="areasOfInterest"
+          options={["AI", "ML", "DL", "CV"]}
           errors={errors}
           setValue={setValue}
         />
         <LoadingButton
-          type='submit'
-          variant='contained'
+          type="submit"
+          variant="contained"
           loading={isUserSignupLoading}
+          className="w-full bg-primary-main"
         >
           Sign up
         </LoadingButton>
+        <p
+          className="text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline"
+          onClick={() => router.push("/signup/organisation")}
+        >
+          Want to Signup As An Org? Click Here.
+        </p>
       </form>
     </main>
   );

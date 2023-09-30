@@ -1,15 +1,19 @@
 import {
   Box,
   Chip,
+  FormControl,
   FormHelperText,
+  FormLabel,
+  InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
-} from '@mui/material';
-import React, { useCallback } from 'react';
-import { Controller } from 'react-hook-form';
+} from "@mui/material";
+import React, { useCallback } from "react";
+import { Controller } from "react-hook-form";
 
 export default function MultipleChipSelect({
+  label,
   control,
   fieldName,
   options,
@@ -21,7 +25,7 @@ export default function MultipleChipSelect({
       const {
         target: { value },
       } = event;
-      setValue(fieldName, typeof value === 'string' ? value.split(',') : value);
+      setValue(fieldName, typeof value === "string" ? value.split(",") : value);
     },
     [fieldName, setValue]
   );
@@ -32,9 +36,10 @@ export default function MultipleChipSelect({
       control={control}
       render={({ field: { _, value } }) => (
         <>
+          <FormLabel className="w-full">{label}</FormLabel>
           <Select
-            className='w-full'
-            size='small'
+            className="w-full"
+            size="small"
             value={value}
             multiple
             onChange={handleChange}
@@ -42,7 +47,7 @@ export default function MultipleChipSelect({
             input={<OutlinedInput />}
             renderValue={(selected) => {
               return (
-                <Box className='flex flex-wrap gap-0.5'>
+                <Box className="flex flex-wrap gap-0.5">
                   {selected.map((value) => (
                     <Chip key={value} label={value} />
                   ))}
@@ -57,8 +62,8 @@ export default function MultipleChipSelect({
             ))}
           </Select>
           {!!errors?.[fieldName] && (
-            <FormHelperText className='text-error-main ml-4'>
-              {errors?.[fieldName] ? errors?.[fieldName]?.message : ''}
+            <FormHelperText className="text-error-main ml-4">
+              {errors?.[fieldName] ? errors?.[fieldName]?.message : ""}
             </FormHelperText>
           )}
         </>

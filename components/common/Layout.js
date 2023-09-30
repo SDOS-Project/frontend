@@ -1,9 +1,9 @@
-'use client';
-import { selectIsAuthenticated } from '@/features/auth/authSlice';
-import { useSelector } from 'react-redux';
-import Header from '../layout/header';
-import { useEffect, useState } from 'react';
-import { Router } from 'next/router';
+"use client";
+import { selectIsAuthenticated } from "@/features/auth/authSlice";
+import { useSelector } from "react-redux";
+import Header from "../layout/header";
+import { useEffect, useState } from "react";
+import { Router } from "next/router";
 
 export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
@@ -19,12 +19,12 @@ export default function Layout({ children }) {
       setIsPageTransitioning(false);
     };
 
-    Router.events.on('routeChangeStart', handleRouteChangeStart);
-    Router.events.on('routeChangeComplete', handleRouteChangeComplete);
+    Router.events.on("routeChangeStart", handleRouteChangeStart);
+    Router.events.on("routeChangeComplete", handleRouteChangeComplete);
 
     return () => {
-      Router.events.off('routeChangeStart', handleRouteChangeStart);
-      Router.events.off('routeChangeComplete', handleRouteChangeComplete);
+      Router.events.off("routeChangeStart", handleRouteChangeStart);
+      Router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
   }, []);
 
