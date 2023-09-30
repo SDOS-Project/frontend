@@ -1,11 +1,11 @@
-import { default as themeConstants } from './theme/themeConstants';
-import { screens as _screens } from 'tailwindcss/defaultTheme';
+import { default as themeConstants } from "./theme/themeConstants";
+import { screens as _screens } from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export const content = [
-  './pages/**/*.{js,ts,jsx,tsx,mdx}',
-  './components/**/*.{js,ts,jsx,tsx,mdx}',
-  './app/**/*.{js,ts,jsx,tsx,mdx}',
+  "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+  "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  "./app/**/*.{js,ts,jsx,tsx,mdx}",
 ];
 export const theme = {
   extend: {
@@ -15,19 +15,20 @@ export const theme = {
       default: themeConstants.font.body,
     },
     colors: {
+      grey: "#F1F5F9",
       gg: themeConstants.background.default,
       paper: themeConstants.background.paper,
       primary: themeConstants.primary,
       secondary: themeConstants.secondary,
       error: themeConstants.error,
       fg: themeConstants.fg.main,
-      action: '#EE4444',
-      danger: '#EE4444',
+      action: "#EE4444",
+      danger: "#EE4444",
     },
     screens: {
       ..._screens,
       ...themeConstants.breakpoints,
-      ha: { raw: '(hover: hover)' },
+      ha: { raw: "(hover: hover)" },
     },
   },
 };
