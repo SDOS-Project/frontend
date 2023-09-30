@@ -11,6 +11,7 @@ import { Button, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidationSchema } from '@/schemas/login/schema';
 import { toast } from 'react-toastify';
+import { FirebaseErrors } from '@/types/FirebaseErrors';
 
 export default function Home() {
   const router = useRouter();
@@ -53,8 +54,8 @@ export default function Home() {
           reset(defaultValues);
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log('error', errorCode, errorMessage);
-          toast.error(errorMessage);
+          console.log('error', errorCode);
+          toast.error(FirebaseErrors[errorCode] || errorMessage);
         });
     },
     [dispatch, login, reset, defaultValues]

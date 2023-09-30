@@ -20,6 +20,7 @@ import { setUser } from '@/features/auth/authSlice';
 import { organisationSignupValidationSchema } from '@/schemas/organisation-signup/schema';
 import { OrganisationType } from '@/types/OrganisationType';
 import { LoadingButton } from '@mui/lab';
+import { FirebaseErrors } from '@/types/FirebaseErrors';
 
 export default function Signup() {
   const router = useRouter();
@@ -78,7 +79,7 @@ export default function Signup() {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log('error', errorCode, errorMessage);
-          toast.error(errorMessage);
+          toast.error(FirebaseErrors[errorCode] || errorMessage);
         });
     },
     [dispatch, signup, reset, defaultValues]
