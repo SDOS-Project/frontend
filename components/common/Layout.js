@@ -2,33 +2,32 @@
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import Header from '../layout/header';
-import { Router } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
 
   const [isPageTransitioning, setIsPageTransitioning] = useState(false);
 
-  useEffect(() => {
-    const handleRouteChangeStart = (url) => {
-      setIsPageTransitioning(true);
-    };
+  // useEffect(() => {
+  //   const handleRouteChangeStart = (url) => {
+  //     setIsPageTransitioning(true);
+  //   };
 
-    const handleRouteChangeComplete = (url) => {
-      setIsPageTransitioning(false);
-    };
+  //   const handleRouteChangeComplete = (url) => {
+  //     setIsPageTransitioning(false);
+  //   };
 
-    Router.events.on('routeChangeStart', handleRouteChangeStart);
-    Router.events.on('routeChangeComplete', handleRouteChangeComplete);
+  //   Router.events.on('routeChangeStart', handleRouteChangeStart);
+  //   Router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
-    return () => {
-      Router.events.off('routeChangeStart', handleRouteChangeStart);
-      Router.events.off('routeChangeComplete', handleRouteChangeComplete);
-    };
-  }, []);
+  //   return () => {
+  //     Router.events.off('routeChangeStart', handleRouteChangeStart);
+  //     Router.events.off('routeChangeComplete', handleRouteChangeComplete);
+  //   };
+  // }, []);
 
-  if (isPageTransitioning) return; // do something here to show a loading indicator;
+  // if (isPageTransitioning) return; // do something here to show a loading indicator;
 
   return (
     <>
