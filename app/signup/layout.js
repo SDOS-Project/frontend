@@ -1,4 +1,4 @@
-import SignupProvider from './SignupProvider';
+import SignupProvider from './providers/SignupProvider';
 
 export default function Layout({ children }) {
   return (
