@@ -31,6 +31,42 @@ export default function Signup() {
   const [signup, { isLoading: isOrganisationSignupLoading }] =
     useOrganisationSignupMutation();
 
+  const textFields = useMemo(
+    () => [
+      {
+        name: 'name',
+        label: 'Name',
+        type: 'text',
+      },
+      {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+      },
+      {
+        name: 'password',
+        label: 'Password',
+        type: 'password',
+      },
+      {
+        name: 'confirmPassword',
+        label: 'Confirm Password',
+        type: 'password',
+      },
+      {
+        name: 'address',
+        label: 'Address',
+        type: 'text',
+      },
+      {
+        name: 'ipPolicy',
+        label: 'IP Policy URL',
+        type: 'text',
+      },
+    ],
+    []
+  );
+
   const defaultValues = useMemo(() => {
     return {
       name: '',
@@ -101,66 +137,26 @@ export default function Signup() {
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col items-center justify-between gap-10'
       >
-        <Controller
-          name='name'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='Name'
-              variant='outlined'
-              error={!!errors.name}
-              helperText={errors.name ? errors.name?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='email'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='Email'
-              variant='outlined'
-              error={!!errors.email}
-              helperText={errors.email ? errors.email?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='password'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              type='password'
-              label='Password'
-              variant='outlined'
-              error={!!errors.password}
-              helperText={errors.password ? errors.password?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='confirmPassword'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              type='password'
-              label='Confirm Password'
-              variant='outlined'
-              error={!!errors.confirmPassword}
-              helperText={
-                errors.confirmPassword ? errors.confirmPassword?.message : ''
-              }
-            />
-          )}
-        />
+        {textFields.map((textField) => (
+          <Controller
+            key={textField.name}
+            name={textField.name}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                size='small'
+                label={textField.label}
+                type={textField.type}
+                variant='outlined'
+                error={!!errors[textField.name]}
+                helperText={
+                  errors[textField.name] ? errors[textField.name]?.message : ''
+                }
+              />
+            )}
+          />
+        ))}
         <Controller
           name='type'
           control={control}
@@ -180,35 +176,6 @@ export default function Signup() {
                 {errors?.role && errors?.role?.message}
               </FormHelperText>
             </FormControl>
-          )}
-        />
-        <Controller
-          name='address'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='Address'
-              variant='outlined'
-              error={!!errors.address}
-              helperText={errors.address ? errors.address?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name='ipPolicy'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='IP Policy URL'
-              placeholder='https://example.com'
-              variant='outlined'
-              error={!!errors.ipPolicy}
-              helperText={errors.ipPolicy ? errors.ipPolicy?.message : ''}
-            />
           )}
         />
         <LoadingButton
