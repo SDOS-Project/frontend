@@ -2,37 +2,33 @@
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import Header from '../layout/header';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { Router } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export default function Layout({ children }) {
-  const router = useRouter();
-
   const auth = useSelector(selectIsAuthenticated);
 
-  // useEffect(() => {
-  //   // Event handler for route change start
-  //   const handleRouteChangeStart = (url) => {
-  //     console.log(`Route is changing to: ${url}`);
-  //     // You can perform actions when the route change starts here
-  //   };
+  const [isPageTransitioning, setIsPageTransitioning] = useState(false);
 
-  //   // Event handler for route change complete
-  //   const handleRouteChangeComplete = (url) => {
-  //     console.log(`Route change completed to: ${url}`);
-  //     // You can perform actions when the route change is complete here
-  //   };
+  useEffect(() => {
+    const handleRouteChangeStart = (url) => {
+      setIsPageTransitioning(true);
+    };
 
-  //   // Subscribe to route change events
-  //   router.events.on('routeChangeStart', handleRouteChangeStart);
-  //   router.events.on('routeChangeComplete', handleRouteChangeComplete);
+    const handleRouteChangeComplete = (url) => {
+      setIsPageTransitioning(false);
+    };
 
-  //   // Clean up event listeners when the component unmounts
-  //   return () => {
-  //     router.events.off('routeChangeStart', handleRouteChangeStart);
-  //     router.events.off('routeChangeComplete', handleRouteChangeComplete);
-  //   };
-  // }, [router.events]);
+    Router.events.on('routeChangeStart', handleRouteChangeStart);
+    Router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    return () => {
+      Router.events.off('routeChangeStart', handleRouteChangeStart);
+      Router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, []);
+
+  if (isPageTransitioning) return; // do something here to show a loading indicator;
 
   return (
     <>
