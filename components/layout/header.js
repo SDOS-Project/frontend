@@ -67,6 +67,12 @@ export default function Header() {
     }
   }, [dispatch, router]);
 
+  const hrefCallback = useCallback(() => {
+    const href = user?.role ? 'user' : 'organisation';
+    console.log(href);
+    return `/${href}/${user.handle}`;
+  }, [user?.role, user?.handle]);
+
   const drawer = (
     <Box onClick={handleDrawerToggle} className='h-full bg-white flex flex-col'>
       {user && (
@@ -82,7 +88,7 @@ export default function Header() {
                 </>
               )}
             </Avatar>
-            <Link href={`/user/${user?.handle}`} legacyBehavior>
+            <Link href={hrefCallback()} legacyBehavior>
               <Typography className='text-primary-main cursor-pointer body-large'>
                 {user?.name ? (
                   <>{user?.name}</>
@@ -170,7 +176,7 @@ export default function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link href={`/user/${user?.handle}`} legacyBehavior>
+              <Link href={hrefCallback()} legacyBehavior>
                 <MenuItem>
                   <ListItemText>Profile</ListItemText>
                 </MenuItem>
