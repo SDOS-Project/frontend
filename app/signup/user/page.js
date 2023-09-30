@@ -1,10 +1,9 @@
 'use client';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from '@/firebase-config';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useSignupMutation } from '@/features/auth/apiSlice';
-import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import {
   FormControl,
@@ -26,10 +25,7 @@ import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 
 export default function Signup() {
-  const router = useRouter();
-
   const dispatch = useDispatch();
-  const authState = useSelector((state) => state.auth);
 
   const { data: organisations, isLoading: isOrganisationsLoading } =
     useGetOrganisationsQuery();
@@ -121,12 +117,6 @@ export default function Signup() {
     },
     [dispatch, signup, reset, defaultValues]
   );
-
-  useEffect(() => {
-    if (authState.isAuthenticated && authState.user) {
-      router.push(`/user/${authState.user.handle}`);
-    }
-  }, [authState.isAuthenticated, authState.user, router]);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
