@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -58,6 +58,10 @@ export default function StartProject() {
     },
     [createProject, defaultValues, reset, router]
   );
+
+  useEffect(() => {
+    if (user?.type) router.push(`/organisation/${user.handle}`);
+  }, [user?.type, user?.handle, router]);
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
