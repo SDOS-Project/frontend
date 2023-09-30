@@ -143,11 +143,16 @@ export default function Header() {
             </Box>
           </Box>
           <Box className='hidden md:flex items-center gap-4'>
-            <Link href={'/project/start'} legacyBehavior>
-              <Button variant='contained' className='bg-primary-main py-1 px-6'>
-                Start a Project
-              </Button>
-            </Link>
+            {user?.role && (
+              <Link href={'/project/start'} legacyBehavior>
+                <Button
+                  variant='contained'
+                  className='bg-primary-main py-1 px-6'
+                >
+                  Start a Project
+                </Button>
+              </Link>
+            )}
             <IconButton className='p-0' onClick={handleOpenUserMenu}>
               <Avatar>
                 {user?.firstName && user?.lastName ? (
