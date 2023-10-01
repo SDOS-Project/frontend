@@ -21,6 +21,7 @@ import { OrganisationType } from "@/types/OrganisationType";
 import { LoadingButton } from "@mui/lab";
 import { FirebaseErrors } from "@/types/FirebaseErrors";
 import { useRouter } from "next/navigation";
+import { TabSwitch } from "@/components/signup/TabSwitch";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -119,19 +120,21 @@ export default function Signup() {
   );
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-grey">
+    <main className='flex w-full items-center justify-center py-16'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center gap-6 bg-paper py-8 px-20 w-1/2 rounded-md"
+        className='flex flex-col items-center justify-center gap-4 bg-paper p-6  w-5/6 rounded-md md:px-20 lg:gap-6 lg:w-1/2 '
       >
-        <div className="flex flex-col items-center justify-center gap-2">
-          <h1 className="text-3xl font-semibold">
-            Signup On Edu<span className="text-primary-main">Corp.</span>
+        <div className='flex flex-col items-center justify-center gap-2'>
+          <h1 className='body-2xlarge font-semibold'>
+            Signup On Edu
+            <span className='text-primary-main'>Corp.</span>
           </h1>
-          <p className="text-primary-grey font-light">
+          <p className='text-primary-grey font-light body-small'>
             Bridging Academia and Industry
           </p>
         </div>
+        <TabSwitch />
         {textFields.map((textField) => (
           <Controller
             key={textField.name}
@@ -140,11 +143,11 @@ export default function Signup() {
             render={({ field }) => (
               <TextField
                 {...field}
-                className="w-full"
-                size="small"
+                className='w-full'
+                size='small'
                 label={textField.label}
                 type={textField.type}
-                variant="outlined"
+                variant='outlined'
                 error={!!errors[textField.name]}
                 helperText={
                   errors[textField.name] ? errors[textField.name]?.message : ""
@@ -154,12 +157,12 @@ export default function Signup() {
           />
         ))}
         <Controller
-          name="type"
+          name='type'
           control={control}
           render={({ field }) => (
-            <FormControl className="w-full mb-2 lg:mb-0" size="small">
+            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
               <InputLabel>Type</InputLabel>
-              <Select {...field} label="type" error={!!errors.type}>
+              <Select {...field} label='type' error={!!errors.type}>
                 {Object.keys(OrganisationType)?.map((role) => {
                   return (
                     <MenuItem key={role} value={role}>
@@ -168,25 +171,25 @@ export default function Signup() {
                   );
                 })}
               </Select>
-              <FormHelperText className="text-red ml-4">
+              <FormHelperText className='text-red ml-4'>
                 {errors?.role && errors?.role?.message}
               </FormHelperText>
             </FormControl>
           )}
         />
         <LoadingButton
-          type="submit"
-          variant="contained"
+          type='submit'
+          variant='contained'
           loading={isOrganisationSignupLoading}
-          className="w-full bg-primary-main"
+          className='w-full bg-primary-main'
         >
           Sign Up
         </LoadingButton>
         <p
-          className="text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline"
-          onClick={() => router.push("/signup/user")}
+          className='text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline'
+          onClick={() => router.push("/")}
         >
-          Want to Signup As An User? Click Here.
+          Want to Login? Click Here.
         </p>
       </form>
     </main>

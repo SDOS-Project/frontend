@@ -74,11 +74,11 @@ export default function Header() {
   }, [user?.role, user?.handle]);
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} className="h-full bg-white flex flex-col">
+    <Box onClick={handleDrawerToggle} className='h-full bg-white flex flex-col'>
       {user && (
         <>
-          <Box className="mt-4 flex flex-col gap-5 justify-center items-center">
-            <Avatar className="w-16 h-16">
+          <Box className='mt-4 flex flex-col gap-5 justify-center items-center'>
+            <Avatar className='w-16 h-16'>
               {user?.name ? (
                 <>{user?.name[0]}</>
               ) : (
@@ -89,7 +89,7 @@ export default function Header() {
               )}
             </Avatar>
             <Link href={hrefCallback()} legacyBehavior>
-              <Typography className="text-primary-main cursor-pointer body-large">
+              <Typography className='text-primary-main cursor-pointer body-large'>
                 {user?.name ? (
                   <>{user?.name}</>
                 ) : (
@@ -100,14 +100,14 @@ export default function Header() {
               </Typography>
             </Link>
           </Box>
-          <Divider className="m-0 p-0 mt-4" />
+          <Divider className='m-0 p-0 mt-4' />
         </>
       )}
       <List>
         {navItems.map((item) => {
           return (
             <ListItem key={item.href} disablePadding>
-              <ListItemButton className="text-center">
+              <ListItemButton className='text-center'>
                 <Link href={item.href} legacyBehavior>
                   <ListItemText primary={item.page} />
                 </Link>
@@ -116,14 +116,14 @@ export default function Header() {
           );
         })}
         <ListItem disablePadding>
-          <ListItemButton className="text-center">
+          <ListItemButton className='text-center'>
             <Link href={"/project/start"} legacyBehavior>
               <ListItemText primary={"Start a Project"} />
             </Link>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton className="text-center">
+          <ListItemButton className='text-center'>
             <ListItemText onClick={handleLogout}>Logout</ListItemText>
           </ListItemButton>
         </ListItem>
@@ -133,15 +133,15 @@ export default function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar color="transparent" className="bg-gg mb-12">
-        <Toolbar className="flex items-center justify-between">
-          <Box className="flex">
+      <AppBar color='transparent' className='bg-gg mb-12'>
+        <Toolbar className='flex items-center justify-between'>
+          <Box className='flex'>
             SDOS
-            <Box className="ml-4 hidden md:flex items-center gap-4">
+            <Box className='ml-4 hidden md:flex items-center gap-4'>
               {navItems.map((item) => {
                 return (
                   <Link href={item.href} key={item.href} legacyBehavior>
-                    <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
+                    <Typography className='body-normal cursor-pointer transition all delay-30 hover:text-primary-main'>
                       {item.page}
                     </Typography>
                   </Link>
@@ -149,18 +149,18 @@ export default function Header() {
               })}
             </Box>
           </Box>
-          <Box className="hidden md:flex items-center gap-4">
+          <Box className='hidden md:flex items-center gap-4'>
             {user?.role && (
               <Link href={"/project/start"} legacyBehavior>
                 <Button
-                  variant="contained"
-                  className="bg-primary-main py-1 px-6"
+                  variant='contained'
+                  className='bg-primary-main py-1 px-6'
                 >
                   Start a Project
                 </Button>
               </Link>
             )}
-            <IconButton className="p-0" onClick={handleOpenUserMenu}>
+            <IconButton className='p-0' onClick={handleOpenUserMenu}>
               <Avatar>
                 {user?.firstName && user?.lastName ? (
                   <>
@@ -173,8 +173,8 @@ export default function Header() {
               </Avatar>
             </IconButton>
             <Menu
-              className="mt-10"
-              id="menu-appbar"
+              className='mt-10'
+              id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
@@ -198,21 +198,21 @@ export default function Header() {
               </MenuItem>
             </Menu>
           </Box>
-          <Box className="md:hidden">
+          <Box className='md:hidden'>
             <IconButton
-              className="md:hidden"
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
+              className='md:hidden'
+              color='inherit'
+              aria-label='open drawer'
+              edge='start'
               onClick={handleDrawerToggle}
             >
-              <MenuIcon className="text-black" />
+              <MenuIcon className='text-black' />
             </IconButton>
           </Box>
         </Toolbar>
         <Drawer
-          anchor="right"
-          variant="temporary"
+          anchor='right'
+          variant='temporary'
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{

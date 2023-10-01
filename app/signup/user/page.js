@@ -24,6 +24,7 @@ import { setUser } from "@/features/auth/authSlice";
 import { LoadingButton } from "@mui/lab";
 import { FirebaseErrors } from "@/types/FirebaseErrors";
 import { useRouter } from "next/navigation";
+import { TabSwitch } from "@/components/signup/TabSwitch";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -121,19 +122,20 @@ export default function Signup() {
   );
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-grey">
+    <main className='flex items-center justify-center pt-4'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center gap-6 bg-paper py-8 px-20 w-1/2 rounded-md"
+        className='flex flex-col items-center justify-center gap-6 bg-paper py-8 px-8  w-5/6 rounded-md lg:w-1/2 md:px-20'
       >
-        <div className="flex flex-col items-center justify-center gap-2">
-          <h1 className="text-3xl font-semibold">
-            Signup On Edu<span className="text-primary-main">Corp.</span>
+        <div className='flex flex-col items-center justify-center gap-2'>
+          <h1 className='body-2xlarge font-semibold'>
+            Signup On Edu<span className='text-primary-main'>Corp.</span>
           </h1>
-          <p className="text-primary-grey font-light">
+          <p className='text-primary-grey font-light body-small'>
             Bridging Academia and Industry
           </p>
         </div>
+        <TabSwitch />
         {textFields.map((textField) => (
           <Controller
             key={textField.name}
@@ -142,30 +144,30 @@ export default function Signup() {
             render={({ field }) => (
               <TextField
                 {...field}
-                size="small"
+                size='small'
                 label={textField.label}
                 type={textField.type}
-                variant="outlined"
+                variant='outlined'
                 error={!!errors[textField.name]}
                 helperText={
                   errors[textField.name] ? errors[textField.name]?.message : ""
                 }
-                className="w-full"
+                className='w-full'
               />
             )}
           />
         ))}
         <Controller
-          name="role"
+          name='role'
           control={control}
           render={({ field }) => (
-            <FormControl className="w-full mb-2 lg:mb-0" size="small">
+            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
               <InputLabel>Role</InputLabel>
               <Select
                 {...field}
-                label="role"
+                label='role'
                 error={!!errors.role}
-                className="w-full"
+                className='w-full'
               >
                 {Object.keys(UserRole)?.map((role) => {
                   return (
@@ -175,7 +177,7 @@ export default function Signup() {
                   );
                 })}
               </Select>
-              <FormHelperText className="text-error-main">
+              <FormHelperText className='text-error-main'>
                 {errors?.role && errors?.role?.message}
               </FormHelperText>
             </FormControl>
@@ -183,7 +185,7 @@ export default function Signup() {
         />
         <CustomAutocomplete
           control={control}
-          fieldName="organisationHandle"
+          fieldName='organisationHandle'
           options={organisations}
           errors={errors}
           loading={isOrganisationsLoading}
@@ -191,26 +193,26 @@ export default function Signup() {
           optionLabelCallback={(option) => option?.name}
         />
         <MultipleChipSelect
-          label="Select Areas Of Interest"
+          label='Select Areas Of Interest'
           control={control}
-          fieldName="areasOfInterest"
+          fieldName='areasOfInterest'
           options={["AI", "ML", "DL", "CV"]}
           errors={errors}
           setValue={setValue}
         />
         <LoadingButton
-          type="submit"
-          variant="contained"
+          type='submit'
+          variant='contained'
           loading={isUserSignupLoading}
-          className="w-full bg-primary-main"
+          className='w-full bg-primary-main'
         >
           Sign up
         </LoadingButton>
         <p
-          className="text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline"
-          onClick={() => router.push("/signup/organisation")}
+          className='text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline'
+          onClick={() => router.push("/")}
         >
-          Want to Signup As An Org? Click Here.
+          Want to Login? Click Here.
         </p>
       </form>
     </main>
