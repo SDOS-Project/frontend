@@ -27,6 +27,7 @@ import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { useRouter } from 'next/navigation';
 import { TabSwitch } from '@/components/signup/TabSwitch';
 import Link from 'next/link';
+import FormFieldLabel from '@/components/common/FormFieldLabel';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -139,66 +140,76 @@ export default function Signup() {
           </div>
           <TabSwitch />
           {textFields.map((textField) => (
+            <div
+              className="w-full"
+              key={`${textField.label}-${textField.name}`}>
+              <FormFieldLabel title={textField.label} />
+              <Controller
+                key={textField.name}
+                name={textField.name}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    size="small"
+                    label={textField.label}
+                    type={textField.type}
+                    variant="outlined"
+                    error={!!errors[textField.name]}
+                    helperText={
+                      errors[textField.name]
+                        ? errors[textField.name]?.message
+                        : ''
+                    }
+                    className="w-full"
+                  />
+                )}
+              />
+            </div>
+          ))}
+          <div className="w-full">
+            <FormFieldLabel title={'Role'} />
             <Controller
-              key={textField.name}
-              name={textField.name}
+              name="role"
               control={control}
               render={({ field }) => (
-                <TextField
-                  {...field}
-                  size="small"
-                  label={textField.label}
-                  type={textField.type}
-                  variant="outlined"
-                  error={!!errors[textField.name]}
-                  helperText={
-                    errors[textField.name]
-                      ? errors[textField.name]?.message
-                      : ''
-                  }
-                  className="w-full"
-                />
+                <FormControl className="w-full mb-2 lg:mb-0" size="small">
+                  <InputLabel>Role</InputLabel>
+                  <Select
+                    {...field}
+                    label="role"
+                    error={!!errors.role}
+                    className="w-full">
+                    {Object.keys(UserRole)?.map((role) => {
+                      return (
+                        <MenuItem key={role} value={role}>
+                          {UserRole[role]}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  <FormHelperText className="text-error-main">
+                    {errors?.role && errors?.role?.message}
+                  </FormHelperText>
+                </FormControl>
               )}
             />
-          ))}
-          <Controller
-            name="role"
-            control={control}
-            render={({ field }) => (
-              <FormControl className="w-full mb-2 lg:mb-0" size="small">
-                <InputLabel>Role</InputLabel>
-                <Select
-                  {...field}
-                  label="role"
-                  error={!!errors.role}
-                  className="w-full">
-                  {Object.keys(UserRole)?.map((role) => {
-                    return (
-                      <MenuItem key={role} value={role}>
-                        {UserRole[role]}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-                <FormHelperText className="text-error-main">
-                  {errors?.role && errors?.role?.message}
-                </FormHelperText>
-              </FormControl>
-            )}
-          />
-          <CustomAutocomplete
-            control={control}
-            fieldName="organisationHandle"
-            options={organisations}
-            errors={errors}
-            loading={isOrganisationsLoading}
-            label={'Organisation'}
-            optionLabelCallback={(option) => option?.name}
-          />
+          </div>
           <div className="w-full">
-            <FormLabel className="w-full">Areas of Interest</FormLabel>
+            <FormFieldLabel title={'Role'} />
+            <CustomAutocomplete
+              control={control}
+              fieldName="organisationHandle"
+              options={organisations}
+              errors={errors}
+              loading={isOrganisationsLoading}
+              label={'Organisation'}
+              optionLabelCallback={(option) => option?.name}
+            />
+          </div>
+          <div className="w-full">
+            <FormFieldLabel title={'Areas of Interest'} />
             <MultipleChipSelect
-              label="Select Areas Of Interest"
               control={control}
               fieldName="areasOfInterest"
               options={['AI', 'ML', 'DL', 'CV']}
