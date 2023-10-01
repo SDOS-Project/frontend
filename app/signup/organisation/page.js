@@ -1,10 +1,10 @@
-"use client";
-import { useCallback, useMemo } from "react";
-import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
-import { auth } from "@/firebase-config";
-import { useDispatch } from "react-redux";
-import { useOrganisationSignupMutation } from "@/features/auth/apiSlice";
-import { Controller, useForm } from "react-hook-form";
+'use client';
+import { useCallback, useMemo } from 'react';
+import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
+import { auth } from '@/firebase-config';
+import { useDispatch } from 'react-redux';
+import { useOrganisationSignupMutation } from '@/features/auth/apiSlice';
+import { Controller, useForm } from 'react-hook-form';
 import {
   FormControl,
   FormHelperText,
@@ -12,16 +12,16 @@ import {
   MenuItem,
   Select,
   TextField,
-} from "@mui/material";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
-import { setUser } from "@/features/auth/authSlice";
-import { organisationSignupValidationSchema } from "@/schemas/organisation-signup/schema";
-import { OrganisationType } from "@/types/OrganisationType";
-import { LoadingButton } from "@mui/lab";
-import { FirebaseErrors } from "@/types/FirebaseErrors";
-import { useRouter } from "next/navigation";
-import { TabSwitch } from "@/components/signup/TabSwitch";
+} from '@mui/material';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
+import { setUser } from '@/features/auth/authSlice';
+import { organisationSignupValidationSchema } from '@/schemas/organisation-signup/schema';
+import { OrganisationType } from '@/types/OrganisationType';
+import { LoadingButton } from '@mui/lab';
+import { FirebaseErrors } from '@/types/FirebaseErrors';
+import { useRouter } from 'next/navigation';
+import { TabSwitch } from '@/components/signup/TabSwitch';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -32,34 +32,34 @@ export default function Signup() {
   const textFields = useMemo(
     () => [
       {
-        name: "name",
-        label: "Name",
-        type: "text",
+        name: 'name',
+        label: 'Name',
+        type: 'text',
       },
       {
-        name: "email",
-        label: "Email",
-        type: "email",
+        name: 'email',
+        label: 'Email',
+        type: 'email',
       },
       {
-        name: "password",
-        label: "Password",
-        type: "password",
+        name: 'password',
+        label: 'Password',
+        type: 'password',
       },
       {
-        name: "confirmPassword",
-        label: "Confirm Password",
-        type: "password",
+        name: 'confirmPassword',
+        label: 'Confirm Password',
+        type: 'password',
       },
       {
-        name: "address",
-        label: "Address",
-        type: "text",
+        name: 'address',
+        label: 'Address',
+        type: 'text',
       },
       {
-        name: "ipPolicy",
-        label: "IP Policy URL",
-        type: "text",
+        name: 'ipPolicy',
+        label: 'IP Policy URL',
+        type: 'text',
       },
     ],
     []
@@ -67,14 +67,14 @@ export default function Signup() {
 
   const defaultValues = useMemo(() => {
     return {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      type: "",
-      logoUrl: "",
-      address: "",
-      ipPolicy: "",
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      type: '',
+      logoUrl: '',
+      address: '',
+      ipPolicy: '',
     };
   }, []);
 
@@ -103,7 +103,7 @@ export default function Signup() {
           } catch (error) {
             deleteUser(firebaseUser)
               .then(() => {
-                console.log("User deleted");
+                console.log('User deleted');
               })
               .catch((err) => console.log(err));
           }
@@ -112,7 +112,7 @@ export default function Signup() {
           reset(defaultValues);
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("error", errorCode, errorMessage);
+          console.log('error', errorCode, errorMessage);
           toast.error(FirebaseErrors[errorCode] || errorMessage);
         });
     },
@@ -120,78 +120,79 @@ export default function Signup() {
   );
 
   return (
-    <main className='flex w-full items-center justify-center py-16'>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-center gap-4 bg-paper p-6  w-5/6 rounded-md md:px-20 lg:gap-6 lg:w-1/2 '
-      >
-        <div className='flex flex-col items-center justify-center gap-2'>
-          <h1 className='body-2xlarge font-semibold'>
-            Signup On Edu
-            <span className='text-primary-main'>Corp.</span>
-          </h1>
-          <p className='text-primary-grey font-light body-small'>
-            Bridging Academia and Industry
-          </p>
-        </div>
-        <TabSwitch />
-        {textFields.map((textField) => (
+    <main className="width-layout-page-form padding-layout-1">
+      <div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center justify-center gap-4">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <h1 className="body-2xlarge font-semibold">
+              Signup On Edu
+              <span className="text-primary-main">Corp.</span>
+            </h1>
+            <p className="text-primary-grey font-light body-small">
+              Bridging Academia and Industry
+            </p>
+          </div>
+          <TabSwitch />
+          {textFields.map((textField) => (
+            <Controller
+              key={textField.name}
+              name={textField.name}
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  className="w-full"
+                  size="small"
+                  label={textField.label}
+                  type={textField.type}
+                  variant="outlined"
+                  error={!!errors[textField.name]}
+                  helperText={
+                    errors[textField.name]
+                      ? errors[textField.name]?.message
+                      : ''
+                  }
+                />
+              )}
+            />
+          ))}
           <Controller
-            key={textField.name}
-            name={textField.name}
+            name="type"
             control={control}
             render={({ field }) => (
-              <TextField
-                {...field}
-                className='w-full'
-                size='small'
-                label={textField.label}
-                type={textField.type}
-                variant='outlined'
-                error={!!errors[textField.name]}
-                helperText={
-                  errors[textField.name] ? errors[textField.name]?.message : ""
-                }
-              />
+              <FormControl className="w-full mb-2 lg:mb-0" size="small">
+                <InputLabel>Type</InputLabel>
+                <Select {...field} label="type" error={!!errors.type}>
+                  {Object.keys(OrganisationType)?.map((role) => {
+                    return (
+                      <MenuItem key={role} value={role}>
+                        {OrganisationType[role]}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText className="text-red ml-4">
+                  {errors?.role && errors?.role?.message}
+                </FormHelperText>
+              </FormControl>
             )}
           />
-        ))}
-        <Controller
-          name='type'
-          control={control}
-          render={({ field }) => (
-            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
-              <InputLabel>Type</InputLabel>
-              <Select {...field} label='type' error={!!errors.type}>
-                {Object.keys(OrganisationType)?.map((role) => {
-                  return (
-                    <MenuItem key={role} value={role}>
-                      {OrganisationType[role]}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-              <FormHelperText className='text-red ml-4'>
-                {errors?.role && errors?.role?.message}
-              </FormHelperText>
-            </FormControl>
-          )}
-        />
-        <LoadingButton
-          type='submit'
-          variant='contained'
-          loading={isOrganisationSignupLoading}
-          className='w-full bg-primary-main'
-        >
-          Sign Up
-        </LoadingButton>
-        <p
-          className='body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline'
-          onClick={() => router.push("/")}
-        >
-          Want to Login? Click Here.
-        </p>
-      </form>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            loading={isOrganisationSignupLoading}
+            className="w-full bg-primary-main">
+            Sign Up
+          </LoadingButton>
+          <p
+            className="body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline"
+            onClick={() => router.push('/')}>
+            Want to Login? Click Here.
+          </p>
+        </form>
+      </div>
     </main>
   );
 }
