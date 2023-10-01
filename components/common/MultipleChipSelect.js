@@ -1,19 +1,15 @@
 import {
   Box,
   Chip,
-  FormControl,
   FormHelperText,
-  FormLabel,
-  InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
-} from "@mui/material";
-import React, { useCallback } from "react";
-import { Controller } from "react-hook-form";
+} from '@mui/material';
+import React, { useCallback } from 'react';
+import { Controller } from 'react-hook-form';
 
 export default function MultipleChipSelect({
-  label,
   control,
   fieldName,
   options,
@@ -25,7 +21,7 @@ export default function MultipleChipSelect({
       const {
         target: { value },
       } = event;
-      setValue(fieldName, typeof value === "string" ? value.split(",") : value);
+      setValue(fieldName, typeof value === 'string' ? value.split(',') : value);
     },
     [fieldName, setValue]
   );
@@ -36,7 +32,6 @@ export default function MultipleChipSelect({
       control={control}
       render={({ field: { _, value } }) => (
         <>
-          <FormLabel className="w-full">{label}</FormLabel>
           <Select
             className="w-full"
             size="small"
@@ -53,8 +48,7 @@ export default function MultipleChipSelect({
                   ))}
                 </Box>
               );
-            }}
-          >
+            }}>
             {options.map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
@@ -63,7 +57,7 @@ export default function MultipleChipSelect({
           </Select>
           {!!errors?.[fieldName] && (
             <FormHelperText className="text-error-main ml-4">
-              {errors?.[fieldName] ? errors?.[fieldName]?.message : ""}
+              {errors?.[fieldName] ? errors?.[fieldName]?.message : ''}
             </FormHelperText>
           )}
         </>
