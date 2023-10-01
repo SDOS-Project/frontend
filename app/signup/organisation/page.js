@@ -132,7 +132,7 @@ export default function Signup() {
               Signup On Edu
               <span className="text-primary-main">Corp.</span>
             </h1>
-            <p className="text-primary-grey font-light body-small">
+            <p className="text-grey font-light body-small">
               Bridging Academia and Industry
             </p>
           </div>
@@ -197,7 +197,7 @@ export default function Signup() {
             Sign Up
           </LoadingButton>
           <Link href="/">
-            <div className="body-small text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+            <div className="body-small text-grey font-light cursor-pointer hover:text-primary-main hover:underline">
               Want to Login? Click Here.
             </div>
           </Link>
