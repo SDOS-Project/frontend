@@ -4,7 +4,7 @@ export default function FormFieldLabel({ title, subtitle }) {
   return (
     <>
       {title && (
-        <Typography className={`font-semibold${!subtitle ? ' mb-2' : ''}`}>
+        <Typography className={`font-medium${!subtitle ? ' mb-2' : ''}`}>
           {title}
         </Typography>
       )}
