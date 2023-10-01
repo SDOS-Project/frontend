@@ -26,6 +26,7 @@ import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { useRouter } from 'next/navigation';
 import { TabSwitch } from '@/components/signup/TabSwitch';
+import Link from 'next/link';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -212,11 +213,11 @@ export default function Signup() {
             className="w-full bg-primary-main">
             Sign up
           </LoadingButton>
-          <div
-            className="body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline"
-            onClick={() => router.push('/')}>
-            Want to Login? Click Here.
-          </div>
+          <Link href="/">
+            <div className="body-small text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+              Want to Login? Click Here.
+            </div>
+          </Link>
         </form>
       </div>
     </main>
