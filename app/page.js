@@ -69,61 +69,61 @@ export default function Home() {
   }, [authState.isAuthenticated, authState.user, router]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-grey">
+    <main className='flex items-center justify-center pt-24'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center gap-6 bg-paper py-16 px-20 w-1/2 rounded-md"
+        className='flex flex-col items-center justify-center gap-4 bg-paper p-6  w-5/6 rounded-md lg:px-20 lg:gap-6 lg:w-1/2 '
       >
-        <div className="flex flex-col items-center justify-center gap-2">
-          <h1 className="text-3xl font-semibold">
-            Login Into Edu<span className="text-primary-main">Corp.</span>
+        <div className='flex flex-col items-center justify-center gap-2'>
+          <h1 className='body-2xlarge font-semibold'>
+            Login Into Edu<span className='text-primary-main'>Corp.</span>
           </h1>
-          <p className="text-primary-grey font-light">
+          <p className='text-primary-grey font-light body-xsmall'>
             Bridging Academia and Industry
           </p>
         </div>
 
         <Controller
-          name="email"
+          name='email'
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              size="small"
-              label="Email"
-              variant="outlined"
-              className="w-full"
+              size='small'
+              label='Email'
+              variant='outlined'
+              className='w-full'
               error={!!errors.email}
               helperText={errors.email ? errors.email?.message : ""}
             />
           )}
         />
         <Controller
-          name="password"
+          name='password'
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              size="small"
-              type="password"
-              label="Password"
-              variant="outlined"
-              className="w-full"
+              size='small'
+              type='password'
+              label='Password'
+              variant='outlined'
+              className='w-full'
               error={!!errors.password}
               helperText={errors.password ? errors.password?.message : ""}
             />
           )}
         />
         <Button
-          type="submit"
-          variant="contained"
-          className="bg-primary-main text-white w-full"
+          type='submit'
+          variant='contained'
+          className='bg-primary-main text-white w-full'
         >
           Login
         </Button>
 
         <p
-          className="text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline"
+          className='body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline'
           onClick={() => router.push("/signup/user")}
         >
           Don't have an Account? Click Here to Sign Up.

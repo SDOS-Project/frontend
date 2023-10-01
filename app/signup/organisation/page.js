@@ -186,7 +186,7 @@ export default function Signup() {
           Sign Up
         </LoadingButton>
         <p
-          className='text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline'
+          className='body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline'
           onClick={() => router.push("/")}
         >
           Want to Login? Click Here.
