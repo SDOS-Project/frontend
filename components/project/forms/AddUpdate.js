@@ -1,16 +1,21 @@
 import DialogFooter from '@/components/common/DialogFooter';
+import { selectUser } from '@/features/auth/authSlice';
 import { addUpdateValidationSchema } from '@/schemas/project/update/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
+  const user = useSelector(selectUser);
+
   const defaultValues = useMemo(() => {
     return {
-      update: '',
+      userHandle: user?.handle,
+      content: '',
     };
-  }, []);
+  }, [user?.handle]);
 
   const {
     control,
@@ -44,7 +49,7 @@ export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent className="flex flex-col gap-y-5">
           <Controller
-            name="update"
+            name="content"
             control={control}
             render={({ field }) => (
               <TextField
@@ -55,8 +60,8 @@ export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
                 label="Update"
                 variant="outlined"
                 className="w-full"
-                error={!!errors.update}
-                helperText={errors.update ? errors.update?.message : ''}
+                error={!!errors.content}
+                helperText={errors.content ? errors.content?.message : ''}
               />
             )}
           />
