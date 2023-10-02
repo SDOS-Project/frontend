@@ -22,7 +22,6 @@ import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { useRouter } from 'next/navigation';
 import { TabSwitch } from '@/components/signup/TabSwitch';
-import FormFieldLabel from '@/components/common/FormFieldLabel';
 import Link from 'next/link';
 
 export default function Signup() {
@@ -126,7 +125,7 @@ export default function Signup() {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center justify-center gap-4 bg-paper p-10 rounded-lg">
+          className="flex flex-col items-center justify-center gap-5 bg-paper p-10 rounded-lg">
           <div className="flex flex-col items-center justify-center gap-2">
             <h1 className="body-2xlarge font-semibold">
               Signup On Edu
@@ -138,57 +137,49 @@ export default function Signup() {
           </div>
           <TabSwitch />
           {textFields.map((textField) => (
-            <div
-              className="w-full"
-              key={`${textField.label}-${textField.name}`}>
-              <FormFieldLabel title={textField.label} />
-              <Controller
-                key={textField.name}
-                name={textField.name}
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    className="w-full"
-                    size="small"
-                    // label={textField.label}
-                    type={textField.type}
-                    variant="outlined"
-                    error={!!errors[textField.name]}
-                    helperText={
-                      errors[textField.name]
-                        ? errors[textField.name]?.message
-                        : ''
-                    }
-                  />
-                )}
-              />
-            </div>
-          ))}
-          <div className="w-full">
-            <FormFieldLabel title={'Type'} />
             <Controller
-              name="type"
+              key={textField.name}
+              name={textField.name}
               control={control}
               render={({ field }) => (
-                <FormControl className="w-full mb-2 lg:mb-0" size="small">
-                  {/* <InputLabel>Type</InputLabel> */}
-                  <Select {...field} error={!!errors.type}>
-                    {Object.keys(OrganisationType)?.map((role) => {
-                      return (
-                        <MenuItem key={role} value={role}>
-                          {OrganisationType[role]}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                  <FormHelperText className="text-red ml-4">
-                    {errors?.role && errors?.role?.message}
-                  </FormHelperText>
-                </FormControl>
+                <TextField
+                  {...field}
+                  className="w-full"
+                  size="small"
+                  label={textField.label}
+                  type={textField.type}
+                  variant="outlined"
+                  error={!!errors[textField.name]}
+                  helperText={
+                    errors[textField.name]
+                      ? errors[textField.name]?.message
+                      : ''
+                  }
+                />
               )}
             />
-          </div>
+          ))}
+          <Controller
+            name="type"
+            control={control}
+            render={({ field }) => (
+              <FormControl className="w-full mb-2 lg:mb-0" size="small">
+                <InputLabel>Type</InputLabel>
+                <Select {...field} label="Type" error={!!errors.type}>
+                  {Object.keys(OrganisationType)?.map((role) => {
+                    return (
+                      <MenuItem key={role} value={role}>
+                        {OrganisationType[role]}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText className="text-red ml-4">
+                  {errors?.role && errors?.role?.message}
+                </FormHelperText>
+              </FormControl>
+            )}
+          />
           <LoadingButton
             type="submit"
             variant="contained"

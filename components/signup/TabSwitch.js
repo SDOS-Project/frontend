@@ -25,7 +25,7 @@ export const TabSwitch = () => {
           className={
             pathname !== '/signup/user' ? selectedTab : notSelectedTab
           }>
-          Signup As An Org
+          Signup As An Organisation
         </div>
       </Link>
     </div>
