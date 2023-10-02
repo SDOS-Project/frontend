@@ -1,4 +1,5 @@
 'use client';
+import ProjectsGrid from '@/components/project/ProjectsGrid';
 import { useGetProjectsQuery } from '@/features/project/apiSice';
 
 export default function Projects() {
@@ -8,5 +9,9 @@ export default function Projects() {
   console.log('projects', projects);
 
   if (isProjectsLoading) return <div>Loading...</div>;
-  return <div className='mt-20'>Projects</div>;
+  return (
+    <main className="mt-20 width-layout-1 p-2">
+      <ProjectsGrid projects={projects} />
+    </main>
+  );
 }

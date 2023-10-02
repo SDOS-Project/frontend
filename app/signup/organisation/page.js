@@ -20,10 +20,14 @@ import { organisationSignupValidationSchema } from '@/schemas/organisation-signu
 import { OrganisationType } from '@/types/OrganisationType';
 import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
+import { useRouter } from 'next/navigation';
+import { TabSwitch } from '@/components/signup/TabSwitch';
+import FormFieldLabel from '@/components/common/FormFieldLabel';
+import Link from 'next/link';
 
 export default function Signup() {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const [signup, { isLoading: isOrganisationSignupLoading }] =
     useOrganisationSignupMutation();
 
@@ -118,60 +122,87 @@ export default function Signup() {
   );
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-between gap-10'
-      >
-        {textFields.map((textField) => (
-          <Controller
-            key={textField.name}
-            name={textField.name}
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                size='small'
-                label={textField.label}
-                type={textField.type}
-                variant='outlined'
-                error={!!errors[textField.name]}
-                helperText={
-                  errors[textField.name] ? errors[textField.name]?.message : ''
-                }
+    <main className="width-layout-page-form padding-layout-1">
+      <div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center justify-center gap-4 bg-paper p-10 rounded-lg">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <h1 className="body-2xlarge font-semibold">
+              Signup On Edu
+              <span className="text-primary-main">Corp.</span>
+            </h1>
+            <p className="text-primary-grey font-light body-small">
+              Bridging Academia and Industry
+            </p>
+          </div>
+          <TabSwitch />
+          {textFields.map((textField) => (
+            <div
+              className="w-full"
+              key={`${textField.label}-${textField.name}`}>
+              <FormFieldLabel title={textField.label} />
+              <Controller
+                key={textField.name}
+                name={textField.name}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    className="w-full"
+                    size="small"
+                    // label={textField.label}
+                    type={textField.type}
+                    variant="outlined"
+                    error={!!errors[textField.name]}
+                    helperText={
+                      errors[textField.name]
+                        ? errors[textField.name]?.message
+                        : ''
+                    }
+                  />
+                )}
               />
-            )}
-          />
-        ))}
-        <Controller
-          name='type'
-          control={control}
-          render={({ field }) => (
-            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
-              <InputLabel>Type</InputLabel>
-              <Select {...field} label='type' error={!!errors.type}>
-                {Object.keys(OrganisationType)?.map((role) => {
-                  return (
-                    <MenuItem key={role} value={role}>
-                      {OrganisationType[role]}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-              <FormHelperText className='text-red ml-4'>
-                {errors?.role && errors?.role?.message}
-              </FormHelperText>
-            </FormControl>
-          )}
-        />
-        <LoadingButton
-          type='submit'
-          variant='contained'
-          loading={isOrganisationSignupLoading}
-        >
-          Sign Up
-        </LoadingButton>
-      </form>
+            </div>
+          ))}
+          <div className="w-full">
+            <FormFieldLabel title={'Type'} />
+            <Controller
+              name="type"
+              control={control}
+              render={({ field }) => (
+                <FormControl className="w-full mb-2 lg:mb-0" size="small">
+                  {/* <InputLabel>Type</InputLabel> */}
+                  <Select {...field} error={!!errors.type}>
+                    {Object.keys(OrganisationType)?.map((role) => {
+                      return (
+                        <MenuItem key={role} value={role}>
+                          {OrganisationType[role]}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  <FormHelperText className="text-red ml-4">
+                    {errors?.role && errors?.role?.message}
+                  </FormHelperText>
+                </FormControl>
+              )}
+            />
+          </div>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            loading={isOrganisationSignupLoading}
+            className="w-full bg-primary-main">
+            Sign Up
+          </LoadingButton>
+          <Link href="/">
+            <div className="body-small text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+              Want to Login? Click Here.
+            </div>
+          </Link>
+        </form>
+      </div>
     </main>
   );
 }

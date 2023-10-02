@@ -8,6 +8,7 @@ import { Controller, useForm } from 'react-hook-form';
 import {
   FormControl,
   FormHelperText,
+  FormLabel,
   InputLabel,
   MenuItem,
   Select,
@@ -23,9 +24,14 @@ import CustomAutocomplete from '@/components/common/CustomAutocomplete';
 import { setUser } from '@/features/auth/authSlice';
 import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
+import { useRouter } from 'next/navigation';
+import { TabSwitch } from '@/components/signup/TabSwitch';
+import Link from 'next/link';
+import FormFieldLabel from '@/components/common/FormFieldLabel';
 
 export default function Signup() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { data: organisations, isLoading: isOrganisationsLoading } =
     useGetOrganisationsQuery();
@@ -119,76 +125,112 @@ export default function Signup() {
   );
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-between gap-10'
-      >
-        {textFields.map((textField) => (
-          <Controller
-            key={textField.name}
-            name={textField.name}
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                size='small'
-                label={textField.label}
-                type={textField.type}
-                variant='outlined'
-                error={!!errors[textField.name]}
-                helperText={
-                  errors[textField.name] ? errors[textField.name]?.message : ''
-                }
+    <main className="width-layout-page-form padding-layout-1">
+      <div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center justify-center gap-4 bg-paper p-10 rounded-lg">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <div className="body-2xlarge font-semibold">
+              Signup On Edu<span className="text-primary-main">Corp.</span>
+            </div>
+            <div className="text-primary-grey font-light body-small">
+              Bridging Academia and Industry
+            </div>
+          </div>
+          <TabSwitch />
+          {textFields.map((textField) => (
+            <div
+              className="w-full"
+              key={`${textField.label}-${textField.name}`}>
+              <FormFieldLabel title={textField.label} />
+              <Controller
+                key={textField.name}
+                name={textField.name}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    size="small"
+                    // label={textField.label}
+                    type={textField.type}
+                    variant="outlined"
+                    error={!!errors[textField.name]}
+                    helperText={
+                      errors[textField.name]
+                        ? errors[textField.name]?.message
+                        : ''
+                    }
+                    className="w-full"
+                  />
+                )}
               />
-            )}
-          />
-        ))}
-        <Controller
-          name='role'
-          control={control}
-          render={({ field }) => (
-            <FormControl className='w-full mb-2 lg:mb-0' size='small'>
-              <InputLabel>Role</InputLabel>
-              <Select {...field} label='role' error={!!errors.role}>
-                {Object.keys(UserRole)?.map((role) => {
-                  return (
-                    <MenuItem key={role} value={role}>
-                      {UserRole[role]}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-              <FormHelperText className='text-error-main'>
-                {errors?.role && errors?.role?.message}
-              </FormHelperText>
-            </FormControl>
-          )}
-        />
-        <CustomAutocomplete
-          control={control}
-          fieldName='organisationHandle'
-          options={organisations}
-          errors={errors}
-          loading={isOrganisationsLoading}
-          label={'Organisation'}
-          optionLabelCallback={(option) => option?.name}
-        />
-        <MultipleChipSelect
-          control={control}
-          fieldName='areasOfInterest'
-          options={['AI', 'ML', 'DL', 'CV']}
-          errors={errors}
-          setValue={setValue}
-        />
-        <LoadingButton
-          type='submit'
-          variant='contained'
-          loading={isUserSignupLoading}
-        >
-          Sign up
-        </LoadingButton>
-      </form>
+            </div>
+          ))}
+          <div className="w-full">
+            <FormFieldLabel title={'Role'} />
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <FormControl className="w-full mb-2 lg:mb-0" size="small">
+                  {/* <InputLabel>Role</InputLabel> */}
+                  <Select
+                    {...field}
+                    // label="role"
+                    error={!!errors.role}
+                    className="w-full">
+                    {Object.keys(UserRole)?.map((role) => {
+                      return (
+                        <MenuItem key={role} value={role}>
+                          {UserRole[role]}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  <FormHelperText className="text-error-main">
+                    {errors?.role && errors?.role?.message}
+                  </FormHelperText>
+                </FormControl>
+              )}
+            />
+          </div>
+          <div className="w-full">
+            <FormFieldLabel title={'Organisation'} />
+            <CustomAutocomplete
+              control={control}
+              fieldName="organisationHandle"
+              options={organisations}
+              errors={errors}
+              loading={isOrganisationsLoading}
+              // label={'Organisation'}
+              optionLabelCallback={(option) => option?.name}
+            />
+          </div>
+          <div className="w-full">
+            <FormFieldLabel title={'Areas of Interest'} />
+            <MultipleChipSelect
+              control={control}
+              fieldName="areasOfInterest"
+              options={['AI', 'ML', 'DL', 'CV']}
+              errors={errors}
+              setValue={setValue}
+            />
+          </div>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            loading={isUserSignupLoading}
+            className="w-full bg-primary-main">
+            Sign up
+          </LoadingButton>
+          <Link href="/">
+            <div className="body-small text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+              Want to Login? Click Here.
+            </div>
+          </Link>
+        </form>
+      </div>
     </main>
   );
 }

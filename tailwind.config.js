@@ -23,6 +23,7 @@ export const theme = {
       fg: themeConstants.fg.main,
       action: '#EE4444',
       danger: '#EE4444',
+      grey: '#F1F5F9',
     },
     screens: {
       ..._screens,

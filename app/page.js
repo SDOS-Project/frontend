@@ -12,6 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidationSchema } from '@/schemas/login/schema';
 import { toast } from 'react-toastify';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
+import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
@@ -69,43 +70,60 @@ export default function Home() {
   }, [authState.isAuthenticated, authState.user, router]);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+    <main className="flex items-center justify-center pt-24">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-between gap-10'
-      >
+        className="flex flex-col items-center justify-center gap-4 bg-paper p-6  w-5/6 rounded-md lg:px-20 lg:gap-6 lg:w-1/2 ">
+        <div className="flex flex-col items-center justify-center gap-2">
+          <h1 className="body-2xlarge font-semibold">
+            Login Into Edu<span className="text-primary-main">Corp.</span>
+          </h1>
+          <p className="text-primary-grey font-light body-xsmall">
+            Bridging Academia and Industry
+          </p>
+        </div>
         <Controller
-          name='email'
+          name="email"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              size='small'
-              label='Email'
-              variant='outlined'
+              size="small"
+              label="Email"
+              variant="outlined"
+              className="w-full"
               error={!!errors.email}
               helperText={errors.email ? errors.email?.message : ''}
             />
           )}
         />
         <Controller
-          name='password'
+          name="password"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              size='small'
-              type='password'
-              label='Password'
-              variant='outlined'
+              size="small"
+              type="password"
+              label="Password"
+              variant="outlined"
+              className="w-full"
               error={!!errors.password}
               helperText={errors.password ? errors.password?.message : ''}
             />
           )}
         />
-        <Button type='submit' variant='contained'>
+        <Button
+          type="submit"
+          variant="contained"
+          className="bg-primary-main text-white w-full">
           Login
         </Button>
+        <Link href={'/signup/user'}>
+          <p className="body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+            Don&apos;t have an account? Click Here to Sign Up.
+          </p>
+        </Link>
       </form>
     </main>
   );

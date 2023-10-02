@@ -18,7 +18,7 @@ export default function CustomAutocomplete({
         <Autocomplete
           loading={loading}
           value={options?.find((option) => option.handle === value) || null}
-          className='w-full'
+          className="w-full"
           onChange={(_, newValue) => {
             onChange(newValue?.handle);
           }}
@@ -36,10 +36,10 @@ export default function CustomAutocomplete({
             <TextField
               {...params}
               name={fieldName}
-              label={label}
-              size='small'
-              variant='outlined'
-              autoComplete='given-name'
+              label={label ?? null}
+              size="small"
+              variant="outlined"
+              autoComplete="given-name"
               error={!!errors[fieldName]}
               helperText={errors[fieldName] ? errors[fieldName]?.message : ''}
             />

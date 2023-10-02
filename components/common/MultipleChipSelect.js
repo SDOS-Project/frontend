@@ -33,8 +33,8 @@ export default function MultipleChipSelect({
       render={({ field: { _, value } }) => (
         <>
           <Select
-            className='w-full'
-            size='small'
+            className="w-full"
+            size="small"
             value={value}
             multiple
             onChange={handleChange}
@@ -42,14 +42,13 @@ export default function MultipleChipSelect({
             input={<OutlinedInput />}
             renderValue={(selected) => {
               return (
-                <Box className='flex flex-wrap gap-0.5'>
+                <Box className="flex flex-wrap gap-0.5">
                   {selected.map((value) => (
                     <Chip key={value} label={value} />
                   ))}
                 </Box>
               );
-            }}
-          >
+            }}>
             {options.map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
@@ -57,7 +56,7 @@ export default function MultipleChipSelect({
             ))}
           </Select>
           {!!errors?.[fieldName] && (
-            <FormHelperText className='text-error-main ml-4'>
+            <FormHelperText className="text-error-main ml-4">
               {errors?.[fieldName] ? errors?.[fieldName]?.message : ''}
             </FormHelperText>
           )}

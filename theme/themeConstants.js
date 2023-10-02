@@ -3,6 +3,7 @@ const themeConstants = {
     dark: '#181870',
     light: '#806db3',
     main: '#4c3595',
+    grey: '#596080',
   },
   error: {
     dark: '#d32f2f',
