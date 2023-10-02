@@ -25,22 +25,22 @@ export default function Project({ params }) {
       {
         label: 'About',
         value: '1',
-        component: <AboutTab />,
+        component: <AboutTab handle={slug} />,
       },
       {
         label: 'Updates',
         value: '2',
-        component: <UpdatesTab />,
+        component: <UpdatesTab handle={slug} />,
       },
     ],
-    []
+    [slug]
   );
 
   if (isLoading) return <div>Loading...</div>;
   return (
     <div className="mt-20 width-layout-1 bg-paper shadow-md">
       <div className="flex justify-between items-center py-4 px-6 border-b">
-        <p className="body-large">Thesis On Ai</p>
+        <p className="body-xlarge">Thesis On Ai</p>
         <div className="flex justify-end items-center gap-4">
           <Chip
             color="primary"
