@@ -126,13 +126,13 @@ export default function Signup() {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center justify-center gap-4">
+          className="flex flex-col items-center justify-center gap-4 bg-paper p-10 rounded-lg">
           <div className="flex flex-col items-center justify-center gap-2">
             <h1 className="body-2xlarge font-semibold">
               Signup On Edu
               <span className="text-primary-main">Corp.</span>
             </h1>
-            <p className="text-grey font-light body-small">
+            <p className="text-primary-grey font-light body-small">
               Bridging Academia and Industry
             </p>
           </div>
@@ -151,7 +151,7 @@ export default function Signup() {
                     {...field}
                     className="w-full"
                     size="small"
-                    label={textField.label}
+                    // label={textField.label}
                     type={textField.type}
                     variant="outlined"
                     error={!!errors[textField.name]}
@@ -172,8 +172,8 @@ export default function Signup() {
               control={control}
               render={({ field }) => (
                 <FormControl className="w-full mb-2 lg:mb-0" size="small">
-                  <InputLabel>Type</InputLabel>
-                  <Select {...field} label="type" error={!!errors.type}>
+                  {/* <InputLabel>Type</InputLabel> */}
+                  <Select {...field} error={!!errors.type}>
                     {Object.keys(OrganisationType)?.map((role) => {
                       return (
                         <MenuItem key={role} value={role}>
@@ -197,7 +197,7 @@ export default function Signup() {
             Sign Up
           </LoadingButton>
           <Link href="/">
-            <div className="body-small text-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+            <div className="body-small text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
               Want to Login? Click Here.
             </div>
           </Link>

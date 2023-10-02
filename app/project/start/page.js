@@ -15,6 +15,7 @@ import { selectUser } from '@/features/auth/authSlice';
 import { UserRole } from '@/types/UserRole';
 import { useCreateProjectMutation } from '@/features/project/apiSice';
 import { useRouter } from 'next/navigation';
+import FormFieldLabel from '@/components/common/FormFieldLabel';
 
 export default function StartProject() {
   const router = useRouter();
@@ -64,73 +65,96 @@ export default function StartProject() {
   }, [user?.type, user?.handle, router]);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-between gap-10'
-      >
-        <Controller
-          name='name'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='Name'
-              variant='outlined'
-              error={!!errors.name}
-              helperText={errors.name ? errors.name?.message : ''}
+    <main className="width-layout-page-form padding-layout-1">
+      <div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center justify-center gap-4 bg-paper p-10 rounded-lg">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <h1 className="body-2xlarge font-semibold">
+              Start A <span className="text-primary-main">Project</span>
+            </h1>
+            <p className="text-primary-grey font-light body-xsmall text-center">
+              A Project is the collaboration of esteemed Faculty Members with
+              hardworking Company Employees. Some description...
+            </p>
+          </div>
+          <div className="w-full">
+            <FormFieldLabel title={'Name'} />
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size="small"
+                  // label="Name"
+                  className="w-full"
+                  variant="outlined"
+                  error={!!errors.name}
+                  helperText={errors.name ? errors.name?.message : ''}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name='description'
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size='small'
-              label='Description'
-              multiline
-              variant='outlined'
-              error={!!errors.description}
-              helperText={errors.description ? errors.description?.message : ''}
+          </div>
+          <div className="w-full">
+            <FormFieldLabel title={'Description'} />
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size="small"
+                  // label="Description"
+                  multiline
+                  variant="outlined"
+                  className="w-full"
+                  error={!!errors.description}
+                  helperText={
+                    errors.description ? errors.description?.message : ''
+                  }
+                />
+              )}
             />
-          )}
-        />
-        {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
-          <CustomAutocomplete
-            control={control}
-            fieldName='partnerHandle'
-            options={employees}
-            errors={errors}
-            loading={isEmployeesLoading}
-            label={'Project Partner'}
-            optionLabelCallback={(option) =>
-              option?.firstName + ' ' + option?.lastName || ''
-            }
-          />
-        ) : (
-          <CustomAutocomplete
-            control={control}
-            fieldName='partnerHandle'
-            options={faculty}
-            errors={errors}
-            loading={isFacultyLoading}
-            label={'Project Partner'}
-            optionLabelCallback={(option) =>
-              option?.firstName + ' ' + option?.lastName || ''
-            }
-          />
-        )}
-        <LoadingButton
-          type='submit'
-          variant='contained'
-          loading={isCreateProjectLoading}
-        >
-          Start Project
-        </LoadingButton>
-      </form>
+          </div>
+          <div className="w-full">
+            <FormFieldLabel title={'Project Partner'} />
+            {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
+              <CustomAutocomplete
+                control={control}
+                fieldName="partnerHandle"
+                options={employees}
+                errors={errors}
+                loading={isEmployeesLoading}
+                // label={'Project Partner'}
+                optionLabelCallback={(option) =>
+                  option?.firstName + ' ' + option?.lastName || ''
+                }
+              />
+            ) : (
+              <CustomAutocomplete
+                control={control}
+                fieldName="partnerHandle"
+                options={faculty}
+                errors={errors}
+                loading={isFacultyLoading}
+                // label={'Project Partner'}
+                optionLabelCallback={(option) =>
+                  option?.firstName + ' ' + option?.lastName || ''
+                }
+              />
+            )}
+          </div>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            className="w-full bg-primary-main"
+            loading={isCreateProjectLoading}>
+            Start Project
+          </LoadingButton>
+        </form>
+      </div>
     </main>
   );
 }

@@ -129,7 +129,7 @@ export default function Signup() {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center justify-center gap-6">
+          className="flex flex-col items-center justify-center gap-4 bg-paper p-10 rounded-lg">
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="body-2xlarge font-semibold">
               Signup On Edu<span className="text-primary-main">Corp.</span>
@@ -152,7 +152,7 @@ export default function Signup() {
                   <TextField
                     {...field}
                     size="small"
-                    label={textField.label}
+                    // label={textField.label}
                     type={textField.type}
                     variant="outlined"
                     error={!!errors[textField.name]}
@@ -174,10 +174,10 @@ export default function Signup() {
               control={control}
               render={({ field }) => (
                 <FormControl className="w-full mb-2 lg:mb-0" size="small">
-                  <InputLabel>Role</InputLabel>
+                  {/* <InputLabel>Role</InputLabel> */}
                   <Select
                     {...field}
-                    label="role"
+                    // label="role"
                     error={!!errors.role}
                     className="w-full">
                     {Object.keys(UserRole)?.map((role) => {
@@ -196,14 +196,14 @@ export default function Signup() {
             />
           </div>
           <div className="w-full">
-            <FormFieldLabel title={'Role'} />
+            <FormFieldLabel title={'Organisation'} />
             <CustomAutocomplete
               control={control}
               fieldName="organisationHandle"
               options={organisations}
               errors={errors}
               loading={isOrganisationsLoading}
-              label={'Organisation'}
+              // label={'Organisation'}
               optionLabelCallback={(option) => option?.name}
             />
           </div>
