@@ -64,7 +64,7 @@ export default function Project({ params }) {
                 key={`${tab.label}-${tab.value}`}
                 label={tab.label}
                 value={tab.label}
-                className="body-large font-semibold uppercase py-3"
+                className="body-normal"
               />
             ))}
           </TabList>
