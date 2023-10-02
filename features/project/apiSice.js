@@ -2,13 +2,18 @@ import { apiSlice } from '../api/apiSlice';
 
 const PROJECT_BASE_URL = '/project';
 
-export const projectApiSlice = apiSlice.injectEndpoints({
+const enhancedApiSlice = apiSlice.enhanceEndpoints({
+  addTagTypes: ['Projects'],
+});
+
+export const projectApiSlice = enhancedApiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProjects: builder.query({
       query: () => ({
         url: `${PROJECT_BASE_URL}`,
         method: 'GET',
       }),
+      providesTags: ['Projects'],
     }),
     getProject: builder.query({
       query: (handle) => ({
@@ -28,6 +33,7 @@ export const projectApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: project,
       }),
+      invalidatesTags: ['Projects'],
     }),
   }),
 });
