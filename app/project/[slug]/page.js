@@ -1,11 +1,14 @@
 'use client';
 import AboutTab from '@/components/project/AboutTab';
-import UpdatesTab from '@/components/project/UpdatesTab';
 import { useGetProjectQuery } from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Chip, Tab } from '@mui/material';
 import { useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
+const UpdatesTab = dynamic(() => import('@/components/project/UpdatesTab'), {
+  ssr: false,
+});
 
 export default function Project({ params }) {
   const { slug } = params;
