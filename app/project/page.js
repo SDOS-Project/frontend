@@ -1,7 +1,5 @@
 'use client';
 import ProjectCardsLayout from '@/components/common/ProjectCardsLayout';
-import ProjectCard from '@/components/project/ProjectCard';
-import ProjectCardSkeleton from '@/components/project/Skeletons/ProjectCardSkeleton';
 import { useGetProjectsQuery } from '@/features/project/apiSice';
 
 export default function Projects() {
