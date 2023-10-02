@@ -1,4 +1,5 @@
 'use client';
+import ProjectCardsLayout from '@/components/common/ProjectCardsLayout';
 import ProjectCard from '@/components/project/ProjectCard';
 import ProjectCardSkeleton from '@/components/project/Skeletons/ProjectCardSkeleton';
 import { useGetProjectsQuery } from '@/features/project/apiSice';
@@ -12,19 +13,10 @@ export default function Projects() {
   return (
     <main className="cards-grid-layout padding-layout-1">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-4 my-4">
-        {isProjectsLoading ? (
-          <>
-            {Array.from({ length: 15 }).map((_, id) => (
-              <ProjectCardSkeleton key={id} />
-            ))}
-          </>
-        ) : (
-          <>
-            {projects?.map((project) => (
-              <ProjectCard key={project.handle} {...project} />
-            ))}
-          </>
-        )}
+        <ProjectCardsLayout
+          projects={projects}
+          isProjectsLoading={isProjectsLoading}
+        />
       </div>
     </main>
   );
