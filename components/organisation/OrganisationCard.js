@@ -22,7 +22,7 @@ function OrganisationCard({
         <div className="w-full py-4 px-6 flex justify-between items-center border-b">
           <div className="flex justify-start items-center gap-2">
             <Avatar className="body-xsmall" src={logoUrl ?? ''}>
-              {name.split(' ')[0].slice(0, 3)}
+              {name[0]}
             </Avatar>
             <p className="body-normal">{name}</p>
           </div>
