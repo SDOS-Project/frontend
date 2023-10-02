@@ -31,8 +31,7 @@ function DialogFooter({
           loading={isLoading}
           disabled={isSaveDisabled}
           onClick={onSaveClick}
-          loadingPosition="start"
-          startIcon={showSaveIcon ? <SaveIcon /> : null}>
+          startIcon={showSaveIcon && <SaveIcon />}>
           {saveLabel}
         </LoadingButton>
       )}
