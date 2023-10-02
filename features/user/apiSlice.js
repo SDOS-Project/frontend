@@ -13,8 +13,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
     getEmployees: builder.query({
       query: () => `${USER_BASE_URL}/employees`,
     }),
+    getUserProjects: builder.query({
+      query: (handle) => `${USER_BASE_URL}/${handle}/projects`,
+    }),
   }),
 });
 
-export const { useGetUserQuery, useGetFacultyQuery, useGetEmployeesQuery } =
-  userApiSlice;
+export const {
+  useGetUserQuery,
+  useGetFacultyQuery,
+  useGetEmployeesQuery,
+  useGetUserProjectsQuery,
+} = userApiSlice;

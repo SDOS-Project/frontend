@@ -1,6 +1,5 @@
 'use client';
 import { useGetUserQuery } from '@/features/user/apiSlice';
-import { UserRole } from '@/types/UserRole';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, IconButton, Tab } from '@mui/material';
 import { useMemo, useState } from 'react';
@@ -9,7 +8,7 @@ import { Email } from '@mui/icons-material';
 import AboutTabUser from '@/components/user/tabs/AboutTabUser';
 import Link from 'next/link';
 const ProjectsTab = dynamic(
-  () => import('@/components/organisation/tabs/ProjectsTab'),
+  () => import('@/components/user/tabs/ProjectsTab'),
   {
     ssr: false,
   }
