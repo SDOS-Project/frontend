@@ -38,7 +38,7 @@ export default function Project({ params }) {
 
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="mt-20 width-layout-1 bg-paper shadow-md">
+    <div className="width-layout-1 bg-paper shadow-md">
       <div className="flex justify-between items-center py-4 px-6 border-b">
         <p className="body-xlarge">{project.name}</p>
         <div className="flex justify-end items-center gap-4">
