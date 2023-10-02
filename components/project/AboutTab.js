@@ -21,21 +21,21 @@ export default function AboutTab({ handle }) {
         <div className="flex justify-between items-center">
           <div className="flex justify-start items-center gap-2">
             <Avatar className="w-10 h-10" />
-            <p className="body-xsmall">Dr. Pankaj Jalote</p>
+            <p className="body-small">Dr. Pankaj Jalote</p>
           </div>
-          <p className="body-xsmall">Faculty@IIITD</p>
+          <p className="body-small">Faculty@IIITD</p>
         </div>
         <div className="flex justify-between items-center">
           <div className="flex justify-start items-center gap-2">
             <Avatar className="w-10 h-10" />
-            <p className="body-xsmall">Mr. Mark Zuckerberg</p>
+            <p className="body-small">Mr. Mark Zuckerberg</p>
           </div>
-          <p className="body-xsmall">Employee@Meta</p>
+          <p className="body-small">Employee@Meta</p>
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-normal">Description</p>
-        <p className="body-xsmall">{project.description}</p>
+        <p className="body-large">Description</p>
+        <p className="body-small">{project.description}</p>
       </div>
     </div>
   );
