@@ -1,19 +1,25 @@
-import { Avatar } from '@mui/material';
+import { Edit } from '@mui/icons-material';
+import { Avatar, IconButton } from '@mui/material';
 import React from 'react';
 
 function UpdateComponent() {
   return (
     <div className="my-4">
       <div className="flex justify-between items-start gap-3">
-        <Avatar sx={{ height: '1.75rem', width: '1.75rem' }} />
+        <Avatar
+          sx={{ height: '1.75rem', width: '1.75rem', margin: '8px 0px' }}
+        />
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
-            <div className="flex justify-start items-center gap-2">
-              <p className="body-small">Mr. Mark Zuckerberg</p>
+            <p className="body-small">Mr. Mark Zuckerberg</p>
+            <div className="flex justify-end items-center gap-2">
+              <p className="body-small">22nd September 2023 at 5:03PM</p>
+              <IconButton>
+                <Edit className="body-small" />
+              </IconButton>
             </div>
-            <p className="body-small">22nd September 2023 at 5:03PM</p>
           </div>
-          <p className="body-xsmall mt-2 text-primary-grey">
+          <p className="body-xsmall text-primary-grey">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut

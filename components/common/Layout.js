@@ -33,7 +33,8 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {auth ? <Header /> : <LandingHeader />}
+      {/* {auth ? <Header /> : <LandingHeader />} */}
+      {auth && <Header />}
       {children}
     </>
   );

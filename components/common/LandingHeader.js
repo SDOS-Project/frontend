@@ -1,13 +1,10 @@
 'use client';
-
 import { selectIsAuthenticated } from '@/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
 export const LandingHeader = () => {
   const router = useRouter();
-  const auth = useSelector(selectIsAuthenticated);
-  console.log('AUTH>>>>', auth);
 
   return (
     <div className="flex justify-between items-center w-full sticky top-0 left-0 p-4 bg-primary-main">
