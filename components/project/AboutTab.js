@@ -22,15 +22,15 @@ export default function AboutTab({ handle }) {
         <p className="body-large">Team</p>
         {project.users.map((item, i) => (
           <div className="flex justify-between items-center" key={i}>
-            <div className="flex justify-start items-center gap-2">
-              <Avatar className="w-10 h-10" />
-              <p className="body-small">
-                {item.firstName + ' ' + item.lastName}
-              </p>
-            </div>
-            <Link
-              href={`mailto:${item.email}`}
-              onClick={(e) => e.stopPropagation()}>
+            <Link href={`/user/${item.handle}`}>
+              <div className="flex justify-start items-center gap-2">
+                <Avatar className="w-10 h-10" />
+                <p className="body-small">
+                  {item.firstName + ' ' + item.lastName}
+                </p>
+              </div>
+            </Link>
+            <Link href={`mailto:${item.email}`}>
               <div className="flex items-center justify-end gap-2">
                 <Mail />
                 <p className="body-small">{item.email}</p>
