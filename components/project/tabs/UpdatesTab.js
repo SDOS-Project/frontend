@@ -1,7 +1,7 @@
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import React, { useCallback, useState } from 'react';
-import UpdateComponent from './UpdateComponent';
-import AddUpdate from './forms/AddUpdate';
+import UpdateComponent from '../UpdateComponent';
+import AddUpdate from '../forms/AddUpdate';
 import { useGetUpdatesQuery } from '@/features/project/apiSice';
 
 function UpdatesTab({ handle }) {
@@ -18,7 +18,7 @@ function UpdatesTab({ handle }) {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="w-full">
+    <>
       <AddUpdate
         handle={handle}
         isDialogOpen={isAddUpdateOpen}
@@ -43,7 +43,7 @@ function UpdatesTab({ handle }) {
           ))
         )}
       </div>
-    </div>
+    </>
   );
 }
 

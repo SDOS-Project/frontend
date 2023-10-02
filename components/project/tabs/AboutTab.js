@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function AboutTab({ handle }) {
   const { data: project } = useGetProjectQuery(handle);
   return (
-    <div className="w-full">
+    <>
       <div className="w-full flex justify-between items-start py-4 px-6 border-b">
         <div className="flex flex-col gap-2">
           <p className="body-large">Status</p>
@@ -43,6 +43,6 @@ export default function AboutTab({ handle }) {
         <p className="body-large">Description</p>
         <p className="body-small">{project.description}</p>
       </div>
-    </div>
+    </>
   );
 }
