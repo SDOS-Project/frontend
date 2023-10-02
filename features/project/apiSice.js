@@ -35,6 +35,13 @@ export const projectApiSlice = enhancedApiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Projects'],
     }),
+    addUpdate: builder.mutation({
+      query: ({ handle, update }) => ({
+        url: `${PROJECT_BASE_URL}/${handle}/updates`,
+        method: 'POST',
+        body: update,
+      }),
+    }),
   }),
 });
 
@@ -43,4 +50,5 @@ export const {
   useGetProjectQuery,
   useGetUpdatesQuery,
   useCreateProjectMutation,
+  useAddUpdateMutation,
 } = projectApiSlice;

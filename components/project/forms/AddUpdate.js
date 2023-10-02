@@ -1,5 +1,6 @@
 import DialogFooter from '@/components/common/DialogFooter';
 import { selectUser } from '@/features/auth/authSlice';
+import { useAddUpdateMutation } from '@/features/project/apiSice';
 import { addUpdateValidationSchema } from '@/schemas/project/update/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
@@ -27,14 +28,25 @@ export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
     resolver: yupResolver(addUpdateValidationSchema),
   });
 
-  const onDiscardClick = () => {
+  const onDiscardClick = useCallback(() => {
     handleCloseDialog();
     reset(defaultValues);
-  };
+  }, [defaultValues, reset, handleCloseDialog]);
 
-  const onSubmit = useCallback(async (data) => {
-    console.log(data);
-  }, []);
+  const [addUpdate, { isLoading }] = useAddUpdateMutation();
+
+  const onSubmit = useCallback(
+    async (data) => {
+      console.log(data);
+      try {
+        await addUpdate({ handle, update: data }).unwrap();
+        onDiscardClick();
+      } catch (error) {
+        reset(defaultValues);
+      }
+    },
+    [addUpdate, handle, reset, defaultValues, onDiscardClick]
+  );
 
   return (
     <Dialog
