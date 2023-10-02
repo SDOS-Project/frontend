@@ -15,9 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        suppressHydrationWarning={true}
-        className={outfit.className + ' bg-grey min-h-screen'}>
+      <body suppressHydrationWarning={true} className={outfit.className}>
         <Providers>
           <CustomThemeProvider>
             <ToastProvider>

@@ -77,7 +77,7 @@ export default function Header() {
     <Box onClick={handleDrawerToggle} className="h-full bg-white flex flex-col">
       {user && (
         <>
-          <Box className="m-4 flex gap-2 justify-start items-center">
+          <Box className="mt-4 flex flex-col gap-5 justify-center items-center">
             <Avatar className="w-16 h-16">
               {user?.name ? (
                 <>{user?.name[0]}</>
@@ -89,7 +89,7 @@ export default function Header() {
               )}
             </Avatar>
             <Link href={hrefCallback()} legacyBehavior>
-              <Typography className="text-primary-white cursor-pointer body-large">
+              <Typography className="text-primary-main cursor-pointer body-large">
                 {user?.name ? (
                   <>{user?.name}</>
                 ) : (
@@ -107,9 +107,9 @@ export default function Header() {
         {navItems.map((item) => {
           return (
             <ListItem key={item.href} disablePadding>
-              <ListItemButton className="text-black text-center">
+              <ListItemButton className="text-center">
                 <Link href={item.href} legacyBehavior>
-                  <ListItemText primary={item.page} className="text-black" />
+                  <ListItemText primary={item.page} />
                 </Link>
               </ListItemButton>
             </ListItem>
@@ -118,18 +118,13 @@ export default function Header() {
         <ListItem disablePadding>
           <ListItemButton className="text-center">
             <Link href={'/project/start'} legacyBehavior>
-              <ListItemText
-                primary={'Start a Project'}
-                className="text-black"
-              />
+              <ListItemText primary={'Start a Project'} />
             </Link>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton className="text-center">
-            <ListItemText className="text-black" onClick={handleLogout}>
-              Logout
-            </ListItemText>
+            <ListItemText onClick={handleLogout}>Logout</ListItemText>
           </ListItemButton>
         </ListItem>
       </List>
@@ -138,7 +133,7 @@ export default function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar color="primary" className="mb-12 drop-shadow-none" elevation={0}>
+      <AppBar color="transparent" className="bg-white shadow-md px-2 sticky">
         <Toolbar className="flex items-center justify-between">
           <Box className="flex">
             SDOS
@@ -146,7 +141,7 @@ export default function Header() {
               {navItems.map((item) => {
                 return (
                   <Link href={item.href} key={item.href} legacyBehavior>
-                    <Typography className="body-normal cursor-pointer transition all delay-30 ">
+                    <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
                       {item.page}
                     </Typography>
                   </Link>
@@ -157,9 +152,11 @@ export default function Header() {
           <Box className="hidden md:flex items-center gap-4">
             {user?.role && (
               <Link href={'/project/start'} legacyBehavior>
-                <Typography className="body-normal cursor-pointer transition all delay-30 ">
+                <Button
+                  variant="contained"
+                  className="bg-primary-main py-1 px-6">
                   Start a Project
-                </Typography>
+                </Button>
               </Link>
             )}
             <IconButton className="p-0" onClick={handleOpenUserMenu}>
@@ -206,7 +203,7 @@ export default function Header() {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}>
-              <MenuIcon className="text-white" />
+              <MenuIcon className="text-black" />
             </IconButton>
           </Box>
         </Toolbar>
