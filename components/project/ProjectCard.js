@@ -2,7 +2,6 @@ import { Avatar, Chip } from '@mui/material';
 import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 function ProjectCard({
@@ -13,7 +12,6 @@ function ProjectCard({
   projectDesc,
   status,
 }) {
-  const router = useRouter();
   return (
     <Link href={`/project/${handle}`}>
       <div className="w-full shadow-lg rounded-sm cursor-pointer bg-paper">
