@@ -25,6 +25,10 @@
     @apply w-full md:w-11/12 lg:w-5/6 xl:w-3/4 mx-auto !max-w-screen-xl;
   }
 
+  .cards-grid-layout {
+    @apply w-full md:w-11/12 mx-auto !max-w-screen-xl;
+  }
+
   .width-layout-page-form {
     @apply w-11/12 sm:w-2/3 md:w-1/2 mx-auto !max-w-screen-sm;
   }
