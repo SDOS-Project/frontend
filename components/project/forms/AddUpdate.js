@@ -35,7 +35,6 @@ export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
     <Dialog
       open={isDialogOpen}
       onClose={handleCloseDialog}
-      className="max-w-sm md:max-w-full ml-auto mr-auto"
       PaperProps={{
         className: 'dialog-layout-md',
       }}>
