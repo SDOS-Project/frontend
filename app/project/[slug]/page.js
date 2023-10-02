@@ -2,9 +2,10 @@
 import AboutTab from '@/components/project/AboutTab';
 import UpdatesTab from '@/components/project/UpdatesTab';
 import { useGetProjectQuery } from '@/features/project/apiSice';
+import { ProjectStatus } from '@/types/ProjectStatus';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Chip, Tab } from '@mui/material';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function Project({ params }) {
   const { slug } = params;
@@ -15,9 +16,25 @@ export default function Project({ params }) {
 
   const [value, setValue] = useState('1');
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setValue(newValue);
   };
+
+  const tabs = useMemo(
+    () => [
+      {
+        label: 'About',
+        value: '1',
+        component: <AboutTab />,
+      },
+      {
+        label: 'Updates',
+        value: '2',
+        component: <UpdatesTab />,
+      },
+    ],
+    []
+  );
 
   if (isLoading) return <div>Loading...</div>;
   return (
@@ -27,7 +44,7 @@ export default function Project({ params }) {
         <div className="flex justify-end items-center gap-4">
           <Chip
             color="primary"
-            label="On Going"
+            label={ProjectStatus[project.status]}
             sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
           />
           <div className="flex justify-end">
@@ -47,12 +64,14 @@ export default function Project({ params }) {
               <Tab label="Updates" value="2" sx={{ fontSize: '1rem' }} />
             </TabList>
           </Box>
-          <TabPanel value="1" sx={{ padding: 0 }}>
-            <AboutTab />
-          </TabPanel>
-          <TabPanel value="2" sx={{ padding: 0 }}>
-            <UpdatesTab />
-          </TabPanel>
+          {tabs.map((tab) => (
+            <TabPanel
+              key={`${tab.label}-${tab.value}`}
+              value={tab.value}
+              sx={{ padding: 0 }}>
+              {tab.component}
+            </TabPanel>
+          ))}
         </TabContext>
       </div>
     </div>
