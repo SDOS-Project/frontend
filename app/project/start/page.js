@@ -15,7 +15,6 @@ import { selectUser } from '@/features/auth/authSlice';
 import { UserRole } from '@/types/UserRole';
 import { useCreateProjectMutation } from '@/features/project/apiSice';
 import { useRouter } from 'next/navigation';
-import FormFieldLabel from '@/components/common/FormFieldLabel';
 
 export default function StartProject() {
   const router = useRouter();
@@ -69,7 +68,7 @@ export default function StartProject() {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center justify-center gap-4 bg-paper p-10 rounded-lg">
+          className="flex flex-col items-center justify-center gap-5 bg-paper p-10 rounded-lg">
           <div className="flex flex-col items-center justify-center gap-2">
             <h1 className="body-2xlarge font-semibold">
               Start A <span className="text-primary-main">Project</span>
@@ -79,73 +78,66 @@ export default function StartProject() {
               hardworking Company Employees. Some description...
             </p>
           </div>
-          <div className="w-full">
-            <FormFieldLabel title={'Name'} />
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  size="small"
-                  // label="Name"
-                  className="w-full"
-                  variant="outlined"
-                  error={!!errors.name}
-                  helperText={errors.name ? errors.name?.message : ''}
-                />
-              )}
-            />
-          </div>
-          <div className="w-full">
-            <FormFieldLabel title={'Description'} />
-            <Controller
-              name="description"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  size="small"
-                  // label="Description"
-                  multiline
-                  variant="outlined"
-                  className="w-full"
-                  error={!!errors.description}
-                  helperText={
-                    errors.description ? errors.description?.message : ''
-                  }
-                />
-              )}
-            />
-          </div>
-          <div className="w-full">
-            <FormFieldLabel title={'Project Partner'} />
-            {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
-              <CustomAutocomplete
-                control={control}
-                fieldName="partnerHandle"
-                options={employees}
-                errors={errors}
-                loading={isEmployeesLoading}
-                // label={'Project Partner'}
-                optionLabelCallback={(option) =>
-                  option?.firstName + ' ' + option?.lastName || ''
-                }
+          <Controller
+            name="name"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                size="small"
+                label="Name"
+                className="w-full"
+                variant="outlined"
+                error={!!errors.name}
+                helperText={errors.name ? errors.name?.message : ''}
               />
-            ) : (
-              <CustomAutocomplete
-                control={control}
-                fieldName="partnerHandle"
-                options={faculty}
-                errors={errors}
-                loading={isFacultyLoading}
-                // label={'Project Partner'}
-                optionLabelCallback={(option) =>
-                  option?.firstName + ' ' + option?.lastName || ''
+            )}
+          />
+          <Controller
+            name="description"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                size="small"
+                label="Description"
+                multiline
+                rows={5}
+                variant="outlined"
+                className="w-full"
+                error={!!errors.description}
+                helperText={
+                  errors.description ? errors.description?.message : ''
                 }
               />
             )}
-          </div>
+          />
+          {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
+            <CustomAutocomplete
+              control={control}
+              fieldName="partnerHandle"
+              options={employees}
+              errors={errors}
+              loading={isEmployeesLoading}
+              label={'Project Partner'}
+              optionLabelCallback={(option) =>
+                option?.firstName + ' ' + option?.lastName || ''
+              }
+            />
+          ) : (
+            <CustomAutocomplete
+              control={control}
+              fieldName="partnerHandle"
+              options={faculty}
+              errors={errors}
+              loading={isFacultyLoading}
+              // label={'Project Partner'}
+              optionLabelCallback={(option) =>
+                option?.firstName + ' ' + option?.lastName || ''
+              }
+            />
+          )}
+
           <LoadingButton
             type="submit"
             variant="contained"
