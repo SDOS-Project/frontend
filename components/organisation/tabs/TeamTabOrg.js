@@ -10,7 +10,7 @@ function TeamTabOrg({ handle }) {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="w-full p-4 flex flex-col gap-2">
+    <div className="w-full p-4 flex flex-col gap-4">
       {users?.map((user) => (
         <TeamMember key={user.handle} {...user} />
       ))}
