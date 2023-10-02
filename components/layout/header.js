@@ -109,10 +109,7 @@ export default function Header() {
             <ListItem key={item.href} disablePadding>
               <ListItemButton className="text-black text-center">
                 <Link href={item.href} legacyBehavior>
-                  <ListItemText
-                    primary={item.page}
-                    className="text-black"
-                  />
+                  <ListItemText primary={item.page} className="text-black" />
                 </Link>
               </ListItemButton>
             </ListItem>
@@ -141,10 +138,7 @@ export default function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar
-        color="primary"
-        className="bg-gg mb-12 drop-shadow-none"
-        elevation={0}>
+      <AppBar color="primary" className="mb-12 drop-shadow-none" elevation={0}>
         <Toolbar className="flex items-center justify-between">
           <Box className="flex">
             SDOS
