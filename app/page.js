@@ -1,17 +1,18 @@
-"use client";
-import { useCallback, useEffect, useMemo } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase-config";
-import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "@/features/auth/apiSlice";
-import { useRouter } from "next/navigation";
-import { setUser } from "@/features/auth/authSlice";
-import { Controller, useForm } from "react-hook-form";
-import { Button, TextField, Typography } from "@mui/material";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { loginValidationSchema } from "@/schemas/login/schema";
-import { toast } from "react-toastify";
-import { FirebaseErrors } from "@/types/FirebaseErrors";
+'use client';
+import { useCallback, useEffect, useMemo } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/firebase-config';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '@/features/auth/apiSlice';
+import { useRouter } from 'next/navigation';
+import { setUser } from '@/features/auth/authSlice';
+import { Controller, useForm } from 'react-hook-form';
+import { Button, TextField } from '@mui/material';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginValidationSchema } from '@/schemas/login/schema';
+import { toast } from 'react-toastify';
+import { FirebaseErrors } from '@/types/FirebaseErrors';
+import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
@@ -23,8 +24,8 @@ export default function Home() {
 
   const defaultValues = useMemo(() => {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     };
   }, []);
 
@@ -54,7 +55,7 @@ export default function Home() {
           reset(defaultValues);
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("error", errorCode);
+          console.log('error', errorCode);
           toast.error(FirebaseErrors[errorCode] || errorMessage);
         });
     },
@@ -63,71 +64,67 @@ export default function Home() {
 
   useEffect(() => {
     if (authState.isAuthenticated && authState.user) {
-      const href = authState.user?.role ? `/user` : "/organisation";
+      const href = authState.user?.role ? `/user` : '/organisation';
       router.push(`${href}/${authState.user.handle}`);
     }
   }, [authState.isAuthenticated, authState.user, router]);
 
   return (
-    <main className='flex items-center justify-center pt-24'>
+    <main className="flex items-center justify-center pt-24">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col items-center justify-center gap-4 bg-paper p-6  w-5/6 rounded-md lg:px-20 lg:gap-6 lg:w-1/2 '
-      >
-        <div className='flex flex-col items-center justify-center gap-2'>
-          <h1 className='body-2xlarge font-semibold'>
-            Login Into Edu<span className='text-primary-main'>Corp.</span>
+        className="flex flex-col items-center justify-center gap-4 bg-paper p-6  w-5/6 rounded-md lg:px-20 lg:gap-6 lg:w-1/2 ">
+        <div className="flex flex-col items-center justify-center gap-2">
+          <h1 className="body-2xlarge font-semibold">
+            Login Into Edu<span className="text-primary-main">Corp.</span>
           </h1>
-          <p className='text-primary-grey font-light body-xsmall'>
+          <p className="text-primary-grey font-light body-xsmall">
             Bridging Academia and Industry
           </p>
         </div>
 
         <Controller
-          name='email'
+          name="email"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              size='small'
-              label='Email'
-              variant='outlined'
-              className='w-full'
+              size="small"
+              label="Email"
+              variant="outlined"
+              className="w-full"
               error={!!errors.email}
-              helperText={errors.email ? errors.email?.message : ""}
+              helperText={errors.email ? errors.email?.message : ''}
             />
           )}
         />
         <Controller
-          name='password'
+          name="password"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              size='small'
-              type='password'
-              label='Password'
-              variant='outlined'
-              className='w-full'
+              size="small"
+              type="password"
+              label="Password"
+              variant="outlined"
+              className="w-full"
               error={!!errors.password}
-              helperText={errors.password ? errors.password?.message : ""}
+              helperText={errors.password ? errors.password?.message : ''}
             />
           )}
         />
         <Button
-          type='submit'
-          variant='contained'
-          className='bg-primary-main text-white w-full'
-        >
+          type="submit"
+          variant="contained"
+          className="bg-primary-main text-white w-full">
           Login
         </Button>
-
-        <p
-          className='body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline'
-          onClick={() => router.push("/signup/user")}
-        >
-          Don't have an Account? Click Here to Sign Up.
-        </p>
+        <Link href={'/signup/user'}>
+          <p className="body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+            Don&apos;t have an account? Click Here to Sign Up.
+          </p>
+        </Link>
       </form>
     </main>
   );
