@@ -2,7 +2,7 @@ const themeConstants = {
   primary: {
     dark: '#181870',
     light: '#806db3',
-    main: '#4c3595',
+    main: '#3C50E0',
     grey: '#596080',
   },
   error: {
