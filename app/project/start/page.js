@@ -131,13 +131,12 @@ export default function StartProject() {
               options={faculty}
               errors={errors}
               loading={isFacultyLoading}
-              // label={'Project Partner'}
+              label={'Project Partner'}
               optionLabelCallback={(option) =>
                 option?.firstName + ' ' + option?.lastName || ''
               }
             />
           )}
-
           <LoadingButton
             type="submit"
             variant="contained"
