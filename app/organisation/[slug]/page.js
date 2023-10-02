@@ -4,7 +4,13 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Tab } from '@mui/material';
 import { useMemo, useState } from 'react';
 import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
-import TeamTabOrg from '@/components/organisation/tabs/TeamTabOrg';
+import dynamic from 'next/dynamic';
+const TeamTabOrg = dynamic(
+  () => import('@/components/organisation/tabs/TeamTabOrg'),
+  {
+    ssr: false,
+  }
+);
 
 export default function Organisation({ params }) {
   const { slug } = params;
