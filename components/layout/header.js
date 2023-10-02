@@ -133,9 +133,7 @@ export default function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar
-        color="transparent"
-        className="bg-white shadow-md px-2 sticky mb-5">
+      <AppBar color="transparent" className="bg-gg shadow-md px-2 sticky mb-5">
         <Toolbar className="flex items-center justify-between">
           <Box className="flex">
             SDOS

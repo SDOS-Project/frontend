@@ -1,8 +1,8 @@
+import TeamMember from '@/components/common/TeamMember';
 import { useGetProjectQuery } from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
-import { Edit, Mail } from '@mui/icons-material';
-import { Avatar, Chip } from '@mui/material';
-import Link from 'next/link';
+import { Edit } from '@mui/icons-material';
+import { Chip } from '@mui/material';
 
 export default function AboutTab({ handle }) {
   const { data: project } = useGetProjectQuery(handle);
@@ -21,22 +21,7 @@ export default function AboutTab({ handle }) {
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large">Team</p>
         {project.users.map((user) => (
-          <div className="flex justify-between items-center" key={user.handle}>
-            <Link href={`/user/${user.handle}`}>
-              <div className="flex justify-start items-center gap-2">
-                <Avatar className="w-8 h-8" />
-                <p className="body-small">
-                  {user.firstName + ' ' + user.lastName}
-                </p>
-              </div>
-            </Link>
-            <Link href={`mailto:${user.email}`}>
-              <div className="flex items-center justify-end gap-2">
-                <Mail />
-                <p className="body-small">{user.email}</p>
-              </div>
-            </Link>
-          </div>
+          <TeamMember key={user.handle} {...user} />
         ))}
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
