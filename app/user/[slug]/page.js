@@ -8,9 +8,12 @@ import dynamic from 'next/dynamic';
 import { Email } from '@mui/icons-material';
 import AboutTabUser from '@/components/user/tabs/AboutTabUser';
 import Link from 'next/link';
-const ProjectsTab = dynamic(() => import('@/components/common/ProjectsTab'), {
-  ssr: false,
-});
+const ProjectsTab = dynamic(
+  () => import('@/components/organisation/tabs/ProjectsTab'),
+  {
+    ssr: false,
+  }
+);
 
 export default function User({ params }) {
   const { slug } = params;

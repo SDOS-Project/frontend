@@ -5,17 +5,18 @@ import { Avatar, Box, Tab } from '@mui/material';
 import { useMemo, useState } from 'react';
 import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
 import dynamic from 'next/dynamic';
-
 const TeamTabOrg = dynamic(
   () => import('@/components/organisation/tabs/TeamTabOrg'),
   {
     ssr: false,
   }
 );
-
-const ProjectsTab = dynamic(() => import('@/components/common/ProjectsTab'), {
-  ssr: false,
-});
+const ProjectsTab = dynamic(
+  () => import('@/components/organisation/tabs/ProjectsTab'),
+  {
+    ssr: false,
+  }
+);
 
 export default function Organisation({ params }) {
   const { slug } = params;
@@ -34,7 +35,7 @@ export default function Organisation({ params }) {
         component: <AboutTabOrg handle={slug} />,
       },
       {
-        label: 'Faculty',
+        label: 'Coordinators',
         component: <TeamTabOrg handle={slug} />,
       },
       {

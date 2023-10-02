@@ -22,6 +22,12 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getOrganisationProjects: builder.query({
+      query: (handle) => ({
+        url: `${ORGANISATION_BASE_URL}/${handle}/projects`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -29,4 +35,5 @@ export const {
   useGetOrganisationsQuery,
   useGetOrganisationQuery,
   useGetOrganisationUsersQuery,
+  useGetOrganisationProjectsQuery,
 } = organisationApiSlice;
