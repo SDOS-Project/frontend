@@ -1,5 +1,4 @@
-import { Edit } from '@mui/icons-material';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar } from '@mui/material';
 import React from 'react';
 
 function UpdateComponent({ user, content, createdAt }) {
@@ -14,12 +13,7 @@ function UpdateComponent({ user, content, createdAt }) {
             <p className="body-small">
               {user?.firstName} {user?.lastName}
             </p>
-            <div className="flex justify-end items-center gap-2">
-              <p className="body-small">{createdAt}</p>
-              <IconButton>
-                <Edit className="body-small" />
-              </IconButton>
-            </div>
+            <p className="body-small">{createdAt}</p>
           </div>
           <p className="body-small text-primary-grey">{content}</p>
         </div>

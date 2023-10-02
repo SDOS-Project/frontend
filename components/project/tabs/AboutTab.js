@@ -20,20 +20,20 @@ export default function AboutTab({ handle }) {
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large">Team</p>
-        {project.users.map((item, i) => (
-          <div className="flex justify-between items-center" key={i}>
-            <Link href={`/user/${item.handle}`}>
+        {project.users.map((user) => (
+          <div className="flex justify-between items-center" key={user.handle}>
+            <Link href={`/user/${user.handle}`}>
               <div className="flex justify-start items-center gap-2">
-                <Avatar className="w-10 h-10" />
+                <Avatar className="w-8 h-8" />
                 <p className="body-small">
-                  {item.firstName + ' ' + item.lastName}
+                  {user.firstName + ' ' + user.lastName}
                 </p>
               </div>
             </Link>
-            <Link href={`mailto:${item.email}`}>
+            <Link href={`mailto:${user.email}`}>
               <div className="flex items-center justify-end gap-2">
                 <Mail />
-                <p className="body-small">{item.email}</p>
+                <p className="body-small">{user.email}</p>
               </div>
             </Link>
           </div>

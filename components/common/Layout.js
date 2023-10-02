@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import Header from '../layout/header';
 import { useEffect, useState } from 'react';
 import { Router } from 'next/router';
-import { LandingHeader } from './LandingHeader';
 
 export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
@@ -32,10 +31,9 @@ export default function Layout({ children }) {
   if (isPageTransitioning) return; // do something here to show a loading indicator;
 
   return (
-    <>
-      {/* {auth ? <Header /> : <LandingHeader />} */}
+    <div className="bg-grey min-h-screen">
       {auth && <Header />}
       {children}
-    </>
+    </div>
   );
 }
