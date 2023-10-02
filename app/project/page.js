@@ -12,9 +12,9 @@ export default function Projects() {
   return (
     <main className="cards-grid-layout padding-layout-1">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-4 my-4">
-        {true ? (
+        {isProjectsLoading ? (
           <>
-            {Array.from({ length: 15 }).map((project, id) => (
+            {Array.from({ length: 15 }).map((_, id) => (
               <ProjectCardSkeleton key={id} />
             ))}
           </>

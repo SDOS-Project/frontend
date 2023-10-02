@@ -5,7 +5,7 @@ import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 
 export default function ProjectCardSkeleton() {
   return (
-    <div className="w-full shadow-lg rounded-sm cursor-pointer bg-paper">
+    <div className="w-full shadow-lg rounded-sm">
       <div className="w-full flex justify-between items-center px-5 py-4 border-b">
         <Skeleton className="w-1/3" />
         <div className="flex justify-end">
