@@ -33,9 +33,9 @@ export default function Organisation({ params }) {
   console.log('organisation', organisation);
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="mt-20 width-layout-1 bg-paper shadow-md">
+    <div className="width-layout-1 padding-layout-1 mt-20 bg-paper shadow-md">
       <div className="flex justify-start gap-2 items-center py-4 px-6 border-b">
-        <Avatar />
+        <Avatar src={organisation.logoSrc}>{organisation.name[0]}</Avatar>
         <p className="body-xlarge">{organisation.name}</p>
       </div>
       <TabContext value={tabValue}>
