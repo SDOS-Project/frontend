@@ -3,6 +3,7 @@ import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import Link from 'next/link';
+import { ProjectStatus } from '@/types/ProjectStatus';
 
 function ProjectCard({
   handle,
@@ -34,7 +35,11 @@ function ProjectCard({
             <CorporateFareIcon className="body-xsmall" />
             <p className="body-xsmall">{companyName}</p>
           </div>
-          <Chip color="primary" label={status} className="w-fit" />
+          <Chip
+            color="primary"
+            label={ProjectStatus[status]}
+            className="w-fit"
+          />
           <p className="body-xsmall">{description}</p>
         </div>
       </div>
