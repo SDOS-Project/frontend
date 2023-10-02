@@ -23,7 +23,7 @@ export default function Organisation({ params }) {
         component: <AboutTabOrg handle={slug} />,
       },
       {
-        label: 'Team',
+        label: 'Faculty',
         component: <TeamTabOrg handle={slug} />,
       },
     ],
