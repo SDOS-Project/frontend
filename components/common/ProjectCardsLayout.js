@@ -1,4 +1,4 @@
-import ProjectCardSkeleton from '../project/Skeletons/ProjectCardSkeleton';
+import ProjectCardSkeleton from '../project/skeletons/ProjectCardSkeleton';
 import ProjectCard from '../project/ProjectCard';
 
 export default function ProjectCardsLayout({ projects, isProjectsLoading }) {
