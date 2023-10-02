@@ -1,4 +1,5 @@
 import { apiSlice } from '../api/apiSlice';
+import { produce } from 'immer';
 
 const PROJECT_BASE_URL = '/project';
 
@@ -41,6 +42,24 @@ export const projectApiSlice = enhancedApiSlice.injectEndpoints({
         method: 'POST',
         body: update,
       }),
+      async onQueryStarted({ handle, _ }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            projectApiSlice.util.updateQueryData(
+              'getUpdates',
+              handle,
+              (draft) => {
+                return produce(draft, (draftState) => {
+                  draftState?.push(data);
+                });
+              }
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
   }),
 });
