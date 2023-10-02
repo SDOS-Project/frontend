@@ -7,7 +7,7 @@ function SearchBar({ state, onChange }) {
     <div className="w-full mb-6">
       <TextField
         placeholder="Search Projects"
-        className="w-full"
+        className="w-full bg-paper"
         value={state}
         onChange={onChange}
         InputProps={{
