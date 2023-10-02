@@ -62,7 +62,9 @@ export default function Organisation({ params }) {
             key={`${tab.label}-${tab.value}`}
             value={tab.label}
             sx={{ padding: 0 }}>
-            {tab.component}
+            <div className="w-full p-4 flex flex-col gap-4">
+              {tab.component}
+            </div>
           </TabPanel>
         ))}
       </TabContext>

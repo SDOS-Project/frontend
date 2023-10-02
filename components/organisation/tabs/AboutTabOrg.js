@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function AboutTab({ handle }) {
   const { data: organisation } = useGetOrganisationQuery(handle);
   return (
-    <div className="w-full p-4 flex flex-col gap-4">
+    <>
       <Link
         href={`mailto:${organisation.email}`}
         onClick={(e) => e.stopPropagation()}>
@@ -28,6 +28,6 @@ export default function AboutTab({ handle }) {
           </p>
         </div>
       </Link>
-    </div>
+    </>
   );
 }
