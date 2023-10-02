@@ -82,7 +82,6 @@ export default function Home() {
             Bridging Academia and Industry
           </p>
         </div>
-
         <Controller
           name="email"
           control={control}

@@ -1,24 +1,19 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
-import { useGetProjectsQuery } from '@/features/project/apiSice';
+import { ProjectStatus } from '@/types/ProjectStatus';
 
-function ProjectsGrid() {
-  const { data: projects, isLoading: isProjectsLoading } =
-    useGetProjectsQuery();
-
+function ProjectsGrid({ projects }) {
   return (
-    <div className="flex flex-wrap w-full gap-6 items-stretch justify-center">
-      {projects.map((item, i) => (
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-4 my-4">
+      {projects?.map((project) => (
         <ProjectCard
-          key={i}
-          handle={item.handle}
-          projectName={'IIITD Thesis'}
+          key={project.handle}
+          handle={project.handle}
+          projectName={project.name}
           collegeName={'IIITD'}
           companyName={'Meta'}
-          projectDesc={
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...'
-          }
-          status={'On Going'}
+          projectDesc={project.description}
+          status={ProjectStatus[project.status]}
         />
       ))}
     </div>
