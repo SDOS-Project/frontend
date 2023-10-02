@@ -13,18 +13,17 @@ function AboutTabUser({ handle }) {
     <>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large">Organisation</p>
-        <Link href={`/organisation/${'org.handle'}`}>
+        <Link href={`/organisation/${user.organisation.handle}`}>
           <div className="flex gap-2 items-center">
             <Avatar src={'org.url'}></Avatar>
-            <p className="body-small">{'Hi'}</p>
+            <p className="body-small">{user.organisation.name}</p>
           </div>
         </Link>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large">Areas Of Interest</p>
-
         <div className="flex gap-2 items-center">
-          {user.areasOfInterest.map((item, i) => (
+          {user.areasOfInterest?.map((item, i) => (
             <Chip label={item} key={i} />
           ))}
         </div>

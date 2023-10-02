@@ -45,7 +45,7 @@ export default function User({ params }) {
     <div className="width-layout-1 padding-layout-1 mt-20 bg-paper shadow-md">
       <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
         <div className="flex justify-start gap-2 items-center">
-          <Avatar>{user.firstName.slice(0, 3)}</Avatar>
+          <Avatar>{user.firstName[0] + user.lastName[0]}</Avatar>
           <p className="body-xlarge">{user.firstName + ' ' + user.lastName}</p>
         </div>
         <Link href={`mailto:${user.email}`}>

@@ -51,8 +51,8 @@ export default function Organisation({ params }) {
   return (
     <div className="width-layout-1 padding-layout-1 mt-20 bg-paper shadow-md">
       <div className="flex justify-start gap-2 items-center py-4 px-6 border-b">
-        <Avatar src={organisation.logoSrc}>{organisation.name[0]}</Avatar>
-        <p className="body-xlarge">{organisation.name}</p>
+        <Avatar src={organisation?.logoSrc}>{organisation?.name[0]}</Avatar>
+        <p className="body-xlarge">{organisation?.name}</p>
       </div>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
