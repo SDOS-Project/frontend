@@ -9,8 +9,8 @@ export default function ProjectCardSkeleton() {
       <div className="w-full flex justify-between items-center px-5 py-4 border-b">
         <Skeleton className="w-1/3" />
         <div className="flex justify-end">
-          <Avatar />
-          <Avatar />
+          <Skeleton className="w-10 h-10" variant="circular" />
+          <Skeleton className="w-10 h-10" variant="circular" />
         </div>
       </div>
       <div className="flex flex-col gap-2 w-full px-5 py-4">
