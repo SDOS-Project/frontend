@@ -16,6 +16,12 @@ export const projectApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getUpdates: builder.query({
+      query: (handle) => ({
+        url: `${PROJECT_BASE_URL}/${handle}/updates`,
+        method: 'GET',
+      }),
+    }),
     createProject: builder.mutation({
       query: (project) => ({
         url: `${PROJECT_BASE_URL}`,
@@ -29,5 +35,6 @@ export const projectApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetProjectsQuery,
   useGetProjectQuery,
+  useGetUpdatesQuery,
   useCreateProjectMutation,
 } = projectApiSlice;
