@@ -1,4 +1,4 @@
-import { Avatar, Skeleton } from '@mui/material';
+import { Skeleton } from '@mui/material';
 import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
