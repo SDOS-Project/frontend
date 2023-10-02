@@ -48,10 +48,13 @@ export default function Project({ params }) {
             sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
           />
           <div className="flex justify-end">
-            <Avatar alt="IIITD" sx={{ width: 48, height: 48 }} />
             <Avatar
-              alt="FB"
+              sx={{ width: 48, height: 48 }}
+              src={project.organisations[0]?.logoUrl ?? ''}
+            />
+            <Avatar
               sx={{ width: 48, height: 48, marginLeft: '-12px' }}
+              src={project.organisations[1]?.logoUrl ?? ''}
             />
           </div>
         </div>
