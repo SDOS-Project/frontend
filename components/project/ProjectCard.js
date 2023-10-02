@@ -6,14 +6,7 @@ import Link from 'next/link';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { OrganisationType } from '@/types/OrganisationType';
 
-function ProjectCard({
-  handle,
-  name,
-  organisations,
-  companyName,
-  description,
-  status,
-}) {
+function ProjectCard({ handle, name, organisations, description, status }) {
   return (
     <Link href={`/project/${handle}`}>
       <div className="w-full shadow-md rounded-sm cursor-pointer bg-paper hover:shadow-lg duration-500">
