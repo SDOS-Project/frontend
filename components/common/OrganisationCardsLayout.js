@@ -1,6 +1,5 @@
-import React from 'react';
-import ProjectCardSkeleton from '../project/Skeletons/ProjectCardSkeleton';
 import OrganisationCard from '../organisation/OrganisationCard';
+import OrganisationCardSkeleton from '../organisation/skeletons/OrganisationCardSkeleton';
 
 export default function OrganisationCardsLayout({
   organisations,
@@ -8,10 +7,10 @@ export default function OrganisationCardsLayout({
 }) {
   return (
     <>
-      {isOrganisationsLoading ? (
+      {true ? (
         <>
           {Array.from({ length: 15 }).map((_, id) => (
-            <ProjectCardSkeleton key={id} />
+            <OrganisationCardSkeleton key={id} />
           ))}
         </>
       ) : (

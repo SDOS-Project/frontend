@@ -1,11 +1,14 @@
-import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
+import { useGetOrganisationUsersQuery } from '@/features/organisation/apiSlice';
 import { Avatar } from '@mui/material';
 import React from 'react';
 import { Email } from '@mui/icons-material';
 import Link from 'next/link';
 
 function TeamTabOrg({ handle }) {
-  const { data: organisation } = useGetOrganisationQuery(handle);
+  const { data: users, isLoading } = useGetOrganisationUsersQuery(handle);
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <div className="w-full p-4 flex flex-col gap-2">
       <Link href="/">
@@ -15,11 +18,11 @@ function TeamTabOrg({ handle }) {
             <p>Avi Vashishta</p>
           </div>
           <Link
-            href={`mailto:${organisation.email}`}
+            href={`mailto:${users?.[0].email}`}
             onClick={(e) => e.stopPropagation()}>
             <div className="flex gap-2 items-center">
               <Email className="body-normal" />
-              <p className="body-small">{organisation.email}</p>
+              <p className="body-small">{users?.[0].email}</p>
             </div>
           </Link>
         </div>

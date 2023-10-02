@@ -5,7 +5,7 @@ import { Email } from '@mui/icons-material';
 
 export default function OrganisationCardSkeleton() {
   return (
-    <div className="w-full bg-white shadow-md cursor-pointer hover:shadow-lg">
+    <div className="w-full bg-white shadow-md">
       <div className="w-full py-4 px-6 flex justify-between items-center border-b">
         <div className="flex justify-start items-center gap-2">
           <Skeleton variant="circular" width={40} height={40} />

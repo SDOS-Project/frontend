@@ -1,4 +1,3 @@
-import React from 'react';
 import ProjectCardSkeleton from '../project/Skeletons/ProjectCardSkeleton';
 import ProjectCard from '../project/ProjectCard';
 
