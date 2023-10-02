@@ -24,7 +24,7 @@ export default function AboutTab({ handle }) {
       <Link href={organisation.ipPolicy} target="_blank">
         <div className="flex gap-2 items-center">
           <LinkIcon className="body-normal" />
-          <p className="body-small">{organisation.ipPolicy}</p>
+          <p className="body-small link">{organisation.ipPolicy}</p>
         </div>
       </Link>
     </div>

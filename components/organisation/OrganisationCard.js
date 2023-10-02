@@ -49,7 +49,7 @@ function OrganisationCard({
             <div className="flex gap-2 items-center">
               <LinkIcon className="body-small" />
               <Tooltip title={ipPolicy}>
-                <p className="body-xsmall line-clamp-1">{ipPolicy}</p>
+                <p className="body-xsmall link line-clamp-1">{ipPolicy}</p>
               </Tooltip>
             </div>
           </Link>
