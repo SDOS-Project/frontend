@@ -1,14 +1,14 @@
-"use client";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from "@mui/material/Avatar";
-import { useCallback, useMemo, useState } from "react";
-import { clearUser, selectUser } from "@/features/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+'use client';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import MenuIcon from '@mui/icons-material/Menu';
+import Avatar from '@mui/material/Avatar';
+import { useCallback, useMemo, useState } from 'react';
+import { clearUser, selectUser } from '@/features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Divider,
@@ -19,13 +19,13 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-} from "@mui/material";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { auth } from "@/firebase-config";
-import { toast } from "react-toastify";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistor } from "@/store/store";
+} from '@mui/material';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { auth } from '@/firebase-config';
+import { toast } from 'react-toastify';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from '@/store/store';
 
 export default function Header() {
   const router = useRouter();
@@ -46,9 +46,9 @@ export default function Header() {
 
   const navItems = useMemo(
     () => [
-      { page: "Recommended", href: "/recommended" },
-      { page: "Projects", href: "/project" },
-      { page: "Organisations", href: "/organisation" },
+      { page: 'Recommended', href: '/recommended' },
+      { page: 'Projects', href: '/project' },
+      { page: 'Organisations', href: '/organisation' },
     ],
     []
   );
@@ -61,24 +61,24 @@ export default function Header() {
     try {
       await auth.signOut();
       dispatch(clearUser());
-      router.push("/");
+      router.push('/');
     } catch (error) {
       toast.error(error.message);
     }
   }, [dispatch, router]);
 
   const hrefCallback = useCallback(() => {
-    const href = user?.role ? "user" : "organisation";
+    const href = user?.role ? 'user' : 'organisation';
     console.log(href);
     return `/${href}/${user.handle}`;
   }, [user?.role, user?.handle]);
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} className='h-full bg-white flex flex-col'>
+    <Box onClick={handleDrawerToggle} className="h-full bg-white flex flex-col">
       {user && (
         <>
-          <Box className='mt-4 flex flex-col gap-5 justify-center items-center'>
-            <Avatar className='w-16 h-16'>
+          <Box className="m-4 flex gap-2 justify-start items-center">
+            <Avatar className="w-16 h-16">
               {user?.name ? (
                 <>{user?.name[0]}</>
               ) : (
@@ -89,7 +89,7 @@ export default function Header() {
               )}
             </Avatar>
             <Link href={hrefCallback()} legacyBehavior>
-              <Typography className='text-primary-main cursor-pointer body-large'>
+              <Typography className="text-primary-white cursor-pointer body-large">
                 {user?.name ? (
                   <>{user?.name}</>
                 ) : (
@@ -100,31 +100,39 @@ export default function Header() {
               </Typography>
             </Link>
           </Box>
-          <Divider className='m-0 p-0 mt-4' />
+          <Divider className="m-0 p-0 mt-4" />
         </>
       )}
       <List>
         {navItems.map((item) => {
           return (
             <ListItem key={item.href} disablePadding>
-              <ListItemButton className='text-center'>
+              <ListItemButton className="text-black text-center">
                 <Link href={item.href} legacyBehavior>
-                  <ListItemText primary={item.page} />
+                  <ListItemText
+                    primary={item.page}
+                    className="text-black"
+                  />
                 </Link>
               </ListItemButton>
             </ListItem>
           );
         })}
         <ListItem disablePadding>
-          <ListItemButton className='text-center'>
-            <Link href={"/project/start"} legacyBehavior>
-              <ListItemText primary={"Start a Project"} />
+          <ListItemButton className="text-center">
+            <Link href={'/project/start'} legacyBehavior>
+              <ListItemText
+                primary={'Start a Project'}
+                className="text-black"
+              />
             </Link>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton className='text-center'>
-            <ListItemText onClick={handleLogout}>Logout</ListItemText>
+          <ListItemButton className="text-center">
+            <ListItemText className="text-black" onClick={handleLogout}>
+              Logout
+            </ListItemText>
           </ListItemButton>
         </ListItem>
       </List>
@@ -133,15 +141,18 @@ export default function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar color='transparent' className='bg-gg mb-12'>
-        <Toolbar className='flex items-center justify-between'>
-          <Box className='flex'>
+      <AppBar
+        color="primary"
+        className="bg-gg mb-12 drop-shadow-none"
+        elevation={0}>
+        <Toolbar className="flex items-center justify-between">
+          <Box className="flex">
             SDOS
-            <Box className='ml-4 hidden md:flex items-center gap-4'>
+            <Box className="ml-4 hidden md:flex items-center gap-4">
               {navItems.map((item) => {
                 return (
                   <Link href={item.href} key={item.href} legacyBehavior>
-                    <Typography className='body-normal cursor-pointer transition all delay-30 hover:text-primary-main'>
+                    <Typography className="body-normal cursor-pointer transition all delay-30 ">
                       {item.page}
                     </Typography>
                   </Link>
@@ -149,18 +160,15 @@ export default function Header() {
               })}
             </Box>
           </Box>
-          <Box className='hidden md:flex items-center gap-4'>
+          <Box className="hidden md:flex items-center gap-4">
             {user?.role && (
-              <Link href={"/project/start"} legacyBehavior>
-                <Button
-                  variant='contained'
-                  className='bg-primary-main py-1 px-6'
-                >
+              <Link href={'/project/start'} legacyBehavior>
+                <Typography className="body-normal cursor-pointer transition all delay-30 ">
                   Start a Project
-                </Button>
+                </Typography>
               </Link>
             )}
-            <IconButton className='p-0' onClick={handleOpenUserMenu}>
+            <IconButton className="p-0" onClick={handleOpenUserMenu}>
               <Avatar>
                 {user?.firstName && user?.lastName ? (
                   <>
@@ -173,21 +181,20 @@ export default function Header() {
               </Avatar>
             </IconButton>
             <Menu
-              className='mt-10'
-              id='menu-appbar'
+              className="mt-10"
+              id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               <Link href={hrefCallback()} legacyBehavior>
                 <MenuItem>
                   <ListItemText>Profile</ListItemText>
@@ -198,34 +205,32 @@ export default function Header() {
               </MenuItem>
             </Menu>
           </Box>
-          <Box className='md:hidden'>
+          <Box className="md:hidden">
             <IconButton
-              className='md:hidden'
-              color='inherit'
-              aria-label='open drawer'
-              edge='start'
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon className='text-black' />
+              className="md:hidden"
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}>
+              <MenuIcon className="text-white" />
             </IconButton>
           </Box>
         </Toolbar>
         <Drawer
-          anchor='right'
-          variant='temporary'
+          anchor="right"
+          variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true,
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
               width: 240,
             },
-          }}
-        >
+          }}>
           {drawer}
         </Drawer>
       </AppBar>
