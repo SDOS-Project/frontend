@@ -40,7 +40,7 @@ export default function Project({ params }) {
   return (
     <div className="mt-20 width-layout-1 bg-paper shadow-md">
       <div className="flex justify-between items-center py-4 px-6 border-b">
-        <p className="body-xlarge">Thesis On Ai</p>
+        <p className="body-xlarge">{project.name}</p>
         <div className="flex justify-end items-center gap-4">
           <Chip
             color="primary"
@@ -56,24 +56,28 @@ export default function Project({ params }) {
           </div>
         </div>
       </div>
-      <div>
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="About" value="1" sx={{ fontSize: '1rem' }} />
-              <Tab label="Updates" value="2" sx={{ fontSize: '1rem' }} />
-            </TabList>
-          </Box>
-          {tabs.map((tab) => (
-            <TabPanel
-              key={`${tab.label}-${tab.value}`}
-              value={tab.value}
-              sx={{ padding: 0 }}>
-              {tab.component}
-            </TabPanel>
-          ))}
-        </TabContext>
-      </div>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            {tabs.map((tab) => (
+              <Tab
+                key={`${tab.label}-${tab.value}`}
+                label={tab.label}
+                value={tab.value}
+                sx={{ fontSize: '1rem' }}
+              />
+            ))}
+          </TabList>
+        </Box>
+        {tabs.map((tab) => (
+          <TabPanel
+            key={`${tab.label}-${tab.value}`}
+            value={tab.value}
+            sx={{ padding: 0 }}>
+            {tab.component}
+          </TabPanel>
+        ))}
+      </TabContext>
     </div>
   );
 }
