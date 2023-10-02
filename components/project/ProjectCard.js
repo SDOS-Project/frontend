@@ -19,11 +19,8 @@ function ProjectCard({
         <div className="w-full flex justify-between items-center px-5 py-4 border-b">
           <p className="body-normal">{name}</p>
           <div className="flex justify-end">
-            <Avatar alt="IIITD" sx={{ width: 30, height: 30 }} />
-            <Avatar
-              alt="FB"
-              sx={{ width: 30, height: 30, marginLeft: '-12px' }}
-            />
+            <Avatar sx={{ width: 30, height: 30 }} />
+            <Avatar sx={{ width: 30, height: 30, marginLeft: '-12px' }} />
           </div>
         </div>
         <div className="flex flex-col gap-2 w-full px-5 py-4">

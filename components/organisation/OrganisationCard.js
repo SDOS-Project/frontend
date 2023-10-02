@@ -5,6 +5,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import SchoolIcon from '@mui/icons-material/School';
 import { useRouter } from 'next/navigation';
 import { OrganisationType } from '@/types/OrganisationType';
+import Link from 'next/link';
 
 function OrganisationCard({
   address,
@@ -34,26 +35,22 @@ function OrganisationCard({
         )}
       </div>
       <div className="flex flex-col gap-2 py-4 px-6">
-        <a href={`mailto:${email}`} onClick={(e) => e.stopPropagation()}>
+        <Link href={`mailto:${email}`} onClick={(e) => e.stopPropagation()}>
           <div className="flex gap-2 items-center">
             <Email className="body-small" />
             <p className="body-xsmall">{email}</p>
           </div>
-        </a>
+        </Link>
         <div className="flex gap-2 items-center">
           <RoomIcon className="body-small" />
           <p className="body-xsmall">{address}</p>
         </div>
-
-        <div
-          className="flex gap-2 items-center"
-          onClick={(e) => {
-            e.stopPropagation();
-            window.open(ipPolicy, '_blank');
-          }}>
-          <LinkIcon className="body-small" />
-          <p className="body-xsmall">{ipPolicy}</p>
-        </div>
+        <Link href={ipPolicy} target="_blank">
+          <div className="flex gap-2 items-center">
+            <LinkIcon className="body-small" />
+            <p className="body-xsmall">{ipPolicy}</p>
+          </div>
+        </Link>
       </div>
     </div>
   );
