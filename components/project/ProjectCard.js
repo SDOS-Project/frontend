@@ -15,7 +15,7 @@ function ProjectCard({
   const router = useRouter();
   return (
     <div
-      className="w-full md:w-96 shadow-lg rounded-sm cursor-pointer hover:shadow-xl"
+      className="w-full md:w-96 shadow-lg rounded-sm cursor-pointer hover:shadow-xl bg-paper"
       onClick={() => router.push(`/project/${handle}`)}>
       <div className="w-full flex justify-between items-center px-5 py-4 border-b">
         <p className="body-normal">{projectName}</p>
