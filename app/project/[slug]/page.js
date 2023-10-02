@@ -12,24 +12,21 @@ export default function Project({ params }) {
 
   const { data: project, isLoading } = useGetProjectQuery(slug);
 
+  const [tabValue, setTabValue] = useState('About');
   console.log('project', project);
 
-  const [value, setValue] = useState('1');
-
   const handleChange = (_, newValue) => {
-    setValue(newValue);
+    setTabValue(newValue);
   };
 
   const tabs = useMemo(
     () => [
       {
         label: 'About',
-        value: '1',
         component: <AboutTab handle={slug} />,
       },
       {
         label: 'Updates',
-        value: '2',
         component: <UpdatesTab handle={slug} />,
       },
     ],
@@ -56,15 +53,15 @@ export default function Project({ params }) {
           </div>
         </div>
       </div>
-      <TabContext value={value}>
+      <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList onChange={handleChange} aria-label="Tabs">
             {tabs.map((tab) => (
               <Tab
                 key={`${tab.label}-${tab.value}`}
                 label={tab.label}
-                value={tab.value}
-                sx={{ fontSize: '1rem' }}
+                value={tab.label}
+                className="body-large font-semibold uppercase py-3"
               />
             ))}
           </TabList>
@@ -72,7 +69,7 @@ export default function Project({ params }) {
         {tabs.map((tab) => (
           <TabPanel
             key={`${tab.label}-${tab.value}`}
-            value={tab.value}
+            value={tab.label}
             sx={{ padding: 0 }}>
             {tab.component}
           </TabPanel>
