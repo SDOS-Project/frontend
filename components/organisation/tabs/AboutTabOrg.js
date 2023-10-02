@@ -2,13 +2,12 @@ import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
 import { Email } from '@mui/icons-material';
 import RoomIcon from '@mui/icons-material/Room';
 import LinkIcon from '@mui/icons-material/Link';
-import SchoolIcon from '@mui/icons-material/School';
 import Link from 'next/link';
 
 export default function AboutTab({ handle }) {
   const { data: organisation } = useGetOrganisationQuery(handle);
   return (
-    <div className="w-full p-4 flex flex-col gap-2">
+    <div className="w-full p-4 flex flex-col gap-4">
       <Link
         href={`mailto:${organisation.email}`}
         onClick={(e) => e.stopPropagation()}>
@@ -24,7 +23,9 @@ export default function AboutTab({ handle }) {
       <Link href={organisation.ipPolicy} target="_blank">
         <div className="flex gap-2 items-center">
           <LinkIcon className="body-normal" />
-          <p className="body-small link">{organisation.ipPolicy}</p>
+          <p className="body-small link line-clamp-1">
+            {organisation.ipPolicy}
+          </p>
         </div>
       </Link>
     </div>
