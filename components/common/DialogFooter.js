@@ -15,9 +15,9 @@ function DialogFooter({
   return (
     <DialogActions className="flex flex-row gap-4 mr-4 mb-4">
       <Button
-        className={!showSaveButton && 'bg-primary-main'}
+        className={!showSaveButton ? 'bg-primary-main' : ''}
         autoFocus
-        variant={!showSaveButton && 'contained'}
+        variant={showSaveButton ? 'text' : 'contained'}
         onClick={onDiscardClick}
         disabled={isLoading}>
         {discardLabel}
