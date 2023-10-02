@@ -7,7 +7,7 @@ export default function OrganisationCardsLayout({
 }) {
   return (
     <>
-      {true ? (
+      {isOrganisationsLoading ? (
         <>
           {Array.from({ length: 15 }).map((_, id) => (
             <OrganisationCardSkeleton key={id} />
