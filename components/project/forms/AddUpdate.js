@@ -33,7 +33,7 @@ export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
     reset(defaultValues);
   }, [defaultValues, reset, handleCloseDialog]);
 
-  const [addUpdate, { isLoading }] = useAddUpdateMutation();
+  const [addUpdate, { isLoading: isAddUpdateLoading }] = useAddUpdateMutation();
 
   const onSubmit = useCallback(
     async (data) => {
@@ -82,6 +82,7 @@ export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
           showSaveIcon={false}
           saveLabel="Add Update"
           onDiscardClick={onDiscardClick}
+          isLoading={isAddUpdateLoading}
         />
       </form>
     </Dialog>

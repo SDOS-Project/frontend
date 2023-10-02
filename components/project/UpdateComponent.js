@@ -15,7 +15,7 @@ function UpdateComponent({ user, content, createdAt }) {
             </p>
             <p className="body-small">{createdAt}</p>
           </div>
-          <p className="body-small text-primary-grey">{content}</p>
+          <p className="body-small">{content}</p>
         </div>
       </div>
     </div>
