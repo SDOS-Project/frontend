@@ -6,17 +6,17 @@ import Link from 'next/link';
 
 function ProjectCard({
   handle,
-  projectName,
+  name,
   collegeName,
   companyName,
-  projectDesc,
+  description,
   status,
 }) {
   return (
     <Link href={`/project/${handle}`}>
       <div className="w-full shadow-lg rounded-sm cursor-pointer bg-paper">
         <div className="w-full flex justify-between items-center px-5 py-4 border-b">
-          <p className="body-normal">{projectName}</p>
+          <p className="body-normal">{name}</p>
           <div className="flex justify-end">
             <Avatar alt="IIITD" sx={{ width: 30, height: 30 }} />
             <Avatar
@@ -35,7 +35,7 @@ function ProjectCard({
             <p className="body-xsmall">{companyName}</p>
           </div>
           <Chip color="primary" label={status} className="w-fit" />
-          <p className="body-xsmall">{projectDesc}</p>
+          <p className="body-xsmall">{description}</p>
         </div>
       </div>
     </Link>
