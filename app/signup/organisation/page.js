@@ -121,79 +121,68 @@ export default function Signup() {
   );
 
   return (
-    <main className="width-layout-page-form padding-layout-1">
-      <div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center justify-center gap-5 bg-paper p-10 rounded-lg">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <h1 className="body-2xlarge font-semibold">
-              Signup On Edu
-              <span className="text-primary-main">Corp.</span>
-            </h1>
-            <p className="text-primary-grey font-light body-small">
-              Bridging Academia and Industry
-            </p>
-          </div>
-          <TabSwitch />
-          {textFields.map((textField) => (
-            <Controller
-              key={textField.name}
-              name={textField.name}
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  className="w-full"
-                  size="small"
-                  label={textField.label}
-                  type={textField.type}
-                  variant="outlined"
-                  error={!!errors[textField.name]}
-                  helperText={
-                    errors[textField.name]
-                      ? errors[textField.name]?.message
-                      : ''
-                  }
-                />
-              )}
-            />
-          ))}
-          <Controller
-            name="type"
-            control={control}
-            render={({ field }) => (
-              <FormControl className="w-full mb-2 lg:mb-0" size="small">
-                <InputLabel>Type</InputLabel>
-                <Select {...field} label="Type" error={!!errors.type}>
-                  {Object.keys(OrganisationType)?.map((role) => {
-                    return (
-                      <MenuItem key={role} value={role}>
-                        {OrganisationType[role]}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-                <FormHelperText className="text-red ml-4">
-                  {errors?.role && errors?.role?.message}
-                </FormHelperText>
-              </FormControl>
-            )}
-          />
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            loading={isOrganisationSignupLoading}
-            className="w-full bg-primary-main">
-            Sign Up
-          </LoadingButton>
-          <Link href="/">
-            <div className="body-small text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
-              Want to Login? Click Here.
-            </div>
-          </Link>
-        </form>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-2">
+        <h1 className="body-2xlarge font-semibold">
+          Signup On Edu
+          <span className="text-primary-main">Corp.</span>
+        </h1>
+        <p className="text-primary-grey font-light body-small">
+          Bridging Academia and Industry
+        </p>
       </div>
-    </main>
+      <TabSwitch />
+      {textFields.map((textField) => (
+        <Controller
+          key={textField.name}
+          name={textField.name}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              className="w-full"
+              size="small"
+              label={textField.label}
+              type={textField.type}
+              variant="outlined"
+              error={!!errors[textField.name]}
+              helperText={
+                errors[textField.name] ? errors[textField.name]?.message : ''
+              }
+            />
+          )}
+        />
+      ))}
+      <Controller
+        name="type"
+        control={control}
+        render={({ field }) => (
+          <FormControl className="w-full mb-2 lg:mb-0" size="small">
+            <InputLabel>Type</InputLabel>
+            <Select {...field} label="Type" error={!!errors.type}>
+              {Object.keys(OrganisationType)?.map((role) => {
+                return (
+                  <MenuItem key={role} value={role}>
+                    {OrganisationType[role]}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            <FormHelperText className="text-red ml-4">
+              {errors?.role && errors?.role?.message}
+            </FormHelperText>
+          </FormControl>
+        )}
+      />
+      <LoadingButton
+        type="submit"
+        variant="contained"
+        loading={isOrganisationSignupLoading}
+        className="w-full bg-primary-main">
+        Sign Up
+      </LoadingButton>
+    </form>
   );
 }

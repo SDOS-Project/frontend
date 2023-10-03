@@ -124,98 +124,87 @@ export default function Signup() {
   );
 
   return (
-    <main className="width-layout-page-form padding-layout-1">
-      <div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center justify-center gap-5 bg-paper p-10 rounded-lg">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <div className="body-2xlarge font-semibold">
-              Signup On Edu<span className="text-primary-main">Corp.</span>
-            </div>
-            <div className="text-primary-grey font-light body-small">
-              Bridging Academia and Industry
-            </div>
-          </div>
-          <TabSwitch />
-          {textFields.map((textField) => (
-            <Controller
-              key={textField.name}
-              name={textField.name}
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  className="w-full"
-                  size="small"
-                  label={textField.label}
-                  type={textField.type}
-                  variant="outlined"
-                  error={!!errors[textField.name]}
-                  helperText={
-                    errors[textField.name]
-                      ? errors[textField.name]?.message
-                      : ''
-                  }
-                />
-              )}
-            />
-          ))}
-          <Controller
-            name="role"
-            control={control}
-            render={({ field }) => (
-              <FormControl className="w-full mb-2 lg:mb-0" size="small">
-                <InputLabel>Role</InputLabel>
-                <Select
-                  {...field}
-                  label="role"
-                  error={!!errors.role}
-                  className="w-full">
-                  {Object.keys(UserRole)?.map((role) => {
-                    return (
-                      <MenuItem key={role} value={role}>
-                        {UserRole[role]}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-                <FormHelperText className="text-error-main">
-                  {errors?.role && errors?.role?.message}
-                </FormHelperText>
-              </FormControl>
-            )}
-          />
-          <CustomAutocomplete
-            control={control}
-            fieldName="organisationHandle"
-            options={organisations}
-            errors={errors}
-            loading={isOrganisationsLoading}
-            label={'Organisation'}
-            optionLabelCallback={(option) => option?.name}
-          />
-          <MultipleChipSelect
-            control={control}
-            fieldName="areasOfInterest"
-            options={areasOfInterests}
-            errors={errors}
-            setValue={setValue}
-          />
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            loading={isUserSignupLoading}
-            className="w-full bg-primary-main">
-            Sign up
-          </LoadingButton>
-          <Link href="/">
-            <div className="body-small text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
-              Want to Login? Click Here.
-            </div>
-          </Link>
-        </form>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center">
+        <div className="body-2xlarge font-semibold">
+          Signup On Edu<span className="text-primary-main">Corp.</span>
+        </div>
+        <div className="text-primary-grey font-light body-small">
+          Bridging Academia and Industry
+        </div>
       </div>
-    </main>
+      <TabSwitch />
+      {textFields.map((textField) => (
+        <Controller
+          key={textField.name}
+          name={textField.name}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              className="w-full"
+              size="small"
+              label={textField.label}
+              type={textField.type}
+              variant="outlined"
+              error={!!errors[textField.name]}
+              helperText={
+                errors[textField.name] ? errors[textField.name]?.message : ''
+              }
+            />
+          )}
+        />
+      ))}
+      <Controller
+        name="role"
+        control={control}
+        render={({ field }) => (
+          <FormControl className="w-full mb-2 lg:mb-0" size="small">
+            <InputLabel>Role</InputLabel>
+            <Select
+              {...field}
+              label="role"
+              error={!!errors.role}
+              className="w-full">
+              {Object.keys(UserRole)?.map((role) => {
+                return (
+                  <MenuItem key={role} value={role}>
+                    {UserRole[role]}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            <FormHelperText className="text-error-main">
+              {errors?.role && errors?.role?.message}
+            </FormHelperText>
+          </FormControl>
+        )}
+      />
+      <CustomAutocomplete
+        control={control}
+        fieldName="organisationHandle"
+        options={organisations}
+        errors={errors}
+        loading={isOrganisationsLoading}
+        label={'Organisation'}
+        optionLabelCallback={(option) => option?.name}
+      />
+      <MultipleChipSelect
+        control={control}
+        fieldName="areasOfInterest"
+        options={areasOfInterests}
+        errors={errors}
+        setValue={setValue}
+      />
+      <LoadingButton
+        type="submit"
+        variant="contained"
+        loading={isUserSignupLoading}
+        className="w-full bg-primary-main">
+        Sign up
+      </LoadingButton>
+    </form>
   );
 }
