@@ -48,36 +48,39 @@ export default function Organisation({ params }) {
 
   console.log('organisation', organisation);
   if (isLoading) return <div>Loading...</div>;
+
   return (
-    <div className="width-layout-1 padding-layout-1 mt-20 bg-paper shadow-md">
-      <div className="flex justify-start gap-2 items-center py-4 px-6 border-b">
-        <Avatar src={organisation?.logoSrc}>{organisation?.name[0]}</Avatar>
-        <p className="body-xlarge">{organisation?.name}</p>
+    <div className="width-layout-1 padding-layout-1">
+      <div className="bg-paper shadow-md">
+        <div className="flex justify-start gap-2 items-center py-4 px-6 border-b">
+          <Avatar src={organisation?.logoSrc}>{organisation?.name[0]}</Avatar>
+          <p className="body-xlarge">{organisation?.name}</p>
+        </div>
+        <TabContext value={tabValue}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <TabList onChange={handleChange} aria-label="Tabs">
+              {tabs.map((tab) => (
+                <Tab
+                  key={`${tab.label}-${tab.value}`}
+                  label={tab.label}
+                  value={tab.label}
+                  className="body-normal"
+                />
+              ))}
+            </TabList>
+          </Box>
+          {tabs.map((tab) => (
+            <TabPanel
+              key={`${tab.label}-${tab.value}`}
+              value={tab.label}
+              sx={{ padding: 0 }}>
+              <div className="w-full p-4 flex flex-col gap-4">
+                {tab.component}
+              </div>
+            </TabPanel>
+          ))}
+        </TabContext>
       </div>
-      <TabContext value={tabValue}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="Tabs">
-            {tabs.map((tab) => (
-              <Tab
-                key={`${tab.label}-${tab.value}`}
-                label={tab.label}
-                value={tab.label}
-                className="body-normal"
-              />
-            ))}
-          </TabList>
-        </Box>
-        {tabs.map((tab) => (
-          <TabPanel
-            key={`${tab.label}-${tab.value}`}
-            value={tab.label}
-            sx={{ padding: 0 }}>
-            <div className="w-full p-4 flex flex-col gap-4">
-              {tab.component}
-            </div>
-          </TabPanel>
-        ))}
-      </TabContext>
     </div>
   );
 }
