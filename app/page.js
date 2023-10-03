@@ -120,7 +120,7 @@ export default function Home() {
           Login
         </Button>
         <Link href={'/signup/user'}>
-          <p className="body-xsmall text-primary-grey font-light cursor-pointer hover:text-primary-main hover:underline">
+          <p className="body-xsmall link">
             Don&apos;t have an account? Click Here to Sign Up.
           </p>
         </Link>
