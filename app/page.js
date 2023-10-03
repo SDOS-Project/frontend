@@ -70,10 +70,10 @@ export default function Home() {
   }, [authState.isAuthenticated, authState.user, router]);
 
   return (
-    <main className="flex items-center justify-center pt-24">
+    <main className="padding-layout-1">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center gap-4 bg-paper p-6  w-5/6 rounded-md lg:px-20 lg:gap-6 lg:w-1/2 ">
+        className="flex flex-col items-center gap-4 width-layout-page-form padding-layout-1">
         <div className="flex flex-col items-center justify-center gap-2">
           <h1 className="body-2xlarge font-semibold">
             Login Into Edu<span className="text-primary-main">Corp.</span>
