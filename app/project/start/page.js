@@ -73,7 +73,7 @@ export default function StartProject() {
             <h1 className="body-2xlarge font-semibold">
               Start A <span className="text-primary-main">Project</span>
             </h1>
-            <p className="text-primary-grey font-light body-xsmall text-center">
+            <p className="text-primary-light font-light body-xsmall text-center">
               A Project is the collaboration of esteemed Faculty Members with
               hardworking Company Employees. Some description...
             </p>

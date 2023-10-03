@@ -1,12 +1,14 @@
 'use client';
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Avatar, Box, IconButton, Tab } from '@mui/material';
+import { Avatar, Box, Chip, IconButton, Tab } from '@mui/material';
 import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Email } from '@mui/icons-material';
 import AboutTabUser from '@/components/user/tabs/AboutTabUser';
 import Link from 'next/link';
+import { UserRole } from '@/types/UserRole';
+import themeConstants from '@/theme/themeConstants';
 const ProjectsTab = dynamic(
   () => import('@/components/user/tabs/ProjectsTab'),
   {
@@ -45,14 +47,23 @@ export default function User({ params }) {
     <div className="width-layout-1 padding-layout-1 mt-20 bg-paper shadow-md">
       <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
         <div className="flex justify-start gap-2 items-center">
-          <Avatar>{user.firstName[0] + user.lastName[0]}</Avatar>
           <p className="body-xlarge">{user.firstName + ' ' + user.lastName}</p>
         </div>
-        <Link href={`mailto:${user.email}`}>
-          <IconButton>
-            <Email />
-          </IconButton>
-        </Link>
+        <div className="flex justify-end items-center gap-6">
+          <Chip
+            label={UserRole[user.role]}
+            color="primary"
+            sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
+          />
+          <Avatar
+            sx={{
+              width: 48,
+              height: 48,
+              background: themeConstants.primary.main,
+            }}>
+            {user.firstName[0] + user.lastName[0]}
+          </Avatar>
+        </div>
       </div>
       <TabContext value={tabValue}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

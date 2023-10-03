@@ -129,7 +129,7 @@ export default function Signup() {
           Signup On Edu
           <span className="text-primary-main">Corp.</span>
         </h1>
-        <p className="text-primary-grey font-light body-small">
+        <p className="text-primary-light font-light body-small">
           Bridging Academia and Industry
         </p>
       </div>
