@@ -44,49 +44,53 @@ export default function User({ params }) {
   console.log('user', user);
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="width-layout-1 padding-layout-1 mt-20 bg-paper shadow-md">
-      <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
-        <div className="flex justify-start gap-2 items-center">
-          <p className="body-xlarge">{user.firstName + ' ' + user.lastName}</p>
+    <div className="width-layout-1 padding-layout-1">
+      <div className=" bg-paper shadow-md">
+        <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
+          <div className="flex justify-start gap-2 items-center">
+            <p className="body-xlarge">
+              {user.firstName + ' ' + user.lastName}
+            </p>
+          </div>
+          <div className="flex justify-end items-center gap-6">
+            <Chip
+              label={UserRole[user.role]}
+              color="primary"
+              sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
+            />
+            <Avatar
+              sx={{
+                width: 48,
+                height: 48,
+                background: themeConstants.primary.main,
+              }}>
+              {user.firstName[0] + user.lastName[0]}
+            </Avatar>
+          </div>
         </div>
-        <div className="flex justify-end items-center gap-6">
-          <Chip
-            label={UserRole[user.role]}
-            color="primary"
-            sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
-          />
-          <Avatar
-            sx={{
-              width: 48,
-              height: 48,
-              background: themeConstants.primary.main,
-            }}>
-            {user.firstName[0] + user.lastName[0]}
-          </Avatar>
-        </div>
+        <TabContext value={tabValue}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <TabList onChange={handleChange} aria-label="Tabs">
+              {tabs.map((tab) => (
+                <Tab
+                  key={`${tab.label}-${tab.value}`}
+                  label={tab.label}
+                  value={tab.label}
+                  className="body-normal"
+                />
+              ))}
+            </TabList>
+          </Box>
+          {tabs.map((tab) => (
+            <TabPanel
+              key={`${tab.label}-${tab.value}`}
+              value={tab.label}
+              sx={{ padding: 0 }}>
+              {tab.component}
+            </TabPanel>
+          ))}
+        </TabContext>
       </div>
-      <TabContext value={tabValue}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="Tabs">
-            {tabs.map((tab) => (
-              <Tab
-                key={`${tab.label}-${tab.value}`}
-                label={tab.label}
-                value={tab.label}
-                className="body-normal"
-              />
-            ))}
-          </TabList>
-        </Box>
-        {tabs.map((tab) => (
-          <TabPanel
-            key={`${tab.label}-${tab.value}`}
-            value={tab.label}
-            sx={{ padding: 0 }}>
-            {tab.component}
-          </TabPanel>
-        ))}
-      </TabContext>
     </div>
   );
 }
