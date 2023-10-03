@@ -4,6 +4,33 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #4c3595;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 @layer components {
   .dialog-layout-md {
     @apply mx-auto mr-auto w-full max-w-screen-md;
@@ -95,8 +122,8 @@
   .link {
     @apply text-primary-light hover:text-primary-main hover:underline hover:cursor-pointer;
   }
-}
 
-input::placeholder {
-  @apply whitespace-pre-wrap;
+  input::placeholder {
+    @apply whitespace-pre-wrap;
+  }
 }
