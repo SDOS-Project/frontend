@@ -1,3 +1,9 @@
+import UserCard from '@/components/common/UserCard';
+
 export default function Recommended() {
-  return <div>Recommended</div>;
+  return (
+    <div>
+      <UserCard />
+    </div>
+  );
 }

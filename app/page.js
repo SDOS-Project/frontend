@@ -78,7 +78,7 @@ export default function Home() {
           <h1 className="body-2xlarge font-semibold">
             Login Into Edu<span className="text-primary-main">Corp.</span>
           </h1>
-          <p className="text-primary-grey font-light body-xsmall">
+          <p className="text-primary-light font-light body-xsmall">
             Bridging Academia and Industry
           </p>
         </div>

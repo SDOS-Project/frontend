@@ -2,7 +2,7 @@ import TeamMember from '@/components/common/TeamMember';
 import { useGetProjectQuery } from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { Edit } from '@mui/icons-material';
-import { Chip } from '@mui/material';
+import { Chip, IconButton } from '@mui/material';
 
 export default function AboutTab({ handle }) {
   const { data: project } = useGetProjectQuery(handle);
@@ -13,9 +13,10 @@ export default function AboutTab({ handle }) {
           <p className="body-large">Status</p>
           <Chip label={ProjectStatus[project.status]} color="primary" />
         </div>
-        <div className="flex justify-end gap-2 items-center text-primary-grey cursor-pointer">
-          <p className="body-small">Edit Status</p>
-          <Edit />
+        <div className="flex justify-end gap-2 items-center text-primary-light cursor-pointer">
+          <IconButton>
+            <Edit />
+          </IconButton>
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
