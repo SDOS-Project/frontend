@@ -15,21 +15,20 @@ function ProjectCard({ handle, name, organisations, description, status }) {
           <div className="flex justify-end">
             <Avatar className="w-12 h-12" src={organisations[0].logoUrl} />
             <Avatar
-              className="w-12 h-12"
-              sx={{ width: 30, height: 30, marginLeft: '-12px' }}
-              src={organisations[0].logoUrl}
+              className="w-12 h-12 -ml-3"
+              src={organisations[1].logoUrl}
             />
           </div>
         </div>
         <div className="flex flex-col gap-2 w-full px-5 py-4">
-          {organisations.map((org, i) => (
-            <Link href={`/organisation/${org.handle}`} key={i}>
+          {organisations.map((org) => (
+            <Link href={`/organisation/${org.handle}`} key={org.handle}>
               <div className="flex items-center justify-start gap-2">
                 {org.type.toLowerCase() ==
                 OrganisationType.ACADEMIC.toLowerCase() ? (
-                  <SchoolIcon className="body-small" />
+                  <SchoolIcon className="body-normal" />
                 ) : (
-                  <CorporateFareIcon className="body-small" />
+                  <CorporateFareIcon className="body-normal" />
                 )}
                 <p className="body-xsmall">{org.name}</p>
               </div>
@@ -40,7 +39,9 @@ function ProjectCard({ handle, name, organisations, description, status }) {
             label={ProjectStatus[status]}
             className="w-fit"
           />
-          <p className="body-xsmall line-clamp-3">{description}</p>
+          <p className="body-xsmall line-clamp-3 text-primary-light">
+            {description}
+          </p>
         </div>
       </div>
     </Link>
