@@ -162,7 +162,9 @@ export default function Signup() {
         control={control}
         render={({ field }) => (
           <FormControl className="w-full mb-2 lg:mb-0" size="small">
-            <InputLabel>Role</InputLabel>
+            <InputLabel className={errors?.role && 'text-error-main'}>
+              Role
+            </InputLabel>
             <Select
               {...field}
               label="role"
