@@ -1,11 +1,10 @@
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import UpdateComponent from '../UpdateComponent';
 import AddUpdate from '../forms/AddUpdate';
 import { useGetUpdatesQuery } from '@/features/project/apiSice';
 import { Button } from '@mui/material';
 
-function UpdatesTab({ handle }) {
+export default function UpdatesTab({ handle }) {
   const { data: updates, isLoading } = useGetUpdatesQuery(handle);
 
   console.log('updates', updates);
@@ -47,5 +46,3 @@ function UpdatesTab({ handle }) {
     </>
   );
 }
-
-export default UpdatesTab;
