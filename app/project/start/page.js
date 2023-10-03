@@ -67,14 +67,15 @@ export default function StartProject() {
     <main className="width-layout-page-form padding-layout-1">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center gap-4">
-        <div className="flex flex-col items-center justify-center gap-2">
+        className="flex flex-col items-center justify-center gap-4 padding-layout-1">
+        <div className="flex flex-col items-center justify-cente gap-2">
           <h1 className="body-2xlarge font-semibold">
             Start A <span className="text-primary-main">Project</span>
           </h1>
-          <p className="text-primary-grey font-light body-xsmall text-center">
+          <p className="text-primary-light font-light body-xsmall text-center">
             A Project is the collaboration of esteemed Faculty Members with
-            hardworking Company Employees. Some description...
+            hardworking Company Employees. A Project can be a Research Project,
+            a Software Project, or a Hardware Project.
           </p>
         </div>
         <Controller
