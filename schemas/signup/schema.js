@@ -1,3 +1,4 @@
+import { areasOfInterests } from '@/types/AreasOfInterests';
 import { UserRole } from '@/types/UserRole';
 import * as yup from 'yup';
 
@@ -20,7 +21,7 @@ export const signupValidationSchema = yup.object().shape({
   organisationHandle: yup.string().required('Organisation is required'),
   areasOfInterest: yup
     .array()
-    .of(yup.string())
+    .of(yup.string().oneOf(areasOfInterests))
     .min(1)
     .required('Areas of Interest is required'),
 });
