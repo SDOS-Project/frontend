@@ -73,62 +73,76 @@ export default function Header() {
     return `/${href}/${user.handle}`;
   }, [user?.role, user?.handle]);
 
-  const drawer = (
-    <Box onClick={handleDrawerToggle} className="h-full bg-white flex flex-col">
-      {user && (
-        <>
-          <Box className="mt-4 flex flex-col gap-5 justify-center items-center">
-            <Avatar className="w-20 h-20">
-              {user?.name ? (
-                <>{user?.name[0]}</>
-              ) : (
-                <>
-                  {user?.firstName[0]}
-                  {user?.lastName[0]}
-                </>
-              )}
-            </Avatar>
-            <Link href={hrefCallback()} legacyBehavior>
-              <Typography className="text-primary-main cursor-pointer body-large">
-                {user?.name ? (
-                  <>{user?.name}</>
-                ) : (
-                  <>
-                    {user?.firstName} {user?.lastName}
-                  </>
-                )}
-              </Typography>
-            </Link>
-          </Box>
-          <Divider className="m-0 p-0 mt-4" />
-        </>
-      )}
-      <List>
-        {navItems.map((item) => {
-          return (
-            <ListItem key={item.href} disablePadding>
-              <ListItemButton className="text-center">
-                <Link href={item.href} legacyBehavior>
-                  <ListItemText primary={item.page} />
+  const drawer = useMemo(
+    () => (
+      <Box
+        onClick={handleDrawerToggle}
+        className="h-full bg-white flex flex-col">
+        {user.name ||
+          (user.firstName && (
+            <>
+              <Box className="mt-4 flex flex-col gap-5 justify-center items-center">
+                <Avatar className="w-24 h-24">
+                  {user?.name ? (
+                    <>{user?.name[0]}</>
+                  ) : (
+                    <>
+                      {user?.firstName[0]}
+                      {user?.lastName[0]}
+                    </>
+                  )}
+                </Avatar>
+                <Link href={hrefCallback()} legacyBehavior>
+                  <Typography className="text-primary-main cursor-pointer body-large">
+                    {user?.name ? (
+                      <>{user?.name}</>
+                    ) : (
+                      <>
+                        {user?.firstName} {user?.lastName}
+                      </>
+                    )}
+                  </Typography>
                 </Link>
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-        <ListItem disablePadding>
-          <ListItemButton className="text-center">
-            <Link href={'/project/start'} legacyBehavior>
-              <ListItemText primary={'Start a Project'} />
-            </Link>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton className="text-center">
-            <ListItemText onClick={handleLogout}>Logout</ListItemText>
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Box>
+              </Box>
+              <Divider className="m-0 p-0 mt-6" />
+            </>
+          ))}
+        <List>
+          {navItems.map((item) => {
+            return (
+              <ListItem key={item.href} disablePadding>
+                <ListItemButton className="text-center">
+                  <Link href={item.href} legacyBehavior>
+                    <ListItemText primary={item.page} />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+          <ListItem disablePadding>
+            <ListItemButton className="text-center">
+              <Link href={'/project/start'} legacyBehavior>
+                <ListItemText primary={'Start a Project'} />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton className="text-center">
+              <ListItemText onClick={handleLogout}>Logout</ListItemText>
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
+    ),
+    [
+      handleDrawerToggle,
+      handleLogout,
+      hrefCallback,
+      navItems,
+      user?.firstName,
+      user?.lastName,
+      user?.name,
+    ]
   );
 
   return (
