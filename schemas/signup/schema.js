@@ -25,6 +25,6 @@ export const signupValidationSchema = yup.object().shape({
   areasOfInterest: yup
     .array()
     .of(yup.string().oneOf(areasOfInterests))
-    .min(1)
+    .min(1, 'Please select at least one area of interest')
     .required('Areas of Interest is required'),
 });
