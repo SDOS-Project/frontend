@@ -13,11 +13,9 @@ function ProjectCard({ handle, name, organisations, description, status }) {
         <div className="w-full flex justify-between items-center px-5 py-4 border-b">
           <p className="body-normal">{name}</p>
           <div className="flex justify-end">
+            <Avatar className="w-12 h-12" src={organisations[0].logoUrl} />
             <Avatar
-              sx={{ width: 30, height: 30 }}
-              src={organisations[0].logoUrl}
-            />
-            <Avatar
+              className="w-12 h-12"
               sx={{ width: 30, height: 30, marginLeft: '-12px' }}
               src={organisations[0].logoUrl}
             />
@@ -42,7 +40,7 @@ function ProjectCard({ handle, name, organisations, description, status }) {
             label={ProjectStatus[status]}
             className="w-fit"
           />
-          <p className="body-xsmall">{description}</p>
+          <p className="body-xsmall line-clamp-3">{description}</p>
         </div>
       </div>
     </Link>
