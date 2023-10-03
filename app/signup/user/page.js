@@ -26,6 +26,7 @@ import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { useRouter } from 'next/navigation';
 import { TabSwitch } from '@/components/signup/TabSwitch';
 import Link from 'next/link';
+import { areasOfInterests } from '@/types/AreasOfInterests';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -197,7 +198,7 @@ export default function Signup() {
           <MultipleChipSelect
             control={control}
             fieldName="areasOfInterest"
-            options={['AI', 'ML', 'DL', 'CV']}
+            options={areasOfInterests}
             errors={errors}
             setValue={setValue}
           />
