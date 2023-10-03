@@ -41,49 +41,51 @@ export default function Project({ params }) {
 
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="width-layout-1 padding-layout-1 bg-paper shadow-md">
-      <div className="flex justify-between items-center py-4 px-6 border-b">
-        <p className="body-3xlarge font-medium">{project.name}</p>
-        <div className="flex justify-end items-center gap-4">
-          <Chip
-            color="primary"
-            label={ProjectStatus[project.status]}
-            sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
-          />
-          <div className="flex justify-end">
-            <Avatar
-              sx={{ width: 48, height: 48 }}
-              src={project.organisations[0]?.logoUrl ?? ''}
+    <div className="width-layout-1 padding-layout-1">
+      <div className="bg-paper shadow-md">
+        <div className="flex justify-between items-center py-4 px-6 border-b">
+          <p className="body-3xlarge font-medium">{project.name}</p>
+          <div className="flex justify-end items-center gap-4">
+            <Chip
+              color="primary"
+              label={ProjectStatus[project.status]}
+              sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
             />
-            <Avatar
-              sx={{ width: 48, height: 48, marginLeft: '-12px' }}
-              src={project.organisations[1]?.logoUrl ?? ''}
-            />
+            <div className="flex justify-end">
+              <Avatar
+                sx={{ width: 48, height: 48 }}
+                src={project.organisations[0]?.logoUrl ?? ''}
+              />
+              <Avatar
+                sx={{ width: 48, height: 48, marginLeft: '-12px' }}
+                src={project.organisations[1]?.logoUrl ?? ''}
+              />
+            </div>
           </div>
         </div>
+        <TabContext value={tabValue}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <TabList onChange={handleChange} aria-label="Tabs">
+              {tabs.map((tab) => (
+                <Tab
+                  key={`${tab.label}-${tab.value}`}
+                  label={tab.label}
+                  value={tab.label}
+                  className="body-normal"
+                />
+              ))}
+            </TabList>
+          </Box>
+          {tabs.map((tab) => (
+            <TabPanel
+              key={`${tab.label}-${tab.value}`}
+              value={tab.label}
+              sx={{ padding: 0 }}>
+              {tab.component}
+            </TabPanel>
+          ))}
+        </TabContext>
       </div>
-      <TabContext value={tabValue}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="Tabs">
-            {tabs.map((tab) => (
-              <Tab
-                key={`${tab.label}-${tab.value}`}
-                label={tab.label}
-                value={tab.label}
-                className="body-normal"
-              />
-            ))}
-          </TabList>
-        </Box>
-        {tabs.map((tab) => (
-          <TabPanel
-            key={`${tab.label}-${tab.value}`}
-            value={tab.label}
-            sx={{ padding: 0 }}>
-            {tab.component}
-          </TabPanel>
-        ))}
-      </TabContext>
     </div>
   );
 }

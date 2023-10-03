@@ -23,14 +23,11 @@ import CustomAutocomplete from '@/components/common/CustomAutocomplete';
 import { setUser } from '@/features/auth/authSlice';
 import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
-import { useRouter } from 'next/navigation';
 import { TabSwitch } from '@/components/signup/TabSwitch';
-import Link from 'next/link';
 import { areasOfInterests } from '@/types/AreasOfInterests';
 
 export default function Signup() {
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const { data: organisations, isLoading: isOrganisationsLoading } =
     useGetOrganisationsQuery();
@@ -127,14 +124,6 @@ export default function Signup() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center justify-center gap-4">
-      <div className="flex flex-col items-center justify-center">
-        <div className="body-2xlarge font-semibold">
-          Signup On Edu<span className="text-primary-main">Corp.</span>
-        </div>
-        <div className="text-primary-light font-light body-small">
-          Bridging Academia and Industry
-        </div>
-      </div>
       <TabSwitch />
       {textFields.map((textField) => (
         <Controller
@@ -196,6 +185,7 @@ export default function Signup() {
       <MultipleChipSelect
         control={control}
         fieldName="areasOfInterest"
+        label="Areas of Interest"
         options={areasOfInterests}
         errors={errors}
         setValue={setValue}

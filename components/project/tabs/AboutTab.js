@@ -25,7 +25,7 @@ export default function AboutTab({ handle }) {
           <TeamMember key={user.handle} {...user} />
         ))}
       </div>
-      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
+      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b overflow-clip">
         <p className="body-large">Description</p>
         <p className="body-small">{project.description}</p>
       </div>

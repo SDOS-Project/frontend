@@ -65,87 +65,84 @@ export default function StartProject() {
 
   return (
     <main className="width-layout-page-form padding-layout-1">
-      <div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center justify-center gap-5 bg-paper p-10 rounded-lg">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <h1 className="body-2xlarge font-semibold">
-              Start A <span className="text-primary-main">Project</span>
-            </h1>
-            <p className="text-primary-light font-light body-xsmall text-center">
-              A Project is the collaboration of esteemed Faculty Members with
-              hardworking Company Employees. Some description...
-            </p>
-          </div>
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                size="small"
-                label="Name"
-                className="w-full"
-                variant="outlined"
-                error={!!errors.name}
-                helperText={errors.name ? errors.name?.message : ''}
-              />
-            )}
-          />
-          <Controller
-            name="description"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                size="small"
-                label="Description"
-                multiline
-                rows={5}
-                variant="outlined"
-                className="w-full"
-                error={!!errors.description}
-                helperText={
-                  errors.description ? errors.description?.message : ''
-                }
-              />
-            )}
-          />
-          {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
-            <CustomAutocomplete
-              control={control}
-              fieldName="partnerHandle"
-              options={employees}
-              errors={errors}
-              loading={isEmployeesLoading}
-              label={'Project Partner'}
-              optionLabelCallback={(option) =>
-                option?.firstName + ' ' + option?.lastName || ''
-              }
-            />
-          ) : (
-            <CustomAutocomplete
-              control={control}
-              fieldName="partnerHandle"
-              options={faculty}
-              errors={errors}
-              loading={isFacultyLoading}
-              label={'Project Partner'}
-              optionLabelCallback={(option) =>
-                option?.firstName + ' ' + option?.lastName || ''
-              }
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col items-center justify-center gap-4 padding-layout-1">
+        <div className="flex flex-col items-center justify-cente gap-2">
+          <h1 className="body-2xlarge font-semibold">
+            Start A <span className="text-primary-main">Project</span>
+          </h1>
+          <p className="text-primary-light font-light body-xsmall text-center">
+            A Project is the collaboration of esteemed Faculty Members with
+            hardworking Company Employees. A Project can be a Research Project,
+            a Software Project, or a Hardware Project.
+          </p>
+        </div>
+        <Controller
+          name="name"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              size="small"
+              label="Name"
+              className="w-full"
+              variant="outlined"
+              error={!!errors.name}
+              helperText={errors.name ? errors.name?.message : ''}
             />
           )}
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            className="w-full bg-primary-main"
-            loading={isCreateProjectLoading}>
-            Start Project
-          </LoadingButton>
-        </form>
-      </div>
+        />
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              size="small"
+              label="Description"
+              multiline
+              rows={5}
+              variant="outlined"
+              className="w-full"
+              error={!!errors.description}
+              helperText={errors.description ? errors.description?.message : ''}
+            />
+          )}
+        />
+        {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
+          <CustomAutocomplete
+            control={control}
+            fieldName="partnerHandle"
+            options={employees}
+            errors={errors}
+            loading={isEmployeesLoading}
+            label={'Project Partner'}
+            optionLabelCallback={(option) =>
+              option?.firstName + ' ' + option?.lastName || ''
+            }
+          />
+        ) : (
+          <CustomAutocomplete
+            control={control}
+            fieldName="partnerHandle"
+            options={faculty}
+            errors={errors}
+            loading={isFacultyLoading}
+            label={'Project Partner'}
+            optionLabelCallback={(option) =>
+              option?.firstName + ' ' + option?.lastName || ''
+            }
+          />
+        )}
+        <LoadingButton
+          type="submit"
+          variant="contained"
+          className="w-full bg-primary-main"
+          loading={isCreateProjectLoading}>
+          Start Project
+        </LoadingButton>
+      </form>
     </main>
   );
 }

@@ -70,10 +70,10 @@ export default function Home() {
   }, [authState.isAuthenticated, authState.user, router]);
 
   return (
-    <main className="padding-layout-1">
+    <main className="width-layout-page-form padding-layout-1">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center gap-4 width-layout-page-form padding-layout-1">
+        className="flex flex-col items-center gap-4 padding-layout-1">
         <div className="flex flex-col items-center justify-center gap-2">
           <h1 className="body-2xlarge font-semibold">
             Login Into Edu<span className="text-primary-main">Corp.</span>
@@ -120,9 +120,9 @@ export default function Home() {
           Login
         </Button>
         <Link href={'/signup/user'}>
-          <p className="body-xsmall link">
+          <div className="link">
             Don&apos;t have an account? Click Here to Sign Up.
-          </p>
+          </div>
         </Link>
       </form>
     </main>

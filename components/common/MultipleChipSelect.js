@@ -1,7 +1,9 @@
 import {
   Box,
   Chip,
+  FormControl,
   FormHelperText,
+  InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
@@ -15,6 +17,7 @@ export default function MultipleChipSelect({
   options,
   setValue,
   errors,
+  label,
 }) {
   const handleChange = useCallback(
     (event) => {
@@ -31,7 +34,10 @@ export default function MultipleChipSelect({
       name={fieldName}
       control={control}
       render={({ field: { _, value } }) => (
-        <>
+        <FormControl className="w-full mb-2 lg:mb-0" size="small">
+          <InputLabel className={errors?.[fieldName] && 'text-error-main'}>
+            {label}
+          </InputLabel>
           <Select
             className="w-full"
             size="small"
@@ -39,7 +45,7 @@ export default function MultipleChipSelect({
             multiple
             onChange={handleChange}
             error={!!errors?.[fieldName]}
-            input={<OutlinedInput />}
+            input={<OutlinedInput label={label} />}
             renderValue={(selected) => {
               return (
                 <Box className="flex flex-wrap gap-0.5">
@@ -60,7 +66,7 @@ export default function MultipleChipSelect({
               {errors?.[fieldName] ? errors?.[fieldName]?.message : ''}
             </FormHelperText>
           )}
-        </>
+        </FormControl>
       )}
     />
   );
