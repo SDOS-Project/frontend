@@ -124,15 +124,6 @@ export default function Signup() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center justify-center gap-4">
-      <div className="flex flex-col items-center justify-center gap-2">
-        <h1 className="body-2xlarge font-semibold">
-          Signup On Edu
-          <span className="text-primary-main">Corp.</span>
-        </h1>
-        <p className="text-primary-grey font-light body-small">
-          Bridging Academia and Industry
-        </p>
-      </div>
       <TabSwitch />
       {textFields.map((textField) => (
         <Controller
