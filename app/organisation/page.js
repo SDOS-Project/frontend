@@ -10,10 +10,7 @@ export default function Organisations() {
 
   return (
     <main className="cards-grid-layout">
-      <p className="body-2xlarge text-center font-semibold mb-5">
-        <span className="text-primary-main">Organisations</span> With Us
-      </p>
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-4 my-4">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-4">
         <OrganisationCardsLayout
           organisations={organisations}
           isOrganisationsLoading={isOrganisationsLoading}
