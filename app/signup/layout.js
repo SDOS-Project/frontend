@@ -16,7 +16,7 @@ export default function Layout({ children }) {
           </div>
           {children}
           <Link href="/">
-            <div className="link flex justify-center mt-5">
+            <div className="link flex justify-center mt-4">
               Want to Login? Click Here.
             </div>
           </Link>

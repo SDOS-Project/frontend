@@ -120,9 +120,9 @@ export default function Home() {
           Login
         </Button>
         <Link href={'/signup/user'}>
-          <p className="body-xsmall link">
+          <div className="link">
             Don&apos;t have an account? Click Here to Sign Up.
-          </p>
+          </div>
         </Link>
       </form>
     </main>
