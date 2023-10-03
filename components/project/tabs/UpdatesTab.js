@@ -1,11 +1,14 @@
 import { useCallback, useState } from 'react';
 import UpdateComponent from '../UpdateComponent';
-import AddUpdate from '../forms/AddUpdate';
 import {
   useGetProjectConfigQuery,
   useGetUpdatesQuery,
 } from '@/features/project/apiSice';
 import { Button } from '@mui/material';
+import dynamic from 'next/dynamic';
+const AddUpdate = dynamic(() => import('../forms/AddUpdate'), {
+  ssr: false,
+});
 
 export default function UpdatesTab({ handle }) {
   const { data: projectConfig, isLoading: isProjectConfigLoading } =
