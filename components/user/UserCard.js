@@ -15,31 +15,31 @@ function UserCard({
 }) {
   return (
     <Link href={`/user/${handle}`}>
-      <div className="w-64 bg-paper shadow-md">
+      <div className="w-full h-full bg-paper shadow-md">
         <div className="p-4 flex flex-col justify-center items-center border-b gap-3">
-          <Avatar sx={{ width: '72px', height: '72px' }} />
+          <Avatar className="w-20 h-20" />
           <p className="body-large text-center">
             {firstName} {lastName}
           </p>
         </div>
         <div className="flex flex-col gap-2 px-4 py-2">
           <div className="flex gap-2 items-center">
-            <Mail className="body-small" />
+            <Mail color="primary" className="body-small" />
             <p className="body-small">{email}</p>
           </div>
           <div className="flex gap-2 items-center">
             {organisation.type.toLowerCase() ===
             OrganisationType.ACADEMIC.toLowerCase() ? (
-              <SchoolIcon className="body-small" />
+              <SchoolIcon color="primary" className="body-small" />
             ) : (
-              <CorporateFareIcon className="body-small" />
+              <CorporateFareIcon color="primary" className="body-small" />
             )}
             <p className="body-small">{organisation.name}</p>
           </div>
           <div className="flex gap-2 items-center flex-wrap">
             {areasOfInterest.map((item, i) => {
               if (i > 5) return;
-              return <Chip label={item} color="primary" key={`${item}-${i}`} />;
+              return <Chip label={item} key={`${item}-${i}`} />;
             })}
           </div>
         </div>
