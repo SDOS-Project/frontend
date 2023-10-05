@@ -74,7 +74,7 @@ export default function User({ params }) {
                   key={`${tab.label}-${tab.value}`}
                   label={tab.label}
                   value={tab.label}
-                  className="body-normal"
+                  className="body-large uppercase"
                 />
               ))}
             </TabList>
