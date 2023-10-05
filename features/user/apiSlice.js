@@ -4,14 +4,17 @@ const USER_BASE_URL = '/user';
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getUser: builder.query({
-      query: (handle) => `${USER_BASE_URL}/${handle}`,
+    getRecommeded: builder.query({
+      query: () => `${USER_BASE_URL}/recommeded`,
     }),
     getFaculty: builder.query({
       query: () => `${USER_BASE_URL}/faculty`,
     }),
     getEmployees: builder.query({
       query: () => `${USER_BASE_URL}/employees`,
+    }),
+    getUser: builder.query({
+      query: (handle) => `${USER_BASE_URL}/${handle}`,
     }),
     getUserProjects: builder.query({
       query: (handle) => `${USER_BASE_URL}/${handle}/projects`,
@@ -20,8 +23,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetUserQuery,
+  useGetRecommededQuery,
   useGetFacultyQuery,
   useGetEmployeesQuery,
+  useGetUserQuery,
   useGetUserProjectsQuery,
 } = userApiSlice;
