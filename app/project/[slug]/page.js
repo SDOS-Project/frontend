@@ -41,7 +41,7 @@ export default function Project({ params }) {
 
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="width-layout-1 padding-layout-1">
+    <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md">
         <div className="flex justify-between items-center py-4 px-6 border-b">
           <p className="body-3xlarge font-medium">{project.name}</p>
