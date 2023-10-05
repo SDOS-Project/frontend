@@ -1,28 +1,27 @@
 'use client';
 import Image from 'next/image';
-import Image404 from '@/public/assets/Image404.svg';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { StatusCodesErrorMessagesMap } from '@/types/StatusCodesErrorMessagesMap';
 
-function ErrorComponent({ errorNum, subText, buttonText, imgSrc }) {
+function ErrorComponent({ statusCode, subText, buttonText, imgSrc }) {
   const router = useRouter();
   return (
     <>
       <Image
-        src={imgSrc ?? Image404}
+        alt="Error Image"
+        src={imgSrc ?? '/assets/404.svg'}
         width={500}
         height={500}
-        className="w-2/3 md:w-1/3"
+        className="w-11/12 md:w-1/2"
       />
       <div className="flex flex-col gap-6 w-full p-6 md:w-1/3">
-        <p className="body-3xlarge font-medium">
-          Error <span className="text-primary-main">{errorNum}</span>
+        <p className="title font-medium">
+          {StatusCodesErrorMessagesMap[statusCode]}
         </p>
-        <p className="body-large">
-          {subText ?? 'Oops, Couldn’t find the page you were looking for'}
-        </p>
+        <p className="body-xlarge">{subText}</p>
         <Button
-          className="bg-primary-main text-white"
+          variant="contained"
           onClick={() => {
             router.back();
           }}>
