@@ -5,6 +5,7 @@ import CustomThemeProvider from '@/theme/provider';
 import { Outfit } from 'next/font/google';
 import Layout from '@/components/common/Layout';
 import ErrorBoundary from '@/components/error/ErrorBoundary';
+import { StyledEngineProvider } from '@mui/material';
 
 const outfit = Outfit({ subsets: ['latin'] });
 
@@ -18,13 +19,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body suppressHydrationWarning={true} className={outfit.className}>
         <Providers>
-          <CustomThemeProvider>
-            <ToastProvider>
-              <ErrorBoundary>
-                <Layout>{children}</Layout>
-              </ErrorBoundary>
-            </ToastProvider>
-          </CustomThemeProvider>
+          <StyledEngineProvider injectFirst>
+            <CustomThemeProvider>
+              <ToastProvider>
+                <ErrorBoundary>
+                  <Layout>{children}</Layout>
+                </ErrorBoundary>
+              </ToastProvider>
+            </CustomThemeProvider>
+          </StyledEngineProvider>
         </Providers>
       </body>
     </html>
