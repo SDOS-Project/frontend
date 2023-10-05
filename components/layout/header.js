@@ -147,7 +147,7 @@ export default function Header() {
 
   return (
     <PersistGate loading={null} persistor={persistor}>
-      <AppBar color="grey" className="shadow-md px-2 sticky mb-5">
+      <AppBar color="grey" className="shadow-md px-2 sticky">
         <Toolbar className="flex items-center justify-between">
           <Box className="flex">
             <Link href={'/'} passHref={true} legacyBehavior>

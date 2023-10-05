@@ -42,7 +42,7 @@ export default function User({ params }) {
   console.log('user', user);
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="width-layout-1 profile-padding-layout">
+    <div className="width-layout-1 padding-layout-1">
       <div className=" bg-paper shadow-md">
         <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
           <div className="flex justify-start gap-2 items-center">
@@ -74,7 +74,7 @@ export default function User({ params }) {
                   key={`${tab.label}-${tab.value}`}
                   label={tab.label}
                   value={tab.label}
-                  className="body-large uppercase"
+                  className="body-normal"
                 />
               ))}
             </TabList>
