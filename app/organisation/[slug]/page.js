@@ -50,7 +50,7 @@ export default function Organisation({ params }) {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="width-layout-1 padding-layout-1">
+    <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md">
         <div className="flex justify-start gap-2 items-center py-4 px-6 border-b">
           <Avatar src={organisation?.logoUrl}>{organisation?.name[0]}</Avatar>
