@@ -46,7 +46,6 @@ export default function Header() {
 
   const navItems = useMemo(
     () => [
-      { page: 'Recommended', href: '/recommended' },
       { page: 'Projects', href: '/project' },
       { page: 'Organisations', href: '/organisation' },
     ],
@@ -108,6 +107,15 @@ export default function Header() {
             </>
           ))}
         <List>
+          {user?.role && (
+            <ListItem disablePadding>
+              <ListItemButton className="text-center">
+                <Link href={'/recommended'} legacyBehavior>
+                  <ListItemText primary={'Recommended'} />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          )}
           {navItems.map((item) => {
             return (
               <ListItem key={item.href} disablePadding>
@@ -142,6 +150,7 @@ export default function Header() {
       user?.firstName,
       user?.lastName,
       user?.name,
+      user?.role,
     ]
   );
 
@@ -158,6 +167,13 @@ export default function Header() {
               />
             </Link>
             <Box className="ml-4 hidden md:flex items-center gap-4">
+              {user?.role && (
+                <Link href={'/recommended'} legacyBehavior>
+                  <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
+                    Recommended
+                  </Typography>
+                </Link>
+              )}
               {navItems.map((item) => {
                 return (
                   <Link href={item.href} key={item.href} legacyBehavior>
