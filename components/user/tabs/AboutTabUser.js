@@ -1,6 +1,6 @@
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { Email } from '@mui/icons-material';
-import { Avatar, Chip, IconButton } from '@mui/material';
+import { Avatar, Chip } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 
@@ -13,16 +13,16 @@ function AboutTabUser({ handle }) {
   return (
     <>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large font-medium text-primary-main">Organisation</p>
+        <p className="body-large font-medium text-primary-dark">Organisation</p>
         <Link href={`/organisation/${user?.organisation?.handle}`}>
           <div className="flex gap-2 items-center">
-            <Avatar src={'org.url'}></Avatar>
+            <Avatar src={user?.organisation?.logoUrl}></Avatar>
             <p className="body-small">{user?.organisation?.name}</p>
           </div>
         </Link>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large font-medium text-primary-main">
+        <p className="body-large font-medium text-primary-dark">
           Areas Of Interest
         </p>
         <div className="flex flex-wrap gap-2 items-center">
@@ -32,7 +32,7 @@ function AboutTabUser({ handle }) {
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large font-medium text-primary-main">Contact</p>
+        <p className="body-large font-medium text-primary-dark">Contact</p>
         <Link href={`mailto:${user?.email}`}>
           <div className="flex items-center gap-2">
             <Email className="text-primary-main" />

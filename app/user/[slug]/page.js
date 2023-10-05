@@ -46,7 +46,7 @@ export default function User({ params }) {
       <div className=" bg-paper shadow-md">
         <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
           <div className="flex justify-start gap-2 items-center">
-            <p className="body-xlarge">
+            <p className="body-xlarge text-primary-dark font-medium">
               {user?.firstName + ' ' + user?.lastName}
             </p>
           </div>
