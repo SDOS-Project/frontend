@@ -47,12 +47,12 @@ export default function User({ params }) {
         <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
           <div className="flex justify-start gap-2 items-center">
             <p className="body-xlarge">
-              {user.firstName + ' ' + user.lastName}
+              {user?.firstName + ' ' + user?.lastName}
             </p>
           </div>
           <div className="flex justify-end items-center gap-6">
             <Chip
-              label={UserRole[user.role]}
+              label={UserRole[user?.role]}
               color="primary"
               sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
             />
@@ -62,7 +62,7 @@ export default function User({ params }) {
                 height: 48,
                 background: themeConstants.primary.main,
               }}>
-              {user.firstName[0] + user.lastName[0]}
+              {user?.firstName[0] + user?.lastName[0]}
             </Avatar>
           </div>
         </div>
