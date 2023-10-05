@@ -4,6 +4,7 @@ import ToastProvider from './toast.provider';
 import CustomThemeProvider from '@/theme/provider';
 import { Outfit } from 'next/font/google';
 import Layout from '@/components/common/Layout';
+import ErrorBoundary from '@/components/error/ErrorBoundary';
 
 const outfit = Outfit({ subsets: ['latin'] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
         <Providers>
           <CustomThemeProvider>
             <ToastProvider>
-              <Layout>{children}</Layout>
+              <ErrorBoundary>
+                <Layout>{children}</Layout>
+              </ErrorBoundary>
             </ToastProvider>
           </CustomThemeProvider>
         </Providers>
