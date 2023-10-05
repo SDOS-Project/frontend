@@ -9,7 +9,7 @@ export default function Projects() {
   console.log('projects', projects);
 
   return (
-    <main className="cards-grid-layout padding-layout-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-4">
+    <main className="cards-grid-layout padding-layout-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-4">
       <ProjectCardsLayout
         projects={projects}
         isProjectsLoading={isProjectsLoading}
