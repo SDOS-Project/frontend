@@ -73,9 +73,9 @@ export default function StartProject() {
             Start A <span className="text-primary-main">Project</span>
           </h1>
           <p className="text-primary-light font-light body-xsmall text-center">
-            A Project is the collaboration of esteemed Faculty Members with
-            hardworking Company Employees. A Project can be a Research Project,
-            a Software Project, or a Hardware Project.
+            Collaboration of Academic Expertise with Industrial Innovation.
+            Register your project here to bridge the gap between academic
+            knowledge and industrial insight.
           </p>
         </div>
         <Controller
