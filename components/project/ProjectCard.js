@@ -9,7 +9,7 @@ import { OrganisationType } from '@/types/OrganisationType';
 function ProjectCard({ handle, name, organisations, description, status }) {
   return (
     <Link href={`/project/${handle}`}>
-      <div className="w-full shadow-md rounded-sm cursor-pointer bg-paper hover:shadow-lg duration-500">
+      <div className="w-full h-full shadow-md rounded-sm cursor-pointer bg-paper hover:shadow-lg duration-500">
         <div className="w-full flex justify-between items-center px-5 py-4 border-b">
           <p className="body-normal">{name}</p>
           <div className="flex justify-end">
