@@ -13,7 +13,7 @@ function AboutTabUser({ handle }) {
   return (
     <>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large">Organisation</p>
+        <p className="body-large font-medium text-primary-main">Organisation</p>
         <Link href={`/organisation/${user?.organisation?.handle}`}>
           <div className="flex gap-2 items-center">
             <Avatar src={'org.url'}></Avatar>
@@ -22,18 +22,20 @@ function AboutTabUser({ handle }) {
         </Link>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large">Areas Of Interest</p>
+        <p className="body-large font-medium text-primary-main">
+          Areas Of Interest
+        </p>
         <div className="flex flex-wrap gap-2 items-center">
           {user?.areasOfInterest?.map((item, i) => (
-            <Chip label={item} key={`${item}-${i}`} color="primary" />
+            <Chip label={item} key={`${item}-${i}`} />
           ))}
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large">Contact</p>
+        <p className="body-large font-medium text-primary-main">Contact</p>
         <Link href={`mailto:${user?.email}`}>
           <div className="flex items-center gap-2">
-            <Email className="text-black" />
+            <Email className="text-primary-main" />
             <p className="body-small">{user?.email}</p>
           </div>
         </Link>
