@@ -53,11 +53,11 @@ export default function Project({ params }) {
             />
             <div className="flex justify-end">
               <Avatar
-                sx={{ width: 48, height: 48 }}
+                className="w-16 h-16"
                 src={project.organisations[0]?.logoUrl ?? ''}
               />
               <Avatar
-                sx={{ width: 48, height: 48, marginLeft: '-12px' }}
+                className="w-16 h-16 -ml-5"
                 src={project.organisations[1]?.logoUrl ?? ''}
               />
             </div>
