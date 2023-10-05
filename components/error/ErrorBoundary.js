@@ -33,7 +33,9 @@ export default class ErrorBoundary extends Component {
             height={500}
             className="w-1/2 sm:w-1/4"
           />
-          <div className="title font-medium">Oops, something went wrong!</div>
+          <div className="title font-medium mt-10">
+            Oops, something went wrong!
+          </div>
           <Button variant="contained" onClick={refreshPage}>
             Reload Page
           </Button>

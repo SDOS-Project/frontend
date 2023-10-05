@@ -47,7 +47,7 @@ export default function User({ params }) {
         <div className="flex justify-between gap-2 items-center py-4 px-6 border-b">
           <div className="flex justify-start gap-2 items-center">
             <p className="body-xlarge">
-              {user?.firstName + ' ' + user?.lastName}
+              {user.firstName + ' ' + user.lastName}
             </p>
           </div>
           <div className="flex justify-end items-center gap-6">
