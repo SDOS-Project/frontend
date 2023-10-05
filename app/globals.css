@@ -73,6 +73,10 @@ html::-webkit-scrollbar-thumb {
     @apply w-11/12 sm:w-2/3 md:w-1/2 mx-auto !max-w-screen-sm;
   }
 
+  .profile-padding-layout {
+    @apply px-4 py-20 sm:px-8 md:px-0;
+  }
+
   .padding-layout-1 {
     @apply px-4 sm:px-8 md:px-0 py-8 md:py-12 lg:py-16 xl:py-20;
   }

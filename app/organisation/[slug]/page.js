@@ -50,10 +50,10 @@ export default function Organisation({ params }) {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="width-layout-1 padding-layout-1">
+    <div className="width-layout-1 profile-padding-layout">
       <div className="bg-paper shadow-md">
         <div className="flex justify-start gap-2 items-center py-4 px-6 border-b">
-          <Avatar src={organisation?.logoSrc}>{organisation?.name[0]}</Avatar>
+          <Avatar src={organisation?.logoUrl}>{organisation?.name[0]}</Avatar>
           <p className="body-xlarge">{organisation?.name}</p>
         </div>
         <TabContext value={tabValue}>
