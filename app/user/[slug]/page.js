@@ -54,14 +54,9 @@ export default function User({ params }) {
             <Chip
               label={UserRole[user?.role]}
               color="primary"
-              sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
+              className="body-normal p-2 sm:p-3 md:p-4"
             />
-            <Avatar
-              sx={{
-                width: 48,
-                height: 48,
-                background: themeConstants.primary.main,
-              }}>
+            <Avatar className="w-12 h-12 sm:w-14 sm:h-14">
               {user?.firstName[0] + user?.lastName[0]}
             </Avatar>
           </div>
