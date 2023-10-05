@@ -23,9 +23,9 @@ function AboutTabUser({ handle }) {
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large">Areas Of Interest</p>
-        <div className="flex gap-2 items-center">
+        <div className="flex flex-wrap gap-2 items-center">
           {user?.areasOfInterest?.map((item, i) => (
-            <Chip label={item} key={i} color="primary" />
+            <Chip label={item} key={`${item}-${i}`} color="primary" />
           ))}
         </div>
       </div>
