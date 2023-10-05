@@ -16,7 +16,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { signupValidationSchema } from '@/schemas/signup/schema';
-import { useGetOrganisationsQuery } from '@/features/organisation/apiSlice';
+import { useGetOrganisationsDropdownQuery } from '@/features/organisation/apiSlice';
 import { UserRole } from '@/types/UserRole';
 import MultipleChipSelect from '@/components/common/MultipleChipSelect';
 import CustomAutocomplete from '@/components/common/CustomAutocomplete';
@@ -30,7 +30,7 @@ export default function Signup() {
   const dispatch = useDispatch();
 
   const { data: organisations, isLoading: isOrganisationsLoading } =
-    useGetOrganisationsQuery();
+    useGetOrganisationsDropdownQuery();
 
   const [signup, { isLoading: isUserSignupLoading }] = useSignupMutation();
 

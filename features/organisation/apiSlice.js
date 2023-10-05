@@ -10,6 +10,12 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getOrganisationsDropdown: builder.query({
+      query: () => ({
+        url: `${ORGANISATION_BASE_URL}/dropdown`,
+        method: 'GET',
+      }),
+    }),
     getOrganisation: builder.query({
       query: (handle) => ({
         url: `${ORGANISATION_BASE_URL}/${handle}`,
@@ -33,6 +39,7 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetOrganisationsQuery,
+  useGetOrganisationsDropdownQuery,
   useGetOrganisationQuery,
   useGetOrganisationUsersQuery,
   useGetOrganisationProjectsQuery,
