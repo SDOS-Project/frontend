@@ -150,7 +150,13 @@ export default function Header() {
       <AppBar color="grey" className="shadow-md px-2 sticky mb-5">
         <Toolbar className="flex items-center justify-between">
           <Box className="flex">
-            SDOS
+            <Link href={'/'} passHref={true} legacyBehavior>
+              <Avatar
+                alt="EduCorp Logo"
+                src="/assets/logo.png"
+                className="hover:cursor-pointer w-12 h-12"
+              />
+            </Link>
             <Box className="ml-4 hidden md:flex items-center gap-4">
               {navItems.map((item) => {
                 return (
