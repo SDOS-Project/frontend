@@ -3,7 +3,7 @@ import AboutTab from '@/components/project/tabs/AboutTab';
 import { useGetProjectQuery } from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Avatar, Box, Button, Chip, Tab } from '@mui/material';
+import { Avatar, Box, Button, Tab } from '@mui/material';
 import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 const UpdatesTab = dynamic(
@@ -58,7 +58,7 @@ export default function Project({ params }) {
               src={project.organisations[1]?.logoUrl ?? ''}
             />
           </div>
-          <div className="flex flex justify-between gap-2 items-center mx-6 mt-4">
+          <div className="flex justify-between gap-2 items-center mx-6 mt-4">
             <p className="body-xlarge text-primary-dark font-medium">
               {project.name}
             </p>
