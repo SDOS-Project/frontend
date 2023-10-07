@@ -3,7 +3,7 @@ import AboutTab from '@/components/project/tabs/AboutTab';
 import { useGetProjectQuery } from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Avatar, Box, Chip, Tab } from '@mui/material';
+import { Avatar, Box, Button, Chip, Tab } from '@mui/material';
 import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 const UpdatesTab = dynamic(
@@ -42,49 +42,53 @@ export default function Project({ params }) {
   if (isLoading) return <div>Loading...</div>;
   return (
     <div className="width-layout-1 padding-layout-2">
-      <div className="bg-paper shadow-md">
-        <div className="flex justify-between items-center py-4 px-6 border-b">
-          <p className="body-3xlarge font-medium">{project.name}</p>
-          <div className="flex justify-end items-center gap-4">
-            <Chip
-              color="primary"
-              label={ProjectStatus[project.status]}
-              sx={{ fontSize: '1rem', paddingInline: '0.75rem' }}
-            />
-            <div className="flex justify-end">
-              <Avatar
-                className="w-16 h-16"
-                src={project.organisations[0]?.logoUrl ?? ''}
-              />
-              <Avatar
-                className="w-16 h-16 -ml-5"
-                src={project.organisations[1]?.logoUrl ?? ''}
-              />
-            </div>
-          </div>
+      <div className="bg-paper shadow-md relative">
+        <div className="absolute top-0 left-0 bg-gg h-24 sm:h-36 w-full rounded-t-lg z-0"></div>
+        <div className="z-50 absolute right-0 top-0 bg-primary-main text-white py-2 px-4 rounded-bl-lg body-small">
+          {ProjectStatus[project.status]}
         </div>
-        <TabContext value={tabValue}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="Tabs">
-              {tabs.map((tab) => (
-                <Tab
-                  key={`${tab.label}-${tab.value}`}
-                  label={tab.label}
-                  value={tab.label}
-                  className="body-normal"
-                />
-              ))}
-            </TabList>
-          </Box>
-          {tabs.map((tab) => (
-            <TabPanel
-              key={`${tab.label}-${tab.value}`}
-              value={tab.label}
-              sx={{ padding: 0 }}>
-              {tab.component}
-            </TabPanel>
-          ))}
-        </TabContext>
+        <div className="w-full pt-14 sm:pt-24 z-50">
+          <div className="flex justify-start mx-6">
+            <Avatar
+              className="w-20 h-20 sm:w-24 sm:h-24"
+              src={project.organisations[0]?.logoUrl ?? ''}
+            />
+            <Avatar
+              className="w-20 h-20 sm:w-24 sm:h-24 -ml-5"
+              src={project.organisations[1]?.logoUrl ?? ''}
+            />
+          </div>
+          <div className="flex flex justify-between gap-2 items-center mx-6 mt-4">
+            <p className="body-xlarge text-primary-dark font-medium">
+              {project.name}
+            </p>
+            <Button className="bg-primary-main px-6 text-white hover:bg-primary-dark">
+              Edit Project
+            </Button>
+          </div>
+          <TabContext value={tabValue}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={handleChange} aria-label="Tabs">
+                {tabs.map((tab) => (
+                  <Tab
+                    key={`${tab.label}-${tab.value}`}
+                    label={tab.label}
+                    value={tab.label}
+                    className="body-normal"
+                  />
+                ))}
+              </TabList>
+            </Box>
+            {tabs.map((tab) => (
+              <TabPanel
+                key={`${tab.label}-${tab.value}`}
+                value={tab.label}
+                sx={{ padding: 0 }}>
+                {tab.component}
+              </TabPanel>
+            ))}
+          </TabContext>
+        </div>
       </div>
     </div>
   );

@@ -33,7 +33,9 @@ export default function UpdatesTab({ handle }) {
         handleCloseDialog={() => setIsAddUpdateOpen(false)}
       />
       <div className="w-full flex justify-between items-center py-4 px-6 border-b">
-        <p className="body-normal">Updates ({updates.length})</p>
+        <p className="body-large font-medium text-primary-dark">
+          Updates ({updates.length})
+        </p>
         {projectConfig?.isAdmin && (
           <Button
             variant="outlined"

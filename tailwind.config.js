@@ -24,6 +24,7 @@ export const theme = {
       action: '#EE4444',
       danger: '#EE4444',
       grey: themeConstants.primary.grey,
+      darkgrey: themeConstants.primary.darkgrey,
     },
     screens: {
       ..._screens,
