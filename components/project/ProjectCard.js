@@ -23,7 +23,9 @@ function ProjectCard({ handle, name, organisations, description, status }) {
                 src={organisations[1].logoUrl}
               />
             </div>
-            <p className="body-2xlarge font-semibold">{name}</p>
+            <p className="body-xlarge font-semibold text-center capitalize line-clamp-1">
+              {name}
+            </p>
           </div>
           <div className="flex flex-col gap-2 w-full">
             {organisations.map((org) => (
