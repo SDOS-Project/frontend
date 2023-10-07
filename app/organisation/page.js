@@ -9,7 +9,7 @@ export default function Organisations() {
   console.log('organisations', organisations);
 
   return (
-    <main className="cards-grid-layout padding-layout-2 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-10 sm:gap-8">
+    <main className="cards-grid-layout padding-layout-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-8">
       <OrganisationCardsLayout
         organisations={organisations}
         isOrganisationsLoading={isOrganisationsLoading}
