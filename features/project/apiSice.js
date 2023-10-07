@@ -48,6 +48,7 @@ export const projectApiSlice = enhancedApiSlice.injectEndpoints({
         method: 'PATCH',
         body: project,
       }),
+      invalidatesTags: ['Projects'],
       async onQueryStarted({ handle, _ }, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
