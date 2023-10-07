@@ -1,27 +1,26 @@
-import { formatDate } from '@/utils/convertDate';
 import { Avatar } from '@mui/material';
+import { format } from 'date-fns';
 import Link from 'next/link';
-import React from 'react';
 
-function UpdateComponent({ user, content, createdAt }) {
+export default function UpdateComponent({ user, content, createdAt }) {
   return (
-    <div className="flex justify-between items-start gap-3 mb-4">
-      <Avatar className="h-8 w-8 body-xsmall">
+    <div className="flex gap-2">
+      <Avatar className="w-10 h-10 body-small">
         {user?.firstName[0] + user?.lastName[0] ?? ''}
       </Avatar>
-      <div className="flex flex-col w-full gap-1">
-        <Link href={`/user/${user?.handle}`}>
-          <p className="body-normal text-primary-dark">
-            {user?.firstName + ' ' + user?.lastName ?? ''}
+      <div className="flex flex-col">
+        <div className="flex items-baseline gap-2">
+          <Link href={`/user/${user?.handle}`}>
+            <p className="body-normal text-primary-dark">
+              {user?.firstName} {user?.lastName}
+            </p>
+          </Link>
+          <p className="body-xsmall text-primary-darkgrey">
+            {format(new Date(createdAt), 'h:mma  MMMM d, yyyy')}
           </p>
-        </Link>
-        <p className="body-xsmall">{content}</p>
-        <p className="body-xsmall text-primary-darkgrey">
-          {formatDate(createdAt)}
-        </p>
+        </div>
+        <p className="body-small">{content}</p>
       </div>
     </div>
   );
 }
-
-export default UpdateComponent;

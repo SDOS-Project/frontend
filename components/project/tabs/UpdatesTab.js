@@ -53,7 +53,9 @@ export default function UpdatesTab({ handle }) {
         ) : (
           updates.length > 0 &&
           updates?.map((update) => (
-            <UpdateComponent key={update.createdAt} {...update} />
+            <div key={update.createdAt} className="my-2">
+              <UpdateComponent key={update.createdAt} {...update} />
+            </div>
           ))
         )}
       </div>
