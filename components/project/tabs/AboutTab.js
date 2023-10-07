@@ -1,8 +1,6 @@
 import TeamMember from '@/components/common/TeamMember';
 import { useGetProjectQuery } from '@/features/project/apiSice';
-import { ProjectStatus } from '@/types/ProjectStatus';
-import { Edit } from '@mui/icons-material';
-import { Avatar, Chip, IconButton } from '@mui/material';
+import { Avatar } from '@mui/material';
 import Link from 'next/link';
 
 export default function AboutTab({ handle }) {
