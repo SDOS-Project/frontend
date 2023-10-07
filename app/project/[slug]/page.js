@@ -62,7 +62,7 @@ export default function Project({ params }) {
             <p className="body-xlarge text-primary-dark font-medium">
               {project.name}
             </p>
-            <Button className="bg-primary-main px-6 text-white hover:bg-primary-dark">
+            <Button variant="contained" className="bg-primary-main">
               Edit Project
             </Button>
           </div>
