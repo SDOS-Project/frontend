@@ -1,16 +1,14 @@
 'use client';
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Avatar, Box, Chip, Tab, Tooltip } from '@mui/material';
+import { Avatar, Box, Tab, Tooltip } from '@mui/material';
 import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import AboutTabUser from '@/components/user/tabs/AboutTabUser';
 import { UserRole } from '@/types/UserRole';
-import themeConstants from '@/theme/themeConstants';
 import Link from 'next/link';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-
 const ProjectsTab = dynamic(
   () => import('@/components/user/tabs/ProjectsTab'),
   {
