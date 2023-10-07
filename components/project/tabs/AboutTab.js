@@ -23,13 +23,15 @@ export default function AboutTab({ handle }) {
         <p className="body-large font-medium text-primary-dark">
           Organisations
         </p>
-        {project.organisations.map((org) => (
-          <Link href={`/organisation/${org?.handle}`}>
+        {project.organisations.map((organisation) => (
+          <Link
+            href={`/organisation/${organisation?.handle}`}
+            key={organisation.handle}>
             <div className="flex gap-2 items-center">
               <Avatar
-                src={org?.logoUrl}
+                src={organisation?.logoUrl}
                 className="h-8 w-8 sm:h-10 sm:w-10"></Avatar>
-              <p className="body-small">{org?.name}</p>
+              <p className="body-small">{organisation?.name}</p>
             </div>
           </Link>
         ))}
