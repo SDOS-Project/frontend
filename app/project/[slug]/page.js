@@ -1,11 +1,16 @@
 'use client';
 import AboutTab from '@/components/project/tabs/AboutTab';
-import { useGetProjectQuery } from '@/features/project/apiSice';
+import {
+  useGetProjectConfigQuery,
+  useGetProjectQuery,
+} from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Button, Tab } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import AddUpdate from '@/components/project/forms/AddUpdate';
+import EditProfile from '@/components/project/forms/EditProfile';
 const UpdatesTab = dynamic(
   () => import('@/components/project/tabs/UpdatesTab'),
   {
@@ -17,13 +22,22 @@ export default function Project({ params }) {
   const { slug } = params;
 
   const { data: project, isLoading } = useGetProjectQuery(slug);
+  const { data: projectConfig, isLoading: isProjectConfigLoading } =
+    useGetProjectConfigQuery(slug);
 
   const [tabValue, setTabValue] = useState('About');
+
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+
   console.log('project', project);
 
-  const handleChange = (_, newValue) => {
+  const handleEditProfile = useCallback(() => {
+    setIsEditProfileOpen(true);
+  }, []);
+
+  const handleChange = useCallback((_, newValue) => {
     setTabValue(newValue);
-  };
+  }, []);
 
   const tabs = useMemo(
     () => [
@@ -39,7 +53,7 @@ export default function Project({ params }) {
     [slug]
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || isProjectConfigLoading) return <div>Loading...</div>;
   return (
     <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md relative">
@@ -62,9 +76,14 @@ export default function Project({ params }) {
             <p className="body-xlarge text-primary-dark font-medium">
               {project.name}
             </p>
-            <Button variant="contained" className="bg-primary-main">
-              Edit Project
-            </Button>
+            {projectConfig?.isAdmin && (
+              <Button
+                variant="contained"
+                className="bg-primary-main"
+                onClick={() => handleEditProfile()}>
+                Edit Project
+              </Button>
+            )}
           </div>
           <TabContext value={tabValue}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -90,6 +109,13 @@ export default function Project({ params }) {
           </TabContext>
         </div>
       </div>
+      {projectConfig?.isAdmin && (
+        <EditProfile
+          handle={slug}
+          isDialogOpen={isEditProfileOpen}
+          handleCloseDialog={() => setIsEditProfileOpen(false)}
+        />
+      )}
     </div>
   );
 }

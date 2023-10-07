@@ -36,7 +36,10 @@ export default class ErrorBoundary extends Component {
           <div className="title font-medium mt-10">
             Oops, something went wrong!
           </div>
-          <Button variant="contained" onClick={refreshPage}>
+          <Button
+            variant="contained"
+            className="bg-primary-main"
+            onClick={refreshPage}>
             Reload Page
           </Button>
         </div>

@@ -27,11 +27,13 @@ export default function UpdatesTab({ handle }) {
 
   return (
     <>
-      <AddUpdate
-        handle={handle}
-        isDialogOpen={isAddUpdateOpen}
-        handleCloseDialog={() => setIsAddUpdateOpen(false)}
-      />
+      {projectConfig?.isAdmin && (
+        <AddUpdate
+          handle={handle}
+          isDialogOpen={isAddUpdateOpen}
+          handleCloseDialog={() => setIsAddUpdateOpen(false)}
+        />
+      )}
       <div className="w-full flex justify-between items-center py-4 px-6 border-b">
         <p className="body-large font-medium text-primary-dark">
           Updates ({updates.length})

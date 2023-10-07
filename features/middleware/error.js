@@ -10,6 +10,5 @@ export const rtkQueryErrorLogger = (api) => (next) => (action) => {
         'Something went wrong'
     );
   }
-
   return next(action);
 };
