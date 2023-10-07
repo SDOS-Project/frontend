@@ -23,7 +23,7 @@ function ProjectCard({ handle, name, organisations, description, status }) {
                 src={organisations[1].logoUrl}
               />
             </div>
-            <p className="body-xlarge font-medium text-center capitalize line-clamp-1">
+            <p className="body-large font-medium text-center capitalize line-clamp-1">
               {name}
             </p>
           </div>
@@ -34,14 +34,16 @@ function ProjectCard({ handle, name, organisations, description, status }) {
                 key={organisation.handle}>
                 {organisation.type.toLowerCase() ==
                 OrganisationType.ACADEMIC.toLowerCase() ? (
-                  <SchoolIcon className="body-large" />
+                  <SchoolIcon className="body-large" color="primary" />
                 ) : (
-                  <CorporateFareIcon className="body-large" />
+                  <CorporateFareIcon className="body-large" color="primary" />
                 )}
                 <p className="body-normal line-clamp-1">{organisation.name}</p>
               </div>
             ))}
-            <p className="body-xsmall line-clamp-3">{description}</p>
+            <p className="body-small line-clamp-3 text-primary-darkgrey">
+              {description}
+            </p>
           </div>
         </div>
       </div>
