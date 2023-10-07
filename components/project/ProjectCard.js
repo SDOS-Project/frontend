@@ -1,4 +1,4 @@
-import { Avatar, Chip } from '@mui/material';
+import { Avatar } from '@mui/material';
 import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
@@ -23,24 +23,25 @@ function ProjectCard({ handle, name, organisations, description, status }) {
                 src={organisations[1].logoUrl}
               />
             </div>
-            <p className="body-xlarge font-semibold text-center capitalize line-clamp-1">
+            <p className="body-xlarge font-medium text-center capitalize line-clamp-1">
               {name}
             </p>
           </div>
           <div className="flex flex-col gap-2 w-full">
-            {organisations.map((org) => (
-              <div className="flex items-center justify-start gap-2">
-                {org.type.toLowerCase() ==
+            {organisations.map((organisation) => (
+              <div
+                className="flex items-center justify-start gap-2"
+                key={organisation.handle}>
+                {organisation.type.toLowerCase() ==
                 OrganisationType.ACADEMIC.toLowerCase() ? (
-                  <SchoolIcon className="body-large " />
+                  <SchoolIcon className="body-large" />
                 ) : (
-                  <CorporateFareIcon className="body-large " />
+                  <CorporateFareIcon className="body-large" />
                 )}
-                <p className="body-normal line-clamp-1">{org.name}</p>
+                <p className="body-normal line-clamp-1">{organisation.name}</p>
               </div>
             ))}
-
-            <p className="body-xsmall line-clamp-3 ">{description}</p>
+            <p className="body-xsmall line-clamp-3">{description}</p>
           </div>
         </div>
       </div>
