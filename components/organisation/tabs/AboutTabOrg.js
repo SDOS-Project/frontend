@@ -8,26 +8,32 @@ export default function AboutTab({ handle }) {
   const { data: organisation } = useGetOrganisationQuery(handle);
   return (
     <>
-      <Link
-        href={`mailto:${organisation.email}`}
-        onClick={(e) => e.stopPropagation()}>
-        <div className="flex gap-2 items-center">
-          <Email className="body-normal" />
-          <p className="body-small">{organisation.email}</p>
-        </div>
-      </Link>
-      <div className="flex gap-2 items-center">
-        <RoomIcon className="body-normal" />
-        <p className="body-small">{organisation.address}</p>
+      <div className="w-full flex flex-col gap-2 border-b pb-4">
+        <p className="body-large font-medium text-primary-dark">Contact</p>
+        <Link href={`mailto:${organisation?.email}`}>
+          <div className="flex items-center gap-2">
+            <Email className="text-primary-main" />
+            <p className="body-small">{organisation?.email}</p>
+          </div>
+        </Link>
       </div>
-      <Link href={organisation.ipPolicy} target="_blank">
-        <div className="flex gap-2 items-center">
-          <LinkIcon className="body-normal" />
-          <p className="body-small link line-clamp-1">
-            {organisation.ipPolicy}
-          </p>
+      <div className="w-full flex flex-col gap-2 border-b pb-4">
+        <p className="body-large font-medium text-primary-dark">Address</p>
+        <div className="flex items-center gap-2">
+          <RoomIcon className="text-primary-main" />
+          <p className="body-small">{organisation.address}</p>
         </div>
-      </Link>
+      </div>
+
+      <div className="w-full flex flex-col gap-2 border-b pb-4">
+        <p className="body-large font-medium text-primary-dark">IP Policy</p>
+        <Link href={organisation.ipPolicy} target="_blank">
+          <div className="flex items-center gap-2">
+            <LinkIcon className="text-primary-main" />
+            <p className="body-small">{organisation.ipPolicy}</p>
+          </div>
+        </Link>
+      </div>
     </>
   );
 }
