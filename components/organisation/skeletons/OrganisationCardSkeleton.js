@@ -17,11 +17,11 @@ export default function OrganisationCardSkeleton() {
         </div>
         <div className="flex flex-col gap-2 py-4 px-6">
           <div className="flex gap-2 items-center">
-            <Email className="body-large" />
+            <Email className="body-large " />
             <Skeleton className="w-full" />
           </div>
           <div className="flex gap-2 items-center">
-            <RoomIcon className="body-large" />
+            <RoomIcon className="body-large " />
             <Skeleton className="w-full" />
           </div>
         </div>

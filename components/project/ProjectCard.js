@@ -32,9 +32,9 @@ function ProjectCard({ handle, name, organisations, description, status }) {
               <div className="flex items-center justify-start gap-2">
                 {org.type.toLowerCase() ==
                 OrganisationType.ACADEMIC.toLowerCase() ? (
-                  <SchoolIcon className="body-large" />
+                  <SchoolIcon className="body-large " />
                 ) : (
-                  <CorporateFareIcon className="body-large" />
+                  <CorporateFareIcon className="body-large " />
                 )}
                 <p className="body-normal">{org.name}</p>
               </div>

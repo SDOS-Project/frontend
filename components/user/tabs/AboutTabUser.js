@@ -13,15 +13,6 @@ function AboutTabUser({ handle }) {
   return (
     <>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large font-medium text-primary-dark">Organisation</p>
-        <Link href={`/organisation/${user?.organisation?.handle}`}>
-          <div className="flex gap-2 items-center">
-            <Avatar src={user?.organisation?.logoUrl}></Avatar>
-            <p className="body-small">{user?.organisation?.name}</p>
-          </div>
-        </Link>
-      </div>
-      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large font-medium text-primary-dark">
           Areas Of Interest
         </p>

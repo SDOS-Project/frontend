@@ -33,11 +33,11 @@ function OrganisationCard({ address, email, handle, logoUrl, name, type }) {
           </div>
           <div className="flex flex-col gap-2 py-4 px-6">
             <div className="flex gap-2 items-center">
-              <Email className="body-large" />
+              <Email className="body-large " />
               <p className="body-normal">{email}</p>
             </div>
             <div className="flex gap-2 items-center">
-              <RoomIcon className="body-large" />
+              <RoomIcon className="body-large " />
               <p className="body-normal">{address}</p>
             </div>
           </div>
