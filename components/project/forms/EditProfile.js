@@ -1,26 +1,38 @@
 import DialogFooter from '@/components/common/DialogFooter';
-import { selectUser } from '@/features/auth/authSlice';
-import { useAddUpdateMutation } from '@/features/project/apiSice';
-import { addUpdateValidationSchema } from '@/schemas/project/update/schema';
+import {
+  useAddUpdateMutation,
+  useGetProjectQuery,
+} from '@/features/project/apiSice';
+import { editProjectValidationSchema } from '@/schemas/project/edit/schema';
+import { ProjectStatus } from '@/types/ProjectStatus';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 
 export default function EditProfile({
   isDialogOpen,
   handleCloseDialog,
   handle,
 }) {
-  const user = useSelector(selectUser);
-
+  const { data: project } = useGetProjectQuery(handle);
   const defaultValues = useMemo(() => {
     return {
-      userHandle: user?.handle,
-      content: '',
+      name: project?.name,
+      status: project?.status,
+      description: project?.description,
     };
-  }, [user?.handle]);
+  }, [project.name, project.status, project.description]);
 
   const {
     control,
@@ -29,7 +41,7 @@ export default function EditProfile({
     formState: { errors },
   } = useForm({
     defaultValues,
-    resolver: yupResolver(addUpdateValidationSchema),
+    resolver: yupResolver(editProjectValidationSchema),
   });
 
   const onDiscardClick = useCallback(() => {
@@ -60,12 +72,54 @@ export default function EditProfile({
         className: 'dialog-layout-md',
       }}>
       <DialogTitle className="font-heading text-primary-main text-xl">
-        Add Update
+        Edit Profile
       </DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent className="flex flex-col gap-y-5">
           <Controller
-            name="content"
+            name="name"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                size="small"
+                label="Name"
+                variant="outlined"
+                className="w-full"
+                error={!!errors.name}
+                helperText={errors.name ? errors.name?.message : ''}
+              />
+            )}
+          />
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => (
+              <FormControl className="w-full mb-2 lg:mb-0" size="small">
+                <InputLabel className={errors?.status && 'text-error-main'}>
+                  Status
+                </InputLabel>
+                <Select
+                  {...field}
+                  label="status"
+                  error={!!errors.status}
+                  className="w-full">
+                  {Object.keys(ProjectStatus)?.map((status) => {
+                    return (
+                      <MenuItem key={status} value={status}>
+                        {ProjectStatus[status]}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <FormHelperText className="text-error-main">
+                  {errors?.status && errors?.status?.message}
+                </FormHelperText>
+              </FormControl>
+            )}
+          />
+          <Controller
+            name="description"
             control={control}
             render={({ field }) => (
               <TextField
@@ -73,11 +127,13 @@ export default function EditProfile({
                 size="small"
                 multiline
                 rows={5}
-                label="Update"
+                label="Description"
                 variant="outlined"
                 className="w-full"
-                error={!!errors.content}
-                helperText={errors.content ? errors.content?.message : ''}
+                error={!!errors.description}
+                helperText={
+                  errors.description ? errors.description?.message : ''
+                }
               />
             )}
           />
