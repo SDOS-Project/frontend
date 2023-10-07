@@ -42,6 +42,31 @@ export const projectApiSlice = enhancedApiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Projects'],
     }),
+    updateProject: builder.mutation({
+      query: ({ handle, project }) => ({
+        url: `${PROJECT_BASE_URL}/${handle}`,
+        method: 'PATCH',
+        body: project,
+      }),
+      async onQueryStarted({ handle, _ }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            projectApiSlice.util.updateQueryData(
+              'getProject',
+              handle,
+              (draft) => {
+                return produce(draft, (draftState) => {
+                  Object.assign(draftState, data);
+                });
+              }
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
     addUpdate: builder.mutation({
       query: ({ handle, update }) => ({
         url: `${PROJECT_BASE_URL}/${handle}/updates`,
@@ -76,5 +101,6 @@ export const {
   useGetUpdatesQuery,
   useGetProjectConfigQuery,
   useCreateProjectMutation,
+  useUpdateProjectMutation,
   useAddUpdateMutation,
 } = projectApiSlice;
