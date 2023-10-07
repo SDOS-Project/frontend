@@ -4,6 +4,7 @@ const themeConstants = {
     light: '#806db3',
     main: '#4c3595',
     grey: '#FAF9FB',
+    darkgrey: '#5D657B',
   },
   error: {
     dark: '#d32f2f',

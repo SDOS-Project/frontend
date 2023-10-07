@@ -5,20 +5,20 @@ import React from 'react';
 
 function UpdateComponent({ user, content, createdAt }) {
   return (
-    <div className="flex justify-between items-start gap-3">
-      <Avatar className="w-10 h-10" />
-      <div className="flex flex-col w-full">
-        <div className="flex justify-between gap-3 items-center mb-2">
-          <Link href={`/user/${user?.handle}`}>
-            <p className="body-small text-primary-light ">
-              {user?.firstName} {user?.lastName}
-            </p>
-          </Link>
-          <p className="body-small text-primary-light">
-            {formatDate(createdAt)}
+    <div className="flex justify-between items-start gap-3 mb-4">
+      <Avatar className="h-8 w-8 body-xsmall">
+        {user?.firstName[0] + user?.lastName[0]}
+      </Avatar>
+      <div className="flex flex-col w-full gap-1">
+        <Link href={`/user/${user.handle}`}>
+          <p className="body-normal text-primary-dark ">
+            {user?.firstName} {user?.lastName}
           </p>
-        </div>
-        <p className="body-small">{content}</p>
+        </Link>
+        <p className="body-xsmall">{content}</p>
+        <p className="body-xsmall text-primary-darkgrey">
+          {formatDate(createdAt)}
+        </p>
       </div>
     </div>
   );

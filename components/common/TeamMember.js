@@ -8,7 +8,9 @@ export default function TeamMember({ firstName, lastName, email, handle }) {
       <Link href={`/user/${handle}`}>
         <div>
           <div className="flex items-center gap-2">
-            <Avatar />
+            <Avatar className="w-8 h-8 sm:h-10 sm:w-10  body-small sm:body-normal">
+              {firstName[0] + lastName[0]}
+            </Avatar>
             <p>
               {firstName} {lastName}
             </p>

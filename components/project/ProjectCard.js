@@ -9,7 +9,7 @@ import { OrganisationType } from '@/types/OrganisationType';
 function ProjectCard({ handle, name, organisations, description, status }) {
   return (
     <Link href={`/project/${handle}`}>
-      <div className="w-full h-full shadow-md rounded-sm cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
+      <div className="w-full h-full shadow-md cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
         <div className="z-50 absolute bg-primary-main text-white px-2 py-1 rounded-br-lg body-xsmall">
           {ProjectStatus[status]}
         </div>
@@ -36,7 +36,7 @@ function ProjectCard({ handle, name, organisations, description, status }) {
                 ) : (
                   <CorporateFareIcon className="body-large " />
                 )}
-                <p className="body-normal">{org.name}</p>
+                <p className="body-normal line-clamp-1">{org.name}</p>
               </div>
             ))}
 

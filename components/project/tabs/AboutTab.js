@@ -2,32 +2,37 @@ import TeamMember from '@/components/common/TeamMember';
 import { useGetProjectQuery } from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { Edit } from '@mui/icons-material';
-import { Chip, IconButton } from '@mui/material';
+import { Avatar, Chip, IconButton } from '@mui/material';
+import Link from 'next/link';
 
 export default function AboutTab({ handle }) {
   const { data: project } = useGetProjectQuery(handle);
   return (
     <>
-      <div className="w-full flex justify-between items-start py-4 px-6 border-b">
-        <div className="flex flex-col gap-2">
-          <p className="body-large">Status</p>
-          <Chip label={ProjectStatus[project.status]} color="primary" />
-        </div>
-        <div className="flex justify-end gap-2 items-center text-primary-light cursor-pointer">
-          <IconButton>
-            <Edit />
-          </IconButton>
-        </div>
+      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b overflow-clip">
+        <p className="body-large font-medium text-primary-dark">Description</p>
+        <p className="body-small">{project.description}</p>
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large">Team</p>
+        <p className="body-large font-medium text-primary-dark">Team</p>
         {project.users.map((user) => (
           <TeamMember key={user.handle} {...user} />
         ))}
       </div>
-      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b overflow-clip">
-        <p className="body-large">Description</p>
-        <p className="body-small">{project.description}</p>
+      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
+        <p className="body-large font-medium text-primary-dark">
+          Organisations
+        </p>
+        {project.organisations.map((org) => (
+          <Link href={`/organisation/${org?.handle}`}>
+            <div className="flex gap-2 items-center">
+              <Avatar
+                src={org?.logoUrl}
+                className="h-8 w-8 sm:h-10 sm:w-10"></Avatar>
+              <p className="body-small">{org?.name}</p>
+            </div>
+          </Link>
+        ))}
       </div>
     </>
   );

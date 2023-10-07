@@ -25,7 +25,7 @@ function OrganisationCard({ address, email, handle, logoUrl, name, type }) {
                 {name[0]}
               </Avatar>
               <Tooltip title={name}>
-                <p className="body-xlarge text-center capitalize font-semibold line-clamp-1">
+                <p className="body-large text-left capitalize font-semibold line-clamp-1 sm:w-3/4 mx-auto">
                   {name}
                 </p>
               </Tooltip>

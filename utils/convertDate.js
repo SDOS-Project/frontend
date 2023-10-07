@@ -1,22 +1,5 @@
-// Function written by gpt-4
-
-function ordinalSuffix(i) {
-  var j = i % 10,
-    k = i % 100;
-  if (j == 1 && k != 11) {
-    return i + 'st';
-  }
-  if (j == 2 && k != 12) {
-    return i + 'nd';
-  }
-  if (j == 3 && k != 13) {
-    return i + 'rd';
-  }
-  return i + 'th';
-}
-
-export function formatDate(inputDate) {
-  const months = [
+export function formatDate(dateString) {
+  const monthNames = [
     'January',
     'February',
     'March',
@@ -31,10 +14,39 @@ export function formatDate(inputDate) {
     'December',
   ];
 
-  const date = new Date(inputDate);
-  const day = ordinalSuffix(date.getUTCDate());
-  const month = months[date.getUTCMonth()];
+  const date = new Date(dateString);
+
+  // Format hours and minutes
+  let hours = date.getUTCHours();
+  const minutes = ('0' + date.getUTCMinutes()).slice(-2);
+  let ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+
+  // Format day
+  const day = date.getUTCDate();
+  let daySuffix;
+  if (day > 3 && day < 21) daySuffix = 'th';
+  switch (day % 10) {
+    case 1:
+      daySuffix = 'st';
+      break;
+    case 2:
+      daySuffix = 'nd';
+      break;
+    case 3:
+      daySuffix = 'rd';
+      break;
+    default:
+      daySuffix = 'th';
+      break;
+  }
+
+  // Format month
+  const monthName = monthNames[date.getUTCMonth()];
+
+  // Format year
   const year = date.getUTCFullYear();
 
-  return `${day} ${month} ${year}`;
+  return `${hours}:${minutes}${ampm} . ${day}${daySuffix} ${monthName} ${year}`;
 }
