@@ -1,7 +1,7 @@
 import DialogFooter from '@/components/common/DialogFooter';
 import {
-  useAddUpdateMutation,
   useGetProjectQuery,
+  useUpdateProjectMutation,
 } from '@/features/project/apiSice';
 import { editProjectValidationSchema } from '@/schemas/project/edit/schema';
 import { ProjectStatus } from '@/types/ProjectStatus';
@@ -49,19 +49,20 @@ export default function EditProfile({
     reset(defaultValues);
   }, [defaultValues, reset, handleCloseDialog]);
 
-  const [addUpdate, { isLoading: isAddUpdateLoading }] = useAddUpdateMutation();
+  const [updateProject, { isLoading: isUpdateProjectLoading }] =
+    useUpdateProjectMutation();
 
   const onSubmit = useCallback(
     async (data) => {
       console.log(data);
       try {
-        await addUpdate({ handle, update: data }).unwrap();
+        await updateProject({ handle, project: data }).unwrap();
         onDiscardClick();
       } catch (error) {
         reset(defaultValues);
       }
     },
-    [addUpdate, handle, reset, defaultValues, onDiscardClick]
+    [updateProject, handle, reset, defaultValues, onDiscardClick]
   );
 
   return (
@@ -142,7 +143,7 @@ export default function EditProfile({
           showSaveIcon={false}
           saveLabel="Add Update"
           onDiscardClick={onDiscardClick}
-          isLoading={isAddUpdateLoading}
+          isLoading={isUpdateProjectLoading}
         />
       </form>
     </Dialog>
