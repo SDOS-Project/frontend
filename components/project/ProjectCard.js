@@ -9,39 +9,37 @@ import { OrganisationType } from '@/types/OrganisationType';
 function ProjectCard({ handle, name, organisations, description, status }) {
   return (
     <Link href={`/project/${handle}`}>
-      <div className="w-full h-full shadow-md rounded-sm cursor-pointer bg-paper hover:shadow-lg duration-500">
-        <div className="w-full flex justify-between items-center px-5 py-4 border-b">
-          <p className="body-normal">{name}</p>
-          <div className="flex justify-end">
-            <Avatar className="w-12 h-12" src={organisations[0].logoUrl} />
-            <Avatar
-              className="w-12 h-12 -ml-3"
-              src={organisations[1].logoUrl}
-            />
-          </div>
+      <div className="w-full h-full shadow-md rounded-sm cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
+        <div className="z-50 absolute bg-primary-main text-white px-2 py-1 rounded-br-lg body-xsmall">
+          {ProjectStatus[status]}
         </div>
-        <div className="flex flex-col gap-2 w-full px-5 py-4">
-          {organisations.map((org) => (
-            <Link href={`/organisation/${org.handle}`} key={org.handle}>
+        <div className="absolute top-0 left-0 bg-gg h-20 w-full rounded-t-lg"></div>
+        <div className="z-50 py-6 px-4">
+          <div className="w-full flex flex-col justify-center items-center px-5 py-4 gap-3">
+            <div className="flex justify-center">
+              <Avatar className="w-16 h-16" src={organisations[0].logoUrl} />
+              <Avatar
+                className="w-16 h-16 -ml-3"
+                src={organisations[1].logoUrl}
+              />
+            </div>
+            <p className="body-2xlarge font-semibold">{name}</p>
+          </div>
+          <div className="flex flex-col gap-2 w-full">
+            {organisations.map((org) => (
               <div className="flex items-center justify-start gap-2">
                 {org.type.toLowerCase() ==
                 OrganisationType.ACADEMIC.toLowerCase() ? (
-                  <SchoolIcon className="body-normal" />
+                  <SchoolIcon className="body-large" />
                 ) : (
-                  <CorporateFareIcon className="body-normal" />
+                  <CorporateFareIcon className="body-large" />
                 )}
-                <p className="body-xsmall">{org.name}</p>
+                <p className="body-normal">{org.name}</p>
               </div>
-            </Link>
-          ))}
-          <Chip
-            color="primary"
-            label={ProjectStatus[status]}
-            className="w-fit"
-          />
-          <p className="body-xsmall line-clamp-3 text-primary-light">
-            {description}
-          </p>
+            ))}
+
+            <p className="body-xsmall line-clamp-3 ">{description}</p>
+          </div>
         </div>
       </div>
     </Link>
