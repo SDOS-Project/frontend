@@ -48,7 +48,7 @@ export default function User({ params }) {
   return (
     <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md relative">
-        <div className="absolute top-0 left-0 bg-gg h-36 w-full rounded-t-lg z-0"></div>
+        <div className="absolute top-0 left-0 bg-gg h-24 sm:h-36 w-full rounded-t-lg z-0"></div>
         <Tooltip title={UserRole[user?.role]}>
           <div className="z-50 absolute right-6 top-6 bg-primary-main text-white p-3 rounded-full body-xsmall">
             {UserRole[user?.role] == UserRole.FACULTY ? (
@@ -58,8 +58,8 @@ export default function User({ params }) {
             )}
           </div>
         </Tooltip>
-        <div className="w-full pt-24 z-50">
-          <Avatar className="w-24 h-24 sm:w-24 sm:h-24 body-2xlarge mx-6">
+        <div className="w-full pt-14 sm:pt-24 z-50">
+          <Avatar className="w-20 h-20 sm:w-24 sm:h-24 body-2xlarge mx-6">
             {user?.firstName[0] + user?.lastName[0]}
           </Avatar>
           <div className="flex flex-col justify-start gap-2 items-start mx-6 mt-4">
@@ -68,7 +68,9 @@ export default function User({ params }) {
             </p>
             <Link href={`/organisation/${user?.organisation?.handle}`}>
               <div className="flex gap-2 items-center">
-                <Avatar src={user?.organisation?.logoUrl}></Avatar>
+                <Avatar
+                  src={user?.organisation?.logoUrl}
+                  className="h-8 w-8 sm:h-12 sm:w-12"></Avatar>
                 <p className="body-small">{user?.organisation?.name}</p>
               </div>
             </Link>
