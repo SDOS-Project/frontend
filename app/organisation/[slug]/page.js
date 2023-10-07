@@ -2,14 +2,12 @@
 import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Tab, Tooltip } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
 import dynamic from 'next/dynamic';
 import { OrganisationType } from '@/types/OrganisationType';
-import Link from 'next/link';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-
 const TeamTabOrg = dynamic(
   () => import('@/components/organisation/tabs/TeamTabOrg'),
   {
@@ -29,9 +27,9 @@ export default function Organisation({ params }) {
   const { data: organisation, isLoading } = useGetOrganisationQuery(slug);
   const [tabValue, setTabValue] = useState('About');
 
-  const handleChange = (_, newValue) => {
+  const handleChange = useCallback((_, newValue) => {
     setTabValue(newValue);
-  };
+  }, []);
 
   const tabs = useMemo(
     () => [

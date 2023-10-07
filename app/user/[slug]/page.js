@@ -2,7 +2,7 @@
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Tab, Tooltip } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import AboutTabUser from '@/components/user/tabs/AboutTabUser';
 import { UserRole } from '@/types/UserRole';
@@ -23,9 +23,9 @@ export default function User({ params }) {
 
   const [tabValue, setTabValue] = useState('About');
 
-  const handleChange = (_, newValue) => {
+  const handleChange = useCallback((_, newValue) => {
     setTabValue(newValue);
-  };
+  }, []);
 
   const tabs = useMemo(
     () => [
