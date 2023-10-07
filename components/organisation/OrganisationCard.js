@@ -5,8 +5,23 @@ import SchoolIcon from '@mui/icons-material/School';
 import { OrganisationType } from '@/types/OrganisationType';
 import Link from 'next/link';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import { useMemo } from 'react';
 
 function OrganisationCard({ address, email, handle, logoUrl, name, type }) {
+  const iconWithInfoList = useMemo(
+    () => [
+      {
+        icon: <Email className="body-large" color="primary" />,
+        info: email,
+      },
+      {
+        icon: <RoomIcon className="body-large" color="primary" />,
+        info: address,
+      },
+    ],
+    [email, address]
+  );
+
   return (
     <Link href={`/organisation/${handle}`}>
       <div className="w-full bg-white shadow-md cursor-pointer hover:shadow-lg overflow-hidden relative rounded-lg">
@@ -25,21 +40,19 @@ function OrganisationCard({ address, email, handle, logoUrl, name, type }) {
                 {name[0]}
               </Avatar>
               <Tooltip title={name}>
-                <p className="body-large text-left capitalize font-semibold line-clamp-1 sm:w-3/4 mx-auto">
+                <p className="body-large text-center capitalize font-medium line-clamp-1">
                   {name}
                 </p>
               </Tooltip>
             </div>
           </div>
           <div className="flex flex-col gap-2 py-4 px-6">
-            <div className="flex gap-2 items-center">
-              <Email className="body-large " />
-              <p className="body-normal">{email}</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <RoomIcon className="body-large " />
-              <p className="body-normal">{address}</p>
-            </div>
+            {iconWithInfoList.map(({ icon, info }) => (
+              <div className="flex gap-2 items-center" key={info}>
+                {icon}
+                <p className="body-normal">{info}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
