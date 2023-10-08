@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/firebase-config';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Avatar, Box, CircularProgress, Typography } from '@mui/material';
 
@@ -19,17 +19,17 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-export default function ImageUpload() {
+export default function ImageUpload({ setValue }) {
   const [downloadURL, setDownloadURL] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [progressUpload, setProgressUpload] = useState(0);
 
   const handleUploadFile = (imageFile) => {
-    if (imageFile.size > 1000000) {
-      toast.error('File size must be less than 1MB');
-      return;
-    }
     if (imageFile) {
+      if (imageFile.size > 1000000) {
+        toast.error('File size must be less than 1MB');
+        return;
+      }
       console.log(imageFile);
       setIsUploading(true);
       const name = imageFile.name;
@@ -57,6 +57,7 @@ export default function ImageUpload() {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
             setDownloadURL(url);
+            setValue('logoUrl', url);
           });
           setIsUploading(false);
         }
@@ -65,10 +66,6 @@ export default function ImageUpload() {
       console.log('No file selected');
     }
   };
-
-  useEffect(() => {
-    console.log(progressUpload);
-  }, [progressUpload]);
 
   return (
     <>
@@ -105,7 +102,7 @@ export default function ImageUpload() {
         variant="contained"
         disabled={isUploading}
         startIcon={<CloudUploadIcon />}>
-        Upload file
+        Upload Profile Picture
         <VisuallyHiddenInput
           type="file"
           accept=".jpeg, .jpg, .png, .svg"

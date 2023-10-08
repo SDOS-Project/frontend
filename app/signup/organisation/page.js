@@ -81,6 +81,7 @@ export default function Signup() {
     control,
     formState: { errors },
     handleSubmit,
+    setValue,
     reset,
   } = useForm({
     resolver: yupResolver(organisationSignupValidationSchema),
@@ -165,14 +166,7 @@ export default function Signup() {
           </FormControl>
         )}
       />
-      <ImageUpload />
-      {/* <Button
-        variant="contained"
-        className="bg-primary-main"
-        startIcon={<CloudUploadIcon />}>
-        Upload file
-        <VisuallyHiddenInput type="file" accept=".jpeg, .jpg, .png, .svg" />
-      </Button> */}
+      <ImageUpload name={'logoUrl'} setValue={setValue} />
       <LoadingButton
         type="submit"
         variant="contained"
