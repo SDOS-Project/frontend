@@ -21,6 +21,7 @@ import { OrganisationType } from '@/types/OrganisationType';
 import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { TabSwitch } from '@/components/signup/TabSwitch';
+import ImageUpload from '@/components/common/ImageUpload';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -164,6 +165,14 @@ export default function Signup() {
           </FormControl>
         )}
       />
+      <ImageUpload />
+      {/* <Button
+        variant="contained"
+        className="bg-primary-main"
+        startIcon={<CloudUploadIcon />}>
+        Upload file
+        <VisuallyHiddenInput type="file" accept=".jpeg, .jpg, .png, .svg" />
+      </Button> */}
       <LoadingButton
         type="submit"
         variant="contained"
