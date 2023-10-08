@@ -69,7 +69,7 @@ export default function Organisation({ params }) {
           <Avatar
             className="w-20 h-20 sm:w-24 sm:h-24 body-2xlarge mx-6"
             src={organisation?.logoUrl}>
-            {organisation?.name}
+            {organisation?.name?.[0]}
           </Avatar>
           <div className="flex flex-col justify-start gap-2 items-start mx-6 mt-4">
             <p className="body-xlarge text-primary-dark font-medium">

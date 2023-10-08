@@ -18,7 +18,7 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-export default function ImageUpload({ setValue }) {
+export default function ImageUpload({ userType, setValue }) {
   const [downloadURL, setDownloadURL] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [progressUpload, setProgressUpload] = useState(0);
@@ -31,7 +31,7 @@ export default function ImageUpload({ setValue }) {
       }
       setIsUploading(true);
       const name = imageFile.name;
-      const storageRef = ref(storage, `image/${name}`);
+      const storageRef = ref(storage, `images/${userType}/${name}`);
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
       uploadTask.on(
         'state_changed',

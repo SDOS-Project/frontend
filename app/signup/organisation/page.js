@@ -166,7 +166,7 @@ export default function Signup() {
           </FormControl>
         )}
       />
-      <ImageUpload name={'logoUrl'} setValue={setValue} />
+      <ImageUpload userType={'organisation'} setValue={setValue} />
       <LoadingButton
         type="submit"
         variant="contained"
