@@ -5,7 +5,7 @@ import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 
 export default function ProjectCardSkeleton() {
   return (
-    <div className="w-full h-full shadow-md rounded-sm cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
+    <div className="w-full h-full shadow-md cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
       <div className="z-50 absolute bg-primary-main text-white px-2 py-1 rounded-br-lg body-xsmall w-1/4 h-6"></div>
       <div className="absolute top-0 left-0 bg-gg h-20 w-full rounded-t-lg"></div>
       <div className="z-50 py-6 px-4">
@@ -17,8 +17,10 @@ export default function ProjectCardSkeleton() {
           <Skeleton className="w-1/3" />
         </div>
         <div className="flex flex-col gap-2 w-full">
-          {[1, 2].map((org) => (
-            <div className="flex items-center justify-start gap-2">
+          {[1, 2].map((org, id) => (
+            <div
+              className="flex items-center justify-start gap-2"
+              key={`${org}-${id}`}>
               {org === 1 ? (
                 <SchoolIcon className="body-large" />
               ) : (
