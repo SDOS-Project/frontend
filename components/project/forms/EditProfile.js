@@ -17,7 +17,7 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 export default function EditProfile({
