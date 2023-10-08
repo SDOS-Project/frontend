@@ -28,7 +28,7 @@ export default function Layout({ children }) {
     };
   }, []);
 
-  if (isPageTransitioning) return; // do something here to show a loading indicator;
+  if (isPageTransitioning) return <div>Transitioning...</div>;
 
   return (
     <div className="bg-grey min-h-screen">

@@ -20,13 +20,10 @@ import { organisationSignupValidationSchema } from '@/schemas/organisation-signu
 import { OrganisationType } from '@/types/OrganisationType';
 import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
-import { useRouter } from 'next/navigation';
 import { TabSwitch } from '@/components/signup/TabSwitch';
-import Link from 'next/link';
 
 export default function Signup() {
   const dispatch = useDispatch();
-  const router = useRouter();
   const [signup, { isLoading: isOrganisationSignupLoading }] =
     useOrganisationSignupMutation();
 
