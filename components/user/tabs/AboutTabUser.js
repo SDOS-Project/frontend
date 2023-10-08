@@ -6,7 +6,7 @@ import React from 'react';
 
 function AboutTabUser({ handle }) {
   const { data: user, isLoading } = useGetUserQuery(handle);
-  console.log('user', user);
+
   if (isLoading) {
     return <>Loading...</>;
   }

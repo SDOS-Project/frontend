@@ -29,7 +29,6 @@ export default function ImageUpload({ setValue }) {
         toast.error('File size must be less than 1MB');
         return;
       }
-      console.log(imageFile);
       setIsUploading(true);
       const name = imageFile.name;
       const storageRef = ref(storage, `image/${name}`);
