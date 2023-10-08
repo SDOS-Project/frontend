@@ -1,6 +1,6 @@
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { Email } from '@mui/icons-material';
-import { Avatar, Chip } from '@mui/material';
+import { Chip } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 
