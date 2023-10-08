@@ -37,7 +37,6 @@ export default function AddUpdate({ isDialogOpen, handleCloseDialog, handle }) {
 
   const onSubmit = useCallback(
     async (data) => {
-      console.log(data);
       try {
         await addUpdate({ handle, update: data }).unwrap();
         onDiscardClick();

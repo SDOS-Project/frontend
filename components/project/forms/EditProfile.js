@@ -54,7 +54,14 @@ export default function EditProfile({
 
   const onSubmit = useCallback(
     async (data) => {
-      console.log(data);
+      if (
+        data.name === project.name &&
+        data.status === project.status &&
+        data.description === project.description
+      ) {
+        onDiscardClick();
+        return;
+      }
       try {
         await updateProject({ handle, project: data }).unwrap();
         onDiscardClick();
@@ -62,7 +69,16 @@ export default function EditProfile({
         reset(defaultValues);
       }
     },
-    [updateProject, handle, reset, defaultValues, onDiscardClick]
+    [
+      updateProject,
+      handle,
+      reset,
+      defaultValues,
+      onDiscardClick,
+      project.name,
+      project.status,
+      project.description,
+    ]
   );
 
   return (
@@ -140,8 +156,7 @@ export default function EditProfile({
           />
         </DialogContent>
         <DialogFooter
-          showSaveIcon={false}
-          saveLabel="Add Update"
+          saveLabel="Save"
           onDiscardClick={onDiscardClick}
           isLoading={isUpdateProjectLoading}
         />
