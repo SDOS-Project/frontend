@@ -17,6 +17,7 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+import { is } from 'date-fns/locale';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -25,7 +26,7 @@ export default function EditProfile({
   handleCloseDialog,
   handle,
 }) {
-  const { data: project } = useGetProjectQuery(handle);
+  const { data: project, refetch } = useGetProjectQuery(handle);
   const defaultValues = useMemo(() => {
     return {
       name: project?.name,
@@ -82,13 +83,8 @@ export default function EditProfile({
   );
 
   useEffect(() => {
-    console.log('CALLED');
-    reset({
-      name: project.name,
-      status: project.status,
-      description: project.description,
-    });
-  }, [reset, defaultValues, project.name, project.status, project.description]);
+    reset(defaultValues);
+  }, [reset, defaultValues, isDialogOpen]);
 
   return (
     <Dialog

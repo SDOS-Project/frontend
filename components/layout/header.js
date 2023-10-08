@@ -68,7 +68,6 @@ export default function Header() {
 
   const hrefCallback = useCallback(() => {
     const href = user?.role ? 'user' : 'organisation';
-    console.log(href);
     return `/${href}/${user.handle}`;
   }, [user?.role, user?.handle]);
 

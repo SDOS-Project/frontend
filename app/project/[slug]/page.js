@@ -9,8 +9,12 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Button, Tab } from '@mui/material';
 import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import AddUpdate from '@/components/project/forms/AddUpdate';
-import EditProfile from '@/components/project/forms/EditProfile';
+const EditProfile = dynamic(
+  () => import('@/components/project/forms/EditProfile'),
+  {
+    ssr: false,
+  }
+);
 const UpdatesTab = dynamic(
   () => import('@/components/project/tabs/UpdatesTab'),
   {
