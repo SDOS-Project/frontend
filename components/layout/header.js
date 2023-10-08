@@ -76,35 +76,34 @@ export default function Header() {
       <Box
         onClick={handleDrawerToggle}
         className="h-full bg-white flex flex-col">
-        {user.name ||
-          (user.firstName && (
-            <>
-              <Box className="mt-4 flex flex-col gap-5 justify-center items-center">
-                <Avatar className="w-24 h-24">
+        {(user?.name || user?.firstName) && (
+          <>
+            <Box className="mt-4 flex flex-col gap-5 justify-center items-center">
+              <Avatar className="w-24 h-24" src={user?.logoUrl}>
+                {user?.name ? (
+                  <>{user?.name[0]}</>
+                ) : (
+                  <>
+                    {user?.firstName[0]}
+                    {user?.lastName[0]}
+                  </>
+                )}
+              </Avatar>
+              <Link href={hrefCallback()} legacyBehavior>
+                <Typography className="text-primary-main cursor-pointer body-large">
                   {user?.name ? (
-                    <>{user?.name[0]}</>
+                    <>{user?.name}</>
                   ) : (
                     <>
-                      {user?.firstName[0]}
-                      {user?.lastName[0]}
+                      {user?.firstName} {user?.lastName}
                     </>
                   )}
-                </Avatar>
-                <Link href={hrefCallback()} legacyBehavior>
-                  <Typography className="text-primary-main cursor-pointer body-large">
-                    {user?.name ? (
-                      <>{user?.name}</>
-                    ) : (
-                      <>
-                        {user?.firstName} {user?.lastName}
-                      </>
-                    )}
-                  </Typography>
-                </Link>
-              </Box>
-              <Divider className="m-0 p-0 mt-6" />
-            </>
-          ))}
+                </Typography>
+              </Link>
+            </Box>
+            <Divider className="m-0 p-0 mt-6" />
+          </>
+        )}
         <List>
           {user?.role && (
             <ListItem disablePadding>
@@ -150,6 +149,7 @@ export default function Header() {
       user?.lastName,
       user?.name,
       user?.role,
+      user?.logoUrl,
     ]
   );
 
@@ -195,7 +195,7 @@ export default function Header() {
               </Link>
             )}
             <IconButton className="p-0" onClick={handleOpenUserMenu}>
-              <Avatar>
+              <Avatar src={user?.logoUrl}>
                 {user?.firstName && user?.lastName ? (
                   <>
                     {user?.firstName[0]}
