@@ -29,8 +29,6 @@ export default function Project({ params }) {
 
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
-  console.log('project', project);
-
   const handleEditProfile = useCallback(() => {
     setIsEditProfileOpen(true);
   }, []);

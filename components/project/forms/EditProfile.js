@@ -81,6 +81,15 @@ export default function EditProfile({
     ]
   );
 
+  useEffect(() => {
+    console.log('CALLED');
+    reset({
+      name: project.name,
+      status: project.status,
+      description: project.description,
+    });
+  }, [reset, defaultValues, project.name, project.status, project.description]);
+
   return (
     <Dialog
       open={isDialogOpen}

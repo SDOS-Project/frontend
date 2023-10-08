@@ -41,7 +41,6 @@ export default function User({ params }) {
     [slug]
   );
 
-  console.log('user', user);
   if (isLoading) return <div>Loading...</div>;
   return (
     <div className="width-layout-1 padding-layout-2">

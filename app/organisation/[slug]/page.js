@@ -49,7 +49,6 @@ export default function Organisation({ params }) {
     [slug]
   );
 
-  console.log('organisation', organisation);
   if (isLoading) return <div>Loading...</div>;
 
   return (
