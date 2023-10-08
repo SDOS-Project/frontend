@@ -13,9 +13,8 @@ const AddUpdate = dynamic(() => import('../forms/AddUpdate'), {
 export default function UpdatesTab({ handle }) {
   const { data: projectConfig, isLoading: isProjectConfigLoading } =
     useGetProjectConfigQuery(handle);
-  const { data: updates, isLoading } = useGetUpdatesQuery(handle);
 
-  console.log('updates', updates);
+  const { data: updates, isLoading } = useGetUpdatesQuery(handle);
 
   const [isAddUpdateOpen, setIsAddUpdateOpen] = useState(false);
 
