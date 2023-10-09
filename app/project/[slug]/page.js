@@ -9,6 +9,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Button, Tab } from '@mui/material';
 import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
 const EditProfile = dynamic(
   () => import('@/components/project/forms/EditProfile'),
   {
@@ -55,7 +56,7 @@ export default function Project({ params }) {
     [slug]
   );
 
-  if (isLoading || isProjectConfigLoading) return <div>Loading...</div>;
+  if (isLoading || isProjectConfigLoading) return <ProjectSkeleton />;
   return (
     <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md relative">
