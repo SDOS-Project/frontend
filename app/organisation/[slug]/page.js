@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { OrganisationType } from '@/types/OrganisationType';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
 const TeamTabOrg = dynamic(
   () => import('@/components/organisation/tabs/TeamTabOrg'),
   {
@@ -49,7 +50,7 @@ export default function Organisation({ params }) {
     [slug]
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProjectSkeleton />;
 
   return (
     <div className="width-layout-1 padding-layout-2">

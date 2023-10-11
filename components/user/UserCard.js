@@ -15,31 +15,39 @@ function UserCard({
 }) {
   return (
     <Link href={`/user/${handle}`}>
-      <div className="w-full h-full bg-paper shadow-md">
-        <div className="p-4 flex flex-col justify-center items-center border-b gap-3">
-          <Avatar className="w-20 h-20" />
-          <p className="body-large text-center">
+      <div className="w-full h-full shadow-md cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
+        <div className="absolute top-0 left-0 bg-gg h-20 w-full rounded-t-lg"></div>
+        <div className="p-4 pt-6 flex flex-col justify-center items-center gap-3">
+          <Avatar className="w-24 h-24" />
+          <p className="body-xlarge text-center font-semibold">
             {firstName} {lastName}
           </p>
         </div>
-        <div className="flex flex-col gap-2 px-4 py-2">
+        <div className="flex flex-col gap-2 px-4 pb-4">
           <div className="flex gap-2 items-center">
-            <Mail color="primary" className="body-small" />
-            <p className="body-small">{email}</p>
+            <Mail color="primary" className="body-large" />
+            <p className="body-normal">{email}</p>
           </div>
           <div className="flex gap-2 items-center">
             {organisation.type.toLowerCase() ===
             OrganisationType.ACADEMIC.toLowerCase() ? (
-              <SchoolIcon color="primary" className="body-small" />
+              <SchoolIcon color="primary" className="body-large" />
             ) : (
-              <CorporateFareIcon color="primary" className="body-small" />
+              <CorporateFareIcon color="primary" className="body-large" />
             )}
-            <p className="body-small">{organisation.name}</p>
+            <p className="body-normal">{organisation.name}</p>
           </div>
           <div className="flex gap-2 items-center flex-wrap">
             {areasOfInterest.map((item, i) => {
               if (i > 5) return;
-              return <Chip label={item} key={`${item}-${i}`} />;
+              return (
+                <Chip
+                  label={item}
+                  key={`${item}-${i}`}
+                  size="small"
+                  className="p-2"
+                />
+              );
             })}
           </div>
         </div>

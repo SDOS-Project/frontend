@@ -9,6 +9,7 @@ import { UserRole } from '@/types/UserRole';
 import Link from 'next/link';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
 const ProjectsTab = dynamic(
   () => import('@/components/user/tabs/ProjectsTab'),
   {
@@ -41,7 +42,7 @@ export default function User({ params }) {
     [slug]
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProjectSkeleton />;
   return (
     <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md relative">
