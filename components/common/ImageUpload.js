@@ -68,9 +68,7 @@ export default function ImageUpload({ userType, setValue }) {
   return (
     <>
       {downloadURL && (
-        <>
-          <Avatar src={downloadURL} alt={downloadURL} className="w-40 h-40" />
-        </>
+        <Avatar src={downloadURL} alt={downloadURL} className="w-40 h-40" />
       )}
       {isUploading && (
         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
