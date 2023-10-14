@@ -27,7 +27,7 @@ export default class ErrorBoundary extends Component {
         <div className="padding-layout-1 flex flex-col items-center justify-center gap-5">
           <Image
             loading="lazy"
-            src="/assets/error.svg"
+            src="/assets/images/error.svg"
             alt="Error"
             width={500}
             height={500}
