@@ -6,7 +6,7 @@ export default function UpdateComponent({ user, content, createdAt }) {
   return (
     <div className="flex gap-2">
       <Avatar className="w-10 h-10 body-small">
-        {user?.firstName[0] + user?.lastName[0] ?? ''}
+        {user?.firstName[0] + user?.lastName[0]}
       </Avatar>
       <div className="flex flex-col">
         <div className="flex items-baseline gap-2">
@@ -16,7 +16,7 @@ export default function UpdateComponent({ user, content, createdAt }) {
             </p>
           </Link>
           <p className="body-xsmall text-primary-darkgrey">
-            {format(new Date(createdAt), 'h:mma  MMMM d, yyyy')}
+            {format(new Date(createdAt), 'h:mma,  MMMM d, yyyy')}
           </p>
         </div>
         <p className="body-small">{content}</p>
