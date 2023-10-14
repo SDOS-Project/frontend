@@ -3,10 +3,10 @@ import { usePathname } from 'next/navigation';
 
 export const TabSwitch = () => {
   const selectedTab =
-    'body-xsmall p-3 border-2 border-primary-main bg-primary-main text-white rounded-md w-full text-center cursor-pointer duration-200 hover:bg-white hover:text-primary-main md:px-6';
+    'body-xsmall p-2.5 border-2 border-primary-main bg-primary-main text-white rounded-md w-full text-center cursor-pointer duration-200 hover:bg-white hover:text-primary-main md:px-6';
 
   const notSelectedTab =
-    'body-xsmall p-3 border-2 border-primary-main text-primary-main rounded-md w-full text-center cursor-pointer hover:bg-primary-main hover:text-white duration-200 md:px-6';
+    'body-xsmall p-2.5 border-2 border-primary-main text-primary-main rounded-md w-full text-center cursor-pointer hover:bg-primary-main hover:text-white duration-200 md:px-6';
 
   const pathname = usePathname();
 
@@ -17,7 +17,7 @@ export const TabSwitch = () => {
           className={
             pathname === '/signup/user' ? selectedTab : notSelectedTab
           }>
-          Signup As A User
+          Signup as User
         </div>
       </Link>
       <Link href={'/signup/organisation'} className="w-full">
@@ -25,7 +25,7 @@ export const TabSwitch = () => {
           className={
             pathname !== '/signup/user' ? selectedTab : notSelectedTab
           }>
-          Signup As An Organisation
+          Signup as Organisation
         </div>
       </Link>
     </div>
