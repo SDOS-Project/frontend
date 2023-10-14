@@ -10,7 +10,7 @@ import { StyledEngineProvider } from '@mui/material';
 const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'SDOS',
+  title: 'EduCorp',
   description: 'This is the SDOS project',
 };
 
