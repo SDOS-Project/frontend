@@ -124,6 +124,7 @@ export default function Signup() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center justify-center gap-4">
       <TabSwitch />
+      <ImageUpload userType={'organisation'} setValue={setValue} />
       {textFields.map((textField) => (
         <Controller
           key={textField.name}
@@ -166,7 +167,6 @@ export default function Signup() {
           </FormControl>
         )}
       />
-      <ImageUpload userType={'organisation'} setValue={setValue} />
       <LoadingButton
         type="submit"
         variant="contained"
