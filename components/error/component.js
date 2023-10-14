@@ -15,13 +15,14 @@ function ErrorComponent({ statusCode, subText, buttonText, imgSrc }) {
         height={500}
         className="w-11/12 md:w-1/2"
       />
-      <div className="flex flex-col gap-6 w-full p-6 md:w-1/3">
-        <p className="title font-medium ">
+      <div className="flex flex-col gap-5 w-full md:w-1/3">
+        <p className="title font-medium m-0">
           {statusCode && StatusCodesErrorMessagesMap[statusCode]}
         </p>
-        <p className="body-xlarge font-light">{subText}</p>
+        <p className="body-large font-light">{subText}</p>
         <Button
           variant="contained"
+          className="bg-primary-main"
           onClick={() => {
             router.back();
           }}>
