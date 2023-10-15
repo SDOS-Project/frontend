@@ -6,11 +6,27 @@ import { useEffect, useState } from 'react';
 import { Router } from 'next/router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '@/store/store';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
 
+  const router = useRouter();
+
   const [isPageTransitioning, setIsPageTransitioning] = useState(false);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (
+      !auth &&
+      !pathname.includes('/login') &&
+      !pathname.includes('/signup')
+    ) {
+      router.push('/');
+    }
+  }, [auth, pathname, router]);
 
   useEffect(() => {
     const handleRouteChangeStart = (url) => {
