@@ -2,8 +2,7 @@ import DialogFooter from '@/components/common/DialogFooter';
 import MultipleChipSelect from '@/components/common/MultipleChipSelect';
 import { useUpdateProjectMutation } from '@/features/project/apiSice';
 import { useGetUserQuery } from '@/features/user/apiSlice';
-import { auth } from '@/firebase-config';
-import { editProjectValidationSchema } from '@/schemas/project/edit/schema';
+import { editUserValidationSchema } from '@/schemas/user/edit/schema';
 import { areasOfInterests } from '@/types/AreasOfInterests';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
@@ -15,7 +14,7 @@ export default function EditProfile({
   handleCloseDialog,
   handle,
 }) {
-  const { data: user, isLoading } = useGetUserQuery(handle);
+  const { data: user } = useGetUserQuery(handle);
   const defaultValues = useMemo(() => {
     return {
       firstName: user?.firstName,
@@ -49,7 +48,7 @@ export default function EditProfile({
     formState: { errors },
   } = useForm({
     defaultValues,
-    resolver: yupResolver(editProjectValidationSchema),
+    resolver: yupResolver(editUserValidationSchema),
   });
 
   const onDiscardClick = useCallback(() => {
@@ -65,13 +64,13 @@ export default function EditProfile({
       if (
         data.firstName === user.firstName &&
         data.lastName === user.lastName &&
+        data.email === user.email &&
         data.areasOfInterest === user.areasOfInterest
       ) {
         onDiscardClick();
         return;
       }
       try {
-        await auth.updateCurrentUser({ email: data.email });
         await updateProject({ handle, project: data }).unwrap();
         onDiscardClick();
       } catch (error) {
@@ -86,6 +85,7 @@ export default function EditProfile({
       onDiscardClick,
       user.firstName,
       user.lastName,
+      user.email,
       user.areasOfInterest,
     ]
   );
