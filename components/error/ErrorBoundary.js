@@ -24,7 +24,7 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="padding-layout-1 flex flex-col items-center justify-center gap-5">
+        <div className="padding-layout-1 flex flex-col items-center justify-center gap-5 min-h-screen">
           <Image
             loading="lazy"
             src="/assets/images/error.svg"

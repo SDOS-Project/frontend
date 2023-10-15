@@ -92,7 +92,7 @@ export default function Header() {
               </Avatar>
               <Box>
                 {user?.handle && (
-                  <Link href={hrefCallback} legacyBehavior>
+                  <Link href={hrefCallback()} legacyBehavior>
                     <Typography className="text-primary-main cursor-pointer body-large text-center">
                       {user?.name ? (
                         <>{user?.name}</>
@@ -236,7 +236,7 @@ export default function Header() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              <Link href={hrefCallback} legacyBehavior>
+              <Link href={hrefCallback()} legacyBehavior>
                 <MenuItem>
                   <ListItemText>Profile</ListItemText>
                 </MenuItem>
