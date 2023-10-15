@@ -31,7 +31,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(
-            projectApiSlice.util.updateQueryData(
+            userApiSlice.util.updateQueryData(
               'getUser',
               data.handle,
               (draft) => {
