@@ -1,7 +1,7 @@
 'use client';
 import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Avatar, Box, Tab, Tooltip } from '@mui/material';
+import { Avatar, Box, Button, Tab, Tooltip } from '@mui/material';
 import { useCallback, useMemo, useState } from 'react';
 import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
 import dynamic from 'next/dynamic';
@@ -9,6 +9,14 @@ import { OrganisationType } from '@/types/OrganisationType';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
+import { useSelector } from 'react-redux';
+import { selectUser } from '@/features/auth/authSlice';
+const EditOrganisation = dynamic(
+  () => import('@/components/organisation/forms/EditOrganisation'),
+  {
+    ssr: false,
+  }
+);
 const TeamTabOrg = dynamic(
   () => import('@/components/organisation/tabs/TeamTabOrg'),
   {
@@ -25,8 +33,20 @@ const ProjectsTab = dynamic(
 export default function Organisation({ params }) {
   const { slug } = params;
 
+  const userState = useSelector(selectUser);
+  const canEdit = useMemo(
+    () => (userState?.handle === slug ? true : false),
+    [userState, slug]
+  );
+
   const { data: organisation, isLoading } = useGetOrganisationQuery(slug);
   const [tabValue, setTabValue] = useState('About');
+
+  const [isEditOrganisationOpen, setIsEditOrganisationOpen] = useState(false);
+
+  const handleEditOrganisation = useCallback(() => {
+    setIsEditOrganisationOpen(true);
+  }, []);
 
   const handleChange = useCallback((_, newValue) => {
     setTabValue(newValue);
@@ -76,6 +96,21 @@ export default function Organisation({ params }) {
             <p className="body-xlarge text-primary-dark font-medium">
               {organisation?.name}
             </p>
+            {canEdit && (
+              <>
+                <Button
+                  variant="contained"
+                  className="bg-primary-main"
+                  onClick={handleEditOrganisation}>
+                  Edit Organisation
+                </Button>
+                <EditOrganisation
+                  handle={slug}
+                  isDialogOpen={isEditOrganisationOpen}
+                  handleCloseDialog={() => setIsEditOrganisationOpen(false)}
+                />
+              </>
+            )}
           </div>
           <TabContext value={tabValue}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
