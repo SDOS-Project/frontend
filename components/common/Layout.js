@@ -14,10 +14,12 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     const handleRouteChangeStart = (url) => {
+      console.log('routeChangeStart', url);
       setIsPageTransitioning(true);
     };
 
     const handleRouteChangeComplete = (url) => {
+      console.log('routeChangeComplete', url);
       setIsPageTransitioning(false);
     };
 
