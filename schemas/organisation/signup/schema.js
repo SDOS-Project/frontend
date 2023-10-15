@@ -1,6 +1,6 @@
 import { OrganisationType } from '@/types/OrganisationType';
 import * as yup from 'yup';
-import { urlValidationSchema } from '../url/schema';
+import { urlValidationSchema } from '../../url/schema';
 
 export const organisationSignupValidationSchema = yup.object().shape({
   name: yup.string().required('Organisation Name is required'),

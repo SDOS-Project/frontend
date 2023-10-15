@@ -1,8 +1,10 @@
 import DialogFooter from '@/components/common/DialogFooter';
-import MultipleChipSelect from '@/components/common/MultipleChipSelect';
-import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
+import {
+  useGetOrganisationQuery,
+  useUpdateOrganisationMutation,
+} from '@/features/organisation/apiSlice';
+import { editOrganisationValidationSchema } from '@/schemas/organisation/edit/schema';
 import { editUserValidationSchema } from '@/schemas/user/edit/schema';
-import { areasOfInterests } from '@/types/AreasOfInterests';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -57,7 +59,7 @@ export default function EditOrganisation({
     formState: { errors },
   } = useForm({
     defaultValues,
-    resolver: yupResolver(editUserValidationSchema),
+    resolver: yupResolver(editOrganisationValidationSchema),
   });
 
   const onDiscardClick = useCallback(() => {
@@ -129,14 +131,6 @@ export default function EditOrganisation({
               )}
             />
           ))}
-          <MultipleChipSelect
-            control={control}
-            fieldName="areasOfInterest"
-            label="Areas of Interest"
-            options={areasOfInterests}
-            errors={errors}
-            setValue={setValue}
-          />
         </DialogContent>
         <DialogFooter
           saveLabel="Save"

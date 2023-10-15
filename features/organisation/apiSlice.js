@@ -34,6 +34,32 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    updateOrganisation: builder.mutation({
+      query: ({ organisation }) => ({
+        url: `${ORGANISATION_BASE_URL}`,
+        method: 'PATCH',
+        body: organisation,
+      }),
+      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            organisationApiSlice.util.updateQueryData(
+              'getOrganisation',
+              data.handle,
+              (draft) => {
+                return produce(draft, (draftState) => {
+                  Object.assign(draftState, data);
+                });
+              }
+            )
+          );
+          dispatch(updateUser(data));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -43,4 +69,5 @@ export const {
   useGetOrganisationQuery,
   useGetOrganisationUsersQuery,
   useGetOrganisationProjectsQuery,
+  useUpdateOrganisationMutation,
 } = organisationApiSlice;
