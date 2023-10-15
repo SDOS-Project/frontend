@@ -24,8 +24,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase-config';
 import { toast } from 'react-toastify';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor } from '@/store/store';
 
 export default function Header() {
   const router = useRouter();
