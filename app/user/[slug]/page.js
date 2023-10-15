@@ -12,6 +12,12 @@ import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@/features/auth/authSlice';
+const EditProfile = dynamic(
+  () => import('@/components/user/forms/EditProfile'),
+  {
+    ssr: false,
+  }
+);
 const ProjectsTab = dynamic(
   () => import('@/components/user/tabs/ProjectsTab'),
   {
@@ -30,6 +36,12 @@ export default function User({ params }) {
   const { data: user, isLoading } = useGetUserQuery(slug);
 
   const [tabValue, setTabValue] = useState('About');
+
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+
+  const handleEditProfile = useCallback(() => {
+    setIsEditProfileOpen(true);
+  }, []);
 
   const handleChange = useCallback((_, newValue) => {
     setTabValue(newValue);
@@ -82,9 +94,19 @@ export default function User({ params }) {
               </Link>
             </div>
             {canEdit && (
-              <Button variant="contained" className="bg-primary-main">
-                Edit Profile
-              </Button>
+              <>
+                <Button
+                  variant="contained"
+                  className="bg-primary-main"
+                  onClick={handleEditProfile}>
+                  Edit Profile
+                </Button>
+                <EditProfile
+                  handle={slug}
+                  isDialogOpen={isEditProfileOpen}
+                  handleCloseDialog={() => setIsEditProfileOpen(false)}
+                />
+              </>
             )}
           </div>
           <TabContext value={tabValue}>
