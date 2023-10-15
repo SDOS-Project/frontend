@@ -92,12 +92,12 @@ export default function Organisation({ params }) {
             src={organisation?.logoUrl}>
             {organisation?.name?.[0]}
           </Avatar>
-          <div className="flex flex-col justify-start gap-2 items-start mx-6 mt-4">
+          <div className="flex justify-between mx-6 py-2">
             <p className="body-xlarge text-primary-dark font-medium">
               {organisation?.name}
             </p>
             {canEdit && (
-              <>
+              <div>
                 <Button
                   variant="contained"
                   className="bg-primary-main"
@@ -109,7 +109,7 @@ export default function Organisation({ params }) {
                   isDialogOpen={isEditOrganisationOpen}
                   handleCloseDialog={() => setIsEditOrganisationOpen(false)}
                 />
-              </>
+              </div>
             )}
           </div>
           <TabContext value={tabValue}>
