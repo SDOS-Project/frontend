@@ -169,112 +169,108 @@ export default function Header() {
   );
 
   return (
-    <PersistGate loading={null} persistor={persistor}>
-      <AppBar color="grey" className="shadow-md px-2 sticky">
-        <Toolbar className="flex items-center justify-between">
-          <Box className="flex">
-            <Link href={'/'} passHref={true} legacyBehavior>
-              <Avatar
-                alt="EduCorp Logo"
-                src="/assets/logo.png"
-                className="hover:cursor-pointer w-12 h-12"
-              />
-            </Link>
-            <Box className="ml-4 hidden md:flex items-center gap-4">
-              {user?.role && (
-                <Link href={'/recommended'} legacyBehavior>
-                  <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
-                    Recommended
-                  </Typography>
-                </Link>
-              )}
-              {navItems.map((item) => {
-                return (
-                  <Link href={item.href} key={item.href} legacyBehavior>
-                    <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
-                      {item.page}
-                    </Typography>
-                  </Link>
-                );
-              })}
-            </Box>
-          </Box>
-          <Box className="hidden md:flex items-center gap-4">
+    <AppBar color="grey" className="shadow-md px-2 sticky">
+      <Toolbar className="flex items-center justify-between">
+        <Box className="flex">
+          <Link href={'/'} passHref={true} legacyBehavior>
+            <Avatar
+              alt="EduCorp Logo"
+              src="/assets/logo.png"
+              className="hover:cursor-pointer w-12 h-12"
+            />
+          </Link>
+          <Box className="ml-4 hidden md:flex items-center gap-4">
             {user?.role && (
-              <Link href={'/project/start'} legacyBehavior>
-                <Button
-                  variant="contained"
-                  className="bg-primary-main py-1 px-6">
-                  Start a Project
-                </Button>
+              <Link href={'/recommended'} legacyBehavior>
+                <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
+                  Recommended
+                </Typography>
               </Link>
             )}
-            <IconButton className="p-0" onClick={handleOpenUserMenu}>
-              <Avatar src={user?.logoUrl}>
-                {user?.firstName && user?.lastName ? (
-                  <>
-                    {user?.firstName[0]}
-                    {user?.lastName[0]}
-                  </>
-                ) : (
-                  user?.name[0]
-                )}
-              </Avatar>
-            </IconButton>
-            <Menu
-              className="mt-10"
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
-              <Link href={hrefCallback()} legacyBehavior>
-                <MenuItem>
-                  <ListItemText>Profile</ListItemText>
-                </MenuItem>
-              </Link>
-              <MenuItem onClick={handleLogout}>
-                <ListItemText>Logout</ListItemText>
+            {navItems.map((item) => {
+              return (
+                <Link href={item.href} key={item.href} legacyBehavior>
+                  <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
+                    {item.page}
+                  </Typography>
+                </Link>
+              );
+            })}
+          </Box>
+        </Box>
+        <Box className="hidden md:flex items-center gap-4">
+          {user?.role && (
+            <Link href={'/project/start'} legacyBehavior>
+              <Button variant="contained" className="bg-primary-main py-1 px-6">
+                Start a Project
+              </Button>
+            </Link>
+          )}
+          <IconButton className="p-0" onClick={handleOpenUserMenu}>
+            <Avatar src={user?.logoUrl}>
+              {user?.firstName && user?.lastName ? (
+                <>
+                  {user?.firstName[0]}
+                  {user?.lastName[0]}
+                </>
+              ) : (
+                user?.name[0]
+              )}
+            </Avatar>
+          </IconButton>
+          <Menu
+            className="mt-10"
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}>
+            <Link href={hrefCallback()} legacyBehavior>
+              <MenuItem>
+                <ListItemText>Profile</ListItemText>
               </MenuItem>
-            </Menu>
-          </Box>
-          <Box className="md:hidden">
-            <IconButton
-              className="md:hidden"
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}>
-              <MenuIcon className="text-black" />
-            </IconButton>
-          </Box>
-        </Toolbar>
-        <Drawer
-          anchor="right"
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: 240,
-            },
-          }}>
-          {drawer}
-        </Drawer>
-      </AppBar>
-    </PersistGate>
+            </Link>
+            <MenuItem onClick={handleLogout}>
+              <ListItemText>Logout</ListItemText>
+            </MenuItem>
+          </Menu>
+        </Box>
+        <Box className="md:hidden">
+          <IconButton
+            className="md:hidden"
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}>
+            <MenuIcon className="text-black" />
+          </IconButton>
+        </Box>
+      </Toolbar>
+      <Drawer
+        anchor="right"
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: 240,
+          },
+        }}>
+        {drawer}
+      </Drawer>
+    </AppBar>
   );
 }

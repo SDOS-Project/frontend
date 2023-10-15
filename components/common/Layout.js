@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import Header from '../layout/header';
 import { useEffect, useState } from 'react';
 import { Router } from 'next/router';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from '@/store/store';
 
 export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
@@ -32,7 +34,11 @@ export default function Layout({ children }) {
 
   return (
     <div className="bg-grey min-h-screen">
-      {auth && <Header />}
+      {auth && (
+        <PersistGate loading={null} persistor={persistor}>
+          <Header />
+        </PersistGate>
+      )}
       {children}
     </div>
   );
