@@ -1,4 +1,6 @@
 import { apiSlice } from '../api/apiSlice';
+import { produce } from 'immer';
+import { updateUser } from '../auth/authSlice';
 
 const ORGANISATION_BASE_URL = '/organisation';
 
