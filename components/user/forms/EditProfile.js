@@ -1,7 +1,9 @@
 import DialogFooter from '@/components/common/DialogFooter';
 import MultipleChipSelect from '@/components/common/MultipleChipSelect';
-import { useUpdateProjectMutation } from '@/features/project/apiSice';
-import { useGetUserQuery } from '@/features/user/apiSlice';
+import {
+  useGetUserQuery,
+  useUpdateProfileMutation,
+} from '@/features/user/apiSlice';
 import { editUserValidationSchema } from '@/schemas/user/edit/schema';
 import { areasOfInterests } from '@/types/AreasOfInterests';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -56,8 +58,8 @@ export default function EditProfile({
     reset(defaultValues);
   }, [defaultValues, reset, handleCloseDialog]);
 
-  const [updateProject, { isLoading: isUpdateProjectLoading }] =
-    useUpdateProjectMutation();
+  const [updateProfile, { isLoading: isUpdateProfileLoading }] =
+    useUpdateProfileMutation();
 
   const onSubmit = useCallback(
     async (data) => {
@@ -71,15 +73,14 @@ export default function EditProfile({
         return;
       }
       try {
-        await updateProject({ handle, project: data }).unwrap();
+        await updateProfile({ user: data }).unwrap();
         onDiscardClick();
       } catch (error) {
         reset(defaultValues);
       }
     },
     [
-      updateProject,
-      handle,
+      updateProfile,
       reset,
       defaultValues,
       onDiscardClick,
@@ -141,7 +142,7 @@ export default function EditProfile({
         <DialogFooter
           saveLabel="Save"
           onDiscardClick={onDiscardClick}
-          isLoading={isUpdateProjectLoading}
+          isLoading={isUpdateProfileLoading}
         />
       </form>
     </Dialog>

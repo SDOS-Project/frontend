@@ -78,8 +78,8 @@ export default function Header() {
         className="h-full bg-white flex flex-col">
         {(user?.name || user?.firstName) && (
           <>
-            <Box className="mt-4 flex flex-col gap-5 justify-center items-center">
-              <Avatar className="w-24 h-24" src={user?.logoUrl}>
+            <Box className="mt-4 flex flex-col gap-4 justify-center items-center">
+              <Avatar className="w-20 h-20" src={user?.logoUrl}>
                 {user?.name ? (
                   <>{user?.name[0]}</>
                 ) : (
@@ -89,19 +89,26 @@ export default function Header() {
                   </>
                 )}
               </Avatar>
-              <Link href={hrefCallback()} legacyBehavior>
-                <Typography className="text-primary-main cursor-pointer body-large">
-                  {user?.name ? (
-                    <>{user?.name}</>
-                  ) : (
-                    <>
-                      {user?.firstName} {user?.lastName}
-                    </>
-                  )}
-                </Typography>
-              </Link>
+              <Box>
+                <Link href={hrefCallback()} legacyBehavior>
+                  <Typography className="text-primary-main cursor-pointer body-large text-center">
+                    {user?.name ? (
+                      <>{user?.name}</>
+                    ) : (
+                      <>
+                        {user?.firstName} {user?.lastName}
+                      </>
+                    )}
+                  </Typography>
+                </Link>
+                {user?.organisation?.name && (
+                  <Typography className="text-primary-light cursor-pointer body-xsmall text-center mt-1">
+                    {user.organisation.name}
+                  </Typography>
+                )}
+              </Box>
             </Box>
-            <Divider className="m-0 p-0 mt-6" />
+            <Divider className="m-0 p-0 mt-5" />
           </>
         )}
         <List>
@@ -150,6 +157,7 @@ export default function Header() {
       user?.name,
       user?.role,
       user?.logoUrl,
+      user?.organisation?.name,
     ]
   );
 
