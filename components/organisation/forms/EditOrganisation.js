@@ -65,9 +65,9 @@ export default function EditOrganisation({
   const onSubmit = useCallback(
     async (data) => {
       if (
-        data.name === defaultValues.name &&
-        data.address === defaultValues.address &&
-        data.ipPolicy === defaultValues.ipPolicy
+        data.name === organisation?.name &&
+        data.address === organisation?.address &&
+        data.ipPolicy === organisation?.ipPolicy
       ) {
         onDiscardClick();
         return;
@@ -80,7 +80,15 @@ export default function EditOrganisation({
       }
     },
 
-    [updateOrganisation, reset, defaultValues, onDiscardClick]
+    [
+      updateOrganisation,
+      reset,
+      defaultValues,
+      onDiscardClick,
+      organisation?.name,
+      organisation?.address,
+      organisation?.ipPolicy,
+    ]
   );
 
   useEffect(() => {
