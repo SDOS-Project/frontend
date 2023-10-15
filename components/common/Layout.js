@@ -8,15 +8,14 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from '@/store/store';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { LinearProgress } from '@mui/material';
 
 export default function Layout({ children }) {
   const auth = useSelector(selectIsAuthenticated);
-
   const router = useRouter();
+  const pathname = usePathname();
 
   const [isPageTransitioning, setIsPageTransitioning] = useState(false);
-
-  const pathname = usePathname();
 
   useEffect(() => {
     if (
@@ -48,10 +47,9 @@ export default function Layout({ children }) {
     };
   }, []);
 
-  if (isPageTransitioning) return <div>Transitioning...</div>;
-
   return (
     <div className="bg-grey min-h-screen">
+      {/* {isPageTransitioning && <LinearProgress color="primary" />} */}
       {auth && (
         <PersistGate loading={null} persistor={persistor}>
           <Header />
