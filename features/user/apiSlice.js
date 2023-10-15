@@ -1,4 +1,6 @@
 import { apiSlice } from '../api/apiSlice';
+import { produce } from 'immer';
+import { updateUser } from '../auth/authSlice';
 
 const USER_BASE_URL = '/user';
 
@@ -19,6 +21,32 @@ export const userApiSlice = apiSlice.injectEndpoints({
     getUserProjects: builder.query({
       query: (handle) => `${USER_BASE_URL}/${handle}/projects`,
     }),
+    updateProfile: builder.mutation({
+      query: ({ user }) => ({
+        url: `${USER_BASE_URL}`,
+        method: 'PATCH',
+        body: user,
+      }),
+      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            projectApiSlice.util.updateQueryData(
+              'getUser',
+              data.handle,
+              (draft) => {
+                return produce(draft, (draftState) => {
+                  Object.assign(draftState, data);
+                });
+              }
+            )
+          );
+          dispatch(updateUser(data));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -28,4 +56,5 @@ export const {
   useGetEmployeesQuery,
   useGetUserQuery,
   useGetUserProjectsQuery,
+  useUpdateProfileMutation,
 } = userApiSlice;
