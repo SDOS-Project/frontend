@@ -25,7 +25,7 @@ export default function EditProject({
   handleCloseDialog,
   handle,
 }) {
-  const { data: project, refetch } = useGetProjectQuery(handle);
+  const { data: project } = useGetProjectQuery(handle);
   const defaultValues = useMemo(() => {
     return {
       name: project?.name,
