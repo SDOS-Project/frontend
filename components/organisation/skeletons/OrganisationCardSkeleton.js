@@ -1,6 +1,5 @@
 import { Avatar, Skeleton } from '@mui/material';
 import RoomIcon from '@mui/icons-material/Room';
-import LinkIcon from '@mui/icons-material/Link';
 import { Email } from '@mui/icons-material';
 
 export default function OrganisationCardSkeleton() {

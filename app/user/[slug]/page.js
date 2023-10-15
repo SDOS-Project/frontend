@@ -30,7 +30,7 @@ export default function User({ params }) {
 
   const userState = useSelector(selectUser);
   const canEdit = useMemo(
-    () => (userState.handle === slug ? true : false),
+    () => (userState?.handle === slug ? true : false),
     [userState, slug]
   );
   const { data: user, isLoading } = useGetUserQuery(slug);

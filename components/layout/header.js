@@ -68,7 +68,8 @@ export default function Header() {
 
   const hrefCallback = useCallback(() => {
     const href = user?.role ? 'user' : 'organisation';
-    return `/${href}/${user.handle}`;
+    const link = `/${href}/${user.handle}`;
+    if (!link) return link;
   }, [user?.role, user?.handle]);
 
   const drawer = useMemo(

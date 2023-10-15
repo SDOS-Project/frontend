@@ -10,7 +10,7 @@ function ErrorComponent({ statusCode, subText, buttonText, imgSrc }) {
     <>
       <Image
         alt="Error Image"
-        src={imgSrc ?? '/assets/404.svg'}
+        src={imgSrc ?? '/assets/images/404.svg'}
         width={500}
         height={500}
         className="w-11/12 md:w-1/2"
