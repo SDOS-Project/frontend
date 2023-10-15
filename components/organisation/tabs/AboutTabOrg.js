@@ -24,7 +24,6 @@ export default function AboutTab({ handle }) {
           <p className="body-small">{organisation.address}</p>
         </div>
       </div>
-
       <div className="w-full flex flex-col gap-2 border-b pb-4">
         <p className="body-large font-medium text-primary-dark">IP Policy</p>
         <Link href={organisation.ipPolicy} target="_blank">

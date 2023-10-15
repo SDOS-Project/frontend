@@ -2,14 +2,9 @@ import { useGetUserQuery } from '@/features/user/apiSlice';
 import { Email } from '@mui/icons-material';
 import { Chip } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
 
-function AboutTabUser({ handle }) {
-  const { data: user, isLoading } = useGetUserQuery(handle);
-
-  if (isLoading) {
-    return <>Loading...</>;
-  }
+export default function AboutTabUser({ handle }) {
+  const { data: user } = useGetUserQuery(handle);
   return (
     <>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
@@ -24,15 +19,13 @@ function AboutTabUser({ handle }) {
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large font-medium text-primary-dark">Contact</p>
-        <Link href={`mailto:${user?.email}`}>
-          <div className="flex items-center gap-2">
-            <Email className="text-primary-main" />
+        <div className="flex items-center gap-2">
+          <Email className="text-primary-main" />
+          <Link href={`mailto:${user?.email}`}>
             <p className="body-small">{user?.email}</p>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
     </>
   );
 }
-
-export default AboutTabUser;
