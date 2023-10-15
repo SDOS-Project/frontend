@@ -4,7 +4,6 @@ import {
   useUpdateOrganisationMutation,
 } from '@/features/organisation/apiSlice';
 import { editOrganisationValidationSchema } from '@/schemas/organisation/edit/schema';
-import { editUserValidationSchema } from '@/schemas/user/edit/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -40,22 +39,15 @@ export default function EditOrganisation({
   const defaultValues = useMemo(() => {
     return {
       name: organisation?.name,
-      logoUrl: organisation?.logoUrl,
       address: organisation?.address,
       ipPolicy: organisation?.ipPolicy,
     };
-  }, [
-    organisation?.name,
-    organisation?.logoUrl,
-    organisation?.address,
-    organisation?.ipPolicy,
-  ]);
+  }, [organisation?.name, organisation?.address, organisation?.ipPolicy]);
 
   const {
     control,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -74,7 +66,6 @@ export default function EditOrganisation({
     async (data) => {
       if (
         data.name === defaultValues.name &&
-        data.logoUrl === defaultValues.logoUrl &&
         data.address === defaultValues.address &&
         data.ipPolicy === defaultValues.ipPolicy
       ) {
