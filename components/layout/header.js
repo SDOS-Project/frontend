@@ -68,8 +68,8 @@ export default function Header() {
 
   const hrefCallback = useCallback(() => {
     const href = user?.role ? 'user' : 'organisation';
-    const link = `/${href}/${user.handle}`;
-    if (!link) return link;
+    const link = `/${href}/${user?.handle}`;
+    return !link ? '/' : link;
   }, [user?.role, user?.handle]);
 
   const drawer = useMemo(
@@ -91,21 +91,25 @@ export default function Header() {
                 )}
               </Avatar>
               <Box>
-                <Link href={hrefCallback()} legacyBehavior>
-                  <Typography className="text-primary-main cursor-pointer body-large text-center">
-                    {user?.name ? (
-                      <>{user?.name}</>
-                    ) : (
-                      <>
-                        {user?.firstName} {user?.lastName}
-                      </>
-                    )}
-                  </Typography>
-                </Link>
+                {user?.handle && (
+                  <Link href={hrefCallback} legacyBehavior>
+                    <Typography className="text-primary-main cursor-pointer body-large text-center">
+                      {user?.name ? (
+                        <>{user?.name}</>
+                      ) : (
+                        <>
+                          {user?.firstName} {user?.lastName}
+                        </>
+                      )}
+                    </Typography>
+                  </Link>
+                )}
                 {user?.organisation?.name && (
-                  <Typography className="text-primary-light cursor-pointer body-xsmall text-center mt-1">
-                    {user.organisation.name}
-                  </Typography>
+                  <Link href={user?.organisation?.handle} legacyBehavior>
+                    <Typography className="text-primary-light cursor-pointer body-xsmall text-center mt-1">
+                      {user.organisation.name}
+                    </Typography>
+                  </Link>
                 )}
               </Box>
             </Box>
@@ -159,6 +163,8 @@ export default function Header() {
       user?.role,
       user?.logoUrl,
       user?.organisation?.name,
+      user?.organisation?.handle,
+      user?.handle,
     ]
   );
 
@@ -230,7 +236,7 @@ export default function Header() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              <Link href={hrefCallback()} legacyBehavior>
+              <Link href={hrefCallback} legacyBehavior>
                 <MenuItem>
                   <ListItemText>Profile</ListItemText>
                 </MenuItem>
