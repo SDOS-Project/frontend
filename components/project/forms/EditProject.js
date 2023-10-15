@@ -17,11 +17,10 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { is } from 'date-fns/locale';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-export default function EditProfile({
+export default function EditProject({
   isDialogOpen,
   handleCloseDialog,
   handle,

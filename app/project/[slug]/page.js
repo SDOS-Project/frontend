@@ -10,8 +10,8 @@ import { Avatar, Box, Button, Tab } from '@mui/material';
 import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
-const EditProfile = dynamic(
-  () => import('@/components/project/forms/EditProfile'),
+const EditProject = dynamic(
+  () => import('@/components/project/forms/EditProject'),
   {
     ssr: false,
   }
@@ -32,10 +32,10 @@ export default function Project({ params }) {
 
   const [tabValue, setTabValue] = useState('About');
 
-  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isEditProjectOpen, setIsEditProjectOpen] = useState(false);
 
-  const handleEditProfile = useCallback(() => {
-    setIsEditProfileOpen(true);
+  const handleEditProject = useCallback(() => {
+    setIsEditProjectOpen(true);
   }, []);
 
   const handleChange = useCallback((_, newValue) => {
@@ -83,7 +83,7 @@ export default function Project({ params }) {
               <Button
                 variant="contained"
                 className="bg-primary-main"
-                onClick={() => handleEditProfile()}>
+                onClick={() => handleEditProject()}>
                 Edit Project
               </Button>
             )}
@@ -113,10 +113,10 @@ export default function Project({ params }) {
         </div>
       </div>
       {projectConfig?.isAdmin && (
-        <EditProfile
+        <EditProject
           handle={slug}
-          isDialogOpen={isEditProfileOpen}
-          handleCloseDialog={() => setIsEditProfileOpen(false)}
+          isDialogOpen={isEditProjectOpen}
+          handleCloseDialog={() => setIsEditProjectOpen(false)}
         />
       )}
     </div>
