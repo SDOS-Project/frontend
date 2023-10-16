@@ -1,4 +1,4 @@
-import { Avatar } from '@mui/material';
+import { Avatar, Tooltip } from '@mui/material';
 import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
@@ -44,7 +44,11 @@ export default function ProjectCard({
                 ) : (
                   <CorporateFareIcon className="body-large" color="primary" />
                 )}
-                <p className="body-normal line-clamp-1">{organisation.name}</p>
+                <Tooltip title={organisation.name}>
+                  <p className="body-normal line-clamp-1">
+                    {organisation.name}
+                  </p>
+                </Tooltip>
               </div>
             ))}
             <p className="body-small line-clamp-3 text-primary-darkgrey">
