@@ -27,7 +27,7 @@ export default function AboutTab({ handle }) {
             key={organisation.handle}>
             <div className="flex gap-2 items-center">
               <Avatar
-                src={organisation?.logoUrl}
+                src={organisation?.imgUrl}
                 className="h-8 w-8 sm:h-10 sm:w-10"></Avatar>
               <p className="body-small">{organisation?.name}</p>
             </div>

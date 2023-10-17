@@ -71,7 +71,7 @@ export default function Signup() {
       password: '',
       confirmPassword: '',
       type: '',
-      logoUrl: '',
+      imgUrl: '',
       address: '',
       ipPolicy: '',
     };

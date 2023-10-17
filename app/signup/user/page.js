@@ -76,7 +76,7 @@ export default function Signup() {
       role: '',
       organisationHandle: '',
       areasOfInterest: [],
-      logoUrl: '',
+      imgUrl: '',
     };
   }, []);
 

@@ -86,7 +86,7 @@ export default function Organisation({ params }) {
         <div className="w-full pt-14 sm:pt-24 z-50">
           <Avatar
             className="w-20 h-20 sm:w-24 sm:h-24 body-2xlarge mx-6"
-            src={organisation?.logoUrl}>
+            src={organisation?.imgUrl}>
             {organisation?.name?.[0]}
           </Avatar>
           <div className="flex justify-between mx-6 py-2">

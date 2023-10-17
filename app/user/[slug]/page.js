@@ -87,7 +87,7 @@ export default function User({ params }) {
               <Link href={`/organisation/${user?.organisation?.handle}`}>
                 <div className="flex gap-1 sm:gap-2 items-center">
                   <Avatar
-                    src={user?.organisation?.logoUrl}
+                    src={user?.organisation?.imgUrl}
                     className="h-8 w-8 sm:h-10 sm:w-10"></Avatar>
                   <p className="body-small">{user?.organisation?.name}</p>
                 </div>

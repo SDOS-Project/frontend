@@ -23,10 +23,10 @@ export default function ProjectCard({
         <div className="z-50 py-6 px-4">
           <div className="w-full flex flex-col justify-center items-center px-5 py-4 gap-3">
             <div className="flex justify-center">
-              <Avatar className="w-16 h-16" src={organisations[0].logoUrl} />
+              <Avatar className="w-16 h-16" src={organisations[0].imgUrl} />
               <Avatar
                 className="w-16 h-16 -ml-3"
-                src={organisations[1].logoUrl}
+                src={organisations[1].imgUrl}
               />
             </div>
             <p className="body-large font-medium text-center capitalize line-clamp-1">
