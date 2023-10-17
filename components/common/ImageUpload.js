@@ -55,7 +55,7 @@ export default function ImageUpload({ userType, setValue }) {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
             setDownloadURL(url);
-            setValue('logoUrl', url);
+            setValue('imgUrl', url);
           });
           setIsUploading(false);
         }
