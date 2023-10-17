@@ -25,6 +25,7 @@ import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { TabSwitch } from '@/components/signup/TabSwitch';
 import { areasOfInterests } from '@/types/AreasOfInterests';
+import ImageUpload from '@/components/common/ImageUpload';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ export default function Signup() {
       role: '',
       organisationHandle: '',
       areasOfInterest: [],
+      logoUrl: '',
     };
   }, []);
 
@@ -125,6 +127,7 @@ export default function Signup() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center justify-center gap-4">
       <TabSwitch />
+      <ImageUpload userType={'user'} setValue={setValue} />
       {textFields.map((textField) => (
         <Controller
           key={textField.name}
