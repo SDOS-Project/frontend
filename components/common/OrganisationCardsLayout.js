@@ -15,8 +15,8 @@ export default function OrganisationCardsLayout({
             grid ??
             'cards-grid-layout padding-layout-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 sm:gap-8'
           }>
-          {Array.from({ length: 15 }).map((_, id) => (
-            <OrganisationCardSkeleton key={id} />
+          {Array.from({ length: 15 }).map((organisation) => (
+            <OrganisationCardSkeleton key={organisation} />
           ))}
         </main>
       ) : organisations.length > 0 ? (
