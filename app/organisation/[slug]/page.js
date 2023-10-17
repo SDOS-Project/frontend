@@ -34,10 +34,7 @@ export default function Organisation({ params }) {
   const { slug } = params;
 
   const userState = useSelector(selectUser);
-  const canEdit = useMemo(
-    () => (userState?.handle === slug ? true : false),
-    [userState, slug]
-  );
+  const canEdit = useMemo(() => userState?.handle === slug, [userState, slug]);
 
   const { data: organisation, isLoading } = useGetOrganisationQuery(slug);
   const [tabValue, setTabValue] = useState('About');
