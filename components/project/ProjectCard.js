@@ -1,4 +1,4 @@
-import { Avatar } from '@mui/material';
+import { Avatar, Tooltip } from '@mui/material';
 import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
@@ -6,7 +6,13 @@ import Link from 'next/link';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { OrganisationType } from '@/types/OrganisationType';
 
-function ProjectCard({ handle, name, organisations, description, status }) {
+export default function ProjectCard({
+  handle,
+  name,
+  organisations,
+  description,
+  status,
+}) {
   return (
     <Link href={`/project/${handle}`}>
       <div className="w-full h-full shadow-md cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
@@ -38,7 +44,11 @@ function ProjectCard({ handle, name, organisations, description, status }) {
                 ) : (
                   <CorporateFareIcon className="body-large" color="primary" />
                 )}
-                <p className="body-normal line-clamp-1">{organisation.name}</p>
+                <Tooltip title={organisation.name}>
+                  <p className="body-normal line-clamp-1">
+                    {organisation.name}
+                  </p>
+                </Tooltip>
               </div>
             ))}
             <p className="body-small line-clamp-3 text-primary-darkgrey">
@@ -50,5 +60,3 @@ function ProjectCard({ handle, name, organisations, description, status }) {
     </Link>
   );
 }
-
-export default ProjectCard;

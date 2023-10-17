@@ -26,12 +26,12 @@ export default class ErrorBoundary extends Component {
       return (
         <div className="padding-layout-1 flex flex-col items-center justify-center gap-5 min-h-screen">
           <Image
-            loading="lazy"
             src="/assets/images/error.svg"
             alt="Error"
             width={500}
             height={500}
             className="w-1/2 sm:w-1/4"
+            priority
           />
           <div className="title font-medium mt-10">
             Oops, something went wrong!

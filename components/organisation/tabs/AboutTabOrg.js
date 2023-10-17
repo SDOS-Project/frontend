@@ -21,15 +21,15 @@ export default function AboutTab({ handle }) {
         <p className="body-large font-medium text-primary-dark">Address</p>
         <div className="flex items-center gap-2">
           <RoomIcon className="text-primary-main" />
-          <p className="body-small">{organisation.address}</p>
+          <p className="body-small">{organisation?.address}</p>
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 border-b pb-4">
         <p className="body-large font-medium text-primary-dark">IP Policy</p>
-        <Link href={organisation.ipPolicy} target="_blank">
+        <Link href={organisation?.ipPolicy} target="_blank">
           <div className="flex items-center gap-2">
             <LinkIcon className="text-primary-main" />
-            <p className="body-small">{organisation.ipPolicy}</p>
+            <p className="body-small">{organisation?.ipPolicy}</p>
           </div>
         </Link>
       </div>
