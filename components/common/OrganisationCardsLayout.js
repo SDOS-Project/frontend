@@ -33,6 +33,7 @@ export default function OrganisationCardsLayout({
         <NullView
           imgSrc={'/assets/images/organisation/empty.svg'}
           heading={'No Organisations Found'}
+          desc={'There are no organisations on the platform yet.'}
         />
       )}
     </>
