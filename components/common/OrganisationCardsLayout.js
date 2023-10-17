@@ -1,4 +1,4 @@
-import NullViewComponent from '../null-views/NullView';
+import NullView from '../null-views/NullView';
 import OrganisationCard from '../organisation/OrganisationCard';
 import OrganisationCardSkeleton from '../organisation/skeletons/OrganisationCardSkeleton';
 
@@ -30,8 +30,8 @@ export default function OrganisationCardsLayout({
           ))}
         </main>
       ) : (
-        <NullViewComponent
-          imgSrc={'/assets/images/orgNotFound.svg'}
+        <NullView
+          imgSrc={'/assets/images/organisation/empty.svg'}
           heading={'No Organisations Found'}
         />
       )}
