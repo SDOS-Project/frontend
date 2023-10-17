@@ -1,5 +1,5 @@
 'use client';
-import NullViewComponent from '@/components/nullViews/NullViewComponent';
+import NullViewComponent from '@/components/null-views/NullView';
 import UserCard from '@/components/user/UserCard';
 import UserCardSkeleton from '@/components/user/skeletons/UserCardSkeleton';
 import { useGetRecommendedQuery } from '@/features/user/apiSlice';
