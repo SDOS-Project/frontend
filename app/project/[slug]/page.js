@@ -68,11 +68,11 @@ export default function Project({ params }) {
           <div className="flex justify-start mx-6">
             <Avatar
               className="w-20 h-20 sm:w-24 sm:h-24"
-              src={project.organisations[0]?.logoUrl ?? ''}
+              src={project.organisations[0]?.imgUrl ?? ''}
             />
             <Avatar
               className="w-20 h-20 sm:w-24 sm:h-24 -ml-5"
-              src={project.organisations[1]?.logoUrl ?? ''}
+              src={project.organisations[1]?.imgUrl ?? ''}
             />
           </div>
           <div className="flex justify-between gap-2 items-center mx-6 mt-4">

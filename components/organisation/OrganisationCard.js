@@ -7,7 +7,7 @@ import Link from 'next/link';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import { useMemo } from 'react';
 
-function OrganisationCard({ address, email, handle, logoUrl, name, type }) {
+function OrganisationCard({ address, email, handle, imgUrl, name, type }) {
   const iconWithInfoList = useMemo(
     () => [
       {
@@ -36,7 +36,7 @@ function OrganisationCard({ address, email, handle, logoUrl, name, type }) {
         <div className="w-full z-50">
           <div className="w-full pt-10 flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center gap-2">
-              <Avatar className="h-16 w-16" src={logoUrl ?? ''}>
+              <Avatar className="h-16 w-16" src={imgUrl ?? ''}>
                 {name[0]}
               </Avatar>
               <Tooltip title={name}>

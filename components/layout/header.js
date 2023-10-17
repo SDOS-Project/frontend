@@ -78,7 +78,7 @@ export default function Header() {
         {(user?.name || user?.firstName) && (
           <>
             <Box className="mt-4 flex flex-col gap-4 justify-center items-center">
-              <Avatar className="w-20 h-20" src={user?.logoUrl}>
+              <Avatar className="w-20 h-20" src={user?.imgUrl}>
                 {user?.name ? (
                   <>{user?.name[0]}</>
                 ) : (
@@ -159,7 +159,7 @@ export default function Header() {
       user?.lastName,
       user?.name,
       user?.role,
-      user?.logoUrl,
+      user?.imgUrl,
       user?.organisation?.name,
       user?.organisation?.handle,
       user?.handle,
@@ -205,7 +205,7 @@ export default function Header() {
             </Link>
           )}
           <IconButton className="p-0" onClick={handleOpenUserMenu}>
-            <Avatar src={user?.logoUrl}>
+            <Avatar src={user?.imgUrl}>
               {user?.firstName && user?.lastName ? (
                 <>
                   {user?.firstName[0]}

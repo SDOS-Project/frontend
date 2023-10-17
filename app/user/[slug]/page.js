@@ -29,10 +29,7 @@ export default function User({ params }) {
   const { slug } = params;
 
   const userState = useSelector(selectUser);
-  const canEdit = useMemo(
-    () => (userState?.handle === slug ? true : false),
-    [userState, slug]
-  );
+  const canEdit = useMemo(() => userState?.handle === slug, [userState, slug]);
   const { data: user, isLoading } = useGetUserQuery(slug);
 
   const [tabValue, setTabValue] = useState('About');
@@ -77,7 +74,9 @@ export default function User({ params }) {
         </Tooltip>
         <div className="w-full pt-14 sm:pt-24 z-50">
           <div className="px-2.5 sm:px-5">
-            <Avatar className="w-20 h-20 sm:w-24 sm:h-24 body-2xlarge">
+            <Avatar
+              className="w-20 h-20 sm:w-24 sm:h-24 body-2xlarge"
+              src={user?.imgUrl}>
               {user?.firstName[0] + user?.lastName[0]}
             </Avatar>
             <div className="mt-2 flex justify-between items-center">
@@ -87,7 +86,7 @@ export default function User({ params }) {
               <Link href={`/organisation/${user?.organisation?.handle}`}>
                 <div className="flex gap-1 sm:gap-2 items-center">
                   <Avatar
-                    src={user?.organisation?.logoUrl}
+                    src={user?.organisation?.imgUrl}
                     className="h-8 w-8 sm:h-10 sm:w-10"></Avatar>
                   <p className="body-small">{user?.organisation?.name}</p>
                 </div>

@@ -22,5 +22,5 @@ export const organisationSignupValidationSchema = yup.object().shape({
     .required('Role is required'),
   address: yup.string().required('Address is required'),
   ipPolicy: urlValidationSchema(true),
-  logoUrl: urlValidationSchema(false),
+  imgUrl: urlValidationSchema(false),
 });
