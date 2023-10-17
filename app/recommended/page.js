@@ -1,7 +1,7 @@
 'use client';
 import NullViewComponent from '@/components/nullViews/NullViewComponent';
 import UserCard from '@/components/user/UserCard';
-import UserCardSkeleton from '@/components/user/UserCardSkeleton';
+import UserCardSkeleton from '@/components/user/skeletons/UserCardSkeleton';
 import { useGetRecommendedQuery } from '@/features/user/apiSlice';
 
 export default function Recommended() {
@@ -10,7 +10,7 @@ export default function Recommended() {
     return (
       <main className="cards-grid-layout padding-layout-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-10 sm:gap-8">
         {Array.from({ length: 15 }).map((item, i) => (
-          <UserCardSkeleton key={`${item}-${i}`} />
+          <UserCardSkeleton key={item} />
         ))}
       </main>
     );

@@ -20,14 +20,9 @@ function UserCardSkeleton() {
           <Skeleton className="w-3/4 h-8" />
         </div>
         <div className="flex gap-2 items-center flex-wrap">
-          {[1, 2, 3, 4, 5].map((item, i) => {
+          {Array.from({ length: 5 }).map((item) => {
             return (
-              <Chip
-                label={''}
-                key={`${item}-${i}`}
-                size="small"
-                className="w-3/4"
-              />
+              <Chip label={''} key={item} size="small" className="w-3/4" />
             );
           })}
         </div>
