@@ -25,11 +25,8 @@ export default function RemoveUser({
   }, [handleCloseDialog]);
 
   const onSubmit = useCallback(async () => {
-    try {
-      await deleteUser({ userHandle, orgHandle: userState.handle });
-    } catch (error) {
-      handleCloseDialog();
-    }
+    await deleteUser({ userHandle, orgHandle: userState.handle });
+    handleCloseDialog();
   }, [deleteUser, userHandle, userState.handle, handleCloseDialog]);
 
   return (

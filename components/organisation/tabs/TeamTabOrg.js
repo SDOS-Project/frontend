@@ -17,7 +17,6 @@ export default function TeamTabOrg({ handle }) {
   const [isRemoveUserOpen, setIsRemoveUserOpen] = useState(false);
   const [userHandle, setUserHandle] = useState(null);
   const handleRemoveUser = useCallback((userHandle) => {
-    console.log(userHandle);
     setIsRemoveUserOpen(true);
     setUserHandle(userHandle);
   }, []);

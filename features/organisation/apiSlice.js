@@ -80,8 +80,14 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
               orgHandle,
               (draft) => {
                 return produce(draft, (draftState) => {
-                  draftState.users = draftState.users.filter(
-                    (user) => user.handle !== userHandle
+                  console.log(JSON.stringify(draftState));
+                  Object.assign(
+                    draftState,
+                    draftState.forEach((user, index) => {
+                      if (user.handle === userHandle) {
+                        draftState.splice(index, 1);
+                      }
+                    })
                   );
                 });
               }
