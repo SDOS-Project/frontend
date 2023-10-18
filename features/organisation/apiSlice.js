@@ -68,6 +68,29 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         url: `${USER_BASE_URL}/${userHandle}`,
         method: 'DELETE',
       }),
+      async onQueryStarted(
+        { orgHandle, userHandle },
+        { dispatch, queryFulfilled }
+      ) {
+        try {
+          await queryFulfilled;
+          dispatch(
+            organisationApiSlice.util.updateQueryData(
+              'getOrganisationUsers',
+              orgHandle,
+              (draft) => {
+                return produce(draft, (draftState) => {
+                  draftState.users = draftState.users.filter(
+                    (user) => user.handle !== userHandle
+                  );
+                });
+              }
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
   }),
 });
