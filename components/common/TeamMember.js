@@ -14,17 +14,15 @@ export default function TeamMember({
   return (
     <div className="flex justify-between items-center">
       <Link href={`/user/${handle}`}>
-        <div>
-          <div className="flex items-center gap-2">
-            <Avatar
-              className="w-8 h-8 sm:h-10 sm:w-10 body-small sm:body-normal"
-              src={imgUrl}>
-              {firstName[0] + lastName[0]}
-            </Avatar>
-            <p>
-              {firstName} {lastName}
-            </p>
-          </div>
+        <div className="flex items-center gap-2">
+          <Avatar
+            className="w-8 h-8 sm:h-10 sm:w-10 body-small sm:body-normal"
+            src={imgUrl}>
+            {firstName[0] + lastName[0]}
+          </Avatar>
+          <p>
+            {firstName} {lastName}
+          </p>
         </div>
       </Link>
       <Link href={`mailto:${email}`} onClick={(e) => e.stopPropagation()}>
