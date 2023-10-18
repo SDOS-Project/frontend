@@ -1,4 +1,5 @@
-import { Warning } from '@mui/icons-material';
+import { selectUser } from '@/features/auth/authSlice';
+import { useDeleteUserMutation } from '@/features/organisation/apiSlice';
 import { LoadingButton } from '@mui/lab';
 import {
   Button,
@@ -8,21 +9,28 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function RemoveUser({
   isDialogOpen,
   handleCloseDialog,
   userHandle,
 }) {
+  const userState = useSelector(selectUser);
+  const [deleteUser, { isLoading: isDeleteUserLoading }] =
+    useDeleteUserMutation();
+
   const onDiscardClick = useCallback(() => {
     handleCloseDialog();
   }, [handleCloseDialog]);
 
-  const onSubmit = useCallback(
-    async (data) => {},
-
-    []
-  );
+  const onSubmit = useCallback(async () => {
+    try {
+      await deleteUser({ userHandle, orgHandle: userState.handle });
+    } catch (error) {
+      handleCloseDialog();
+    }
+  }, [deleteUser, userHandle, userState.handle, handleCloseDialog]);
 
   return (
     <Dialog
@@ -44,7 +52,7 @@ export default function RemoveUser({
           variant="text"
           className="text-black"
           onClick={() => onDiscardClick()}
-          disabled={false}>
+          disabled={isDeleteUserLoading}>
           Discard
         </Button>
         <LoadingButton
@@ -52,7 +60,7 @@ export default function RemoveUser({
           variant="contained"
           className="bg-error-dark"
           type="action"
-          loading={false}
+          loading={isDeleteUserLoading}
           onClick={() => onSubmit()}
           color="error">
           Remove

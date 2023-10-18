@@ -64,7 +64,7 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
       },
     }),
     deleteUser: builder.mutation({
-      query: ({ orgHandle, userHandle }) => ({
+      query: ({ userHandle }) => ({
         url: `${USER_BASE_URL}/${userHandle}`,
         method: 'DELETE',
       }),
