@@ -1,8 +1,14 @@
 import { Email } from '@mui/icons-material';
-import { Avatar } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import Link from 'next/link';
 
-export default function TeamMember({ firstName, lastName, email, handle }) {
+export default function TeamMember({
+  firstName,
+  lastName,
+  email,
+  handle,
+  canRemove = false,
+}) {
   return (
     <div className="flex justify-between items-center">
       <Link href={`/user/${handle}`}>
@@ -23,6 +29,11 @@ export default function TeamMember({ firstName, lastName, email, handle }) {
           <p className="body-small">{email}</p>
         </div>
       </Link>
+      {canRemove && (
+        <Button variant="contained" className="bg-error-dark" color="error">
+          Remove
+        </Button>
+      )}
     </div>
   );
 }

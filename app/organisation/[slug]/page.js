@@ -94,7 +94,7 @@ export default function Organisation({ params }) {
               {organisation?.name}
             </p>
             {canEdit && (
-              <div>
+              <>
                 <Button
                   variant="contained"
                   className="bg-primary-main"
@@ -106,7 +106,7 @@ export default function Organisation({ params }) {
                   isDialogOpen={isEditOrganisationOpen}
                   handleCloseDialog={() => setIsEditOrganisationOpen(false)}
                 />
-              </div>
+              </>
             )}
           </div>
           <TabContext value={tabValue}>
