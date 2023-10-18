@@ -19,7 +19,7 @@ export default function TeamMember({ firstName, lastName, email, handle }) {
       </Link>
       <Link href={`mailto:${email}`} onClick={(e) => e.stopPropagation()}>
         <div className="flex gap-2 items-center">
-          <Email className="body-normal" />
+          <Email className="body-normal" color="primary" />
           <p className="body-small">{email}</p>
         </div>
       </Link>
