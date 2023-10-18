@@ -8,6 +8,7 @@ export default function TeamMember({
   email,
   handle,
   canRemove = false,
+  handleRemoveUser,
 }) {
   return (
     <div className="flex justify-between items-center">
@@ -30,7 +31,11 @@ export default function TeamMember({
         </div>
       </Link>
       {canRemove && (
-        <Button variant="contained" className="bg-error-dark" color="error">
+        <Button
+          variant="contained"
+          className="bg-error-dark"
+          color="error"
+          onClick={handleRemoveUser}>
           Remove
         </Button>
       )}
