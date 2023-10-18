@@ -35,7 +35,7 @@ export default function TeamMember({
           variant="contained"
           className="bg-error-dark"
           color="error"
-          onClick={handleRemoveUser}>
+          onClick={() => handleRemoveUser(handle)}>
           Remove
         </Button>
       )}
