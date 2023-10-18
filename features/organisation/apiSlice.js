@@ -1,6 +1,7 @@
 import { apiSlice } from '../api/apiSlice';
 import { produce } from 'immer';
 import { updateUser } from '../auth/authSlice';
+import { USER_BASE_URL } from '../user/apiSlice';
 
 const ORGANISATION_BASE_URL = '/organisation';
 
@@ -62,6 +63,12 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    deleteUser: builder.mutation({
+      query: ({ orgHandle, userHandle }) => ({
+        url: `${USER_BASE_URL}/${userHandle}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -72,4 +79,5 @@ export const {
   useGetOrganisationUsersQuery,
   useGetOrganisationProjectsQuery,
   useUpdateOrganisationMutation,
+  useDeleteUserMutation,
 } = organisationApiSlice;
