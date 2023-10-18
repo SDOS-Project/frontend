@@ -7,6 +7,7 @@ export default function TeamMember({
   lastName,
   email,
   handle,
+  imgUrl,
   canRemove = false,
   handleRemoveUser,
 }) {
@@ -15,7 +16,9 @@ export default function TeamMember({
       <Link href={`/user/${handle}`}>
         <div>
           <div className="flex items-center gap-2">
-            <Avatar className="w-8 h-8 sm:h-10 sm:w-10 body-small sm:body-normal">
+            <Avatar
+              className="w-8 h-8 sm:h-10 sm:w-10 body-small sm:body-normal"
+              src={imgUrl}>
               {firstName[0] + lastName[0]}
             </Avatar>
             <p>
