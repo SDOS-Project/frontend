@@ -7,13 +7,7 @@ import { useLoginMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { setUser } from '@/features/auth/authSlice';
 import { Controller, useForm } from 'react-hook-form';
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  OutlinedInput,
-  TextField,
-} from '@mui/material';
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidationSchema } from '@/schemas/login/schema';
 import { toast } from 'react-toastify';
