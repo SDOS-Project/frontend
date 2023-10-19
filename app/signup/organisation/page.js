@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,8 @@ import { Controller, useForm } from 'react-hook-form';
 import {
   FormControl,
   FormHelperText,
+  IconButton,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -22,11 +24,27 @@ import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { TabSwitch } from '@/components/signup/TabSwitch';
 import ImageUpload from '@/components/common/ImageUpload';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export default function Signup() {
   const dispatch = useDispatch();
   const [signup, { isLoading: isOrganisationSignupLoading }] =
     useOrganisationSignupMutation();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleClickShowPassword = useCallback(
+    () => setShowPassword((show) => !show),
+    []
+  );
+  const handleClickShowConfirmPassword = useCallback(
+    () => setShowConfirmPassword((show) => !show),
+    []
+  );
+  const handleMouseDownPassword = useCallback((event) => {
+    event.preventDefault();
+  }, []);
 
   const textFields = useMemo(
     () => [
@@ -43,12 +61,30 @@ export default function Signup() {
       {
         name: 'password',
         label: 'Password',
-        type: 'password',
+        type: showPassword ? 'text' : 'password',
+        endAdornment: (
+          <IconButton
+            aria-label="toggle password visibility"
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+            edge="end">
+            {showPassword ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        ),
       },
       {
         name: 'confirmPassword',
         label: 'Confirm Password',
-        type: 'password',
+        type: showConfirmPassword ? 'text' : 'password',
+        endAdornment: (
+          <IconButton
+            aria-label="toggle password visibility"
+            onClick={handleClickShowConfirmPassword}
+            onMouseDown={handleMouseDownPassword}
+            edge="end">
+            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        ),
       },
       {
         name: 'address',
@@ -61,7 +97,13 @@ export default function Signup() {
         type: 'text',
       },
     ],
-    []
+    [
+      showPassword,
+      showConfirmPassword,
+      handleClickShowPassword,
+      handleClickShowConfirmPassword,
+      handleMouseDownPassword,
+    ]
   );
 
   const defaultValues = useMemo(() => {
@@ -142,6 +184,13 @@ export default function Signup() {
               helperText={
                 errors[textField.name] ? errors[textField.name]?.message : ''
               }
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {textField.endAdornment}
+                  </InputAdornment>
+                ),
+              }}
             />
           )}
         />
