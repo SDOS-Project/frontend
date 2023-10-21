@@ -1,5 +1,3 @@
-'use client';
-
 import { Avatar, Skeleton } from '@mui/material';
 
 export default function ProjectSkeleton() {
