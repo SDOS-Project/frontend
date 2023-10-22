@@ -200,8 +200,14 @@ export default function Signup() {
         control={control}
         render={({ field }) => (
           <FormControl className="w-full mb-2 lg:mb-0" size="small">
-            <InputLabel>Type</InputLabel>
-            <Select {...field} label="Type" error={!!errors.type}>
+            <InputLabel className={errors?.type && 'text-error-main'}>
+              Type
+            </InputLabel>
+            <Select
+              {...field}
+              label="type"
+              error={!!errors.type}
+              className="w-full">
               {Object.keys(OrganisationType)?.map((role) => {
                 return (
                   <MenuItem key={role} value={role}>
@@ -210,8 +216,8 @@ export default function Signup() {
                 );
               })}
             </Select>
-            <FormHelperText className="text-red ml-4">
-              {errors?.role && errors?.role?.message}
+            <FormHelperText className="text-error-main">
+              {errors?.type && errors?.type?.message}
             </FormHelperText>
           </FormControl>
         )}

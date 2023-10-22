@@ -18,7 +18,7 @@ export const organisationSignupValidationSchema = yup.object().shape({
     .required('Confirm Password is required'),
   type: yup
     .string()
-    .oneOf(Object.keys(OrganisationType))
+    .oneOf(Object.keys(OrganisationType), 'Type must be Academic or Corporate')
     .required('Role is required'),
   address: yup.string().required('Address is required'),
   ipPolicy: urlValidationSchema(true),
