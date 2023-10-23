@@ -27,7 +27,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: user,
       }),
-      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ _ }, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(

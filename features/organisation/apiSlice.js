@@ -43,7 +43,7 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: organisation,
       }),
-      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ _ }, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(
