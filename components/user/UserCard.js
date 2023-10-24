@@ -12,13 +12,14 @@ function UserCard({
   email,
   organisation,
   areasOfInterest,
+  imgUrl,
 }) {
   return (
     <Link href={`/user/${handle}`}>
       <div className="w-full h-full shadow-md cursor-pointer bg-paper hover:shadow-lg duration-500 relative rounded-lg">
         <div className="absolute top-0 left-0 bg-gg h-20 w-full rounded-t-lg"></div>
         <div className="p-4 pt-6 flex flex-col justify-center items-center gap-3">
-          <Avatar className="w-24 h-24" />
+          <Avatar className="w-24 h-24" src={imgUrl} />
           <p className="body-xlarge text-center font-semibold">
             {firstName} {lastName}
           </p>
