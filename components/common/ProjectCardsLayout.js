@@ -29,12 +29,11 @@ export default function ProjectCardsLayout({
             <ProjectCard key={project.handle} {...project} />
           ))}
         </main>
-      ) : (
-        <NullViewComponent
-          imgSrc="/assets/images/project/empty.svg"
-          heading="No Projects Found"
-          desc="You haven't created any projects yet."
-        />
+      ) : (<NullViewComponent
+        imgSrc="/assets/images/project/empty.svg"
+        heading="No Projects Found"
+        desc="You haven't created any projects yet."
+      />
       )}
     </>
   );
