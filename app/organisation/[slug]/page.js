@@ -75,7 +75,7 @@ export default function Organisation({ params }) {
         <div className="absolute top-0 left-0 bg-gg h-24 sm:h-36 w-full rounded-t-lg z-0"></div>
         <Tooltip title={OrganisationType[organisation?.type]}>
           <div className="z-50 absolute right-6 top-6 bg-primary-main text-white p-3 rounded-full body-xsmall">
-            {OrganisationType[organisation?.type].toLowerCase() ===
+            {OrganisationType[organisation?.type]?.toLowerCase() ===
             OrganisationType.ACADEMIC.toLowerCase() ? (
               <SchoolIcon className="body-xlarge" />
             ) : (
@@ -94,7 +94,7 @@ export default function Organisation({ params }) {
               {organisation?.name}
             </p>
             {canEdit && (
-              <div>
+              <>
                 <Button
                   variant="contained"
                   className="bg-primary-main"
@@ -106,7 +106,7 @@ export default function Organisation({ params }) {
                   isDialogOpen={isEditOrganisationOpen}
                   handleCloseDialog={() => setIsEditOrganisationOpen(false)}
                 />
-              </div>
+              </>
             )}
           </div>
           <TabContext value={tabValue}>

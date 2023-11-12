@@ -1,6 +1,7 @@
 import { apiSlice } from '../api/apiSlice';
 import { produce } from 'immer';
 import { updateUser } from '../auth/authSlice';
+import { USER_BASE_URL } from '../user/apiSlice';
 
 const ORGANISATION_BASE_URL = '/organisation';
 
@@ -42,7 +43,7 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: organisation,
       }),
-      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ _ }, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(
@@ -62,6 +63,41 @@ export const organisationApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    deleteUser: builder.mutation({
+      query: ({ userHandle }) => ({
+        url: `${USER_BASE_URL}/${userHandle}`,
+        method: 'DELETE',
+      }),
+      async onQueryStarted(
+        { orgHandle, userHandle },
+        { dispatch, queryFulfilled }
+      ) {
+        try {
+          await queryFulfilled;
+          dispatch(
+            organisationApiSlice.util.updateQueryData(
+              'getOrganisationUsers',
+              orgHandle,
+              (draft) => {
+                return produce(draft, (draftState) => {
+                  console.log(JSON.stringify(draftState));
+                  Object.assign(
+                    draftState,
+                    draftState.forEach((user, index) => {
+                      if (user.handle === userHandle) {
+                        draftState.splice(index, 1);
+                      }
+                    })
+                  );
+                });
+              }
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -72,4 +108,5 @@ export const {
   useGetOrganisationUsersQuery,
   useGetOrganisationProjectsQuery,
   useUpdateOrganisationMutation,
+  useDeleteUserMutation,
 } = organisationApiSlice;

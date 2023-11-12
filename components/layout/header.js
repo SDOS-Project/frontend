@@ -116,13 +116,22 @@ export default function Header() {
         )}
         <List>
           {user?.role && (
-            <ListItem disablePadding>
-              <ListItemButton className="text-center">
-                <Link href={'/recommended'} legacyBehavior>
-                  <ListItemText primary={'Recommended'} />
-                </Link>
-              </ListItemButton>
-            </ListItem>
+            <>
+              <ListItem disablePadding>
+                <ListItemButton className="text-center">
+                  <Link href={'/project/start'} legacyBehavior>
+                    <ListItemText primary={'Start a Project'} />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton className="text-center">
+                  <Link href={'/recommended'} legacyBehavior>
+                    <ListItemText primary={'Recommended'} />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+            </>
           )}
           {navItems.map((item) => {
             return (
@@ -135,13 +144,6 @@ export default function Header() {
               </ListItem>
             );
           })}
-          <ListItem disablePadding>
-            <ListItemButton className="text-center">
-              <Link href={'/project/start'} legacyBehavior>
-                <ListItemText primary={'Start a Project'} />
-              </Link>
-            </ListItemButton>
-          </ListItem>
           <ListItem disablePadding>
             <ListItemButton className="text-center">
               <ListItemText onClick={handleLogout}>Logout</ListItemText>

@@ -2,7 +2,7 @@ import { apiSlice } from '../api/apiSlice';
 import { produce } from 'immer';
 import { updateUser } from '../auth/authSlice';
 
-const USER_BASE_URL = '/user';
+export const USER_BASE_URL = '/user';
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -27,7 +27,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: user,
       }),
-      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ _ }, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           dispatch(

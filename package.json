@@ -16,6 +16,7 @@
     "@mui/lab": "^5.0.0-alpha.146",
     "@mui/material": "^5.14.10",
     "@reduxjs/toolkit": "^1.9.5",
+    "cssnano": "^6.0.1",
     "date-fns": "^2.30.0",
     "eslint": "8.50.0",
     "eslint-config-next": "^13.5.4",

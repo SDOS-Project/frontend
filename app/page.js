@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,12 +7,13 @@ import { useLoginMutation } from '@/features/auth/apiSlice';
 import { useRouter } from 'next/navigation';
 import { setUser } from '@/features/auth/authSlice';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, TextField } from '@mui/material';
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidationSchema } from '@/schemas/login/schema';
 import { toast } from 'react-toastify';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 import Link from 'next/link';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export default function Home() {
   const router = useRouter();
@@ -21,6 +22,16 @@ export default function Home() {
   const authState = useSelector((state) => state.auth);
 
   const [login] = useLoginMutation();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = useCallback(
+    () => setShowPassword((show) => !show),
+    []
+  );
+  const handleMouseDownPassword = useCallback((event) => {
+    event.preventDefault();
+  }, []);
 
   const defaultValues = useMemo(() => {
     return {
@@ -104,12 +115,25 @@ export default function Home() {
             <TextField
               {...field}
               size="small"
-              type="password"
               label="Password"
               variant="outlined"
               className="w-full"
               error={!!errors.password}
               helperText={errors.password ? errors.password?.message : ''}
+              type={showPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end">
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           )}
         />
