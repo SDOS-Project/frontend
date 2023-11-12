@@ -83,7 +83,7 @@ export const projectApiSlice = enhancedApiSlice.injectEndpoints({
               handle,
               (draft) => {
                 return produce(draft, (draftState) => {
-                  draftState?.push(data);
+                  draftState?.unshift(data);
                 });
               }
             )
