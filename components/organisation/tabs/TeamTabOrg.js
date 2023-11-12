@@ -5,6 +5,7 @@ import { useGetOrganisationUsersQuery } from '@/features/organisation/apiSlice';
 import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import RemoveUser from '../forms/RemoveUser';
+import CoordinatorSkeleton from '../skeletons/CoordinatorSkeleton';
 
 export default function TeamTabOrg({ handle }) {
   const userState = useSelector(selectUser);
@@ -22,7 +23,7 @@ export default function TeamTabOrg({ handle }) {
     setUserHandle(userHandle);
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <CoordinatorSkeleton />;
 
   return (
     <>
