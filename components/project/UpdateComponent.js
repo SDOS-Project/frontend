@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function UpdateComponent({ user, content, createdAt }) {
   return (
     <div className="flex gap-2">
-      <Avatar className="w-10 h-10 body-small">
+      <Avatar className="w-10 h-10 body-small" src={user?.imgUrl}>
         {user?.firstName[0] + user?.lastName[0]}
       </Avatar>
       <div className="flex flex-col">
