@@ -1,8 +1,9 @@
+import TeamMember from '@/components/common/TeamMember';
+import NullView from '@/components/null-views/NullView';
+import { selectUser } from '@/features/auth/authSlice';
 import { useGetOrganisationUsersQuery } from '@/features/organisation/apiSlice';
 import { useCallback, useMemo, useState } from 'react';
-import TeamMember from '@/components/common/TeamMember';
 import { useSelector } from 'react-redux';
-import { selectUser } from '@/features/auth/authSlice';
 import RemoveUser from '../forms/RemoveUser';
 
 export default function TeamTabOrg({ handle }) {
@@ -25,14 +26,18 @@ export default function TeamTabOrg({ handle }) {
 
   return (
     <>
-      {users?.map((user) => (
+      {users.length > 0 ? users?.map((user) => (
         <TeamMember
           key={user.handle}
           canRemove={canRemove}
           handleRemoveUser={handleRemoveUser}
           {...user}
         />
-      ))}
+      )) : <NullView
+        imgSrc={'/assets/images/organisation/empty.svg'}
+        heading={'No Coordinators Found'}
+        desc={'There are no coordinators with this organisation yet.'}
+      />}
       {canRemove && (
         <RemoveUser
           userHandle={userHandle}
