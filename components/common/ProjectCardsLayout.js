@@ -12,7 +12,7 @@ export default function ProjectCardsLayout({
       <NullViewComponent
         imgSrc="/assets/images/project/empty.svg"
         heading="No Projects Found"
-        desc="You haven't created any projects yet."
+        desc="There are no projects yet."
       />
     );
   }
