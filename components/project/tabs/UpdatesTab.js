@@ -1,11 +1,12 @@
-import { useCallback, useState } from 'react';
-import UpdateComponent from '../UpdateComponent';
 import {
   useGetProjectConfigQuery,
   useGetUpdatesQuery,
 } from '@/features/project/apiSice';
 import { Button } from '@mui/material';
 import dynamic from 'next/dynamic';
+import { useCallback, useState } from 'react';
+import UpdatesSkeleton from '../Skeletons/UpdatesSkeleton';
+import UpdateComponent from '../UpdateComponent';
 const AddUpdate = dynamic(() => import('../forms/AddUpdate'), {
   ssr: false,
 });
@@ -22,7 +23,7 @@ export default function UpdatesTab({ handle }) {
     setIsAddUpdateOpen(true);
   }, []);
 
-  if (isLoading || isProjectConfigLoading) return <div>Loading...</div>;
+  if (isLoading || isProjectConfigLoading) return <UpdatesSkeleton />;
 
   return (
     <>
@@ -47,16 +48,14 @@ export default function UpdatesTab({ handle }) {
         )}
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
+        {
           updates.length > 0 &&
           updates?.map((update) => (
             <div key={update.createdAt} className="my-2">
               <UpdateComponent key={update.createdAt} {...update} />
             </div>
           ))
-        )}
+        }
       </div>
     </>
   );
