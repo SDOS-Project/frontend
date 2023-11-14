@@ -2,7 +2,7 @@
 import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Button, Tab, Tooltip } from '@mui/material';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
 import dynamic from 'next/dynamic';
 import { OrganisationType } from '@/types/OrganisationType';
@@ -57,7 +57,8 @@ export default function Organisation({ params }) {
       },
       {
         label:
-          organisation?.type === OrganisationType.ACADEMIC
+          organisation.type.toLowerCase() ===
+          OrganisationType.ACADEMIC.toLowerCase()
             ? 'Faculty'
             : 'Employees',
         component: <TeamTabOrg handle={slug} />,
