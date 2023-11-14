@@ -57,7 +57,7 @@ export default function Organisation({ params }) {
       },
       {
         label:
-          organisation.type.toLowerCase() ===
+          organisation?.type.toLowerCase() ===
           OrganisationType.ACADEMIC.toLowerCase()
             ? 'Faculty'
             : 'Employees',
