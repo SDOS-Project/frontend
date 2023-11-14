@@ -11,7 +11,8 @@ const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'EduCorp',
-  description: 'This is the SDOS project',
+  description:
+    'A platform where academic expertise meets industrial innovation.',
 };
 
 export default function RootLayout({ children }) {
