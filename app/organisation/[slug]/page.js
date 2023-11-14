@@ -56,7 +56,10 @@ export default function Organisation({ params }) {
         component: <AboutTabOrg handle={slug} />,
       },
       {
-        label: 'Coordinators',
+        label:
+          organisation?.type === OrganisationType.ACADEMIC
+            ? 'Faculty'
+            : 'Employees',
         component: <TeamTabOrg handle={slug} />,
       },
       {
@@ -64,7 +67,7 @@ export default function Organisation({ params }) {
         component: <ProjectsTab handle={slug} />,
       },
     ],
-    [slug]
+    [slug, organisation?.type]
   );
 
   if (isLoading) return <ProjectSkeleton />;
