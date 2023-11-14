@@ -1,7 +1,14 @@
 'use client';
 import { useGetUserQuery } from '@/features/user/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Avatar, Box, Button, Tab, Tooltip } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  LinearProgress,
+  Tab,
+  Tooltip,
+} from '@mui/material';
 import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import AboutTabUser from '@/components/user/tabs/AboutTabUser';
@@ -58,7 +65,13 @@ export default function User({ params }) {
     [slug]
   );
 
-  if (isLoading) return <ProjectSkeleton />;
+  if (isLoading)
+    return (
+      <>
+        <LinearProgress />
+        <ProjectSkeleton />
+      </>
+    );
   return (
     <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md relative">

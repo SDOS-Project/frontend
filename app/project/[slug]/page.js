@@ -6,7 +6,7 @@ import {
 } from '@/features/project/apiSice';
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Avatar, Box, Button, Tab } from '@mui/material';
+import { Avatar, Box, Button, LinearProgress, Tab } from '@mui/material';
 import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
@@ -56,7 +56,13 @@ export default function Project({ params }) {
     [slug]
   );
 
-  if (isLoading || isProjectConfigLoading) return <ProjectSkeleton />;
+  if (isLoading || isProjectConfigLoading)
+    return (
+      <>
+        <LinearProgress />
+        <ProjectSkeleton />
+      </>
+    );
   return (
     <div className="width-layout-1 padding-layout-2">
       <div className="bg-paper shadow-md relative">
