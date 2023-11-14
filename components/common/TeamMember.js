@@ -1,6 +1,9 @@
 import { Email } from '@mui/icons-material';
-import { Avatar, Button } from '@mui/material';
+import { Avatar, Button, Tooltip } from '@mui/material';
 import Link from 'next/link';
+import SchoolIcon from '@mui/icons-material/School';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import { UserRole } from '@/types/UserRole';
 
 export default function TeamMember({
   firstName,
@@ -9,6 +12,7 @@ export default function TeamMember({
   handle,
   imgUrl,
   canRemove = false,
+  role,
   handleRemoveUser,
 }) {
   return (
@@ -23,6 +27,15 @@ export default function TeamMember({
           <p>
             {firstName} {lastName}
           </p>
+          <Tooltip title={UserRole[role]}>
+            <div className="bg-primary-main text-white p-1.5 flex justify-center rounded-full">
+              {UserRole[role] == UserRole.FACULTY ? (
+                <SchoolIcon className="body-xsmall" />
+              ) : (
+                <CorporateFareIcon className="body-xsmall" />
+              )}
+            </div>
+          </Tooltip>
         </div>
       </Link>
       <Link href={`mailto:${email}`} onClick={(e) => e.stopPropagation()}>
