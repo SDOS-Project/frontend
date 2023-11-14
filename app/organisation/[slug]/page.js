@@ -2,7 +2,7 @@
 import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Button, Tab, Tooltip } from '@mui/material';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
 import dynamic from 'next/dynamic';
 import { OrganisationType } from '@/types/OrganisationType';
