@@ -70,6 +70,20 @@ export default function StartProject() {
     [createProject, defaultValues, reset, router]
   );
 
+  const dateFields = useMemo(
+    () => [
+      {
+        name: 'startDate',
+        label: 'Start Date',
+      },
+      {
+        name: 'endDate',
+        label: 'End Date',
+      },
+    ],
+    []
+  );
+
   useEffect(() => {
     if (user?.type) router.push(`/organisation/${user.handle}`);
   }, [user?.type, user?.handle, router]);
@@ -147,58 +161,34 @@ export default function StartProject() {
           />
         )}
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Controller
-            name="startDate"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <DesktopDatePicker
-                label="Start Date"
-                inputFormat="DD/MM/YYYY"
-                slotProps={{ textField: { size: 'small' } }}
-                value={value}
-                onChange={(newValue) => onChange(newValue ? newValue.$d : null)}
-                className="w-full">
-                {({ inputRef, inputProps, InputProps }) => (
-                  <TextField
-                    {...inputProps}
-                    ref={inputRef}
-                    size="large"
-                    error={!!errors.startDate}
-                    helperText={
-                      errors.startDate ? errors.startDate.message : ''
-                    }
-                    InputProps={InputProps}
-                  />
-                )}
-              </DesktopDatePicker>
-            )}
-          />
-        </LocalizationProvider>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Controller
-            name="endDate"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <DesktopDatePicker
-                label="End Date"
-                inputFormat="DD/MM/YYYY"
-                slotProps={{ textField: { size: 'small' } }}
-                value={value}
-                onChange={(newValue) => onChange(newValue ? newValue.$d : null)}
-                className="w-full">
-                {({ inputRef, inputProps, InputProps }) => (
-                  <TextField
-                    {...inputProps}
-                    ref={inputRef}
-                    size="small"
-                    error={!!errors.endDate}
-                    helperText={errors.endDate ? errors.endDate.message : ''}
-                    InputProps={InputProps}
-                  />
-                )}
-              </DesktopDatePicker>
-            )}
-          />
+          {dateFields.map(({ name, label }) => (
+            <Controller
+              key={name}
+              name={name}
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <DesktopDatePicker
+                  label={label}
+                  inputFormat="DD/MM/YYYY"
+                  slotProps={{ textField: { size: 'small' } }}
+                  value={value}
+                  onChange={(newValue) =>
+                    onChange(newValue ? newValue.$d : null)
+                  }
+                  className="w-full">
+                  {({ inputRef, inputProps, InputProps }) => (
+                    <TextField
+                      {...inputProps}
+                      ref={inputRef}
+                      error={!!errors.name}
+                      helperText={errors.name ? errors.name.message : ''}
+                      InputProps={InputProps}
+                    />
+                  )}
+                </DesktopDatePicker>
+              )}
+            />
+          ))}
         </LocalizationProvider>
         <LoadingButton
           type="submit"

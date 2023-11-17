@@ -6,7 +6,8 @@ export const startProjectValidationSchema = yup.object().shape({
   partnerHandle: yup.string().required('Partner is required'),
   startDate: yup
     .date()
-    .nullable()
+    .required('Start date is required')
+    .typeError('Start date must be a valid date')
     .when('endDate', (endDate, schema) =>
       endDate
         ? schema.required('Start date is required if end date is present')
@@ -14,6 +15,7 @@ export const startProjectValidationSchema = yup.object().shape({
     ),
   endDate: yup
     .date()
-    .nullable()
-    .min(yup.ref('startDate'), 'End date must be after start date'),
+    .required('End date is required')
+    .min(yup.ref('startDate'), 'End date must be after start date')
+    .typeError('End date must be a valid date'),
 });
