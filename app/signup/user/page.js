@@ -201,7 +201,7 @@ export default function Signup() {
         name="role"
         control={control}
         render={({ field }) => (
-          <FormControl className="w-full mb-2 lg:mb-0" size="small">
+          <FormControl className="w-full" size="small">
             <InputLabel className={errors?.role && 'text-error-main'}>
               Role
             </InputLabel>
