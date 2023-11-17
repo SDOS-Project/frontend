@@ -1,7 +1,14 @@
 'use client';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { startProjectValidationSchema } from '@/schemas/project/start/schema';
@@ -18,6 +25,7 @@ import { useRouter } from 'next/navigation';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
+import { ProjectLocation } from '@/types/ProjectLocation';
 
 export default function StartProject() {
   const router = useRouter();
@@ -39,6 +47,7 @@ export default function StartProject() {
       partnerHandle: '',
       startDate: null,
       endDate: null,
+      location: '',
     };
   }, [user?.handle]);
 
@@ -170,7 +179,13 @@ export default function StartProject() {
                 <DesktopDatePicker
                   label={label}
                   inputFormat="DD/MM/YYYY"
-                  slotProps={{ textField: { size: 'small' } }}
+                  slotProps={{
+                    textField: {
+                      size: 'small',
+                      error: !!errors[name],
+                      helperText: errors[name] ? errors[name].message : '',
+                    },
+                  }}
                   value={value}
                   onChange={(newValue) =>
                     onChange(newValue ? newValue.$d : null)
@@ -190,6 +205,33 @@ export default function StartProject() {
             />
           ))}
         </LocalizationProvider>
+        <Controller
+          name="location"
+          control={control}
+          render={({ field }) => (
+            <FormControl className="w-full" size="small">
+              <InputLabel className={errors?.location && 'text-error-main'}>
+                Location
+              </InputLabel>
+              <Select
+                {...field}
+                label="Location"
+                error={!!errors.location}
+                className="w-full">
+                {Object.keys(ProjectLocation)?.map((location) => {
+                  return (
+                    <MenuItem key={location} value={location}>
+                      {ProjectLocation[location]}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+              <FormHelperText className="text-error-main">
+                {errors?.location && errors?.location?.message}
+              </FormHelperText>
+            </FormControl>
+          )}
+        />
         <LoadingButton
           type="submit"
           variant="contained"

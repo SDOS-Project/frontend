@@ -1,3 +1,4 @@
+import { ProjectLocation } from '@/types/ProjectLocation';
 import * as yup from 'yup';
 
 export const startProjectValidationSchema = yup.object().shape({
@@ -18,4 +19,8 @@ export const startProjectValidationSchema = yup.object().shape({
     .required('End date is required')
     .min(yup.ref('startDate'), 'End date must be after start date')
     .typeError('End date must be a valid date'),
+  location: yup
+    .string()
+    .oneOf(Object.keys(ProjectLocation), 'Location must be valid')
+    .required('Location is required'),
 });
