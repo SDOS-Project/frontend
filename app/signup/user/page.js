@@ -97,6 +97,11 @@ export default function Signup() {
           </IconButton>
         ),
       },
+      {
+        name: 'socialUrl',
+        label: 'Homepage/LinkedIn URL',
+        type: 'text',
+      },
     ],
     [
       showPassword,
@@ -114,6 +119,7 @@ export default function Signup() {
       email: '',
       password: '',
       confirmPassword: '',
+      socialUrl: '',
       role: '',
       organisationHandle: '',
       areasOfInterest: [],
