@@ -10,7 +10,7 @@ export default function Layout({ children }) {
             <div className="body-2xlarge font-semibold">
               Signup On Edu<span className="text-primary-main">Corp.</span>
             </div>
-            <div className="text-primary-grey font-light body-small">
+            <div className="text-primary-light font-light body-small">
               Bridging Academia and Industry
             </div>
           </div>
