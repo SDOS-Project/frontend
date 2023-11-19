@@ -97,7 +97,12 @@ export default function User({ params }) {
               <p className="body-xlarge text-primary-dark font-medium">
                 {user?.firstName + ' ' + user?.lastName}
               </p>
-              <Link href={`/organisation/${user?.organisation?.handle}`}>
+              <Link
+                href={
+                  user?.organisation?.handle
+                    ? `/organisation/${user?.organisation?.handle}`
+                    : ''
+                }>
                 <div className="flex gap-1 sm:gap-2 items-center">
                   <Avatar
                     src={user?.organisation?.imgUrl}
