@@ -15,9 +15,14 @@ import { TabSwitch } from '@/components/signup/TabSwitch';
 import ImageUpload from '@/components/common/ImageUpload';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { studentSignupValidationSchema } from '@/schemas/signup/student/schema';
+import CustomAutocomplete from '@/components/common/CustomAutocomplete';
+import { useGetOrganisationsDropdownQuery } from '@/features/organisation/apiSlice';
 
 export default function Signup() {
   const dispatch = useDispatch();
+
+  const { data: organisations, isLoading: isOrganisationsLoading } =
+    useGetOrganisationsDropdownQuery();
 
   const [signup, { isLoading: isUserSignupLoading }] =
     useStudentSignupMutation();
@@ -99,6 +104,7 @@ export default function Signup() {
       email: '',
       password: '',
       confirmPassword: '',
+      organisationHandle: '',
       imgUrl: '',
     };
   }, []);
@@ -179,6 +185,15 @@ export default function Signup() {
           )}
         />
       ))}
+      <CustomAutocomplete
+        control={control}
+        fieldName="organisationHandle"
+        options={organisations}
+        errors={errors}
+        loading={isOrganisationsLoading}
+        label={'Organisation (Optional)'}
+        optionLabelCallback={(option) => option?.name}
+      />
       <LoadingButton
         type="submit"
         variant="contained"

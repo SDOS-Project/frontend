@@ -16,5 +16,6 @@ export const studentSignupValidationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('Confirm Password is required'),
+  organisationHandle: yup.string().optional(),
   imgUrl: urlValidationSchema(false),
 });
