@@ -27,7 +27,7 @@ export default function UpdatesTab({ handle }) {
 
   return (
     <>
-      {projectConfig?.isAdmin && (
+      {(projectConfig?.isAdmin || projectConfig?.isStudent) && (
         <AddUpdate
           handle={handle}
           isDialogOpen={isAddUpdateOpen}
@@ -38,7 +38,7 @@ export default function UpdatesTab({ handle }) {
         <p className="body-large font-medium text-primary-dark">
           Updates ({updates.length})
         </p>
-        {projectConfig?.isAdmin && (
+        {(projectConfig?.isAdmin || projectConfig?.isStudent) && (
           <Button
             variant="outlined"
             color="primary"
@@ -48,14 +48,12 @@ export default function UpdatesTab({ handle }) {
         )}
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        {
-          updates.length > 0 &&
+        {updates.length > 0 &&
           updates?.map((update) => (
             <div key={update.createdAt} className="my-2">
               <UpdateComponent key={update.createdAt} {...update} />
             </div>
-          ))
-        }
+          ))}
       </div>
     </>
   );
