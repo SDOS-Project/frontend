@@ -18,7 +18,7 @@ export const TabSwitch = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex items-center w-full gap-1 my-4">
+    <div className="flex items-center w-full gap-1 mt-5">
       <Link href={'/signup/user'} className="w-full">
         <div
           className={
