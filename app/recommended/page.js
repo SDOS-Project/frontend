@@ -2,11 +2,24 @@
 import NullView from '@/components/null-views/NullView';
 import UserCard from '@/components/user/UserCard';
 import UserCardSkeleton from '@/components/user/skeletons/UserCardSkeleton';
+import { selectUser } from '@/features/auth/authSlice';
 import { useGetRecommendedQuery } from '@/features/user/apiSlice';
+import { UserRole } from '@/types/UserRole';
 import { LinearProgress } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Recommended() {
+  const router = useRouter();
+  const userState = useSelector(selectUser);
   const { data: recommeded, isLoading } = useGetRecommendedQuery();
+
+  useEffect(() => {
+    if (userState?.role.toLowerCase() === UserRole.STUDENT.toLowerCase()) {
+      router.push('/');
+    }
+  }, [userState, router]);
 
   if (isLoading)
     return (

@@ -24,6 +24,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase-config';
 import { toast } from 'react-toastify';
+import { UserRole } from '@/types/UserRole';
 
 export default function Header() {
   const router = useRouter();
@@ -115,24 +116,25 @@ export default function Header() {
           </>
         )}
         <List>
-          {user?.role && (
-            <>
-              <ListItem disablePadding>
-                <ListItemButton className="text-center">
-                  <Link href={'/project/start'} legacyBehavior>
-                    <ListItemText primary={'Start a Project'} />
-                  </Link>
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton className="text-center">
-                  <Link href={'/recommended'} legacyBehavior>
-                    <ListItemText primary={'Recommended'} />
-                  </Link>
-                </ListItemButton>
-              </ListItem>
-            </>
-          )}
+          {user?.role &&
+            user?.role.toLowerCase() !== UserRole.STUDENT.toLowerCase() && (
+              <>
+                <ListItem disablePadding>
+                  <ListItemButton className="text-center">
+                    <Link href={'/project/start'} legacyBehavior>
+                      <ListItemText primary={'Start a Project'} />
+                    </Link>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton className="text-center">
+                    <Link href={'/recommended'} legacyBehavior>
+                      <ListItemText primary={'Recommended'} />
+                    </Link>
+                  </ListItemButton>
+                </ListItem>
+              </>
+            )}
           {navItems.map((item) => {
             return (
               <ListItem key={item.href} disablePadding>
@@ -180,13 +182,14 @@ export default function Header() {
             />
           </Link>
           <Box className="ml-4 hidden md:flex items-center gap-4">
-            {user?.role && (
-              <Link href={'/recommended'} legacyBehavior>
-                <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
-                  Recommended
-                </Typography>
-              </Link>
-            )}
+            {user?.role &&
+              user?.role.toLowerCase() !== UserRole.STUDENT.toLowerCase() && (
+                <Link href={'/recommended'} legacyBehavior>
+                  <Typography className="body-normal cursor-pointer transition all delay-30 hover:text-primary-main">
+                    Recommended
+                  </Typography>
+                </Link>
+              )}
             {navItems.map((item) => {
               return (
                 <Link href={item.href} key={item.href} legacyBehavior>
@@ -199,13 +202,16 @@ export default function Header() {
           </Box>
         </Box>
         <Box className="hidden md:flex items-center gap-4">
-          {user?.role && (
-            <Link href={'/project/start'} legacyBehavior>
-              <Button variant="contained" className="bg-primary-main py-1 px-6">
-                Start a Project
-              </Button>
-            </Link>
-          )}
+          {user?.role &&
+            user?.role.toLowerCase() !== UserRole.STUDENT.toLowerCase() && (
+              <Link href={'/project/start'} legacyBehavior>
+                <Button
+                  variant="contained"
+                  className="bg-primary-main py-1 px-6">
+                  Start a Project
+                </Button>
+              </Link>
+            )}
           <IconButton className="p-0" onClick={handleOpenUserMenu}>
             <Avatar src={user?.imgUrl}>
               {user?.firstName && user?.lastName ? (
