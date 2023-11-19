@@ -30,9 +30,17 @@ export const TabSwitch = () => {
       <Link href={'/signup/organisation'} className="w-full">
         <div
           className={
-            pathname !== '/signup/user' ? selectedTab : notSelectedTab
+            pathname === '/signup/organisation' ? selectedTab : notSelectedTab
           }>
           Signup as Organisation
+        </div>
+      </Link>
+      <Link href={'/signup/student'} className="w-full">
+        <div
+          className={
+            pathname === '/signup/student' ? selectedTab : notSelectedTab
+          }>
+          Signup as Student
         </div>
       </Link>
     </div>
