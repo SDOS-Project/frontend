@@ -23,4 +23,13 @@ export const startProjectValidationSchema = yup.object().shape({
     .string()
     .oneOf(Object.keys(ProjectLocation), 'Location must be valid')
     .required('Location is required'),
+  students: yup.array().of(
+    yup.object().shape({
+      name: yup.string().required('Name is required'),
+      email: yup
+        .string()
+        .email('Email must be valid')
+        .required('Email is required'),
+    })
+  ),
 });
