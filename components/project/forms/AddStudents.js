@@ -20,8 +20,6 @@ export default function AddStudents({ control, errors }) {
     },
   ];
 
-  console.log('ERRORS', errors);
-
   return (
     <>
       {fields.map((item, index) => (
@@ -50,7 +48,10 @@ export default function AddStudents({ control, errors }) {
               />
             </div>
           ))}
-          <Button variant="outlined" onClick={() => remove(index)}>
+          <Button
+            variant="outlined"
+            className="w-fit h-fit py-1.5"
+            onClick={() => remove(index)}>
             Remove
           </Button>
         </div>

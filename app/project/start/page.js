@@ -71,12 +71,12 @@ export default function StartProject() {
         startDate: data.startDate ? data.startDate.toISOString() : null,
         endDate: data.endDate ? data.endDate.toISOString() : null,
       };
-      // try {
-      //   const project = await createProject(formattedData).unwrap();
-      //   router.push(`/project/${project.handle}`);
-      // } catch (error) {
-      //   reset(defaultValues);
-      // }
+      try {
+        const project = await createProject(formattedData).unwrap();
+        router.push(`/project/${project.handle}`);
+      } catch (error) {
+        reset(defaultValues);
+      }
     },
     [createProject, defaultValues, reset, router]
   );
@@ -230,7 +230,7 @@ export default function StartProject() {
             </FormControl>
           )}
         />
-        <AddStudents control={control} />
+        <AddStudents control={control} errors={errors} />
         <LoadingButton
           type="submit"
           variant="contained"
