@@ -1,5 +1,4 @@
 import { Avatar, Tooltip } from '@mui/material';
-import React from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import Link from 'next/link';
@@ -23,34 +22,38 @@ export default function ProjectCard({
         <div className="z-50 py-6 px-4">
           <div className="w-full flex flex-col justify-center items-center px-5 py-4 gap-3">
             <div className="flex justify-center">
-              <Avatar className="w-16 h-16" src={organisations[0].imgUrl} />
+              <Avatar className="w-16 h-16" src={organisations?.[0].imgUrl}>
+                {organisations?.[0].name[0]}
+              </Avatar>
               <Avatar
                 className="w-16 h-16 -ml-3"
-                src={organisations[1].imgUrl}
-              />
+                src={organisations?.[1].imgUrl}>
+                {organisations?.[1].name[0]}
+              </Avatar>
             </div>
             <p className="body-large font-medium text-center capitalize line-clamp-1">
               {name}
             </p>
           </div>
           <div className="flex flex-col gap-2 w-full">
-            {organisations.map((organisation) => (
-              <div
-                className="flex items-center justify-start gap-2"
-                key={organisation.handle}>
-                {organisation.type.toLowerCase() ==
-                OrganisationType.ACADEMIC.toLowerCase() ? (
-                  <SchoolIcon className="body-large" color="primary" />
-                ) : (
-                  <CorporateFareIcon className="body-large" color="primary" />
-                )}
-                <Tooltip title={organisation.name}>
-                  <p className="body-normal line-clamp-1">
-                    {organisation.name}
-                  </p>
-                </Tooltip>
-              </div>
-            ))}
+            {organisations?.length > 0 &&
+              organisations?.map((organisation) => (
+                <div
+                  className="flex items-center justify-start gap-2"
+                  key={organisation.handle}>
+                  {organisation.type.toLowerCase() ==
+                  OrganisationType.ACADEMIC.toLowerCase() ? (
+                    <SchoolIcon className="body-large" color="primary" />
+                  ) : (
+                    <CorporateFareIcon className="body-large" color="primary" />
+                  )}
+                  <Tooltip title={organisation.name}>
+                    <p className="body-normal line-clamp-1">
+                      {organisation.name}
+                    </p>
+                  </Tooltip>
+                </div>
+              ))}
             <p className="body-small line-clamp-3 text-primary-darkgrey">
               {description}
             </p>
