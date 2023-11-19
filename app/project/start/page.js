@@ -26,6 +26,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 import { ProjectLocation } from '@/types/ProjectLocation';
+import AddStudents from '@/components/project/forms/AddStudents';
 
 export default function StartProject() {
   const router = useRouter();
@@ -79,6 +80,14 @@ export default function StartProject() {
     [createProject, defaultValues, reset, router]
   );
 
+  const textFields = useMemo(
+    () => [
+      { name: 'name', label: 'Name' },
+      { name: 'description', label: 'Description' },
+    ],
+    []
+  );
+
   const dateFields = useMemo(
     () => [
       {
@@ -112,38 +121,26 @@ export default function StartProject() {
             knowledge and industrial insight.
           </p>
         </div>
-        <Controller
-          name="name"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size="small"
-              label="Name"
-              className="w-full"
-              variant="outlined"
-              error={!!errors.name}
-              helperText={errors.name ? errors.name?.message : ''}
-            />
-          )}
-        />
-        <Controller
-          name="description"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              size="small"
-              label="Description"
-              multiline
-              rows={5}
-              variant="outlined"
-              className="w-full"
-              error={!!errors.description}
-              helperText={errors.description ? errors.description?.message : ''}
-            />
-          )}
-        />
+        {textFields.map(({ name, label }) => (
+          <Controller
+            key={name}
+            name={name}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                size="small"
+                label={label}
+                className="w-full"
+                variant="outlined"
+                multiline={name === 'description'}
+                rows={name === 'description' ? 5 : 1}
+                error={!!errors[name]}
+                helperText={errors[name] ? errors[name]?.message : ''}
+              />
+            )}
+          />
+        ))}
         {user?.role?.toLowerCase() === UserRole.FACULTY.toLowerCase() ? (
           <CustomAutocomplete
             control={control}
@@ -232,6 +229,7 @@ export default function StartProject() {
             </FormControl>
           )}
         />
+        <AddStudents />
         <LoadingButton
           type="submit"
           variant="contained"
