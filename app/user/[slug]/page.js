@@ -78,7 +78,8 @@ export default function User({ params }) {
         <div className="absolute top-0 left-0 bg-gg h-24 sm:h-36 w-full rounded-t-lg z-0"></div>
         <Tooltip title={UserRole[user?.role]}>
           <div className="z-50 absolute right-6 top-6 bg-primary-main text-white p-3 rounded-full body-xsmall">
-            {UserRole[user?.role] == UserRole.FACULTY ? (
+            {UserRole[user?.role] == UserRole.FACULTY ||
+            UserRole[user?.role] == UserRole.STUDENT ? (
               <SchoolIcon className="body-xlarge" />
             ) : (
               <CorporateFareIcon className="body-xlarge" />
@@ -100,8 +101,12 @@ export default function User({ params }) {
                 <div className="flex gap-1 sm:gap-2 items-center">
                   <Avatar
                     src={user?.organisation?.imgUrl}
-                    className="h-8 w-8 sm:h-10 sm:w-10"></Avatar>
-                  <p className="body-small">{user?.organisation?.name}</p>
+                    className="h-8 w-8 sm:h-10 sm:w-10">
+                    {user?.organisation?.name[0] || user?.organisationName[0]}
+                  </Avatar>
+                  <p className="body-small">
+                    {user?.organisation?.name || user?.organisationName}
+                  </p>
                 </div>
               </Link>
             </div>
