@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch } from 'react-redux';
-import { useSignupMutation } from '@/features/auth/apiSlice';
+import { useStudentSignupMutation } from '@/features/auth/apiSlice';
 import { Controller, useForm } from 'react-hook-form';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,7 +19,8 @@ import { studentSignupValidationSchema } from '@/schemas/signup/student/schema';
 export default function Signup() {
   const dispatch = useDispatch();
 
-  const [signup, { isLoading: isUserSignupLoading }] = useSignupMutation();
+  const [signup, { isLoading: isUserSignupLoading }] =
+    useStudentSignupMutation();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
