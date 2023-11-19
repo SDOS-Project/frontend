@@ -7,6 +7,7 @@ export const rtkQueryErrorLogger = (api) => (next) => (action) => {
     toast.error(
       action.payload?.data?.message ||
         action.payload?.data?.message[0] ||
+        action.payload?.data?.error ||
         'Something went wrong'
     );
   }
