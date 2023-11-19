@@ -110,21 +110,22 @@ export default function User({ params }) {
                 </div>
               </Link>
             </div>
-            {canEdit && (
-              <>
-                <Button
-                  variant="contained"
-                  className="bg-primary-main"
-                  onClick={handleEditProfile}>
-                  Edit Profile
-                </Button>
-                <EditProfile
-                  handle={slug}
-                  isDialogOpen={isEditProfileOpen}
-                  handleCloseDialog={() => setIsEditProfileOpen(false)}
-                />
-              </>
-            )}
+            {canEdit &&
+              user?.role.toLowerCase() !== UserRole.STUDENT.toLowerCase() && (
+                <>
+                  <Button
+                    variant="contained"
+                    className="bg-primary-main"
+                    onClick={handleEditProfile}>
+                    Edit Profile
+                  </Button>
+                  <EditProfile
+                    handle={slug}
+                    isDialogOpen={isEditProfileOpen}
+                    handleCloseDialog={() => setIsEditProfileOpen(false)}
+                  />
+                </>
+              )}
           </div>
           <TabContext value={tabValue}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
