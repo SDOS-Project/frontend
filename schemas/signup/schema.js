@@ -22,7 +22,7 @@ export const signupValidationSchema = yup.object().shape({
     .string()
     .oneOf(Object.keys(UserRole), 'Role must be Faculty or Employee')
     .required('Role is required'),
-  organisationHandle: yup.string().required('Organisation is required'),
+  organisationHandle: yup.string().optional(),
   areasOfInterest: yup
     .array()
     .of(yup.string().oneOf(areasOfInterests))
