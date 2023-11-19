@@ -217,6 +217,9 @@ export default function Signup() {
               error={!!errors.role}
               className="w-full">
               {Object.keys(UserRole)?.map((role) => {
+                if (UserRole[role] === UserRole.STUDENT) {
+                  return;
+                }
                 return (
                   <MenuItem key={role} value={role}>
                     {UserRole[role]}
@@ -236,7 +239,7 @@ export default function Signup() {
         options={organisations}
         errors={errors}
         loading={isOrganisationsLoading}
-        label={'Organisation'}
+        label={'Organisation (Optional)'}
         optionLabelCallback={(option) => option?.name}
       />
       <MultipleChipSelect
