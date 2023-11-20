@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from '@/firebase-config';
 import { useDispatch } from 'react-redux';
@@ -20,16 +20,15 @@ import { toast } from 'react-toastify';
 import { signupValidationSchema } from '@/schemas/signup/schema';
 import { useGetOrganisationsDropdownQuery } from '@/features/organisation/apiSlice';
 import { UserRole } from '@/types/UserRole';
-import MultipleChipSelect from '@/components/common/MultipleChipSelect';
 import CustomAutocomplete from '@/components/common/CustomAutocomplete';
 import { setUser } from '@/features/auth/authSlice';
 import { LoadingButton } from '@mui/lab';
 import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { TabSwitch } from '@/components/signup/TabSwitch';
-import { areasOfInterests } from '@/types/AreasOfInterests';
 import ImageUpload from '@/components/common/ImageUpload';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { engineeringFields } from '@/types/EngineeringFields';
+import MultipleAutocomplete from '@/components/common/MultipleAutocomplete';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -135,10 +134,24 @@ export default function Signup() {
     handleSubmit,
     setValue,
     reset,
+    watch,
+    getValues,
   } = useForm({
     resolver: yupResolver(signupValidationSchema),
     defaultValues,
   });
+
+  const selectedDiscipline = watch('discipline');
+
+  useEffect(() => {
+    if (getValues('discipline') !== selectedDiscipline) {
+      setValue('areasOfInterest', []);
+    }
+  }, [selectedDiscipline, getValues, setValue]);
+
+  const areasOfInterestOptions = useMemo(() => {
+    return engineeringFields[selectedDiscipline] || [];
+  }, [selectedDiscipline]);
 
   const onSubmit = useCallback(
     async (data) => {
@@ -271,13 +284,14 @@ export default function Signup() {
           </FormControl>
         )}
       />
-      <MultipleChipSelect
+      <MultipleAutocomplete
         control={control}
         fieldName="areasOfInterest"
         label="Areas of Interest"
-        options={areasOfInterests}
+        options={areasOfInterestOptions}
         errors={errors}
         setValue={setValue}
+        freeSolo={true}
       />
       <LoadingButton
         type="submit"
