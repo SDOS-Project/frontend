@@ -145,6 +145,7 @@ export default function Signup() {
 
   useEffect(() => {
     if (getValues('discipline') !== selectedDiscipline) {
+      console.log('resetting areas of interest');
       setValue('areasOfInterest', []);
     }
   }, [selectedDiscipline, getValues, setValue]);
