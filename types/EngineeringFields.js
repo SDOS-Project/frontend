@@ -78,3 +78,19 @@ export const engineeringFields = Object.freeze({
     'Petroleum Engineering',
   ],
 });
+
+export const disciplineEnumMapping = Object.freeze({
+  'Civil Engineering': 'CivilEngineering',
+  'Mechanical Engineering': 'MechanicalEngineering',
+  'Electrical Engineering': 'ElectricalEngineering',
+  'Computer Science and Engineering': 'ComputerScienceAndEngineering',
+  'Aerospace Engineering': 'AerospaceEngineering',
+  'Chemical Engineering': 'ChemicalEngineering',
+  'Biomedical Engineering': 'BiomedicalEngineering',
+  'Civil and Environmental Engineering': 'CivilAndEnvironmentalEngineering',
+  'Materials Science and Engineering': 'MaterialsScienceAndEngineering',
+  'Automobile Engineering': 'AutomobileEngineering',
+  Mechatronics: 'Mechatronics',
+  'Textile Engineering': 'TextileEngineering',
+  'Ocean Engineering': 'OceanEngineering',
+});

@@ -27,7 +27,10 @@ import { FirebaseErrors } from '@/types/FirebaseErrors';
 import { TabSwitch } from '@/components/signup/TabSwitch';
 import ImageUpload from '@/components/common/ImageUpload';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { engineeringFields } from '@/types/EngineeringFields';
+import {
+  disciplineEnumMapping,
+  engineeringFields,
+} from '@/types/EngineeringFields';
 import MultipleAutocomplete from '@/components/common/MultipleAutocomplete';
 
 export default function Signup() {
@@ -157,12 +160,16 @@ export default function Signup() {
   const onSubmit = useCallback(
     async (data) => {
       const { email, password } = data;
+      const transformedData = {
+        ...data,
+        discipline: disciplineEnumMapping[data.discipline] || data.discipline,
+      };
       createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
           const firebaseUser = userCredential.user;
           try {
             const user = await signup({
-              ...data,
+              ...transformedData,
               firebaseId: firebaseUser.uid,
             }).unwrap();
             dispatch(setUser(user));
