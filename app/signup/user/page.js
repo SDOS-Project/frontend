@@ -29,6 +29,7 @@ import { TabSwitch } from '@/components/signup/TabSwitch';
 import { areasOfInterests } from '@/types/AreasOfInterests';
 import ImageUpload from '@/components/common/ImageUpload';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { engineeringFields } from '@/types/EngineeringFields';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -122,6 +123,7 @@ export default function Signup() {
       socialUrl: '',
       role: '',
       organisationHandle: '',
+      discipline: '',
       areasOfInterest: [],
       imgUrl: '',
     };
@@ -241,6 +243,33 @@ export default function Signup() {
         loading={isOrganisationsLoading}
         label={'Organisation (Optional)'}
         optionLabelCallback={(option) => option?.name}
+      />
+      <Controller
+        name="discipline"
+        control={control}
+        render={({ field }) => (
+          <FormControl className="w-full" size="small">
+            <InputLabel className={errors?.discipline && 'text-error-main'}>
+              Discipline
+            </InputLabel>
+            <Select
+              {...field}
+              label="discipline"
+              error={!!errors.discipline}
+              className="w-full">
+              {Object.keys(engineeringFields)?.map((discipline) => {
+                return (
+                  <MenuItem key={discipline} value={discipline}>
+                    {discipline}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            <FormHelperText className="text-error-main">
+              {errors?.discipline && errors?.discipline?.message}
+            </FormHelperText>
+          </FormControl>
+        )}
       />
       <MultipleChipSelect
         control={control}

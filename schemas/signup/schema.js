@@ -2,6 +2,7 @@ import { areasOfInterests } from '@/types/AreasOfInterests';
 import { UserRole } from '@/types/UserRole';
 import * as yup from 'yup';
 import { urlValidationSchema } from '../url/schema';
+import { engineeringFields } from '@/types/EngineeringFields';
 
 export const signupValidationSchema = yup.object().shape({
   firstName: yup.string().required('First Name is required'),
@@ -23,6 +24,13 @@ export const signupValidationSchema = yup.object().shape({
     .oneOf(Object.keys(UserRole), 'Role must be Faculty or Employee')
     .required('Role is required'),
   organisationHandle: yup.string().optional(),
+  discipline: yup
+    .string()
+    .oneOf(
+      Object.keys(engineeringFields),
+      'Discipline must be one of the options'
+    )
+    .required('Discipline is required'),
   areasOfInterest: yup
     .array()
     .of(yup.string().oneOf(areasOfInterests))
