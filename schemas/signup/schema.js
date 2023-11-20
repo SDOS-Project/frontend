@@ -1,4 +1,3 @@
-import { areasOfInterests } from '@/types/AreasOfInterests';
 import { UserRole } from '@/types/UserRole';
 import * as yup from 'yup';
 import { urlValidationSchema } from '../url/schema';
@@ -33,7 +32,7 @@ export const signupValidationSchema = yup.object().shape({
     .required('Discipline is required'),
   areasOfInterest: yup
     .array()
-    .of(yup.string().oneOf(areasOfInterests))
+    .of(yup.string())
     .min(1, 'Please select at least one area of interest')
     .required('Areas of Interest is required'),
   imgUrl: urlValidationSchema(false),
