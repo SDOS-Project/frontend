@@ -94,3 +94,7 @@ export const disciplineEnumMapping = Object.freeze({
   'Textile Engineering': 'TextileEngineering',
   'Ocean Engineering': 'OceanEngineering',
 });
+
+export const disciplineDisplayMapping = Object.fromEntries(
+  Object.entries(disciplineEnumMapping).map(([key, value]) => [value, key])
+);

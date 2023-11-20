@@ -1,4 +1,5 @@
 import DialogFooter from '@/components/common/DialogFooter';
+import MultipleAutocomplete from '@/components/common/MultipleAutocomplete';
 import MultipleChipSelect from '@/components/common/MultipleChipSelect';
 import {
   useGetUserQuery,
@@ -6,8 +7,22 @@ import {
 } from '@/features/user/apiSlice';
 import { editUserValidationSchema } from '@/schemas/user/edit/schema';
 import { areasOfInterests } from '@/types/AreasOfInterests';
+import {
+  disciplineDisplayMapping,
+  engineeringFields,
+} from '@/types/EngineeringFields';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -22,9 +37,16 @@ export default function EditProfile({
       firstName: user?.firstName,
       lastName: user?.lastName,
       email: user?.email,
+      discipline: disciplineDisplayMapping[user?.discipline],
       areasOfInterest: user?.areasOfInterest,
     };
-  }, [user.firstName, user.lastName, user.email, user.areasOfInterest]);
+  }, [
+    user?.firstName,
+    user?.lastName,
+    user?.email,
+    user?.areasOfInterest,
+    user?.discipline,
+  ]);
 
   const textFields = useMemo(
     () => [
@@ -47,11 +69,26 @@ export default function EditProfile({
     handleSubmit,
     reset,
     setValue,
+    watch,
+    getValues,
     formState: { errors },
   } = useForm({
     defaultValues,
     resolver: yupResolver(editUserValidationSchema),
   });
+
+  const selectedDiscipline = watch('discipline');
+
+  useEffect(() => {
+    if (getValues('discipline') !== selectedDiscipline) {
+      console.log('resetting areas of interest');
+      setValue('areasOfInterest', []);
+    }
+  }, [selectedDiscipline, getValues, setValue]);
+
+  const areasOfInterestOptions = useMemo(() => {
+    return engineeringFields[selectedDiscipline] || [];
+  }, [selectedDiscipline]);
 
   const onDiscardClick = useCallback(() => {
     handleCloseDialog();
@@ -130,13 +167,40 @@ export default function EditProfile({
               )}
             />
           ))}
-          <MultipleChipSelect
+          <Controller
+            name="discipline"
+            control={control}
+            render={({ field }) => (
+              <FormControl className="w-full" size="small">
+                <InputLabel className={errors?.discipline && 'text-error-main'}>
+                  Discipline
+                </InputLabel>
+                <Select
+                  {...field}
+                  defaultValue={user?.discipline}
+                  label="discipline"
+                  error={!!errors.discipline}
+                  className="w-full">
+                  {Object.entries(engineeringFields).map(([key, _]) => (
+                    <MenuItem key={key} value={key}>
+                      {disciplineDisplayMapping[key] || key}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText className="text-error-main">
+                  {errors?.discipline && errors?.discipline?.message}
+                </FormHelperText>
+              </FormControl>
+            )}
+          />
+          <MultipleAutocomplete
             control={control}
             fieldName="areasOfInterest"
             label="Areas of Interest"
-            options={areasOfInterests}
+            options={areasOfInterestOptions}
             errors={errors}
             setValue={setValue}
+            freeSolo={true}
           />
         </DialogContent>
         <DialogFooter

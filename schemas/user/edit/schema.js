@@ -10,7 +10,7 @@ export const editUserValidationSchema = yup.object().shape({
     .required('Email is required'),
   areasOfInterest: yup
     .array()
-    .of(yup.string().oneOf(areasOfInterests))
+    .of(yup.string())
     .min(1, 'Please select at least one area of interest')
     .required('Areas of Interest is required'),
 });
