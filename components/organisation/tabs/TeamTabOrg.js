@@ -27,18 +27,22 @@ export default function TeamTabOrg({ handle }) {
 
   return (
     <>
-      {users.length > 0 ? users?.map((user) => (
-        <TeamMember
-          key={user.handle}
-          canRemove={canRemove}
-          handleRemoveUser={handleRemoveUser}
-          {...user}
+      {users.length > 0 ? (
+        users?.map((user) => (
+          <TeamMember
+            key={user.handle}
+            canRemove={canRemove}
+            handleRemoveUser={handleRemoveUser}
+            {...user}
+          />
+        ))
+      ) : (
+        <NullView
+          imgSrc={'/assets/images/organisation/empty.svg'}
+          heading={'No Users Found'}
+          desc={'There are no users with this organisation yet.'}
         />
-      )) : <NullView
-        imgSrc={'/assets/images/organisation/empty.svg'}
-        heading={'No Coordinators Found'}
-        desc={'There are no coordinators with this organisation yet.'}
-      />}
+      )}
       {canRemove && (
         <RemoveUser
           userHandle={userHandle}
