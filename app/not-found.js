@@ -10,7 +10,7 @@ export default function NotFound() {
           "The page you requested couldn't be found. Please check the URL or navigate back to our homepage to continue exploring."
         }
         buttonText={'Go back'}
-        imgSrc={'/assets/images/404.svg'}
+        imgSrc={'/assets/images/errors/404.svg'}
       />
     </ErrorLayout>
   );
