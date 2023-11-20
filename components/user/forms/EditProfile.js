@@ -9,6 +9,7 @@ import { editUserValidationSchema } from '@/schemas/user/edit/schema';
 import { areasOfInterests } from '@/types/AreasOfInterests';
 import {
   disciplineDisplayMapping,
+  disciplineEnumMapping,
   engineeringFields,
 } from '@/types/EngineeringFields';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -104,13 +105,23 @@ export default function EditProfile({
         data.firstName === user.firstName &&
         data.lastName === user.lastName &&
         data.email === user.email &&
+        data.discipline === disciplineDisplayMapping[user?.discipline] &&
         data.areasOfInterest === user.areasOfInterest
       ) {
         onDiscardClick();
         return;
       }
       try {
-        await updateProfile({ user: data }).unwrap();
+        await updateProfile({
+          user: {
+            ...data,
+            discipline: Object.keys(disciplineEnumMapping).includes(
+              data.discipline
+            )
+              ? disciplineEnumMapping[data.discipline]
+              : data.discipline,
+          },
+        }).unwrap();
         onDiscardClick();
       } catch (error) {
         reset(defaultValues);
@@ -125,6 +136,7 @@ export default function EditProfile({
       user.lastName,
       user.email,
       user.areasOfInterest,
+      user.discipline,
     ]
   );
 
