@@ -11,16 +11,24 @@ export default function AboutTabUser({ handle }) {
   return (
     <>
       {user?.role.toLowerCase() !== UserRole.STUDENT.toLowerCase() && (
-        <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-          <p className="body-large font-medium text-primary-dark">
-            Areas Of Interest in {disciplineDisplayMapping[user?.discipline]}
-          </p>
-          <div className="flex flex-wrap gap-2 items-center">
-            {user?.areasOfInterest?.map((item, i) => (
-              <Chip label={item} key={`${item}-${i}`} />
-            ))}
+        <>
+          <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
+            <p className="body-large font-medium text-primary-dark">
+              Discipline
+            </p>
+            <Chip label={disciplineDisplayMapping[user?.discipline]} className='w-fit bg-primary-main text-white' />
           </div>
-        </div>
+          <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
+            <p className="body-large font-medium text-primary-dark">
+              Areas Of Interest
+            </p>
+            <div className="flex flex-wrap gap-2 items-center">
+              {user?.areasOfInterest?.map((item, i) => (
+                <Chip label={item} key={`${item}-${i}`} />
+              ))}
+            </div>
+          </div>
+        </>
       )}
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large font-medium text-primary-dark">Contact</p>
@@ -33,8 +41,10 @@ export default function AboutTabUser({ handle }) {
         {user?.role.toLowerCase() !== UserRole.STUDENT.toLowerCase() && (
           <div className="flex items-center gap-2">
             <LinkIcon className="text-primary-main" />
-            <Link href={`${user?.socialUrl}`}>
-              <p className="body-small hover:text-primary-main">{user?.socialUrl}</p>
+            <Link href={`${user?.socialUrl}`} target="_blank">
+              <p className="body-small hover:text-primary-main">
+                {user?.socialUrl}
+              </p>
             </Link>
           </div>
         )}
