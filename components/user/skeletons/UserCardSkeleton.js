@@ -1,6 +1,6 @@
 import { Mail } from '@mui/icons-material';
-import { Avatar, Chip, Skeleton } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
+import { Avatar, Chip, Skeleton } from '@mui/material';
 
 function UserCardSkeleton() {
   return (
@@ -20,13 +20,13 @@ function UserCardSkeleton() {
           <Skeleton className="w-3/4 h-8" />
         </div>
         <div className="flex gap-2 items-center flex-wrap">
-          {Array.from({ length: 5 }).map((item, i) => {
+          {Array.from({ length: 4 }).map((item, i) => {
             return (
               <Chip
                 label={''}
                 key={`${item}-${i}`}
                 size="small"
-                className="w-3/4"
+                className="w-1/3"
               />
             );
           })}
