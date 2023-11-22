@@ -1,4 +1,6 @@
+import { disciplineDisplayMapping } from '@/types/EngineeringFields';
 import { OrganisationType } from '@/types/OrganisationType';
+import { UserRole } from '@/types/UserRole';
 import { Mail } from '@mui/icons-material';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -15,6 +17,7 @@ function UserCard({
   areasOfInterest,
   imgUrl,
   discipline,
+  organisationName,
 }) {
   return (
     <Link href={`/user/${handle}`}>
@@ -31,18 +34,29 @@ function UserCard({
             <Mail color="primary" className="body-large" />
             <p className="body-normal">{email}</p>
           </div>
-          <div className="flex gap-2 items-center">
-            {organisation.type.toLowerCase() ===
-              OrganisationType.ACADEMIC.toLowerCase() ? (
-              <SchoolIcon color="primary" className="body-large" />
-            ) : (
-              <CorporateFareIcon color="primary" className="body-large" />
-            )}
-            <p className="body-normal">{organisation.name}</p>
-          </div>
+          {organisation ? (
+            <div className="flex gap-2 items-center">
+              {organisation.type.toLowerCase() ===
+                OrganisationType.ACADEMIC.toLowerCase() ? (
+                <SchoolIcon color="primary" className="body-large" />
+              ) : (
+                <CorporateFareIcon color="primary" className="body-large" />
+              )}
+              <p className="body-normal">{organisation.name}</p>
+            </div>
+          ) : (
+            <div className="flex gap-2 items-center">
+              {role.toLowerCase() === UserRole.EMPLOYEE.toLowerCase() ? (
+                <CorporateFareIcon color="primary" className="body-large" />
+              ) : (
+                <SchoolIcon color="primary" className="body-large" />
+              )}
+              <p className="body-normal">{organisationName}</p>
+            </div>
+          )}
           <div className="flex gap-2 items-center">
             <MenuBookIcon color="primary" className="body-large" />
-            <p className="body-normal">{discipline}</p>
+            <p className="body-normal">{disciplineDisplayMapping[discipline]}</p>
           </div>
           <div className="flex gap-2 items-center flex-wrap">
             {areasOfInterest.map((item, i) => {
