@@ -51,22 +51,22 @@ export default function AboutTab({ handle }) {
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
         <p className="body-large font-medium text-primary-dark">More Info</p>
 
-        <Tooltip title="Project Location" placement="left-start">
-          <div className="flex justify-start items-center gap-2">
-            <LocationOnIcon className="body-normal text-primary-dark" />
+        <div className="flex justify-start items-center gap-2">
+          <LocationOnIcon className="body-normal text-primary-dark" />
+          <Tooltip title="Project Location">
             <p className="body-small">{ProjectLocation[project.location]}</p>
-          </div>
-        </Tooltip>
+          </Tooltip>
+        </div>
 
-        <Tooltip title="Project Duration" placement="left-start">
-          <div className="flex justify-start items-center gap-2">
-            <CalendarTodayIcon className="body-normal text-primary-dark" />
+        <div className="flex justify-start items-center gap-2">
+          <CalendarTodayIcon className="body-normal text-primary-dark" />
+          <Tooltip title="Project Duration">
             <p className="body-small">
               {format(new Date(project.startDate), 'dd MMM yyyy')} to{' '}
               {format(new Date(project.endDate), 'dd MMM yyyy')}
             </p>
-          </div>
-        </Tooltip>
+          </Tooltip>
+        </div>
       </div>
     </>
   );
