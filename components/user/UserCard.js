@@ -1,9 +1,10 @@
-import { Mail } from '@mui/icons-material';
-import { Avatar, Chip } from '@mui/material';
-import SchoolIcon from '@mui/icons-material/School';
-import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import Link from 'next/link';
 import { OrganisationType } from '@/types/OrganisationType';
+import { Mail } from '@mui/icons-material';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SchoolIcon from '@mui/icons-material/School';
+import { Avatar, Chip } from '@mui/material';
+import Link from 'next/link';
 
 function UserCard({
   handle,
@@ -13,6 +14,7 @@ function UserCard({
   organisation,
   areasOfInterest,
   imgUrl,
+  discipline,
 }) {
   return (
     <Link href={`/user/${handle}`}>
@@ -31,12 +33,16 @@ function UserCard({
           </div>
           <div className="flex gap-2 items-center">
             {organisation.type.toLowerCase() ===
-            OrganisationType.ACADEMIC.toLowerCase() ? (
+              OrganisationType.ACADEMIC.toLowerCase() ? (
               <SchoolIcon color="primary" className="body-large" />
             ) : (
               <CorporateFareIcon color="primary" className="body-large" />
             )}
             <p className="body-normal">{organisation.name}</p>
+          </div>
+          <div className="flex gap-2 items-center">
+            <MenuBookIcon color="primary" className="body-large" />
+            <p className="body-normal">{discipline}</p>
           </div>
           <div className="flex gap-2 items-center flex-wrap">
             {areasOfInterest.map((item, i) => {
