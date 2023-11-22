@@ -1,11 +1,10 @@
 import { disciplineDisplayMapping } from '@/types/EngineeringFields';
 import { OrganisationType } from '@/types/OrganisationType';
 import { UserRole } from '@/types/UserRole';
-import { Mail } from '@mui/icons-material';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SchoolIcon from '@mui/icons-material/School';
-import { Avatar, Chip } from '@mui/material';
+import { Avatar, Chip, Tooltip } from '@mui/material';
 import Link from 'next/link';
 
 function UserCard({
@@ -30,37 +29,37 @@ function UserCard({
           </p>
         </div>
         <div className="flex flex-col gap-2 px-4 pb-4">
-          <div className="flex gap-2 items-center">
-            <Mail color="primary" className="body-large" />
-            <p className="body-normal">{email}</p>
-          </div>
           {organisation ? (
-            <div className="flex gap-2 items-center">
-              {organisation.type.toLowerCase() ===
-                OrganisationType.ACADEMIC.toLowerCase() ? (
-                <SchoolIcon color="primary" className="body-large" />
-              ) : (
-                <CorporateFareIcon color="primary" className="body-large" />
-              )}
-              <p className="body-normal">{organisation.name}</p>
-            </div>
+            <Tooltip title={organisation.name}>
+              <div className="flex gap-2 items-center">
+                {organisation.type.toLowerCase() ===
+                  OrganisationType.ACADEMIC.toLowerCase() ? (
+                  <SchoolIcon color="primary" className="body-large" />
+                ) : (
+                  <CorporateFareIcon color="primary" className="body-large" />
+                )}
+                <p className="body-normal line-clamp-1">{organisation.name}</p>
+              </div>
+            </Tooltip>
           ) : (
-            <div className="flex gap-2 items-center">
-              {role.toLowerCase() === UserRole.EMPLOYEE.toLowerCase() ? (
-                <CorporateFareIcon color="primary" className="body-large" />
-              ) : (
-                <SchoolIcon color="primary" className="body-large" />
-              )}
-              <p className="body-normal">{organisationName}</p>
-            </div>
+            <Tooltip title={organisationName}>
+              <div className="flex gap-2 items-center">
+                {role.toLowerCase() === UserRole.EMPLOYEE.toLowerCase() ? (
+                  <CorporateFareIcon color="primary" className="body-large" />
+                ) : (
+                  <SchoolIcon color="primary" className="body-large" />
+                )}
+                <p className="body-normal line-clamp-1">{organisationName}</p>
+              </div>
+            </Tooltip>
           )}
           <div className="flex gap-2 items-center">
             <MenuBookIcon color="primary" className="body-large" />
-            <p className="body-normal">{disciplineDisplayMapping[discipline]}</p>
+            <p className="body-normal line-clamp-1">{disciplineDisplayMapping[discipline]}</p>
           </div>
-          <div className="flex gap-2 items-center flex-wrap">
+          <div className="flex gap-2 items-center flex-wrap mt-1">
             {areasOfInterest.map((item, i) => {
-              if (i > 5) return;
+              if (i > 3) return;
               return (
                 <Chip
                   label={item}
