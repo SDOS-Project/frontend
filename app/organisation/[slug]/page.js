@@ -1,5 +1,11 @@
 'use client';
+import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
+import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
+import { selectUser } from '@/features/auth/authSlice';
 import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
+import { OrganisationType } from '@/types/OrganisationType';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import SchoolIcon from '@mui/icons-material/School';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import {
   Avatar,
@@ -9,15 +15,9 @@ import {
   Tab,
   Tooltip,
 } from '@mui/material';
-import { useCallback, useMemo, useState } from 'react';
-import AboutTabOrg from '@/components/organisation/tabs/AboutTabOrg';
 import dynamic from 'next/dynamic';
-import { OrganisationType } from '@/types/OrganisationType';
-import SchoolIcon from '@mui/icons-material/School';
-import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
+import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectUser } from '@/features/auth/authSlice';
 const EditOrganisation = dynamic(
   () => import('@/components/organisation/forms/EditOrganisation'),
   {
@@ -32,6 +32,13 @@ const TeamTabOrg = dynamic(
 );
 const ProjectsTab = dynamic(
   () => import('@/components/organisation/tabs/ProjectsTab'),
+  {
+    ssr: false,
+  }
+);
+
+const StudentsTab = dynamic(
+  () => import('@/components/organisation/tabs/StudentsTab'),
   {
     ssr: false,
   }
@@ -56,27 +63,35 @@ export default function Organisation({ params }) {
     setTabValue(newValue);
   }, []);
 
-  const tabs = useMemo(
-    () => [
+  const tabs = useMemo(() => {
+    let isAcademic =
+      organisation?.type.toLowerCase() ===
+      OrganisationType.ACADEMIC.toLowerCase();
+
+    let tabsArray = [
       {
         label: 'About',
         component: <AboutTabOrg handle={slug} />,
       },
       {
-        label:
-          organisation?.type.toLowerCase() ===
-          OrganisationType.ACADEMIC.toLowerCase()
-            ? 'Faculty'
-            : 'Employees',
-        component: <TeamTabOrg handle={slug} />,
-      },
-      {
         label: 'Projects',
         component: <ProjectsTab handle={slug} />,
       },
-    ],
-    [slug, organisation?.type]
-  );
+      {
+        label: isAcademic ? 'Faculty' : 'Employees',
+        component: <TeamTabOrg handle={slug} />,
+      },
+    ];
+
+    if (isAcademic) {
+      tabsArray.push({
+        label: 'Students',
+        component: <StudentsTab handle={slug} />,
+      });
+    }
+
+    return tabsArray;
+  }, [slug, organisation?.type]);
 
   if (isLoading)
     return (
@@ -93,7 +108,7 @@ export default function Organisation({ params }) {
         <Tooltip title={OrganisationType[organisation?.type]}>
           <div className="z-50 absolute right-6 top-6 bg-primary-main text-white p-3 rounded-full body-xsmall">
             {OrganisationType[organisation?.type]?.toLowerCase() ===
-            OrganisationType.ACADEMIC.toLowerCase() ? (
+              OrganisationType.ACADEMIC.toLowerCase() ? (
               <SchoolIcon className="body-xlarge" />
             ) : (
               <CorporateFareIcon className="body-xlarge" />

@@ -1,14 +1,8 @@
 'use client';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import MenuIcon from '@mui/icons-material/Menu';
-import Avatar from '@mui/material/Avatar';
-import { useCallback, useMemo, useState } from 'react';
 import { clearUser, selectUser } from '@/features/auth/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { auth } from '@/firebase-config';
+import { UserRole } from '@/types/UserRole';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   Button,
   Divider,
@@ -20,11 +14,17 @@ import {
   Menu,
   MenuItem,
 } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { auth } from '@/firebase-config';
+import { useCallback, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { UserRole } from '@/types/UserRole';
 
 export default function Header() {
   const router = useRouter();
@@ -103,13 +103,17 @@ export default function Header() {
                     </Typography>
                   </Link>
                 )}
-                {user?.organisation?.name && (
+                {user?.organisation?.name ? (
                   <Link href={user?.organisation?.handle} legacyBehavior>
                     <Typography className="text-primary-light cursor-pointer body-xsmall text-center mt-1">
                       {user.organisation.name}
                     </Typography>
                   </Link>
-                )}
+                ) :
+                  <Typography className="text-primary-light cursor-pointer body-xsmall text-center mt-1">
+                    {user?.organisationName}
+                  </Typography>
+                }
               </Box>
             </Box>
             <Divider className="m-0 p-0 mt-5" />

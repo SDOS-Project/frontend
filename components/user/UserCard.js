@@ -1,9 +1,12 @@
-import { Mail } from '@mui/icons-material';
-import { Avatar, Chip } from '@mui/material';
-import SchoolIcon from '@mui/icons-material/School';
-import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import Link from 'next/link';
+import { disciplineDisplayMapping } from '@/types/EngineeringFields';
 import { OrganisationType } from '@/types/OrganisationType';
+import { UserRole } from '@/types/UserRole';
+import { Mail } from '@mui/icons-material';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SchoolIcon from '@mui/icons-material/School';
+import { Avatar, Chip } from '@mui/material';
+import Link from 'next/link';
 
 function UserCard({
   handle,
@@ -13,6 +16,8 @@ function UserCard({
   organisation,
   areasOfInterest,
   imgUrl,
+  discipline,
+  organisationName,
 }) {
   return (
     <Link href={`/user/${handle}`}>
@@ -29,14 +34,29 @@ function UserCard({
             <Mail color="primary" className="body-large" />
             <p className="body-normal">{email}</p>
           </div>
+          {organisation ? (
+            <div className="flex gap-2 items-center">
+              {organisation.type.toLowerCase() ===
+                OrganisationType.ACADEMIC.toLowerCase() ? (
+                <SchoolIcon color="primary" className="body-large" />
+              ) : (
+                <CorporateFareIcon color="primary" className="body-large" />
+              )}
+              <p className="body-normal">{organisation.name}</p>
+            </div>
+          ) : (
+            <div className="flex gap-2 items-center">
+              {role.toLowerCase() === UserRole.EMPLOYEE.toLowerCase() ? (
+                <CorporateFareIcon color="primary" className="body-large" />
+              ) : (
+                <SchoolIcon color="primary" className="body-large" />
+              )}
+              <p className="body-normal">{organisationName}</p>
+            </div>
+          )}
           <div className="flex gap-2 items-center">
-            {organisation.type.toLowerCase() ===
-            OrganisationType.ACADEMIC.toLowerCase() ? (
-              <SchoolIcon color="primary" className="body-large" />
-            ) : (
-              <CorporateFareIcon color="primary" className="body-large" />
-            )}
-            <p className="body-normal">{organisation.name}</p>
+            <MenuBookIcon color="primary" className="body-large" />
+            <p className="body-normal">{disciplineDisplayMapping[discipline]}</p>
           </div>
           <div className="flex gap-2 items-center flex-wrap">
             {areasOfInterest.map((item, i) => {

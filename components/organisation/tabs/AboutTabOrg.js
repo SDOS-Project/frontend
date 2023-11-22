@@ -1,7 +1,7 @@
 import { useGetOrganisationQuery } from '@/features/organisation/apiSlice';
 import { Email } from '@mui/icons-material';
-import RoomIcon from '@mui/icons-material/Room';
 import LinkIcon from '@mui/icons-material/Link';
+import RoomIcon from '@mui/icons-material/Room';
 import Link from 'next/link';
 
 export default function AboutTab({ handle }) {
@@ -24,7 +24,7 @@ export default function AboutTab({ handle }) {
           <p className="body-small">{organisation?.address}</p>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-2 border-b pb-4">
+      <div className="w-full flex flex-col gap-2 pb-4">
         <p className="body-large font-medium text-primary-dark">IP Policy</p>
         <Link href={organisation?.ipPolicy} target="_blank">
           <div className="flex items-center gap-2">
