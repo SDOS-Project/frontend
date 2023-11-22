@@ -11,6 +11,26 @@ export default function AboutTab({ handle }) {
   const { data: project } = useGetProjectQuery(handle);
   return (
     <>
+      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
+        <p className="body-large font-medium text-primary-dark">Project Info</p>
+
+        <div className="flex justify-start items-center gap-2">
+          <LocationOnIcon className="body-normal text-primary-dark" />
+          <Tooltip title="Project Location">
+            <p className="body-small">{ProjectLocation[project.location]}</p>
+          </Tooltip>
+        </div>
+
+        <div className="flex justify-start items-center gap-2">
+          <CalendarTodayIcon className="body-normal text-primary-dark" />
+          <Tooltip title="Project Duration">
+            <p className="body-small">
+              {format(new Date(project.startDate), 'dd MMM yyyy')} to{' '}
+              {format(new Date(project.endDate), 'dd MMM yyyy')}
+            </p>
+          </Tooltip>
+        </div>
+      </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b overflow-clip">
         <p className="body-large font-medium text-primary-dark">Description</p>
         <p className="body-small">{project.description}</p>
@@ -19,12 +39,6 @@ export default function AboutTab({ handle }) {
         <p className="body-large font-medium text-primary-dark">Team</p>
         {project.users.map((user) => (
           <TeamMember key={user.handle} {...user} />
-        ))}
-      </div>
-      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large font-medium text-primary-dark">Students</p>
-        {project.students.map((user) => (
-          <TeamMember key={user.handle} {...user} isStudent={true} />
         ))}
       </div>
       {project.organisations && project.organisations.length > 0 ? (
@@ -48,26 +62,7 @@ export default function AboutTab({ handle }) {
       ) : (
         <></>
       )}
-      <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        <p className="body-large font-medium text-primary-dark">More Info</p>
 
-        <div className="flex justify-start items-center gap-2">
-          <LocationOnIcon className="body-normal text-primary-dark" />
-          <Tooltip title="Project Location">
-            <p className="body-small">{ProjectLocation[project.location]}</p>
-          </Tooltip>
-        </div>
-
-        <div className="flex justify-start items-center gap-2">
-          <CalendarTodayIcon className="body-normal text-primary-dark" />
-          <Tooltip title="Project Duration">
-            <p className="body-small">
-              {format(new Date(project.startDate), 'dd MMM yyyy')} to{' '}
-              {format(new Date(project.endDate), 'dd MMM yyyy')}
-            </p>
-          </Tooltip>
-        </div>
-      </div>
     </>
   );
 }

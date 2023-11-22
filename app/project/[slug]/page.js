@@ -1,4 +1,5 @@
 'use client';
+import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
 import AboutTab from '@/components/project/tabs/AboutTab';
 import {
   useGetProjectConfigQuery,
@@ -7,9 +8,8 @@ import {
 import { ProjectStatus } from '@/types/ProjectStatus';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Avatar, Box, Button, LinearProgress, Tab } from '@mui/material';
-import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import ProjectSkeleton from '@/components/common/ProfilePageSkeleton';
+import { useCallback, useMemo, useState } from 'react';
 const EditProject = dynamic(
   () => import('@/components/project/forms/EditProject'),
   {
@@ -18,6 +18,13 @@ const EditProject = dynamic(
 );
 const UpdatesTab = dynamic(
   () => import('@/components/project/tabs/UpdatesTab'),
+  {
+    ssr: false,
+  }
+);
+
+const StudentsTab = dynamic(
+  () => import('@/components/project/tabs/StudentsTab'),
   {
     ssr: false,
   }
@@ -47,6 +54,10 @@ export default function Project({ params }) {
       {
         label: 'About',
         component: <AboutTab handle={slug} />,
+      },
+      {
+        label: 'Students',
+        component: <StudentsTab handle={slug} />,
       },
       {
         label: 'Updates',
