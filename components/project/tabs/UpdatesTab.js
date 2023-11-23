@@ -1,3 +1,4 @@
+import NullView from '@/components/null-views/NullView';
 import {
   useGetProjectConfigQuery,
   useGetUpdatesQuery,
@@ -48,12 +49,19 @@ export default function UpdatesTab({ handle }) {
         )}
       </div>
       <div className="w-full flex flex-col gap-2 py-4 px-6 border-b">
-        {updates.length > 0 &&
+        {updates.length > 0 ? (
           updates?.map((update) => (
             <div key={update.createdAt} className="my-2">
               <UpdateComponent key={update.createdAt} {...update} />
             </div>
-          ))}
+          ))
+        ) : (
+          <NullView
+            imgSrc="/assets/images/project/empty.svg"
+            heading="No Updates Yet"
+            desc="There are no project updates yet."
+          />
+        )}
       </div>
     </>
   );
