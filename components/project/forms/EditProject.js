@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import AddStudents from './AddStudents';
 
 export default function EditProject({
   isDialogOpen,
@@ -31,8 +32,9 @@ export default function EditProject({
       name: project?.name,
       status: project?.status,
       description: project?.description,
+      students: project?.students || [],
     };
-  }, [project.name, project.status, project.description]);
+  }, [project.name, project.status, project.description, project.students]);
 
   const {
     control,
@@ -57,7 +59,8 @@ export default function EditProject({
       if (
         data.name === project.name &&
         data.status === project.status &&
-        data.description === project.description
+        data.description === project.description &&
+        data.students === project.students
       ) {
         onDiscardClick();
         return;
@@ -78,6 +81,7 @@ export default function EditProject({
       project.name,
       project.status,
       project.description,
+      project.students,
     ]
   );
 
@@ -158,6 +162,7 @@ export default function EditProject({
               />
             )}
           />
+          <AddStudents control={control} errors={errors} />
         </DialogContent>
         <DialogFooter
           saveLabel="Save"

@@ -1,5 +1,6 @@
 import { useFieldArray, Controller } from 'react-hook-form';
 import { Button, TextField } from '@mui/material';
+import { useMemo } from 'react';
 
 export default function AddStudents({ control, errors }) {
   const { fields, append, remove } = useFieldArray({
@@ -7,18 +8,21 @@ export default function AddStudents({ control, errors }) {
     name: 'students',
   });
 
-  const textFields = [
-    {
-      name: 'name',
-      label: 'Name',
-      type: 'text',
-    },
-    {
-      name: 'email',
-      label: 'Email',
-      type: 'email',
-    },
-  ];
+  const textFields = useMemo(
+    () => [
+      {
+        name: 'name',
+        label: 'Name',
+        type: 'text',
+      },
+      {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+      },
+    ],
+    []
+  );
 
   return (
     <>
