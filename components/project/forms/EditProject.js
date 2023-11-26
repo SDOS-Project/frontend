@@ -54,13 +54,32 @@ export default function EditProject({
   const [updateProject, { isLoading: isUpdateProjectLoading }] =
     useUpdateProjectMutation();
 
+  const areStudentsEqual = useCallback((students1, students2) => {
+    if (students1.length !== students2.length) {
+      return false;
+    }
+
+    for (let i = 0; i < students1.length; i++) {
+      const student1 = students1[i];
+      const student2 = students2[i];
+      if (
+        student1.name !== student2.name ||
+        student1.email !== student2.email
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  }, []);
+
   const onSubmit = useCallback(
     async (data) => {
       if (
         data.name === project.name &&
         data.status === project.status &&
         data.description === project.description &&
-        data.students === project.students
+        areStudentsEqual(data.students, project.students)
       ) {
         onDiscardClick();
         return;
@@ -82,6 +101,7 @@ export default function EditProject({
       project.status,
       project.description,
       project.students,
+      areStudentsEqual,
     ]
   );
 
