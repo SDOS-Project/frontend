@@ -17,6 +17,7 @@ export default function ProjectSkeleton() {
           <div className="border-t flex justify-start gap-2 items-center mx-6 mt-4">
             <Skeleton className="w-24 h-10" />
             <Skeleton className="w-24 h-10" />
+            <Skeleton className="w-24 h-10" />
           </div>
           <div className="mx-6 mt-4 border-b">
             <Skeleton className="w-1/3 h-10" />
