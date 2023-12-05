@@ -1,12 +1,10 @@
 import DialogFooter from '@/components/common/DialogFooter';
 import MultipleAutocomplete from '@/components/common/MultipleAutocomplete';
-import MultipleChipSelect from '@/components/common/MultipleChipSelect';
 import {
   useGetUserQuery,
   useUpdateProfileMutation,
 } from '@/features/user/apiSlice';
 import { editUserValidationSchema } from '@/schemas/user/edit/schema';
-import { areasOfInterests } from '@/types/AreasOfInterests';
 import {
   disciplineDisplayMapping,
   disciplineEnumMapping,
@@ -132,11 +130,11 @@ export default function EditProfile({
       reset,
       defaultValues,
       onDiscardClick,
-      user.firstName,
-      user.lastName,
-      user.email,
-      user.areasOfInterest,
-      user.discipline,
+      user?.firstName,
+      user?.lastName,
+      user?.email,
+      user?.areasOfInterest,
+      user?.discipline,
     ]
   );
 
