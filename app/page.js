@@ -1,6 +1,7 @@
 'use client';
 
 import FAQS from '@/components/landing/FAQS';
+import Header from '@/components/landing/Header';
 import HeroSection from '@/components/landing/HeroSection';
 import OurMission from '@/components/landing/OurMission';
 import WhyChooseUs from '@/components/landing/WhyChooseUs';
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <main className="bg-white h-full w-full flex flex-col items-center justify-center gap-4">
+      <Header />
       <HeroSection />
       <OurMission />
       <WhyChooseUs />

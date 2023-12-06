@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 function HeroSection() {
     const router = useRouter();
     return (
-        <div className="w-full flex justify-center lg:justify-between items-center gap-4 p-6 py-12 lg:py-24">
+        <div className="w-full flex justify-center lg:justify-between items-center gap-4 p-6 py-12">
             <Image
                 loading="lazy"
                 src={'/assets/images/landing/hero1.svg'}

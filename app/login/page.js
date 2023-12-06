@@ -1,4 +1,5 @@
 'use client';
+import Header from '@/components/landing/Header';
 import { useLoginMutation } from '@/features/auth/apiSlice';
 import { setUser } from '@/features/auth/authSlice';
 import { auth } from '@/firebase-config';
@@ -81,74 +82,77 @@ export default function Home() {
     }, [authState.isAuthenticated, authState.user, router]);
 
     return (
-        <main className="width-layout-page-form padding-layout-1">
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col items-center gap-4 padding-layout-1">
-                <div className="flex flex-col items-center justify-center gap-2">
-                    <h1 className="body-2xlarge font-semibold">
-                        Login Into Edu<span className="text-primary-main">Corp.</span>
-                    </h1>
-                    <p className="text-primary-light font-light body-xsmall">
-                        Bridging Academia and Industry
-                    </p>
-                </div>
-                <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                        <TextField
-                            {...field}
-                            size="small"
-                            label="Email"
-                            variant="outlined"
-                            className="w-full"
-                            error={!!errors.email}
-                            helperText={errors.email ? errors.email?.message : ''}
-                        />
-                    )}
-                />
-                <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                        <TextField
-                            {...field}
-                            size="small"
-                            label="Password"
-                            variant="outlined"
-                            className="w-full"
-                            error={!!errors.password}
-                            helperText={errors.password ? errors.password?.message : ''}
-                            type={showPassword ? 'text' : 'password'}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end">
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    )}
-                />
-                <Button
-                    type="submit"
-                    variant="contained"
-                    className="bg-primary-main text-white w-full">
-                    Login
-                </Button>
-                <Link href={'/signup/user'}>
-                    <div className="link">
-                        Don&apos;t have an account? Click Here to Sign Up.
+        <>
+            <Header />
+            <main className="width-layout-page-form padding-layout-1">
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col items-center gap-4 padding-layout-1">
+                    <div className="flex flex-col items-center justify-center gap-2">
+                        <h1 className="body-2xlarge font-semibold">
+                            Login Into Edu<span className="text-primary-main">Corp.</span>
+                        </h1>
+                        <p className="text-primary-light font-light body-xsmall">
+                            Bridging Academia and Industry
+                        </p>
                     </div>
-                </Link>
-            </form>
-        </main>
+                    <Controller
+                        name="email"
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                size="small"
+                                label="Email"
+                                variant="outlined"
+                                className="w-full"
+                                error={!!errors.email}
+                                helperText={errors.email ? errors.email?.message : ''}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="password"
+                        control={control}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                size="small"
+                                label="Password"
+                                variant="outlined"
+                                className="w-full"
+                                error={!!errors.password}
+                                helperText={errors.password ? errors.password?.message : ''}
+                                type={showPassword ? 'text' : 'password'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end">
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                        )}
+                    />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        className="bg-primary-main text-white w-full">
+                        Login
+                    </Button>
+                    <Link href={'/signup/user'}>
+                        <div className="link">
+                            Don&apos;t have an account? Click Here to Sign Up.
+                        </div>
+                    </Link>
+                </form>
+            </main>
+        </>
     );
 }
