@@ -33,14 +33,6 @@ function FAQS() {
             heading: 'How do I get started with a project collaboration?',
             desc: 'Simply sign up, complete your profile, and browse through the list of available projects or industry partners. You can initiate a collaboration request directly through the platform.',
         },
-        {
-            heading: 'Are there any fees associated with using this platform?',
-            desc: "Joining and exploring the platform is free. However, certain premium features may be available under a subscription model. Details on pricing and subscriptions are available on our 'Pricing' page.",
-        },
-        {
-            heading: 'What happens if a collaboration does not work out?',
-            desc: 'While we strive to ensure successful collaborations, we understand that not every match may be perfect. In such cases, our support team is available to assist in resolving issues or facilitating a change in partnerships if needed.',
-        },
     ];
 
     return (
