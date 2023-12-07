@@ -109,11 +109,11 @@ export default function Header() {
                       {user.organisation.name}
                     </Typography>
                   </Link>
-                ) :
+                ) : (
                   <Typography className="text-primary-light cursor-pointer body-xsmall text-center mt-1">
                     {user?.organisationName}
                   </Typography>
-                }
+                )}
               </Box>
             </Box>
             <Divider className="m-0 p-0 mt-5" />
@@ -171,6 +171,7 @@ export default function Header() {
       user?.organisation?.name,
       user?.organisation?.handle,
       user?.handle,
+      user?.organisationName,
     ]
   );
 
