@@ -1,9 +1,11 @@
+import Header from '@/components/landing/Header';
 import Link from 'next/link';
 import SignupProvider from './providers/SignupProvider';
 
 export default function Layout({ children }) {
   return (
     <>
+      <Header />
       <SignupProvider>
         <main className="width-layout-page-form padding-layout-1">
           <div className="flex flex-col items-center justify-center">
