@@ -21,8 +21,8 @@ function OurMission() {
     return (
         <div className="px-6 lg:px-16 w-full">
             <div className="bg-primary-grey w-full p-6 rounded-lg lg:py-10 lg:px-16 lg:rounded-2xl">
-                <h1 className="body-xlarge text-center font-semibold">
-                    Seamless Academic-Industry Synergy
+                <h1 className="body-2xlarge text-center font-semibold">
+                    Our Mission
                 </h1>
                 <div className="mt-12 mb-2 flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-10 lg:gap-4 w-full">
                     {data.map((item, i) => (

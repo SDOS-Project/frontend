@@ -11,7 +11,7 @@ function WhyChooseUs() {
                 height={200}
                 className="w-48 mx-auto"
             />
-            <p className="body-xlarge text-center font-semibold">
+            <p className="body-2xlarge text-center font-semibold">
                 Why Choose Our Platform?
             </p>
             <p className="w-full lg:w-1/2 text-center font-light body-small">
